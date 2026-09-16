@@ -16,5 +16,7 @@
 - 图号：Fig-03
 - 状态：占位说明
 - 目标文件：ch02-fig03-uno-q-execution-boundary.svg
+- 图源：[任务执行侧决策图 Mermaid 源文件](../../diagrams/uno-q-execution-boundary.mmd)
+- 正文位置：[第 2 章第 6 节：任务应该放在哪里执行](../../book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md#6-任务应该放在哪里执行)
 - 内容要求：覆盖任务需求到 MCU、MPU 或双侧协同的分流
 - 来源边界：基于官方资料原创重绘；不直接复制外部图片

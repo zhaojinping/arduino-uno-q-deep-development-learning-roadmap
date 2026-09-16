@@ -96,15 +96,13 @@ last_verified: 2026-09-16
 
 ~~~mermaid
 flowchart TB
-    START[任务需求] --> TIMING{是否需要确定性时序或直接 I/O?}
+    START[任务需求] --> HYBRID{是否同时需要实时控制与高层计算?}
+    HYBRID -->|是| BOTH[MPU + MCU\n通过 Arduino Bridge / RPC]
+    HYBRID -->|否| TIMING{是否需要确定性时序或直接 I/O?}
     TIMING -->|是| MCU[MCU\nSTM32U585\nZephyr + Arduino Sketch]
     TIMING -->|否| LINUX{是否依赖 Linux、网络、文件或模型?}
     LINUX -->|是| MPU[MPU\nQualcomm QRB2210\nDebian Linux]
-    LINUX -->|否| HYBRID{是否同时需要实时控制与高层计算?}
-    HYBRID -->|是| BOTH[MPU + MCU\n通过 Arduino Bridge / RPC]
-    HYBRID -->|否| CHOOSE[按数据来源、延迟和维护边界选择]
-    MCU --> BOTH
-    MPU --> BOTH
+    LINUX -->|否| CHOOSE[按数据来源、延迟和维护边界选择]
 ~~~
 
 图下解释：这是学习用的决策启发式，不能代替具体硬件、电气和软件接口核验。正文在图后加入单行占位：`图号=Fig-03`、位置、读者要看到的关系和“基于官方资料原创重绘”的来源边界。
@@ -120,8 +118,8 @@ flowchart TB
 在正文直接提到产品页和数据表之前，先在 `resources/references.md` 追加以下两条表格记录；若记录已存在则保留一份，不重复添加：
 
 ```markdown
-| 官方文档 | Arduino UNO Q 产品页 | https://docs.arduino.cc/hardware/uno-q | 核对产品定位、双处理器和 IDE/App Lab 分工；本章第 2～5 节 | 官方网页，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-16 |
-| 官方数据表 | Arduino UNO Q 数据表 | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Bridge/RPC 的服务调用、响应和通知边界；本章第 4 节 | 官方数据表，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-16 |
+| 官方文档 | Arduino UNO Q 产品页 | https://docs.arduino.cc/hardware/uno-q | 核对产品定位、双处理器和 IDE/App Lab 分工；本章第 2～5 节 | 网页内容（核验时） | 官方网页，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-16 |
+| 官方数据表 | Arduino UNO Q 数据表 | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Bridge/RPC 的服务调用、响应和通知边界；本章第 4 节 | ABX00162 PDF（核验时） | 官方数据表，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-16 |
 ```
 
 - [ ] **Step 6: 静态检查章节本身**
@@ -167,9 +165,9 @@ if ($diagram -notmatch '^flowchart TB') { throw 'Mermaid flowchart declaration m
 
 读取 `resources/references.md`，确认 Task 1 已在正文引用前登记下列两条官方来源各一条，最后核验日期均为 `2026-09-16`，并写明本项目仅链接/原创重述，不取得外部材料再分发许可；若任一条缺失，应先报告前置任务未完成，不重复添加来源记录：
 
-```text
-Arduino UNO Q 产品页 | https://docs.arduino.cc/hardware/uno-q | 核对产品定位、双处理器和 IDE/App Lab 分工 | 官方网页，按页面声明使用 | 2026-09-16
-Arduino UNO Q 数据表 | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Bridge/RPC 的服务调用、响应和通知边界 | 官方数据表，按页面声明使用 | 2026-09-16
+```markdown
+| 官方文档 | Arduino UNO Q 产品页 | https://docs.arduino.cc/hardware/uno-q | 核对产品定位、双处理器和 IDE/App Lab 分工；本章第 2～5 节 | 网页内容（核验时） | 官方网页，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-16 |
+| 官方数据表 | Arduino UNO Q 数据表 | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Bridge/RPC 的服务调用、响应和通知边界；本章第 4 节 | ABX00162 PDF（核验时） | 官方数据表，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-16 |
 ```
 
 - [ ] **Step 4: 更新项目进度**
