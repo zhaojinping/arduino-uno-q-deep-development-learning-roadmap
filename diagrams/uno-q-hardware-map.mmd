@@ -1,0 +1,20 @@
+flowchart LR
+    subgraph UNOQ[Arduino UNO Q]
+        MPU[QRB2210 MPU\nDebian Linux\n1.8 V I/O 域]
+        BRIDGE[Arduino Bridge / RPC]
+        MCU[STM32U585 MCU\nZephyr + Arduino Sketch\n3.3 V I/O 域]
+        WIRELESS[无线模块 WCBN3536A\nWi-Fi 5 / Bluetooth 5.1]
+        USBC[USB-C\n供电、数据与显示的高层入口\n角色、线缆和供电条件需核验]
+        UNO_HEADERS[UNO headers\nMCU 侧 3.3 V I/O\n兼容性需逐项核验]
+        QWIIC[Qwiic\nI2C4 / Wire1\n3.3 V]
+        BOTTOM[底部高速扩展资源\nJMEDIA / JMISC\n含 1.8 V、3.3 V 与专用信号]
+
+        MPU -.->|逻辑关系，不表示单一物理连线| BRIDGE
+        BRIDGE -.->|逻辑关系，不表示单一物理连线| MCU
+        WIRELESS -->|无线连接资源| MPU
+        USBC -->|系统入口| MPU
+        MCU -->|数字、模拟与常用总线| UNO_HEADERS
+        MCU -->|次级 I2C 总线| QWIIC
+        MPU -->|高速媒体与 MPU 侧资源| BOTTOM
+        MCU -->|MCU 侧扩展资源| BOTTOM
+    end
