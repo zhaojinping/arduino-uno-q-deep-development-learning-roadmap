@@ -3,6 +3,7 @@
 ## 第一篇：认识 Arduino UNO Q
 - [本篇导读](book/第1篇_认识UNOQ/README.md)
 - [第1章 Arduino 的发展](book/第1篇_认识UNOQ/第1章_Arduino的发展.md)
+- [第2章 什么是 Arduino UNO Q](book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md)
 
 ## 第二篇：STM32
 - [本篇范围](book/第2篇_STM32/README.md)

@@ -28,7 +28,7 @@
 
 ## 当前进度
 
-当前状态：**第一阶段写作中**。本阶段先固定仓库边界、目录入口、写作约定和资源登记格式；章节正文、示例代码、图示和图片将在后续任务中逐项补充并验证。
+当前状态：**第一篇持续写作中**。本阶段先固定仓库边界、目录入口、写作约定和资源登记格式；章节正文、示例代码、图示和图片将在后续任务中逐项补充并验证。
 
 ## 目录结构
 
@@ -62,11 +62,13 @@ docs/writing-guidelines.md
 resources/references.md
 book/第1篇_认识UNOQ/README.md
 book/第1篇_认识UNOQ/第1章_Arduino的发展.md
+book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
 diagrams/arduino-evolution.mmd
 diagrams/uno-q-dual-brain.mmd
+diagrams/uno-q-execution-boundary.mmd
 images/第1篇_认识UNOQ/README.md
 ```
 

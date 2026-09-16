@@ -11,3 +11,10 @@
 - 目标文件：ch01-fig02-uno-q-dual-brain.svg
 - 内容要求：标注 MPU、MCU、Linux、Zephyr 和 Bridge/RPC
 - 来源边界：基于官方文字资料独立绘制
+
+## 图 1-3：UNO Q 任务执行侧决策图
+- 图号：Fig-03
+- 状态：占位说明
+- 目标文件：ch02-fig03-uno-q-execution-boundary.svg
+- 内容要求：覆盖任务需求到 MCU、MPU 或双侧协同的分流
+- 来源边界：基于官方资料原创重绘；不直接复制外部图片
