@@ -1,0 +1,10 @@
+flowchart TB
+    START[任务需求] --> TIMING{是否需要确定性时序或直接 I/O?}
+    TIMING -->|是| MCU[MCU\nSTM32U585\nZephyr + Arduino Sketch]
+    TIMING -->|否| LINUX{是否依赖 Linux、网络、文件或模型?}
+    LINUX -->|是| MPU[MPU\nQualcomm QRB2210\nDebian Linux]
+    LINUX -->|否| HYBRID{是否同时需要实时控制与高层计算?}
+    HYBRID -->|是| BOTH[MPU + MCU\n通过 Arduino Bridge / RPC]
+    HYBRID -->|否| CHOOSE[按数据来源、延迟和维护边界选择]
+    MCU --> BOTH
+    MPU --> BOTH
