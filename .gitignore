@@ -1,0 +1,14 @@
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Temporary and editor files
+*.tmp
+*.bak
+.idea/
+.vscode/*.log
+
+# Generated site and build output
+site/
+build/
+dist/

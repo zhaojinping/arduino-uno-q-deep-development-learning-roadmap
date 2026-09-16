@@ -1,0 +1,10 @@
+flowchart TB
+    subgraph UNOQ[Arduino UNO Q]
+        MPU[MPU\nQualcomm QRB2210\nDebian Linux\n应用、网络、模型]
+        MCU[MCU\nSTM32U585\nZephyr/Arduino\n实时 I/O、传感器、执行器]
+        BRIDGE[Bridge / RPC\n跨处理器调用与数据交换]
+        MPU <--> BRIDGE <--> MCU
+    end
+    USER[开发者] --> APP[Arduino App Lab / CLI / IDE]
+    APP --> MPU
+    APP --> MCU
