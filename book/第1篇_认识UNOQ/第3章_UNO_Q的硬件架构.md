@@ -1,12 +1,12 @@
 ---
-title: UNO Q 的硬件架构
+title: Arduino UNO Q 的硬件架构
 part: 1
 chapter: 3
 status: draft
 last_verified: 2026-09-16
 ---
 
-# 第3章 UNO Q 的硬件架构
+# 第3章 Arduino UNO Q 的硬件架构
 
 ## 学习目标
 
