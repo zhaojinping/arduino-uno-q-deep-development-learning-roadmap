@@ -28,7 +28,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇持续写作中**。第 1 章和第 2 章已完成写作，Blink 示例和 Mermaid 源文件已存在；第一篇其余主题，以及 Arduino CLI 编译、上传和硬件实机验证仍待后续任务完成。
+当前状态：**第一篇持续写作中**。第 1～3 章已完成写作，Blink 示例和 Mermaid 源文件已存在；第一篇其余主题，以及 Arduino CLI 编译、上传和硬件实机验证仍待后续任务完成。
 
 ## 目录结构
 
@@ -63,12 +63,14 @@ resources/references.md
 book/第1篇_认识UNOQ/README.md
 book/第1篇_认识UNOQ/第1章_Arduino的发展.md
 book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md
+book/第1篇_认识UNOQ/第3章_UNO_Q的硬件架构.md
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
 diagrams/arduino-evolution.mmd
 diagrams/uno-q-dual-brain.mmd
 diagrams/uno-q-execution-boundary.mmd
+diagrams/uno-q-hardware-map.mmd
 images/第1篇_认识UNOQ/README.md
 ```
 
