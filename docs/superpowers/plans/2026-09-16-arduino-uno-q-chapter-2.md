@@ -32,7 +32,7 @@
 - `SUMMARY.md`：把已经存在的第 2 章追加到第一篇的第 1 章之后。
 - `book/第1篇_认识UNOQ/README.md`：把“UNO Q 定位”预留主题更新为第 2 章正式入口，其余未创建主题继续保持预留说明。
 - `images/第1篇_认识UNOQ/README.md`：登记 Fig-03 的占位说明、目标文件和原创重绘边界。
-- `resources/references.md`：登记本章新增使用的官方产品页和数据表，并保留已有官方手册、核心仓库记录。
+- `resources/references.md`：在第 2 章正文引用前登记本章使用的官方产品页和数据表，并保留已有官方手册、核心仓库记录。
 - `README.md`：只更新当前进度和已核验文件清单，不改项目定位或版权边界。
 - `docs/superpowers/plans/2026-09-16-arduino-uno-q-chapter-2.md`：本轮长期维护计划和审阅依据。
 
@@ -41,6 +41,7 @@
 **Files:**
 - Create: `book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md`
 - Create: `diagrams/uno-q-execution-boundary.mmd`
+- Modify: `resources/references.md`
 
 **Interfaces:**
 - Consumes: 现有第 1 章、`docs/writing-guidelines.md`、`resources/references.md`，以及 Arduino 官方 UNO Q 产品页、User Manual、数据表和 ArduinoCore-zephyr 板卡定义。
@@ -116,6 +117,13 @@ flowchart TB
 
 从本章链接到已存在的 `../第2篇_STM32/README.md`、`../第3篇_Linux/README.md`、`../第4篇_PythonBridge/README.md`、`../第5篇_AppLab/README.md`、上一章 `./第1章_Arduino的发展.md` 和 `../../resources/references.md`。来源区写明核验日期、官方资料用途、静态/实机验证边界和不取得外部材料再分发许可的声明。
 
+在正文直接提到产品页和数据表之前，先在 `resources/references.md` 追加以下两条表格记录；若记录已存在则保留一份，不重复添加：
+
+```markdown
+| 官方文档 | Arduino UNO Q 产品页 | https://docs.arduino.cc/hardware/uno-q | 核对产品定位、双处理器和 IDE/App Lab 分工；本章第 2～5 节 | 官方网页，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-16 |
+| 官方数据表 | Arduino UNO Q 数据表 | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Bridge/RPC 的服务调用、响应和通知边界；本章第 4 节 | 官方数据表，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-16 |
+```
+
 - [ ] **Step 6: 静态检查章节本身**
 
 运行以下检查并在实现报告中记录实际输出：
@@ -135,12 +143,11 @@ if ($diagram -notmatch '^flowchart TB') { throw 'Mermaid flowchart declaration m
 - Modify: `SUMMARY.md`
 - Modify: `book/第1篇_认识UNOQ/README.md`
 - Modify: `images/第1篇_认识UNOQ/README.md`
-- Modify: `resources/references.md`
 - Modify: `README.md`
 
 **Interfaces:**
 - Consumes: Task 1 已创建且通过静态检查的第 2 章和 Mermaid 源文件。
-- Produces: 无失效本地入口的第一篇导航、唯一的 Fig-03 登记、完整的官方来源记录和与实际仓库内容相符的项目进度。
+- Produces: 无失效本地入口的第一篇导航、唯一的 Fig-03 登记、对 Task 1 已登记官方来源的索引核验和与实际仓库内容相符的项目进度。
 
 - [ ] **Step 1: 追加 SUMMARY 和第一篇阅读顺序**
 
@@ -158,7 +165,7 @@ if ($diagram -notmatch '^flowchart TB') { throw 'Mermaid flowchart declaration m
 
 - [ ] **Step 3: 登记新增官方来源**
 
-把下列两条加入 `resources/references.md`，最后核验日期均为 `2026-09-16`，并写明本项目仅链接/原创重述，不取得外部材料再分发许可：
+读取 `resources/references.md`，确认 Task 1 已在正文引用前登记下列两条官方来源各一条，最后核验日期均为 `2026-09-16`，并写明本项目仅链接/原创重述，不取得外部材料再分发许可；若任一条缺失，应先报告前置任务未完成，不重复添加来源记录：
 
 ```text
 Arduino UNO Q 产品页 | https://docs.arduino.cc/hardware/uno-q | 核对产品定位、双处理器和 IDE/App Lab 分工 | 官方网页，按页面声明使用 | 2026-09-16
