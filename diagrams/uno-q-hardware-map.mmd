@@ -9,8 +9,10 @@ flowchart LR
         QWIIC[Qwiic\nI2C4 / Wire1\n3.3 V]
         BOTTOM[底部高速扩展资源\nJMEDIA / JMISC\n含 1.8 V、3.3 V 与专用信号]
 
-        MPU -.->|逻辑关系，不表示单一物理连线| BRIDGE
-        BRIDGE -.->|逻辑关系，不表示单一物理连线| MCU
+        MPU -.->|请求 / 通知；逻辑关系，不表示单一物理连线| BRIDGE
+        BRIDGE -.->|响应 / 通知；逻辑关系，不表示单一物理连线| MPU
+        BRIDGE -.->|请求 / 通知；逻辑关系，不表示单一物理连线| MCU
+        MCU -.->|响应 / 通知；逻辑关系，不表示单一物理连线| BRIDGE
         WIRELESS -->|无线连接资源| MPU
         USBC -->|系统入口| MPU
         MCU -->|数字、模拟与常用总线| UNO_HEADERS

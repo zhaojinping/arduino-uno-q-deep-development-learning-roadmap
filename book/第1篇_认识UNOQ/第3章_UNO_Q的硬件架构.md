@@ -3,7 +3,7 @@ title: Arduino UNO Q 的硬件架构
 part: 1
 chapter: 3
 status: draft
-last_verified: 2026-09-16
+last_verified: 2026-09-20
 ---
 
 # 第3章 Arduino UNO Q 的硬件架构
@@ -78,7 +78,7 @@ USB-C 是 UNO Q 的供电、数据和显示能力入口之一。官方 User Manu
 
 ## 7. Bridge/RPC 是逻辑协同，电气域仍然存在
 
-Arduino Bridge / RPC 为 Linux 侧和 MCU 侧提供服务调用、响应与通知的协同方式。它允许高层应用请求 MCU 执行硬件动作，也允许 Sketch 调用 Linux 服务或上报事件。设计者应围绕服务名、参数、超时、错误和恢复来组织跨处理器行为，而不是假设两侧共享内存、共享函数调用栈或共享全部外设。
+Arduino Bridge / RPC 为 Linux 侧和 MCU 侧提供服务调用、响应与通知的双向协同方式。Linux 侧可请求 MCU 执行硬件动作，Sketch 侧也可调用 Linux 服务或上报事件。设计者应围绕服务名、参数、超时、错误和恢复来组织跨处理器行为，而不是假设两侧共享内存、共享函数调用栈或共享全部外设。
 
 Bridge/RPC 是软件层的逻辑关系。官方数据表说明其可以适配多种物理传输，因此架构图中的虚线不会指定某一条实际总线，也不表达时序、带宽或确定性保证。需要定位传输问题时，应进一步查目标软件版本、Router/Bridge 配置和底层资源占用。
 
@@ -100,8 +100,10 @@ flowchart LR
         QWIIC[Qwiic\nI2C4 / Wire1\n3.3 V]
         BOTTOM[底部高速扩展资源\nJMEDIA / JMISC\n含 1.8 V、3.3 V 与专用信号]
 
-        MPU -.->|逻辑关系，不表示单一物理连线| BRIDGE
-        BRIDGE -.->|逻辑关系，不表示单一物理连线| MCU
+        MPU -.->|请求 / 通知；逻辑关系，不表示单一物理连线| BRIDGE
+        BRIDGE -.->|响应 / 通知；逻辑关系，不表示单一物理连线| MPU
+        BRIDGE -.->|请求 / 通知；逻辑关系，不表示单一物理连线| MCU
+        MCU -.->|响应 / 通知；逻辑关系，不表示单一物理连线| BRIDGE
         WIRELESS -->|无线连接资源| MPU
         USBC -->|系统入口| MPU
         MCU -->|数字、模拟与常用总线| UNO_HEADERS
@@ -111,7 +113,7 @@ flowchart LR
     end
 ```
 
-图中实线只表示资源归属或高层入口，不能据此推导逐针脚连接；两条虚线只表示 MPU、Bridge/RPC 与 MCU 的逻辑协同。可追溯的原始图源保存在 [`diagrams/uno-q-hardware-map.mmd`](../../diagrams/uno-q-hardware-map.mmd)。
+图中实线只表示资源归属或高层入口，不能据此推导逐针脚连接；四条虚线分别表示 MPU 与 Bridge/RPC、Bridge/RPC 与 MCU 之间双向的请求、响应和通知关系。可追溯的原始图源保存在 [`diagrams/uno-q-hardware-map.mmd`](../../diagrams/uno-q-hardware-map.mmd)。
 
 > 图示占位：图号=Fig-04；位置=本节 Mermaid 架构图之后；内容=Arduino UNO Q 内 QRB2210 MPU、STM32U585 MCU、无线模块、UNO headers、Qwiic、底部高速扩展资源以及 Arduino Bridge / RPC 逻辑协同与电气域边界；来源=基于 Arduino 官方资料原创重绘，源文件 diagrams/uno-q-hardware-map.mmd。
 
@@ -179,7 +181,7 @@ Arduino UNO Q 应被理解为异构计算平台：QRB2210 MPU 运行 Debian Linu
 
 ## 来源与验证
 
-本章仅使用已登记的 Arduino 官方资料，并于 `2026-09-16` 核验：
+本章仅使用已登记的 Arduino 官方资料，并于 `2026-09-20` 核验：
 
 1. [Arduino UNO Q 产品页](https://docs.arduino.cc/hardware/uno-q)：核对双处理器产品定位、WCBN3536A、Wi-Fi 5、Bluetooth 5.1、UNO headers、Qwiic、底部高速连接器、USB-C 高层用途和内置 RPC。
 2. [Arduino UNO Q Datasheet](https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf)：核对 QRB2210 与 STM32U585、1.8 V MPU I/O 域、3.3 V MCU I/O 域、`JMEDIA`/`JMISC`、Qwiic、USB-C/供电和接口复用边界。
