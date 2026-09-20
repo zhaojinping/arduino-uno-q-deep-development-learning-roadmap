@@ -1,0 +1,13 @@
+flowchart TB
+    HOST[开发工具与入口] --> APPLAB[Arduino App Lab\nPython / Apps / Bricks / AI\nMPU + MCU 工作流]
+    HOST --> IDE[Arduino IDE 2+\nArduino Sketch\n目标：MCU]
+    HOST --> CLI[Arduino CLI\n自动化构建/上传\n目标：MCU]
+    APPLAB --> LINUX[MPU\nDebian Linux\nPython / 容器 / 应用]
+    IDE --> MCU[STM32U585\nZephyr + Arduino Sketch]
+    CLI --> MCU
+    LINUX -.->|逻辑服务调用| BRIDGE[Arduino Bridge / RPC\n请求、响应、通知]
+    BRIDGE -.->|逻辑服务调用| LINUX
+    MCU -.->|硬件事件/服务| BRIDGE
+    BRIDGE -.->|硬件请求/响应| MCU
+    LINUX --> RES1[Linux 侧资源\n文件、网络、模型]
+    MCU --> RES2[实时侧资源\nGPIO、PWM、ADC、总线]
