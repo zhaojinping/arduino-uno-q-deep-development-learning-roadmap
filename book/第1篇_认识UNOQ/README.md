@@ -6,7 +6,7 @@
 
 ## 阅读顺序
 
-先阅读[第 1 章：Arduino 的发展](./第1章_Arduino的发展.md)，再依次阅读[第 2 章：什么是 Arduino UNO Q](./第2章_什么是Arduino_UNO_Q.md)和[第 3 章：UNO Q 的硬件架构](./第3章_UNO_Q的硬件架构.md)，随后按“软件架构、第一个实验”的顺序进入后续章节。
+先阅读[第 1 章：Arduino 的发展](./第1章_Arduino的发展.md)，再依次阅读[第 2 章：什么是 Arduino UNO Q](./第2章_什么是Arduino_UNO_Q.md)、[第 3 章：UNO Q 的硬件架构](./第3章_UNO_Q的硬件架构.md)和[第 4 章：UNO Q 的软件架构](./第4章_UNO_Q的软件架构.md)，随后进入第一个实验。
 
 ## 前置知识
 
@@ -17,7 +17,7 @@
 - [第 1 章：Arduino 的发展](./第1章_Arduino的发展.md)——Arduino 的入门模型、AVR 时代、32 位与联网能力，以及走向 UNO Q 的路线背景。
 - [第 2 章：什么是 Arduino UNO Q](./第2章_什么是Arduino_UNO_Q.md)——明确 UNO Q 在高性能 Linux 计算与实时硬件控制之间的定位。
 - [第 3 章：UNO Q 的硬件架构](./第3章_UNO_Q的硬件架构.md)——说明 MPU、MCU 及其协同边界；完整规格和外设细节留给后续篇章。
-- 软件架构——说明 Linux、Arduino/Zephyr 与开发工具的分工；具体操作留给对应篇章。
+- [第 4 章：UNO Q 的软件架构](./第4章_UNO_Q的软件架构.md)——说明 Linux、Arduino/Zephyr、开发工具与 Bridge/RPC 的分工；具体操作留给对应篇章。
 - 第一个实验——以可验证的基础实验建立运行、观察和故障定位习惯；实验正文留待后续任务。
 
 ## 实验与工具边界

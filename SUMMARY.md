@@ -5,6 +5,7 @@
 - [第1章 Arduino 的发展](book/第1篇_认识UNOQ/第1章_Arduino的发展.md)
 - [第2章 什么是 Arduino UNO Q](book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md)
 - [第3章 UNO Q 的硬件架构](book/第1篇_认识UNOQ/第3章_UNO_Q的硬件架构.md)
+- [第4章 UNO Q 的软件架构](book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md)
 
 ## 第二篇：STM32
 - [本篇范围](book/第2篇_STM32/README.md)

@@ -29,3 +29,12 @@
 - 正文位置：[第 3 章第 8 节：硬件关系图：资源、协同与边界](../../book/第1篇_认识UNOQ/第3章_UNO_Q的硬件架构.md#fig-04-uno-q-hardware-map)
 - 内容要求：展示 QRB2210 MPU、STM32U585 MCU、无线模块、UNO headers、Qwiic、底部高速扩展资源，以及 Arduino Bridge / RPC 的逻辑协同与 1.8 V/3.3 V 电气域边界
 - 来源边界：基于已登记的 Arduino 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 1-5：UNO Q 软件架构图
+- 图号：Fig-05
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch04-fig05-uno-q-software-architecture.svg
+- 图源：[UNO Q 软件架构 Mermaid 源文件](../../diagrams/uno-q-software-architecture.mmd)
+- 正文位置：[第 4 章第 6 节：软件架构图：入口、责任与资源](../../book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md#fig-05-uno-q-software-architecture)
+- 内容要求：展示开发入口、MPU Debian Linux、MCU Zephyr 与 Arduino Sketch、Bridge/RPC 逻辑服务边界及各侧资源归属
+- 来源边界：基于已登记的 Arduino 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
