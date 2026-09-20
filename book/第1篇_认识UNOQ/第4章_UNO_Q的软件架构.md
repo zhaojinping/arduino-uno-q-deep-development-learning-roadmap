@@ -80,7 +80,7 @@ flowchart TB
     MCU --> RES2[实时侧资源\nGPIO、PWM、ADC、总线]
 ```
 
-图号=Fig-05
+> 图示占位：图号=Fig-05；位置=软件架构图之后；内容=开发工具入口、MPU Debian Linux、MCU Zephyr/Arduino Sketch、Bridge/RPC 逻辑服务边界与两侧资源归属的软件责任关系；来源=diagrams/uno-q-software-architecture.mmd。
 
 可追溯的原始图源见 [UNO Q 软件架构 Mermaid 源文件](../../diagrams/uno-q-software-architecture.mmd)。图中的实线表示开发入口、处理器与资源的高层流程或归属；虚线表示 Bridge / RPC 的逻辑请求、响应和通知边界，绝不表示固定物理接线。
 
@@ -89,7 +89,7 @@ flowchart TB
 本章没有可运行代码。以下为不需要开发板、网络或工具执行的纸面分类练习：
 
 1. 将 **Blink** 放入 MCU 侧，说明它是 Arduino Sketch 与实时侧 I/O 的入门任务。
-2. 将 **Linux 文件/网络工作** 放入 MPU 的 Debian Linux 侧，列出文件、网络或模型资源之一。
+2. 将 **Linux 文件工作** 与 **Python 网络服务** 放入 MPU 的 Debian Linux 侧，列出文件、网络或模型资源之一。
 3. 将 **GPIO/PWM/ADC** 放入 STM32U585 的实时侧，并注明仍须核对 3.3 V 电气边界。
 4. 将 **App Lab Brick 工作** 标为 App Lab 的统一工作流入口，再写明其具体资源与执行侧仍需按项目核验。
 5. 将 **跨处理器控制** 标为 Bridge / RPC 的逻辑服务边界，为它写出一个请求、一个响应或通知以及一个失败或超时情形；不要把它画成共享内存或固定导线。
@@ -103,6 +103,10 @@ flowchart TB
 本章没有硬件或运行时结果。未执行 Arduino CLI 编译或上传、App Lab、Linux 进程、Bridge/RPC 实际通信、GPIO/PWM/ADC 输出、文件/网络操作或电气测量；这些项目必须在目标硬件、软件版本和外设组合上单独取得证据。
 
 ## 常见问题
+
+### App Lab 与 Arduino IDE/CLI 的区别是什么？
+
+Arduino App Lab 是面向 Python、Sketches、Bricks 和 Linux 应用的统一工作流入口，可组织 MPU 与 MCU 协同的项目；Arduino IDE 2+ 与 Arduino CLI 则面向 MCU 侧的 Arduino/Zephyr 工作流，分别服务交互式 Sketch 开发与自动化构建、上传。工作流入口不同，不表示它们可替代彼此的运行时、权限边界或硬件验证。
 
 ### Arduino IDE 2+ 或 Arduino CLI 能否直接给 MPU 编程？
 
@@ -119,6 +123,10 @@ flowchart TB
 ### Linux 侧能请求 MCU 硬件服务，是否就能自动使用全部硬件？
 
 不能。服务是否实现、权限、引脚复用、驱动、资源占用和电气条件都会限制可用性。跨处理器请求也不会消除 1.8 V MPU 与 3.3 V MCU 的实际硬件边界。
+
+### Python 能否直接使用任意 GPIO？
+
+不能。Python 网络服务通常归入 MPU 的 Debian Linux 侧，但能否访问某个 GPIO 仍取决于该资源的实际归属、系统权限、设备节点、驱动、引脚复用与 1.8 V/3.3 V 电气条件；需要 MCU 侧控制时，应通过已设计并验证的 Bridge/RPC 服务，而不是假定 Python 可直接取得任意 GPIO。
 
 ## 本章小结
 

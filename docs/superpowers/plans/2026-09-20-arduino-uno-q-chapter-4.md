@@ -101,4 +101,4 @@ Add a paragraph explaining that solid arrows are responsibility/entry relationsh
 
 - [x] **Step 3: Record boundaries.** Record that no Arduino CLI compile/upload, App Lab run, Linux process inspection, Bridge/RPC communication, or hardware measurement was performed. A GitHub push remains a separately authorized external delivery step and must only be claimed after the remote SHA matches the verified local SHA.
 
-- [x] **Step 4: Mark the plan and ledger complete after review.** Preserve every `Ruling:` line for the final handoff before deleting the ignored SDD workspace.
+- [ ] **Step 4: Mark the plan and ledger complete after review.** Preserve every `Ruling:` line for the final handoff before deleting the ignored SDD workspace.
