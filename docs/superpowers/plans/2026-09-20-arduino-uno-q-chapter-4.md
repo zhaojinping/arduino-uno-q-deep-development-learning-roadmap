@@ -34,11 +34,11 @@
 - Consumes: Chapter 2 positioning, Chapter 3 hardware/electrical boundaries, the four official rows in `resources/references.md`, and the terminology rules in `docs/writing-guidelines.md`.
 - Produces: The stable chapter anchor `#fig-05-uno-q-software-architecture`, the Fig-05 placeholder, and an independent Mermaid source that exactly matches the chapter's fenced block.
 
-- [ ] **Step 1: Write the chapter metadata and learning frame.** Use the exact front matter from Global Constraints, then add `# 第4章 UNO Q 的软件架构`, `## 学习目标`, `## 本章导读`, and `## 背景与边界`. Explain that the chapter follows the hardware responsibility map and answers “which tool targets which runtime” rather than teaching every tool's installation procedure.
+- [x] **Step 1: Write the chapter metadata and learning frame.** Use the exact front matter from Global Constraints, then add `# 第4章 UNO Q 的软件架构`, `## 学习目标`, `## 本章导读`, and `## 背景与边界`. Explain that the chapter follows the hardware responsibility map and answers “which tool targets which runtime” rather than teaching every tool's installation procedure.
 
-- [ ] **Step 2: Explain the four software responsibility layers.** Cover: host-side development entry points; MPU-side Debian Linux applications and services; MCU-side Zephyr plus Arduino Sketch; and Bridge/RPC as a logical request/response/notification boundary. State the supported high-level distinction from the official product page/User Manual: App Lab is the unified workflow for Python, sketches, Bricks and Linux-side applications; Arduino IDE and CLI target the MCU-side Arduino/Zephyr workflow. Do not imply that IDE/CLI programs the MPU or that Debian replaces Zephyr.
+- [x] **Step 2: Explain the four software responsibility layers.** Cover: host-side development entry points; MPU-side Debian Linux applications and services; MCU-side Zephyr plus Arduino Sketch; and Bridge/RPC as a logical request/response/notification boundary. State the supported high-level distinction from the official product page/User Manual: App Lab is the unified workflow for Python, sketches, Bricks and Linux-side applications; Arduino IDE and CLI target the MCU-side Arduino/Zephyr workflow. Do not imply that IDE/CLI programs the MPU or that Debian replaces Zephyr.
 
-- [ ] **Step 3: Add the software responsibility diagram.** The independent source and inline block must contain exactly this Mermaid content, with no second diagram:
+- [x] **Step 3: Add the software responsibility diagram.** The independent source and inline block must contain exactly this Mermaid content, with no second diagram:
 
 ```mermaid
 flowchart TB
@@ -58,9 +58,9 @@ flowchart TB
 
 Add a paragraph explaining that solid arrows are responsibility/entry relationships and dotted arrows are logical coordination, not a physical wire, timing guarantee, or shared-memory claim. Add the exact stable anchor and one Fig-05 placeholder after the diagram.
 
-- [ ] **Step 4: Add the paper exercise, verification boundary, FAQ, summary, and references.** Include sections `## 操作或实验`, `## 验证结果`, `## 常见问题`, `## 本章小结`, `## 交叉引用与延伸阅读`, and `## 来源与验证`. The exercise classifies tasks such as Blink, file processing, GPIO sampling, Python network service, App Lab Brick, and cross-processor control by runtime/tool. Explicitly state that the exercise needs no hardware and that no runnable code is introduced. FAQ must address App Lab vs IDE, whether IDE programs MPU, whether Linux replaces Zephyr, what Bridge/RPC guarantees, and whether Python may directly use any GPIO. Link back to Chapters 2–3, forward to the reserved STM32/Linux/Python Bridge/App Lab entries, and link the diagram source and reference index.
+- [x] **Step 4: Add the paper exercise, verification boundary, FAQ, summary, and references.** Include sections `## 操作或实验`, `## 验证结果`, `## 常见问题`, `## 本章小结`, `## 交叉引用与延伸阅读`, and `## 来源与验证`. The exercise classifies tasks such as Blink, file processing, GPIO sampling, Python network service, App Lab Brick, and cross-processor control by runtime/tool. Explicitly state that the exercise needs no hardware and that no runnable code is introduced. FAQ must address App Lab vs IDE, whether IDE programs MPU, whether Linux replaces Zephyr, what Bridge/RPC guarantees, and whether Python may directly use any GPIO. Link back to Chapters 2–3, forward to the reserved STM32/Linux/Python Bridge/App Lab entries, and link the diagram source and reference index.
 
-- [ ] **Step 5: Self-check the chapter.** Confirm the first product mention, metadata, fixed headings, single Fig-05 placeholder, inline/source Mermaid equality, source citations, and no claims of CLI upload or hardware runtime. Commit the chapter and source as `docs: add chapter 4 software architecture`.
+- [x] **Step 5: Self-check the chapter.** Confirm the first product mention, metadata, fixed headings, single Fig-05 placeholder, inline/source Mermaid equality, source citations, and no claims of CLI upload or hardware runtime. Commit the chapter and source as `docs: add chapter 4 software architecture`.
 
 ### Task 2: Synchronize navigation, figure registry, and source traceability
 
@@ -75,15 +75,15 @@ Add a paragraph explaining that solid arrows are responsibility/entry relationsh
 - Consumes: Task 1's chapter path, Fig-05 anchor, and Mermaid source path.
 - Produces: One canonical navigation entry, a chapter map entry, a Fig-05 registry row, and four official source rows whose usage explicitly covers Chapter 4.
 
-- [ ] **Step 1: Add the chapter to `SUMMARY.md`.** Append `- [第4章 UNO Q 的软件架构](book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md)` immediately after the Chapter 3 entry, preserving the existing order and paths.
+- [x] **Step 1: Add the chapter to `SUMMARY.md`.** Append `- [第4章 UNO Q 的软件架构](book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md)` immediately after the Chapter 3 entry, preserving the existing order and paths.
 
-- [ ] **Step 2: Update the First Part README and root progress.** Add Chapter 4 to the reading order and chapter map. Update the root README's current progress and verified file list to include Chapter 4 and `diagrams/uno-q-software-architecture.mmd`, without claiming hardware runtime verification.
+- [x] **Step 2: Update the First Part README and root progress.** Add Chapter 4 to the reading order and chapter map. Update the root README's current progress and verified file list to include Chapter 4 and `diagrams/uno-q-software-architecture.mmd`, without claiming hardware runtime verification.
 
-- [ ] **Step 3: Register Fig-05.** In `images/第1篇_认识UNOQ/README.md`, add exactly one row for `Fig-05` pointing to the Chapter 4 stable anchor and Mermaid source. Record that the image is a future SVG generated from the project-owned Mermaid source; do not create an SVG in this task.
+- [x] **Step 3: Register Fig-05.** In `images/第1篇_认识UNOQ/README.md`, add exactly one row for `Fig-05` pointing to the Chapter 4 stable anchor and Mermaid source. Record that the image is a future SVG generated from the project-owned Mermaid source; do not create an SVG in this task.
 
-- [ ] **Step 4: Extend the four existing official source rows.** Keep each URL, license wording, and source identity unchanged while adding the Chapter 4 software-architecture usage: product page for App Lab/IDE/Bridge boundaries; datasheet for processor and Bridge/RPC boundary; User Manual for Debian/Zephyr/App Lab/IDE workflow; ArduinoCore-zephyr for MCU-side Zephyr Core and IDE/CLI/App Lab target support. Set their last verification date to `2026-09-20`.
+- [x] **Step 4: Extend the four existing official source rows.** Keep each URL, license wording, and source identity unchanged while adding the Chapter 4 software-architecture usage: product page for App Lab/IDE/Bridge boundaries; datasheet for processor and Bridge/RPC boundary; User Manual for Debian/Zephyr/App Lab/IDE workflow; ArduinoCore-zephyr for MCU-side Zephyr Core and IDE/CLI/App Lab target support. Set their last verification date to `2026-09-20`.
 
-- [ ] **Step 5: Check cross-file consistency.** Confirm the Chapter 4 link appears once in SUMMARY and the Part README, Fig-05 appears once in the registry and once in the chapter, all local targets exist, and no duplicate alias path is introduced. Commit as `docs: register chapter 4 software architecture`.
+- [x] **Step 5: Check cross-file consistency.** Confirm the Chapter 4 link appears once in SUMMARY and the Part README, Fig-05 appears once in the registry and once in the chapter, all local targets exist, and no duplicate alias path is introduced. Commit as `docs: register chapter 4 software architecture`.
 
 ### Task 3: Whole-change verification and delivery record
 
@@ -95,10 +95,10 @@ Add a paragraph explaining that solid arrows are responsibility/entry relationsh
 - Consumes: Task 1 and Task 2 commits.
 - Produces: Fresh verification evidence for the whole change; no generated image, npm cache, or other temporary tool output in the repository.
 
-- [ ] **Step 1: Run structural and link checks.** Verify required files, front matter, required headings, Fig-05 uniqueness, inline/source Mermaid equality, Mermaid declaration, official URL registration, and all local Markdown link targets.
+- [x] **Step 1: Run structural and link checks.** Verify required files, front matter, required headings, Fig-05 uniqueness, inline/source Mermaid equality, Mermaid declaration, official URL registration, and all local Markdown link targets.
 
-- [ ] **Step 2: Run diff hygiene checks.** Run `git diff --check` over the Chapter 4 range, confirm no generated SVG is present, and confirm `git status --short` contains only intended tracked edits or is clean after commits.
+- [x] **Step 2: Run diff hygiene checks.** Run `git diff --check` over the Chapter 4 range, confirm no generated SVG is present, and confirm `git status --short` contains only intended tracked edits or is clean after commits.
 
-- [ ] **Step 3: Record boundaries.** Record that no Arduino CLI compile/upload, App Lab run, Linux process inspection, Bridge/RPC communication, or hardware measurement was performed. A GitHub push remains a separately authorized external delivery step and must only be claimed after the remote SHA matches the verified local SHA.
+- [x] **Step 3: Record boundaries.** Record that no Arduino CLI compile/upload, App Lab run, Linux process inspection, Bridge/RPC communication, or hardware measurement was performed. A GitHub push remains a separately authorized external delivery step and must only be claimed after the remote SHA matches the verified local SHA.
 
-- [ ] **Step 4: Mark the plan and ledger complete after review.** Preserve every `Ruling:` line for the final handoff before deleting the ignored SDD workspace.
+- [x] **Step 4: Mark the plan and ledger complete after review.** Preserve every `Ruling:` line for the final handoff before deleting the ignored SDD workspace.
