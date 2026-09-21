@@ -1,0 +1,14 @@
+flowchart LR
+    HOST[开发主机] --> ACCESS{USB/ADB/SSH/Network}
+    ACCESS -- 失败 --> ACCESS_FAIL[访问层诊断\n连接/权限/发现]
+    ACCESS -- 通过 --> LINUX[UNO Q Linux/MPU]
+    LINUX --> DEV[设备层\n/dev /sys /udev]
+    LINUX --> NET[网络层\nlink/address/route/DNS/port]
+    LINUX --> SVC[服务层\nunit/process/log/restart]
+    DEV --> APP[App/Bridge]
+    NET --> APP
+    SVC --> APP
+    APP --> MCU[MCU/Bridge契约]
+    MCU --> RESULT[状态/结果/时间戳]
+    MCU -- 拒绝/过期/故障 --> SAFE[保持MCU安全状态\n记录原因]
+    RESULT --> OBS[证据包\n状态/时间/日志]

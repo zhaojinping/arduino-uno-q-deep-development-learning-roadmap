@@ -80,4 +80,8 @@
 | 官方板卡文档 | Arduino UNO Q User Manual（Linux/ADB/SSH 访问边界） | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对第三篇第1章 Debian Linux、App Lab Network Mode、mDNS、USB/ADB、SSH、udev 权限、USB 标识和 Linux 环境事实；不把访问成功替代服务或 MCU 控制结果。 | main | Arduino 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
 | 官方规范 | Linux Filesystem Hierarchy Standard | https://refspecs.linuxfoundation.org/fhs.shtml | 核对第三篇第1章根目录、用户目录、临时目录、设备、运行时状态、配置和日志路径的通用职责边界；不把规范替代 UNO Q 当前镜像检查。 | 3.0（核验时） | Linux Foundation 规范；本项目只链接和原创解释。 | 2026-09-21 |
 
+| 官方网络文档 | NetworkManager nmcli Reference Manual | https://networkmanager.dev/docs/api/latest/nmcli.html | 核对第三篇第2章 nmcli 状态查询、设备状态、活动连接、连接管理和读写操作边界；不把通用命令输出替代 UNO Q 实机网络结果。 | 1.58.0（核验时） | NetworkManager 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方服务文档 | systemd.service source documentation | https://github.com/systemd/systemd/blob/main/man/systemd.service.xml | 核对第三篇第2章 service 单元、启动命令、执行环境、退出和重启策略边界；不把 systemd 通用语义替代目标镜像服务管理器实测。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方服务文档 | systemctl source documentation | https://github.com/systemd/systemd/blob/main/man/systemctl.xml | 核对第三篇第2章 enable/start/stop/restart、system/user 作用域和服务状态观察边界；不在本章默认实验中执行写操作。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

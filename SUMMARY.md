@@ -23,6 +23,7 @@
 ## 第三篇：Linux
 - [本篇范围](book/第3篇_Linux/README.md)
 - [第1章 Linux 侧开发基础：文件系统、进程与 MCU 边界](book/第3篇_Linux/第1章_Linux侧开发基础_文件系统进程与MCU边界.md)
+- [第2章 Linux 设备、网络与服务：从可见到可用](book/第3篇_Linux/第2章_Linux设备网络与服务_从可见到可用.md)
 
 ## 第四篇：Python Bridge
 - [本篇范围](book/第4篇_PythonBridge/README.md)
