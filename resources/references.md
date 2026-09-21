@@ -4,6 +4,13 @@
 
 | 类别 | 名称 | URL | 用途 | 版本/分支（核验时） | 许可证/声明 | 最后核验日期 |
 |---|---|---|---|---|---|---|
+| 官方数据表 | Arduino UNO Q ADC/模拟输入边界（ABX00162-ABX00173） | https://docs.arduino.cc/resources/datasheets/ABX00162-ABX00173-datasheet.pdf | 核对第二篇第3章 A0～A5 映射、3.3 V 模拟域、VREF+、0～VREF+范围和 ADC 模式下的 5 V 电气边界。 | ABX00162-ABX00173 PDF（核验时） | 官方数据表；本项目只链接和原创解释，不复制表格或图片。 | 2026-09-21 |
+| 官方配置 | ArduinoCore-zephyr UNO Q ADC overlay | https://github.com/arduino/ArduinoCore-zephyr/blob/main/variants/arduino_uno_q_stm32u585xx/arduino_uno_q_stm32u585xx.overlay | 核对第二篇第3章 A0～A5 的 adc-pin-gpios、io-channels 和 ADC1 通道当前 main 分支描述；不把当前映射承诺为未来版本或实机测量。 | main | Arduino 官方仓库；本项目只链接和原创解释，不复制配置文件。 | 2026-09-21 |
+| 官方代码 | ArduinoCore-zephyr wiring_analog.cpp | https://github.com/arduino/ArduinoCore-zephyr/blob/main/cores/arduino/wiring_analog.cpp | 核对第二篇第3章 analogRead() 的逻辑引脚映射、分辨率设置、通道配置和 adc_read() 代码边界。 | main | Arduino 官方仓库；本项目只链接和原创解释，不复制代码。 | 2026-09-21 |
+| 官方参考 | Arduino analogRead 参考 | https://github.com/arduino/reference-en/blob/master/Language/Functions/Analog%20IO/analogRead.adoc | 核对第二篇第3章 Arduino 模拟读取的通用语义和不同板卡的分辨率/电压差异；不把通用表格当作 UNO Q 实测。 | master | Arduino 官方参考仓库；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方 API | Zephyr ADC API 参考 | https://docs.zephyrproject.org/latest/doxygen/html/group__adc__interface.html | 核对第二篇第3章 adc_dt_spec、adc_channel_setup_dt、adc_sequence_init_dt、adc_read_dt、参考获取和原始码换算接口。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方示例 | Zephyr ADC 示例索引 | https://docs.zephyrproject.org/latest/samples/drivers/adc/index.html | 核对第二篇第3章 sequence、Devicetree 和 stream 示例的职责边界；不把通用示例当作 UNO Q 原生工程验证。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方 API | Zephyr adc_sequence 结构说明 | https://docs.zephyrproject.org/latest/doxygen/html/structadc__sequence.html | 核对第二篇第3章 channels、buffer、resolution、oversampling 和采样选项含义。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方文档 | Zephyr PWM 文档 | https://docs.zephyrproject.org/latest/hardware/peripherals/pwm.html | 核对第二篇第 2 章的 PWM 周期、脉宽、占空比、时间单位辅助宏、Devicetree pwms 和 pwm_set/pwm_set_dt 通用 API 边界。 | 网页内容（核验时） | Zephyr 官方文档，按项目声明使用；本项目只链接和原创解释，不复制示例正文。 | 2026-09-21 |
 | 官方示例 | Zephyr PWM Blinky 示例说明 | https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/basic/blinky_pwm/README.rst | 核对第二篇第 2 章中 pwm_led0 别名和板级 PWM 示例所需的 Devicetree 前提；不将通用示例当作 UNO Q 实测。 | main | Zephyr 官方仓库，按仓库声明使用；本项目只链接和原创重述。 | 2026-09-21 |
 | 官方 API | Zephyr pwm_dt_spec API 说明 | https://docs.zephyrproject.org/latest/doxygen/html/structpwm__dt__spec.html | 核对第二篇第 2 章中 PWM 设备、通道、周期和标志的资源描述。 | 网页内容（核验时） | Zephyr 官方文档，按项目声明使用；本项目只链接和原创解释。 | 2026-09-21 |

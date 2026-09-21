@@ -1,0 +1,16 @@
+flowchart LR
+    REQ[模拟量需求\n范围/带宽/采样率] --> PIN[选择ADC输入\nA0-A5/外部传感器]
+    PIN --> ELEC{输入范围/保护/源阻抗已核验?}
+    ELEC -- 否 --> STOP1[停止：查数据表/分压/保护]
+    ELEC -- 是 --> REF[确定参考/增益/分辨率/校准]
+    REF --> SAMPLE[配置通道/采样时间/序列/缓冲]
+    SAMPLE --> RAW[取得原始码\n检查错误与范围]
+    RAW --> CONVERT[换算与校准\nraw→mV→物理量]
+    CONVERT --> RATE{采样和控制时序需要MCU本地?}
+    RATE -- 是 --> MCU[MCU本地采样/滤波/保护]
+    RATE -- 否 --> BRIDGE[Bridge/Linux接收带单位数据\n不替代采样时序]
+    MCU --> EVIDENCE[参考源/电压/重复性/故障验证]
+    BRIDGE --> EVIDENCE
+    EVIDENCE --> CHECK{范围/噪声/误差/时间戳已记录?}
+    CHECK -- 否 --> STOP2[停止：标记待验证]
+    CHECK -- 是 --> RECORD[记录版本/条件/结果]
