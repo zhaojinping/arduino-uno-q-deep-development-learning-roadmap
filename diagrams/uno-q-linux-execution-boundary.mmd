@@ -1,0 +1,15 @@
+flowchart LR
+    HOST[开发主机] --> ACCESS{USB/ADB/SSH/Network}
+    ACCESS -- 权限或连接失败 --> DIAG[先检查udev/网络/凭据\n不修改应用]
+    ACCESS -- 连接通过 --> LINUX[UNO Q Debian Linux\nMPU用户空间]
+    LINUX --> FS[文件系统/配置/日志]
+    LINUX --> PROC[进程/权限/服务]
+    LINUX --> BRIDGE[Bridge/arduino-app-cli\n请求/状态]
+    BRIDGE --> MCU[STM32U585 MCU\nZephyr实时控制]
+    MCU --> IO[GPIO/PWM/ADC/UART/SPI/I2C]
+    IO --> MCU
+    MCU --> BRIDGE
+    BRIDGE --> RESULT[状态/结果/时间戳]
+    LINUX --> OBS[观测\nps/ss/df/logs]
+    OBS --> RESULT
+    LINUX -- 不直接绕过 --> SAFE[MCU状态机和安全输出]

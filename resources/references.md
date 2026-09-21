@@ -76,4 +76,8 @@
 | 官方板卡文档 | Arduino UNO Q User Manual（综合实验边界） | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对第二篇第9章双处理器、MCU/Linux/Bridge、Qwiic、工具和状态交接的事实边界；不把手册内容替代综合实测。 | main | Arduino 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
 | 官方代码仓库 | ArduinoCore-zephyr（综合实验资源边界） | https://github.com/arduino/ArduinoCore-zephyr | 核对第二篇第9章 Arduino Core on Zephyr、UNO Q 变体和 MCU 侧构建资源边界；不把源代码声明当作实机结果。 | main | Arduino 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 
+| 官方代码仓库 | Arduino App CLI | https://github.com/arduino/arduino-app-cli | 核对第三篇第1章 App/Bridge 的 Linux 侧管理入口、Linux 与微控制器部分的应用组织和 system check 能力边界；不把仓库说明替代目标镜像实测。 | main | Arduino 官方仓库；仓库标注 GPL-3.0-or-later；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方板卡文档 | Arduino UNO Q User Manual（Linux/ADB/SSH 访问边界） | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对第三篇第1章 Debian Linux、App Lab Network Mode、mDNS、USB/ADB、SSH、udev 权限、USB 标识和 Linux 环境事实；不把访问成功替代服务或 MCU 控制结果。 | main | Arduino 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方规范 | Linux Filesystem Hierarchy Standard | https://refspecs.linuxfoundation.org/fhs.shtml | 核对第三篇第1章根目录、用户目录、临时目录、设备、运行时状态、配置和日志路径的通用职责边界；不把规范替代 UNO Q 当前镜像检查。 | 3.0（核验时） | Linux Foundation 规范；本项目只链接和原创解释。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。
