@@ -1,0 +1,17 @@
+flowchart LR
+    CLAIM[硬件主张\n接口/功能/性能] --> PRE{版本、接线、电压和所有权已确认?}
+    PRE -- 否 --> STOP1[停止：断电并补齐前置证据]
+    PRE -- 是 --> BUILD{构建与上传证据完整?}
+    BUILD -- 否 --> STOP2[停止：核对FQBN/BOARD/端口/产物]
+    BUILD -- 是 --> IDLE{空载和空闲状态安全?}
+    IDLE -- 否 --> STOP3[停止：修正电气/复位/默认状态]
+    IDLE -- 是 --> VECTOR[选择最小测试向量]
+    VECTOR --> OBS[串口/万用表/逻辑分析仪\n记录观测设置]
+    OBS --> RESULT{结果满足阈值?}
+    RESULT -- 是 --> STRESS[重复/负载/故障注入]
+    RESULT -- 否 --> CLASSIFY[分类：工具/软件/资源/电气/协议/测量]
+    CLASSIFY --> ISOLATE[一次只改变一个变量]
+    ISOLATE --> VECTOR
+    STRESS --> REGRESSION{回归和恢复通过?}
+    REGRESSION -- 否 --> SAFE[安全停止/降级/保留证据]
+    REGRESSION -- 是 --> ARCHIVE[归档版本/接线/波形/日志/阈值]

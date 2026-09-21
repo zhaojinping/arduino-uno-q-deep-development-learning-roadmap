@@ -68,4 +68,9 @@
 | 官方 API | Zephyr Watchdog API | https://docs.zephyrproject.org/latest/doxygen/html/group__watchdog__interface.html | 核对第二篇第7章 wdt_install_timeout、wdt_setup、wdt_feed 和看门狗错误返回边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方文档 | Zephyr Task Watchdog | https://docs.zephyrproject.org/latest/services/task_wdt/index.html | 核对第二篇第7章多任务健康监督、任务看门狗通道、硬件看门狗回退和复位边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 
+| 官方文档 | Arduino CLI Getting Started | https://docs.arduino.cc/arduino-cli/getting-started | 核对第二篇第8章列板、FQBN、compile、upload 和运行验证的阶段边界；不把通用示例输出当作 UNO Q 实测。 | 网页内容（核验时） | Arduino 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方文档 | Zephyr Application Development | https://docs.zephyrproject.org/latest/develop/application/index.html | 核对第二篇第8章应用目录、prj.conf、overlay、独立 build 目录、west build 和 west flash 的流程边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方文档 | Zephyr Building, Flashing and Debugging | https://docs.zephyrproject.org/latest/develop/west/build-flash-debug.html | 核对第二篇第8章 west build、west boards、west flash 和构建/刷写产物的证据边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方文档 | Zephyr Peripherals | https://docs.zephyrproject.org/latest/hardware/peripherals/index.html | 核对第二篇第8章 GPIO、PWM、ADC、UART、SPI、I2C 等外设 API 分类和资源验证的范围边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

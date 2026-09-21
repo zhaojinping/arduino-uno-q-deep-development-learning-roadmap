@@ -69,3 +69,13 @@
 - 正文位置：[第二篇第 7 章第 9 节：实时任务决策图](../../book/第2篇_STM32/第7章_实时任务与调度_从周期循环到可验证响应.md#fig-13-uno-q-stm32-realtime-scheduling-boundary)
 - 内容要求：展示实时需求从周期、WCET 和截止时间量化，经过 MCU/Linux 所有权、ISR/线程/工作队列、同步对象、负载、降级和看门狗验证，到优先级与证据固化的成功和停止路径
 - 来源边界：基于 Zephyr 和 Arduino UNO Q 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 2-8：硬件验证与故障定位决策图
+
+- 图号：Fig-14
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch08-fig14-uno-q-stm32-hardware-verification-boundary.svg
+- 图源：[硬件验证与故障定位 Mermaid 源文件](../../diagrams/uno-q-stm32-hardware-verification-boundary.mmd)
+- 正文位置：[第二篇第 8 章第 9 节：硬件验证决策图](../../book/第2篇_STM32/第8章_硬件验证与故障定位_从接线检查到证据闭环.md#fig-14-uno-q-stm32-hardware-verification-boundary)
+- 内容要求：展示硬件主张从版本、接线、电气和所有权前置检查，经构建/上传、空载状态、最小测试向量、仪器观测、失败隔离、压力回归到证据归档或安全停止的路径
+- 来源边界：基于 Arduino、Zephyr 和 UNO Q 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
