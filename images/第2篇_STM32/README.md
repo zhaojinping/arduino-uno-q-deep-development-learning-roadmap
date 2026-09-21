@@ -39,3 +39,13 @@
 - 正文位置：[第二篇第 1 章第 4 节：GPIO 任务决策图](../../book/第2篇_STM32/第1章_STM32侧开发基础_GPIO与实时边界.md#fig-07-uno-q-stm32-gpio-boundary)
 - 内容要求：展示 GPIO 需求从 MCU 责任、板级资源、STM32/Devicetree 映射、电气核验、API 选择、实时性判断到证据记录的成功与停止路径
 - 来源边界：基于 Arduino、Zephyr 和 ST 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 2-5：SPI 通信决策图
+
+- 图号：Fig-11
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch05-fig11-uno-q-stm32-spi-boundary.svg
+- 图源：[SPI 通信边界 Mermaid 源文件](../../diagrams/uno-q-stm32-spi-boundary.mmd)
+- 正文位置：[第二篇第 5 章第 6 节：SPI 通信决策图](../../book/第2篇_STM32/第5章_SPI通信_从片选时序到设备驱动边界.md#fig-11-uno-q-stm32-spi-boundary)
+- 内容要求：展示 SPI 需求从控制器、引脚和 CS 核验，经过 CPOL/CPHA、位序、字宽、频率、事务和 Arduino/Zephyr API 选择，到设备 ID、逻辑分析、错误注入及 MCU/Linux 所有权记录的成功和停止路径
+- 来源边界：基于 Arduino、Zephyr 和 ST 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片

@@ -1,0 +1,14 @@
+flowchart LR
+    REQ[SPI需求\n设备/吞吐/时序] --> BUS{控制器、引脚和CS已核验?}
+    BUS -- 否 --> STOP1[停止：查overlay/pinctrl/电气]
+    BUS -- 是 --> MODE[确定CPOL/CPHA/位序/字宽/频率]
+    MODE --> CS[定义CS所有权\n拉低/保持/释放]
+    CS --> TXN[定义事务\n命令/地址/数据/读回]
+    TXN --> API{资源和实时性?}
+    API -- Arduino抽象 --> ARD[SPI.beginTransaction/transfer]
+    API -- Zephyr资源 --> ZEP[SPI DT spec/ spi_transceive]
+    ARD --> CHECK[回环/设备ID/逻辑分析/错误注入]
+    ZEP --> CHECK
+    CHECK --> OWNER{MCU/Linux边界已定义?}
+    OWNER -- 否 --> STOP2[停止：补齐设备协议和故障动作]
+    OWNER -- 是 --> RECORD[记录版本/模式/CS/频率/证据]

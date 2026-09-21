@@ -42,4 +42,12 @@
 | 社区课程 | Mjrovai/ARDUINO-UNO-Q | https://github.com/Mjrovai/ARDUINO-UNO-Q | 核对社区课程化章节和案例组织方式，只作结构参考。 | `main` | 仓库页面标注 GPL-3.0；本项目不复制其代码、图片或课程正文。 | 2026-09-16 |
 | 社区知识库 | CWTI-Ltd/arduino_uno_q_knowledge_base_and_playground | https://github.com/CWTI-Ltd/arduino_uno_q_knowledge_base_and_playground | 核对社区知识库/实践场的组织方式，只作结构参考。 | `main` | README 明确非官方、教育/开发用途、进行中项目；当前未见标准再分发许可证声明，许可状态待核验；本项目不复制其内容。 | 2026-09-16 |
 
+| 官方参考 | Arduino SPI 官方参考 | https://github.com/arduino/reference-en/blob/master/Language/Functions/Communication/SPI.adoc | 核对第二篇第5章 SPISettings、begin、beginTransaction、endTransaction、transfer、usingInterrupt 以及不同板卡默认 SPI 引脚说明；不把其他板卡引脚表当作 UNO Q 实测。 | master | Arduino 官方参考仓库；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方配置 | ArduinoCore-zephyr UNO Q 当前 SPI overlay | https://github.com/arduino/ArduinoCore-zephyr/blob/main/variants/arduino_uno_q_stm32u585xx/arduino_uno_q_stm32u585xx.overlay | 核对第二篇第5章 spis = <&spi2>, <&spi3>、SPI 延迟初始化、device0 节点及当前 GPIO 资源声明；不把源代码声明当作实物接线、CS 或波形结果。 | main | Arduino 官方仓库；本项目只链接和原创解释，不复制配置文件。 | 2026-09-21 |
+| 官方配置 | ArduinoCore-zephyr 变体配置说明 | https://github.com/arduino/ArduinoCore-zephyr/blob/main/documentation/variants.md | 核对第二篇第5章变体资源数组和 Arduino 外设对象配置的边界；不把通用规则替代 UNO Q 当前 overlay 和构建结果。 | main | Arduino 官方仓库；本项目只链接和原创解释，不复制配置文件。 | 2026-09-21 |
+| 官方文档 | Zephyr SPI 外设文档 | https://docs.zephyrproject.org/latest/hardware/peripherals/spi.html | 核对第二篇第5章 controller/peripheral、SDO/SDI/CS 术语和旧术语兼容边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 API | Zephyr SPI API 参考 | https://docs.zephyrproject.org/latest/doxygen/html/group__spi__interface.html | 核对第二篇第5章 spi_dt_spec、SPI_DT_SPEC_GET、spi_buf、spi_buf_set、spi_is_ready_dt、spi_transceive_dt、操作标志、CS 保持和锁相关接口。 | Zephyr API 网页（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 API | Zephyr Devicetree SPI API | https://docs.zephyrproject.org/latest/doxygen/html/group__devicetree-spi.html | 核对第二篇第5章 cs-gpios、SPI 外设 reg/CS 索引以及 CS 查询宏的关系。 | Zephyr API 网页（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方迁移说明 | Zephyr 4.5 SPI 术语迁移 | https://docs.zephyrproject.org/latest/releases/migration-guide-4.5.html | 核对第二篇第5章 controller/peripheral inclusive API 名称迁移及旧 master/slave 宏的版本边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。
