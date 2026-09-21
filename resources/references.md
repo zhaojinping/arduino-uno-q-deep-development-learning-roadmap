@@ -73,4 +73,7 @@
 | 官方文档 | Zephyr Building, Flashing and Debugging | https://docs.zephyrproject.org/latest/develop/west/build-flash-debug.html | 核对第二篇第8章 west build、west boards、west flash 和构建/刷写产物的证据边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方文档 | Zephyr Peripherals | https://docs.zephyrproject.org/latest/hardware/peripherals/index.html | 核对第二篇第8章 GPIO、PWM、ADC、UART、SPI、I2C 等外设 API 分类和资源验证的范围边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 
+| 官方板卡文档 | Arduino UNO Q User Manual（综合实验边界） | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对第二篇第9章双处理器、MCU/Linux/Bridge、Qwiic、工具和状态交接的事实边界；不把手册内容替代综合实测。 | main | Arduino 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方代码仓库 | ArduinoCore-zephyr（综合实验资源边界） | https://github.com/arduino/ArduinoCore-zephyr | 核对第二篇第9章 Arduino Core on Zephyr、UNO Q 变体和 MCU 侧构建资源边界；不把源代码声明当作实机结果。 | main | Arduino 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

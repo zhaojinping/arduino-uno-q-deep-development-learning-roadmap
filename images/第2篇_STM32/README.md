@@ -79,3 +79,13 @@
 - 正文位置：[第二篇第 8 章第 9 节：硬件验证决策图](../../book/第2篇_STM32/第8章_硬件验证与故障定位_从接线检查到证据闭环.md#fig-14-uno-q-stm32-hardware-verification-boundary)
 - 内容要求：展示硬件主张从版本、接线、电气和所有权前置检查，经构建/上传、空载状态、最小测试向量、仪器观测、失败隔离、压力回归到证据归档或安全停止的路径
 - 来源边界：基于 Arduino、Zephyr 和 UNO Q 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 2-9：综合实验控制闭环架构图
+
+- 图号：Fig-15
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch09-fig15-uno-q-stm32-integrated-control-boundary.svg
+- 图源：[综合实验控制闭环 Mermaid 源文件](../../diagrams/uno-q-stm32-integrated-control-boundary.mmd)
+- 正文位置：[第二篇第 9 章第 3 节：综合实验控制闭环架构图](../../book/第2篇_STM32/第9章_综合实验_传感控制与MCU_Linux协同闭环.md#fig-15-uno-q-stm32-integrated-control-boundary)
+- 内容要求：展示 Sensor-A/Sensor-B 经 I2C、SPI 或 ADC 进入 MCU 采样与有效性判断，再进入实时控制、PWM/GPIO 输出、UART/Bridge 诊断与请求路径；同时展示固定消息队列、监督任务、DEGRADED、SAFE_STOP 和复位后重新自检
+- 来源边界：基于 Arduino、Zephyr、ArduinoCore-zephyr 和 UNO Q 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片

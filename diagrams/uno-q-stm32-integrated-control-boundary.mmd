@@ -1,0 +1,18 @@
+flowchart LR
+    INPUT[Sensor-A/Sensor-B\nI2C/SPI/ADC] --> ACQ[MCU采样\n时间戳/有效位/错误码]
+    ACQ --> SELF{SELFTEST和输入有效?}
+    SELF -- 否 --> DEG[DEGRADED\n限幅/降频/保留诊断]
+    SELF -- 是 --> CONTROL[实时控制\n周期/截止时间/限幅]
+    CONTROL --> OUTPUT[PWM/GPIO\n安全使能]
+    OUTPUT --> FEEDBACK[状态/故障/输出证据]
+    FEEDBACK --> DIAG[UART诊断\n序列号/时间戳]
+    DIAG --> BRIDGE[Linux/Bridge\n配置/展示/非实时请求]
+    BRIDGE --> CMD{版本、权限和deadline有效?}
+    CMD -- 否 --> REJECT[REJECTED/EXPIRED\n不改变输出]
+    CMD -- 是 --> CONTROL
+    ACQ --> QUEUE[固定消息/快照队列]
+    QUEUE --> SUPERVISOR[监督任务\n队列/心跳/看门狗]
+    SUPERVISOR --> FAULT{关键故障?}
+    FAULT -- 否 --> CONTROL
+    FAULT -- 是 --> SAFE[SAFE_STOP\n关闭使能/记录原因]
+    SAFE --> RESET[复位后重新BOOT和SELFTEST]
