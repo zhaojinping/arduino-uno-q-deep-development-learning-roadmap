@@ -59,3 +59,13 @@
 - 正文位置：[第二篇第 6 章第 6 节：I2C 通信与总线恢复决策图](../../book/第2篇_STM32/第6章_I2C通信_从设备地址到总线恢复.md#fig-12-uno-q-stm32-i2c-recovery-boundary)
 - 内容要求：展示 I2C 需求从 SDA/SCL、电压、上拉和 7 位地址核验，经过 Wire/Zephyr 事务、ACK/NACK、超时、总线恢复和 MCU/Linux 所有权记录的成功与停止路径
 - 来源边界：基于 Arduino、Zephyr、NXP 和 ArduinoCore-zephyr 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 2-7：实时任务与调度决策图
+
+- 图号：Fig-13
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch07-fig13-uno-q-stm32-realtime-scheduling-boundary.svg
+- 图源：[实时任务与调度 Mermaid 源文件](../../diagrams/uno-q-stm32-realtime-scheduling-boundary.mmd)
+- 正文位置：[第二篇第 7 章第 9 节：实时任务决策图](../../book/第2篇_STM32/第7章_实时任务与调度_从周期循环到可验证响应.md#fig-13-uno-q-stm32-realtime-scheduling-boundary)
+- 内容要求：展示实时需求从周期、WCET 和截止时间量化，经过 MCU/Linux 所有权、ISR/线程/工作队列、同步对象、负载、降级和看门狗验证，到优先级与证据固化的成功和停止路径
+- 来源边界：基于 Zephyr 和 Arduino UNO Q 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片

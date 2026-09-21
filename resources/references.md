@@ -59,4 +59,13 @@
 | 官方 API | Zephyr I2C API 参考 | https://docs.zephyrproject.org/latest/doxygen/html/group__i2c__interface.html | 核对第二篇第6章 i2c_dt_spec、I2C_DT_SPEC_GET、i2c_is_ready_dt、i2c_write_read_dt、i2c_recover_bus、事务标志和错误返回。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方协议资料 | NXP UM10204 I2C-bus specification and user manual | https://www.nxp.com/webapp/Download?colCode=UM10204&location=null | 核对第二篇第6章开漏/上拉、START/STOP、ACK/NACK、时钟拉伸、仲裁和总线清理的协议背景。 | UM10204（核验时） | NXP 官方协议资料；本项目只链接和原创解释，不复制正文或图表。 | 2026-09-21 |
 
+| 官方文档 | Zephyr Threads | https://docs.zephyrproject.org/latest/kernel/services/threads/index.html | 核对第二篇第7章线程生命周期、栈、优先级、合作式/可抢占线程和线程上下文边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方文档 | Zephyr Scheduling | https://docs.zephyrproject.org/latest/kernel/services/scheduling/index.html | 核对第二篇第7章 ready 线程选择、调度点、时间片、k_sleep、k_yield 和合作式线程阻塞风险。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方文档 | Zephyr Kernel Timing | https://docs.zephyrproject.org/latest/kernel/services/timing/clocks.html | 核对第二篇第7章 k_uptime_get、k_uptime_get_32、k_timeout_t、k_timer 和 k_work_delayable 的时间语义。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方文档 | Zephyr Workqueue Threads | https://docs.zephyrproject.org/latest/kernel/services/threads/workqueue.html | 核对第二篇第7章延迟工作、系统工作队列、阻塞工作处理器和额外工作队列的成本边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方文档 | Zephyr Message Queues | https://docs.zephyrproject.org/latest/kernel/services/data_passing/message_queues.html | 核对第二篇第7章固定大小消息队列、ISR/线程入队出队、队列满和数据复制语义。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 API | Zephyr Mutex APIs | https://docs.zephyrproject.org/latest/doxygen/html/group__mutex__apis.html | 核对第二篇第7章 k_mutex_lock、k_mutex_unlock、超时和互斥不能在 ISR 中使用的边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 API | Zephyr Watchdog API | https://docs.zephyrproject.org/latest/doxygen/html/group__watchdog__interface.html | 核对第二篇第7章 wdt_install_timeout、wdt_setup、wdt_feed 和看门狗错误返回边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方文档 | Zephyr Task Watchdog | https://docs.zephyrproject.org/latest/services/task_wdt/index.html | 核对第二篇第7章多任务健康监督、任务看门狗通道、硬件看门狗回退和复位边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

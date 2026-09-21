@@ -1,0 +1,19 @@
+flowchart LR
+    REQ[实时需求\n输入/输出/周期/截止时间] --> METRIC{周期、WCET、截止时间已量化?}
+    METRIC -- 否 --> STOP1[停止：补齐时间预算与证据]
+    METRIC -- 是 --> OWNER{MCU还是Linux/Bridge负责?}
+    OWNER -- Linux --> BRIDGE[异步请求/队列/超时\n不承担硬实时闭环]
+    OWNER -- MCU --> API{执行上下文?}
+    API -- ISR --> ISR[短处理\n置位/入队/唤醒]
+    API -- Thread --> THREAD[线程：优先级/栈/阻塞]
+    API -- Work --> WORK[工作队列：短处理/非阻塞]
+    ISR --> SYNC[消息队列/信号量/原子状态]
+    THREAD --> SYNC
+    WORK --> SYNC
+    SYNC --> LOAD{执行时间+排队时间满足预算?}
+    LOAD -- 否 --> DEG[降级：丢弃/合并/限频/复位]
+    DEG --> EVIDENCE[记录超载、丢包、最大延迟]
+    LOAD -- 是 --> GUARD[看门狗/超时/共享资源保护]
+    GUARD --> TEST{波形/时间戳/压力测试通过?}
+    TEST -- 否 --> STOP2[停止：回到任务边界与预算]
+    TEST -- 是 --> RECORD[固化优先级、周期、所有权与证据]
