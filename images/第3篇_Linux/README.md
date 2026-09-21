@@ -29,3 +29,13 @@
 - 正文位置：[第三篇第 3 章第 7 节：Linux 可观测性、资源与回滚闭环图](../../book/第3篇_Linux/第3章_Linux可观测性与资源管理_日志时间与安全回滚.md#fig-18-uno-q-linux-observability-resource-rollback-boundary)
 - 内容要求：展示 Linux/Bridge 事件、journal 字段、realtime/monotonic/boot_id、资源压力、证据包、远程变更、停止点、回滚验证以及 ACCEPTED/APPLIED/REJECTED/UNKNOWN 结果如何回到 MCU 状态机和安全输出
 - 来源边界：基于 systemd journal 字段与 journalctl、systemd 资源控制、Linux cgroup v2、Arduino UNO Q User Manual 和第二篇 MCU/Bridge 契约原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 3-4：远程运维与 Python Bridge 请求时序
+
+- 图号：Fig-19
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch04-fig19-uno-q-linux-remote-bridge-request-sequence.svg
+- 图源：[远程运维与 Python Bridge Mermaid 源文件](../../diagrams/uno-q-linux-remote-bridge-request-sequence.mmd)
+- 正文位置：[第三篇第 4 章第 4 节：远程运维与 Python Bridge 请求时序](../../book/第3篇_Linux/第4章_Linux远程运维与Python_Bridge_从安全命令到可验证请求.md#fig-19-linux-remote-bridge-request-sequence)
+- 内容要求：展示开发主机经 SSH、ADB 或 App Lab 进入 Linux 服务，再经过 operation 白名单、参数/权限/资源校验和 Python Bridge，分别进入 Linux 只读路径或 MCU RPC 路径，并覆盖 APPLIED、REJECTED、EXPIRED、FAILED、UNKNOWN 和脱敏证据返回。
+- 来源边界：基于 Arduino UNO Q User Manual、Android Debug Bridge 官方文档、Python subprocess/json 官方文档和第二篇 MCU/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。

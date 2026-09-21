@@ -90,4 +90,9 @@
 | 官方内核文档 | Linux cgroup v2 | https://docs.kernel.org/admin-guide/cgroup-v2.html | 核对第三篇第3章统一 cgroup v2 控制器、资源统计和压力观察的内核边界；不把存在文档当作目标内核已启用某项控制器。 | 网页内容（核验时） | Linux kernel 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方时间文档 | systemd time documentation | https://github.com/systemd/systemd/blob/main/man/systemd.time.xml | 核对第三篇第3章 systemd 时间表达式和时间相关语义；时间同步、时区和目标镜像配置仍需现场验证。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 
+| 官方平台文档 | Android Debug Bridge | https://developer.android.com/tools/adb | 核对第三篇第4章 ADB client、server、device daemon、设备列表和 shell 入口的分层边界；不把通用 ADB 文档替代 UNO Q 实机授权和权限验证。 | 网页内容（核验时） | Android Developers 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 Python 文档 | Python subprocess | https://docs.python.org/3/library/subprocess.html | 核对第三篇第4章固定 argv、shell=False、capture_output、timeout、TimeoutExpired 和子进程输出处理边界；不把概念脚本替代目标镜像现场测试。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 Python 文档 | Python json | https://docs.python.org/3/library/json.html | 核对第三篇第4章 JSON 编解码和不可信 JSON 输入的大小/资源风险；不把 JSON 格式正确替代协议授权和 MCU 结果验证。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方板卡文档 | Arduino UNO Q User Manual（远程入口与 Bridge） | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对第三篇第4章 Network Mode、USB/ADB、Linux、App Lab 和 Bridge/RPC 的产品事实边界；不把访问成功替代授权、结果或硬件验证。 | main | Arduino 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

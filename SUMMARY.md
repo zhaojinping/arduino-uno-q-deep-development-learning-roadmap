@@ -25,6 +25,7 @@
 - [第1章 Linux 侧开发基础：文件系统、进程与 MCU 边界](book/第3篇_Linux/第1章_Linux侧开发基础_文件系统进程与MCU边界.md)
 - [第2章 Linux 设备、网络与服务：从可见到可用](book/第3篇_Linux/第2章_Linux设备网络与服务_从可见到可用.md)
 - [第3章 Linux 可观测性与资源管理：日志、时间与安全回滚](book/第3篇_Linux/第3章_Linux可观测性与资源管理_日志时间与安全回滚.md)
+- [第4章 Linux 远程运维与 Python Bridge：从安全命令到可验证请求](book/第3篇_Linux/第4章_Linux远程运维与Python_Bridge_从安全命令到可验证请求.md)
 
 ## 第四篇：Python Bridge
 - [本篇范围](book/第4篇_PythonBridge/README.md)

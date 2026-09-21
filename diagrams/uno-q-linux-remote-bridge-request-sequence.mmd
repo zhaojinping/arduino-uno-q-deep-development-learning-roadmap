@@ -1,0 +1,26 @@
+sequenceDiagram
+    participant H as 开发主机/运维任务
+    participant A as 访问入口\nSSH/ADB/App Lab
+    participant L as UNO Q Linux服务
+    participant B as Python Bridge
+    participant M as STM32 MCU
+    H->>A: 身份认证/会话建立
+    A->>L: 受控操作请求
+    L->>B: request_id + deadline + operation
+    B->>B: 白名单/参数/权限/资源校验
+    alt Linux只读操作
+        B-->>L: 状态摘要 + evidence_ref
+    else MCU控制请求
+        B->>M: RPC request + idempotency_key
+        alt 对端确认应用
+            M-->>B: ACCEPTED/APPLIED + sequence
+            B-->>L: 结果 + 时间 + boot_id
+        else 拒绝/过期/失败
+            M-->>B: REJECTED/EXPIRED/FAILED
+            B-->>L: 分类错误 + 停止建议
+        else 连接中断或证据缺失
+            B-->>L: UNKNOWN + 查询建议
+        end
+    end
+    L-->>A: 脱敏结果摘要
+    A-->>H: 结果与证据引用
