@@ -1,0 +1,17 @@
+flowchart LR
+    ARTIFACT[版本化应用/依赖] --> STAGE[隔离目录/校验和]
+    CONFIG[配置分层\n默认/站点/运行] --> VALIDATE[Schema/权限/秘密边界]
+    CRED[Credential source\n不入日志] --> VALIDATE
+    UNIT[systemd unit/drop-in] --> VERIFY[systemd-analyze verify]
+    STAGE --> VERIFY
+    VALIDATE --> VERIFY
+    VERIFY --> SNAPSHOT[旧版本/状态/证据快照]
+    SNAPSHOT --> START[受控 reload/start]
+    START --> HEALTH[只读健康检查\nBridge/队列/缓存]
+    HEALTH --> GATE{健康门通过?}
+    GATE -- 是 --> PROMOTE[放行/记录版本]
+    GATE -- 否 --> STOP[停止新请求]
+    STOP --> RECONCILE[UNKNOWN 对账]
+    RECONCILE --> ROLLBACK[回滚应用/配置/Unit]
+    ROLLBACK --> VERIFY_ROLLBACK[回滚验证]
+    VERIFY_ROLLBACK --> RESULT[证据包/人工决定]

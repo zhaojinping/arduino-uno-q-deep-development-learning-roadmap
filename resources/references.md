@@ -104,5 +104,8 @@
 | 官方 Python 文档 | Python statistics | https://docs.python.org/3/library/statistics.html | 核对第三篇第6章 median、quantiles、样本量和分位数计算边界；不把小样本插值当作稳定的现场尾延迟结论。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方内核文档 | Linux perf security | https://docs.kernel.org/admin-guide/perf-security.html | 核对第三篇第6章 perf/performance counter 的权限、安全和敏感信息边界；不为测量而修改目标设备安全策略或提升权限。 | 网页内容（核验时） | Linux kernel 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方 Python 文档 | Python asyncio tasks and timeouts（测试运行器） | https://docs.python.org/3/library/asyncio-task.html | 核对第三篇第6章 wait_for、Task 取消、超时和异步测试替身边界；不把协程超时替代 Bridge/MCU 最终状态确认。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方服务文档 | systemd.exec | https://github.com/systemd/systemd/blob/main/man/systemd.exec.xml | 核对第三篇第7章执行环境、WorkingDirectory、目录管理、NoNewPrivileges、ProtectSystem、ProtectHome、凭据和服务进程边界；不把主机支持的字段直接当作 UNO Q 当前镜像能力。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方服务文档 | systemd credentials | https://github.com/systemd/systemd/blob/main/docs/CREDENTIALS.md | 核对第三篇第7章凭据注入、秘密不入 unit/日志和目标支持边界；不在本项目保存或分发真实凭据。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方服务文档 | systemd-analyze | https://github.com/systemd/systemd/blob/main/man/systemd-analyze.xml | 核对第三篇第7章 unit verify、security 审查和工具输出的辅助性质；不把安全分析结果替代现场风险评估。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

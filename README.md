@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～6 章已建立为初稿**。Blink 示例和 Mermaid 源文件已存在；第一篇第 5 章提供 IDE、CLI、App Lab 的验证闭环，第二篇第 2 章补充 PWM 与定时输出的资源核验框架，第二篇第 3 章补充 ADC 采样、输入保护和数据证据框架，第二篇第 4 章补充 UART 资源、帧格式、缓冲和 MCU/Linux 边界框架，第二篇第 5 章补充 SPI 时序、片选、Devicetree 设备节点和 MCU/Linux 总线所有权框架，第二篇第 6 章补充 I2C 电气模型、7 位地址、Wire/Zephyr 事务、总线恢复和 MCU/Linux 所有权框架，第二篇第 7 章补充周期任务、Zephyr 调度、同步对象、超载、看门狗和 MCU/Linux 实时责任框架，第二篇第 8 章补充硬件验证等级、工具链、外设验证向量、故障隔离和证据归档框架，第二篇第 9 章补充传感、控制、状态机、Bridge 数据契约、故障注入和第二篇到第三篇交接框架，第三篇第 1 章补充 Linux/MPU、MCU、Bridge、文件系统、进程、访问入口和证据分层框架，第三篇第 2 章补充设备可见性、网络分层、NetworkManager、服务状态、日志和 Bridge 结果关联框架，第三篇第 3 章补充 journal 字段、时间基准、资源压力、证据包、远程变更和安全回滚框架，第三篇第 4 章补充 ADB/SSH/App Lab 入口、命令白名单、Python 子进程、请求信封、幂等和 UNKNOWN 处理框架，第三篇第 5 章补充有界队列、背压、任务租约、退避重连、状态缓存和优雅停止框架，第三篇第 6 章补充测试层级、基线与分位数指标、确定性故障注入、性能预算和现场测试运行手册，但本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～7 章已建立为初稿**。Blink 示例和 Mermaid 源文件已存在；第一篇第 5 章提供 IDE、CLI、App Lab 的验证闭环，第二篇第 2 章补充 PWM 与定时输出的资源核验框架，第二篇第 3 章补充 ADC 采样、输入保护和数据证据框架，第二篇第 4 章补充 UART 资源、帧格式、缓冲和 MCU/Linux 边界框架，第二篇第 5 章补充 SPI 时序、片选、Devicetree 设备节点和 MCU/Linux 总线所有权框架，第二篇第 6 章补充 I2C 电气模型、7 位地址、Wire/Zephyr 事务、总线恢复和 MCU/Linux 所有权框架，第二篇第 7 章补充周期任务、Zephyr 调度、同步对象、超载、看门狗和 MCU/Linux 实时责任框架，第二篇第 8 章补充硬件验证等级、工具链、外设验证向量、故障隔离和证据归档框架，第二篇第 9 章补充传感、控制、状态机、Bridge 数据契约、故障注入和第二篇到第三篇交接框架，第三篇第 1 章补充 Linux/MPU、MCU、Bridge、文件系统、进程、访问入口和证据分层框架，第三篇第 2 章补充设备可见性、网络分层、NetworkManager、服务状态、日志和 Bridge 结果关联框架，第三篇第 3 章补充 journal 字段、时间基准、资源压力、证据包、远程变更和安全回滚框架，第三篇第 4 章补充 ADB/SSH/App Lab 入口、命令白名单、Python 子进程、请求信封、幂等和 UNKNOWN 处理框架，第三篇第 5 章补充有界队列、背压、任务租约、退避重连、状态缓存和优雅停止框架，第三篇第 6 章补充测试层级、基线与分位数指标、确定性故障注入、性能预算和现场测试运行手册，第三篇第 7 章补充部署对象、systemd 生命周期、配置/凭据分层、资源权限、健康门、回滚和发布证据框架，但本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 ## 目录结构
 
@@ -84,6 +84,7 @@ book/第3篇_Linux/第3章_Linux可观测性与资源管理_日志时间与安�
 book/第3篇_Linux/第4章_Linux远程运维与Python_Bridge_从安全命令到可验证请求.md
 book/第3篇_Linux/第5章_Linux现场自动化与Python_Bridge_队列重连与状态缓存.md
 book/第3篇_Linux/第6章_Linux与Python_Bridge现场测试与性能治理_从基准压测到故障注入.md
+book/第3篇_Linux/第7章_Linux与Python_Bridge现场部署与服务化治理_从systemd配置分层到安全回滚.md
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
@@ -108,9 +109,10 @@ diagrams/uno-q-linux-observability-resource-rollback-boundary.mmd
 diagrams/uno-q-linux-remote-bridge-request-sequence.mmd
 diagrams/uno-q-linux-job-queue-reconnect-state-cache.mmd
 diagrams/uno-q-linux-test-performance-fault-injection.mmd
+diagrams/uno-q-linux-bridge-deployment-rollback.mmd
 images/第1篇_认识UNOQ/README.md
 images/第2篇_STM32/README.md
 images/第3篇_Linux/README.md
 ```
 
-本次检查覆盖第一篇、第二篇第 1 章、第二篇第 2 章、第二篇第 3 章、第二篇第 4 章、第二篇第 5 章、第二篇第 6 章、第二篇第 7 章、第二篇第 8 章、第二篇第 9 章、第三篇第 1 章、第三篇第 2 章、第三篇第 3 章、第三篇第 4 章、第三篇第 5 章和第三篇第 6 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；GPIO、PWM、ADC、UART、SPI、I2C、实时任务、硬件验证、综合实验、Linux 执行边界、Linux 设备网络服务边界、Linux 可观测性资源回滚边界、远程 Bridge 请求时序、现场自动化队列重连缓存和测试性能故障注入 Mermaid 源文件已完成一致性检查，但当前环境未安装 mmdc，未生成或验证 SVG，也未执行 arduino-cli 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调或硬件实机运行。
+本次检查覆盖第一篇、第二篇第 1 章、第二篇第 2 章、第二篇第 3 章、第二篇第 4 章、第二篇第 5 章、第二篇第 6 章、第二篇第 7 章、第二篇第 8 章、第二篇第 9 章、第三篇第 1 章、第三篇第 2 章、第三篇第 3 章、第三篇第 4 章、第三篇第 5 章、第三篇第 6 章和第三篇第 7 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；GPIO、PWM、ADC、UART、SPI、I2C、实时任务、硬件验证、综合实验、Linux 执行边界、Linux 设备网络服务边界、Linux 可观测性资源回滚边界、远程 Bridge 请求时序、现场自动化队列重连缓存、测试性能故障注入和 Linux Bridge 部署回滚 Mermaid 源文件已完成一致性检查，但当前环境未安装 mmdc，未生成或验证 SVG，也未执行 arduino-cli 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、systemd unit 安装/启用/重启、配置或凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调或硬件实机运行。

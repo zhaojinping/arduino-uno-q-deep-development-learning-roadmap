@@ -59,3 +59,13 @@
 - 正文位置：[第三篇第 6 章第 3 节：测试层、故障注入与证据闭环](../../book/第3篇_Linux/第6章_Linux与Python_Bridge现场测试与性能治理_从基准压测到故障注入.md#fig-21-linux-test-performance-fault-injection)
 - 内容要求：展示测试规格、基线环境、静态/组件/契约/集成测试、故障注入、现场或硬件闭环、证据包、分位数分析、性能与安全放行门及回滚重测路径。
 - 来源边界：基于 Python time/statistics/asyncio 官方文档、Linux perf security 官方文档、Arduino UNO Q User Manual、Arduino App specification、Arduino Router 和前述 Linux/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。
+
+## 图 3-7：Linux Bridge 部署、健康门与安全回滚闭环图
+
+- 图号：Fig-22
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch07-fig22-uno-q-linux-bridge-deployment-rollback.svg
+- 图源：[Linux Bridge 部署回滚 Mermaid 源文件](../../diagrams/uno-q-linux-bridge-deployment-rollback.mmd)
+- 正文位置：[第三篇第 7 章第 4 节：Linux Bridge 部署、健康门与安全回滚闭环](../../book/第3篇_Linux/第7章_Linux与Python_Bridge现场部署与服务化治理_从systemd配置分层到安全回滚.md#fig-22-linux-bridge-deployment-rollback)
+- 内容要求：展示应用、配置、凭据和 systemd unit 的隔离暂存、schema/权限/秘密校验、unit 验证、旧版本快照、受控激活、只读健康门、UNKNOWN 对账、回滚和回滚验证。
+- 来源边界：基于 systemd.service、systemd.exec、systemd.resource-control、systemctl、systemd credentials、systemd-analyze、Arduino UNO Q User Manual 和前述 Linux/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。
