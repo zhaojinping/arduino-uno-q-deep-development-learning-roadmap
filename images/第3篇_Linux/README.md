@@ -39,3 +39,13 @@
 - 正文位置：[第三篇第 4 章第 4 节：远程运维与 Python Bridge 请求时序](../../book/第3篇_Linux/第4章_Linux远程运维与Python_Bridge_从安全命令到可验证请求.md#fig-19-linux-remote-bridge-request-sequence)
 - 内容要求：展示开发主机经 SSH、ADB 或 App Lab 进入 Linux 服务，再经过 operation 白名单、参数/权限/资源校验和 Python Bridge，分别进入 Linux 只读路径或 MCU RPC 路径，并覆盖 APPLIED、REJECTED、EXPIRED、FAILED、UNKNOWN 和脱敏证据返回。
 - 来源边界：基于 Arduino UNO Q User Manual、Android Debug Bridge 官方文档、Python subprocess/json 官方文档和第二篇 MCU/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。
+
+## 图 3-5：Linux 现场自动化队列、重连与状态缓存闭环图
+
+- 图号：Fig-20
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch05-fig20-uno-q-linux-job-queue-reconnect-state-cache.svg
+- 图源：[现场自动化队列重连缓存 Mermaid 源文件](../../diagrams/uno-q-linux-job-queue-reconnect-state-cache.mmd)
+- 正文位置：[第三篇第 5 章第 4 节：队列、重连与状态缓存闭环](../../book/第3篇_Linux/第5章_Linux现场自动化与Python_Bridge_队列重连与状态缓存.md#fig-20-linux-job-queue-reconnect-state-cache)
+- 内容要求：展示请求校验、有界队列、背压、worker 租约、连接状态、退避重连、UNKNOWN、结果分类、状态缓存 freshness、重新查询和脱敏证据归档的闭环。
+- 来源边界：基于 Python asyncio Queue/Task 官方文档、systemd.service、Arduino UNO Q User Manual、Arduino App specification、Arduino Router 和第二篇 MCU/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。

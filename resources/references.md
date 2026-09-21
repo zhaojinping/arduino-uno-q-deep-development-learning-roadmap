@@ -95,4 +95,10 @@
 | 官方 Python 文档 | Python json | https://docs.python.org/3/library/json.html | 核对第三篇第4章 JSON 编解码和不可信 JSON 输入的大小/资源风险；不把 JSON 格式正确替代协议授权和 MCU 结果验证。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方板卡文档 | Arduino UNO Q User Manual（远程入口与 Bridge） | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对第三篇第4章 Network Mode、USB/ADB、Linux、App Lab 和 Bridge/RPC 的产品事实边界；不把访问成功替代授权、结果或硬件验证。 | main | Arduino 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
 
+| 官方 Python 文档 | Python asyncio queues | https://docs.python.org/3/library/asyncio-queue.html | 核对第三篇第5章 Queue、maxsize、qsize、put/get、task_done、join 和有界队列边界；不把概念队列替代现场负载测试。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 Python 文档 | Python asyncio tasks and timeouts | https://docs.python.org/3/library/asyncio-task.html | 核对第三篇第5章 wait_for、Task、取消和超时处理边界；不把协程超时替代外部 MCU 状态确认。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方服务文档 | systemd.service（现场自动化服务边界） | https://github.com/systemd/systemd/blob/main/man/systemd.service.xml | 核对第三篇第5章 service unit、进程监督、启动/停止、重启和资源控制关联边界；不在默认实验中安装或重启现场服务。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方应用规范 | Arduino App specification（队列与 Bridge 交接） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对第三篇第5章 Arduino Sketch、Python、Linux App 和 RPC/Router 的组件边界；不把 App 运行态替代队列、缓存和 MCU 结果验证。 | main | Arduino 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方代码仓库 | Arduino Router | https://github.com/arduino/arduino-router | 核对第三篇第5章 Router/MessagePack RPC 传输和 Linux/MCU 连接基础；不把 Router 连接成功替代业务请求 APPLIED。 | main | Arduino 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

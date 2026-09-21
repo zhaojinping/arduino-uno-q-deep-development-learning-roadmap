@@ -1,0 +1,22 @@
+flowchart LR
+    IN[远程/本地请求] --> VALIDATE[协议/权限/deadline]
+    VALIDATE -- 拒绝 --> REJECT[REJECTED\n记录原因]
+    VALIDATE -- 通过 --> CAPACITY{队列有容量?}
+    CAPACITY -- 否 --> BACKPRESSURE[QUEUE_FULL/DEFERRED\n通知调用方]
+    CAPACITY -- 是 --> JOB[有界任务队列\njob_id/幂等键]
+    JOB --> WORKER[Worker\n租约/并发上限]
+    WORKER --> LINK{连接状态?}
+    LINK -- ready --> SEND[投递\nrequest_id/sequence]
+    LINK -- disconnected --> RECONNECT[退避重连\n预算/停止点]
+    RECONNECT -- 超出预算 --> UNKNOWN[UNKNOWN\n查询或人工处理]
+    RECONNECT -- ready --> SEND
+    SEND --> RESULT{结果状态?}
+    RESULT -- APPLIED --> CACHE[更新状态缓存\nsequence/boot_id/时间]
+    RESULT -- ACCEPTED --> WAIT[等待或状态查询]
+    RESULT -- REJECTED/FAILED/EXPIRED --> TERMINAL[终态\n证据归档]
+    WAIT --> CACHE
+    CACHE -- stale --> QUERY[重新查询]
+    QUERY --> CACHE
+    CACHE --> EVIDENCE[日志/evidence_ref\n对外脱敏摘要]
+    UNKNOWN --> EVIDENCE
+    TERMINAL --> EVIDENCE
