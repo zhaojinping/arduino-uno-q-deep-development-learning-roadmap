@@ -1,0 +1,17 @@
+flowchart LR
+    EVENT[Linux进程/服务/Bridge事件] --> JOURNAL[日志/结构化字段\nunit/PID/request_id]
+    CLOCK[时间基准\nrealtime/monotonic/boot_id] --> JOURNAL
+    JOURNAL --> CORRELATE[关联窗口\n序列号/时间/提交号]
+    CORRELATE --> PACKAGE[证据包\n原始日志/摘要/校验]
+    RESOURCE[CPU/Memory/Disk/Tasks/IO] --> THRESHOLD{资源阈值或压力?}
+    THRESHOLD -- 否 --> OBSERVE[持续观测\n不改变控制]
+    THRESHOLD -- 是 --> DEGRADE[限流/降级/停止Linux请求]
+    PACKAGE --> RECOVERY[备份/校验/回滚记录]
+    RECOVERY --> REMOTE[远程运维\n明确权限/停止点]
+    REMOTE -- 风险未确认 --> STOP[停止写操作\n保留现场]
+    REMOTE -- 可回滚 --> CHANGE[小步变更\n记录前后状态]
+    CHANGE --> VERIFY[重新观测\n服务/Bridge/MCU结果]
+    VERIFY --> RESULT[ACCEPTED/APPLIED/\nREJECTED/UNKNOWN]
+    RESULT --> SAFE[MCU状态机和安全输出]
+    OBSERVE --> RESULT
+    DEGRADE --> SAFE

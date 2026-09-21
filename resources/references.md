@@ -84,4 +84,10 @@
 | 官方服务文档 | systemd.service source documentation | https://github.com/systemd/systemd/blob/main/man/systemd.service.xml | 核对第三篇第2章 service 单元、启动命令、执行环境、退出和重启策略边界；不把 systemd 通用语义替代目标镜像服务管理器实测。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方服务文档 | systemctl source documentation | https://github.com/systemd/systemd/blob/main/man/systemctl.xml | 核对第三篇第2章 enable/start/stop/restart、system/user 作用域和服务状态观察边界；不在本章默认实验中执行写操作。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 
+| 官方日志文档 | systemd journal fields | https://github.com/systemd/systemd/blob/main/man/systemd.journal-fields.xml | 核对第三篇第3章 _SYSTEMD_UNIT、_PID、_BOOT_ID、来源实时时间和来源启动后时间等结构化日志字段；不把字段存在替代目标镜像现场核验。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方日志文档 | journalctl source documentation | https://github.com/systemd/systemd/blob/main/man/journalctl.xml | 核对第三篇第3章时间窗口、服务过滤、UTC、JSON、游标、无分页和有限日志读取等只读观察边界；不在默认实验中清理或改变日志。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方资源文档 | systemd resource control | https://github.com/systemd/systemd/blob/main/man/systemd.resource-control.xml | 核对第三篇第3章 service/cgroup 资源控制、CPU、内存、任务和 I/O 统计边界；不把通用配置语义当作 UNO Q 当前镜像默认配置。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方内核文档 | Linux cgroup v2 | https://docs.kernel.org/admin-guide/cgroup-v2.html | 核对第三篇第3章统一 cgroup v2 控制器、资源统计和压力观察的内核边界；不把存在文档当作目标内核已启用某项控制器。 | 网页内容（核验时） | Linux kernel 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方时间文档 | systemd time documentation | https://github.com/systemd/systemd/blob/main/man/systemd.time.xml | 核对第三篇第3章 systemd 时间表达式和时间相关语义；时间同步、时区和目标镜像配置仍需现场验证。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

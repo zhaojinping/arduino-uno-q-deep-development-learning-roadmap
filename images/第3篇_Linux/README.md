@@ -19,3 +19,13 @@
 - 正文位置：[第三篇第 2 章第 5 节：Linux 设备、网络与服务边界图](../../book/第3篇_Linux/第2章_Linux设备网络与服务_从可见到可用.md#fig-17-uno-q-linux-device-network-service-boundary)
 - 内容要求：展示开发主机经 USB、ADB、SSH 或网络进入 Linux/MPU，再分别经过设备、网络和服务层到 App/Bridge，最终回到 MCU/Bridge 状态结果；同时展示访问失败、拒绝、过期、故障和证据记录路径
 - 来源边界：基于 Arduino UNO Q User Manual、NetworkManager、systemd 和第二篇 MCU/Bridge 契约原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 3-3：Linux 可观测性、资源与回滚闭环图
+
+- 图号：Fig-18
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch03-fig18-uno-q-linux-observability-resource-rollback-boundary.svg
+- 图源：[Linux 可观测性资源回滚 Mermaid 源文件](../../diagrams/uno-q-linux-observability-resource-rollback-boundary.mmd)
+- 正文位置：[第三篇第 3 章第 7 节：Linux 可观测性、资源与回滚闭环图](../../book/第3篇_Linux/第3章_Linux可观测性与资源管理_日志时间与安全回滚.md#fig-18-uno-q-linux-observability-resource-rollback-boundary)
+- 内容要求：展示 Linux/Bridge 事件、journal 字段、realtime/monotonic/boot_id、资源压力、证据包、远程变更、停止点、回滚验证以及 ACCEPTED/APPLIED/REJECTED/UNKNOWN 结果如何回到 MCU 状态机和安全输出
+- 来源边界：基于 systemd journal 字段与 journalctl、systemd 资源控制、Linux cgroup v2、Arduino UNO Q User Manual 和第二篇 MCU/Bridge 契约原创重绘；不直接复制官方产品图、数据表框图或第三方图片
