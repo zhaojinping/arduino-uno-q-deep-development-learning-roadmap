@@ -1,0 +1,16 @@
+flowchart LR
+    SPEC[测试规格\n目标/版本/边界] --> BASELINE[基线环境\n硬件/软件/资源/时间]
+    BASELINE --> STATIC[静态与组件测试]
+    STATIC --> CONTRACT[协议/状态契约测试]
+    CONTRACT --> INTEGRATION[集成测试\n队列/连接/缓存/Bridge]
+    INTEGRATION --> FAULT[故障注入\n延迟/丢失/重复/重启]
+    FAULT --> FIELD[现场或硬件闭环\n受控窗口]
+    FIELD --> EVIDENCE[证据包\nrun_id/样本/日志/版本]
+    EVIDENCE --> ANALYZE[指标与分位数\np50/p95/p99/错误率]
+    ANALYZE --> GATE{通过性能与安全门?}
+    GATE -- 否 --> TRIAGE[停止发布\n定位/回滚/重测]
+    GATE -- 是 --> RELEASE[允许下一阶段\n保留限制条件]
+    TRIAGE --> BASELINE
+    QUEUE[队列深度/等待时间] --> ANALYZE
+    RESOURCE[CPU/Memory/Disk/压力] --> ANALYZE
+    RESULT[MCU状态/sequence/UNKNOWN] --> ANALYZE

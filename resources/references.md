@@ -100,5 +100,9 @@
 | 官方服务文档 | systemd.service（现场自动化服务边界） | https://github.com/systemd/systemd/blob/main/man/systemd.service.xml | 核对第三篇第5章 service unit、进程监督、启动/停止、重启和资源控制关联边界；不在默认实验中安装或重启现场服务。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方应用规范 | Arduino App specification（队列与 Bridge 交接） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对第三篇第5章 Arduino Sketch、Python、Linux App 和 RPC/Router 的组件边界；不把 App 运行态替代队列、缓存和 MCU 结果验证。 | main | Arduino 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方代码仓库 | Arduino Router | https://github.com/arduino/arduino-router | 核对第三篇第5章 Router/MessagePack RPC 传输和 Linux/MCU 连接基础；不把 Router 连接成功替代业务请求 APPLIED。 | main | Arduino 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 Python 文档 | Python time | https://docs.python.org/3/library/time.html | 核对第三篇第6章 monotonic、perf_counter_ns、process_time_ns 和时间源边界；不把主机计时器结果当作 UNO Q 实机性能。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 Python 文档 | Python statistics | https://docs.python.org/3/library/statistics.html | 核对第三篇第6章 median、quantiles、样本量和分位数计算边界；不把小样本插值当作稳定的现场尾延迟结论。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方内核文档 | Linux perf security | https://docs.kernel.org/admin-guide/perf-security.html | 核对第三篇第6章 perf/performance counter 的权限、安全和敏感信息边界；不为测量而修改目标设备安全策略或提升权限。 | 网页内容（核验时） | Linux kernel 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 Python 文档 | Python asyncio tasks and timeouts（测试运行器） | https://docs.python.org/3/library/asyncio-task.html | 核对第三篇第6章 wait_for、Task 取消、超时和异步测试替身边界；不把协程超时替代 Bridge/MCU 最终状态确认。 | Python 3 文档（核验时） | Python 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

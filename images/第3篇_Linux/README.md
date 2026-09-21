@@ -49,3 +49,13 @@
 - 正文位置：[第三篇第 5 章第 4 节：队列、重连与状态缓存闭环](../../book/第3篇_Linux/第5章_Linux现场自动化与Python_Bridge_队列重连与状态缓存.md#fig-20-linux-job-queue-reconnect-state-cache)
 - 内容要求：展示请求校验、有界队列、背压、worker 租约、连接状态、退避重连、UNKNOWN、结果分类、状态缓存 freshness、重新查询和脱敏证据归档的闭环。
 - 来源边界：基于 Python asyncio Queue/Task 官方文档、systemd.service、Arduino UNO Q User Manual、Arduino App specification、Arduino Router 和第二篇 MCU/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。
+
+## 图 3-6：Linux 与 Python Bridge 测试、性能与故障注入闭环图
+
+- 图号：Fig-21
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch06-fig21-uno-q-linux-test-performance-fault-injection.svg
+- 图源：[测试性能故障注入 Mermaid 源文件](../../diagrams/uno-q-linux-test-performance-fault-injection.mmd)
+- 正文位置：[第三篇第 6 章第 3 节：测试层、故障注入与证据闭环](../../book/第3篇_Linux/第6章_Linux与Python_Bridge现场测试与性能治理_从基准压测到故障注入.md#fig-21-linux-test-performance-fault-injection)
+- 内容要求：展示测试规格、基线环境、静态/组件/契约/集成测试、故障注入、现场或硬件闭环、证据包、分位数分析、性能与安全放行门及回滚重测路径。
+- 来源边界：基于 Python time/statistics/asyncio 官方文档、Linux perf security 官方文档、Arduino UNO Q User Manual、Arduino App specification、Arduino Router 和前述 Linux/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。

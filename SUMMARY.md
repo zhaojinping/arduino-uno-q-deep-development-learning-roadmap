@@ -27,6 +27,7 @@
 - [第3章 Linux 可观测性与资源管理：日志、时间与安全回滚](book/第3篇_Linux/第3章_Linux可观测性与资源管理_日志时间与安全回滚.md)
 - [第4章 Linux 远程运维与 Python Bridge：从安全命令到可验证请求](book/第3篇_Linux/第4章_Linux远程运维与Python_Bridge_从安全命令到可验证请求.md)
 - [第5章 Linux 现场自动化与 Python Bridge：队列、重连与状态缓存](book/第3篇_Linux/第5章_Linux现场自动化与Python_Bridge_队列重连与状态缓存.md)
+- [第6章 Linux 与 Python Bridge 现场测试与性能治理：从基准、压测到故障注入](book/第3篇_Linux/第6章_Linux与Python_Bridge现场测试与性能治理_从基准压测到故障注入.md)
 
 ## 第四篇：Python Bridge
 - [本篇范围](book/第4篇_PythonBridge/README.md)
