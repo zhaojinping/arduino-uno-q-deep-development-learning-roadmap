@@ -1,0 +1,17 @@
+flowchart LR
+    REQ[通信需求\n日志/设备协议/Bridge链路] --> ROLE{谁拥有时序与故障处理?}
+    ROLE -- MCU实时 --> RES[核验UART节点/引脚/复用/电气]
+    ROLE -- 诊断输出 --> DEBUG[分离调试输出与业务帧]
+    RES --> PARAM[定义波特率/数据位/校验/停止位/流控]
+    PARAM --> FRAME[定义帧头/长度/序号/校验/超时]
+    FRAME --> API{吞吐量和实时性?}
+    API -- 低速简单 --> POLL[轮询]
+    API -- 持续收发 --> IRQ[中断+环形缓冲]
+    API -- 高吞吐 --> ASYNC[异步/DMA/双缓冲]
+    POLL --> TEST[回环/已知帧/错误注入]
+    IRQ --> TEST
+    ASYNC --> TEST
+    DEBUG --> TEST
+    TEST --> BOUNDARY{MCU/Linux边界已定义?}
+    BOUNDARY -- 否 --> STOP[停止：补齐端口/协议/故障动作]
+    BOUNDARY -- 是 --> EVIDENCE[记录版本/配置/丢帧/校验/延迟]
