@@ -1,0 +1,16 @@
+flowchart LR
+    REQ[GPIO需求\n输入/输出/边沿/周期] --> OWNER{资源由MCU侧负责?}
+    OWNER -- 否 --> STOP1[停止：回到MPU/Linux或Bridge边界]
+    OWNER -- 是 --> MAP[解析板级资源\n连接器/LED/按键/外设复用]
+    MAP --> PIN[解析MCU资源\n控制器/端口/引脚/Devicetree]
+    PIN --> ELEC{电压/电流/上拉/初始状态已核验?}
+    ELEC -- 否 --> STOP2[停止：查数据表/引脚图/原理图]
+    ELEC -- 是 --> API[选择Arduino API或Zephyr GPIO API]
+    API --> TIME{是否有严格时序要求?}
+    TIME -- 是 --> REALTIME[MCU任务/中断/外设\n定义延迟与抖动指标]
+    TIME -- 否 --> APP[普通应用逻辑\n必要时通过Bridge协同]
+    REALTIME --> EVIDENCE[编译/上传/观察/测量]
+    APP --> EVIDENCE
+    EVIDENCE --> RESULT{证据是否足够?}
+    RESULT -- 否 --> STOP3[停止：标记待验证，不扩大结论]
+    RESULT -- 是 --> DONE[记录版本、条件与结果]

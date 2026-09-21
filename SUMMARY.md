@@ -10,6 +10,7 @@
 
 ## 第二篇：STM32
 - [本篇范围](book/第2篇_STM32/README.md)
+- [第1章 STM32 侧开发基础：GPIO、引脚与实时边界](book/第2篇_STM32/第1章_STM32侧开发基础_GPIO与实时边界.md)
 
 ## 第三篇：Linux
 - [本篇范围](book/第3篇_Linux/README.md)

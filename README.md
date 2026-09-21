@@ -12,6 +12,7 @@
 
 - [阅读总览（SUMMARY.md）](SUMMARY.md)
 - [第一篇：认识 UNO Q（第1篇_认识UNOQ README）](book/第1篇_认识UNOQ/README.md)
+- [第二篇：STM32（第2篇_STM32 README）](book/第2篇_STM32/README.md)
 - [设计说明](docs/superpowers/specs/2026-09-15-arduino-uno-q-book-design.md)
 - [参考资料索引](resources/references.md)
 - [写作规范](docs/writing-guidelines.md)
@@ -28,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇持续写作中**。第 1～5 章已完成写作，Blink 示例和 Mermaid 源文件已存在；第 5 章提供 IDE、CLI、App Lab 的验证闭环，但本环境仍未完成 Arduino CLI 编译、上传和硬件实机验证。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1 章正在持续写作**。Blink 示例和 Mermaid 源文件已存在；第一篇第 5 章提供 IDE、CLI、App Lab 的验证闭环，但本环境仍未完成 Arduino CLI 编译、上传和硬件实机验证。章节编号按篇重置，第二篇不使用“第 6 章”。
 
 ## 目录结构
 
@@ -66,6 +67,8 @@ book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md
 book/第1篇_认识UNOQ/第3章_UNO_Q的硬件架构.md
 book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md
 book/第1篇_认识UNOQ/第5章_第一个实验_Blink验证闭环.md
+book/第2篇_STM32/README.md
+book/第2篇_STM32/第1章_STM32侧开发基础_GPIO与实时边界.md
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
@@ -75,7 +78,9 @@ diagrams/uno-q-execution-boundary.mmd
 diagrams/uno-q-hardware-map.mmd
 diagrams/uno-q-software-architecture.mmd
 diagrams/uno-q-first-experiment-validation.mmd
+diagrams/uno-q-stm32-gpio-boundary.mmd
 images/第1篇_认识UNOQ/README.md
+images/第2篇_STM32/README.md
 ```
 
-本次首期检查覆盖文件存在性、相对 Markdown 链接、章节元数据、Mermaid 声明、图示占位、Blink 源代码结构和 UTF-8；第 5 章新增的静态检查同样不等同于 `arduino-cli` 编译、上传或硬件实机运行。
+本次检查覆盖第一篇与第二篇第 1 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；Mermaid 源文件已完成一致性检查，但当前环境未安装 `mmdc`，未生成或验证 SVG，也未执行 `arduino-cli` 编译、上传或硬件实机运行。
