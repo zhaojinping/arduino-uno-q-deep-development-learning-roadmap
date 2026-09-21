@@ -50,4 +50,13 @@
 | 官方 API | Zephyr Devicetree SPI API | https://docs.zephyrproject.org/latest/doxygen/html/group__devicetree-spi.html | 核对第二篇第5章 cs-gpios、SPI 外设 reg/CS 索引以及 CS 查询宏的关系。 | Zephyr API 网页（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方迁移说明 | Zephyr 4.5 SPI 术语迁移 | https://docs.zephyrproject.org/latest/releases/migration-guide-4.5.html | 核对第二篇第5章 controller/peripheral inclusive API 名称迁移及旧 master/slave 宏的版本边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
 
+| 官方参考 | Arduino Wire 官方参考 | https://github.com/arduino/reference-en/blob/master/Language/Functions/Communication/Wire.adoc | 核对第二篇第6章 7 位地址、SDA/SCL 上拉、Wire 事务、请求读取、超时和通用缓冲边界；不把通用实现细节当作 UNO Q 实测。 | master | Arduino 官方参考仓库；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方参考 | Arduino Wire endTransmission() | https://github.com/arduino/reference-en/blob/master/Language/Functions/Communication/Wire/endTransmission.adoc | 核对第二篇第6章 endTransmission(false) 的重复 START 语义和 0～5 返回值；不把返回码映射替代目标 Core 验证。 | master | Arduino 官方参考仓库；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方板卡文档 | Arduino UNO Q User Manual | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对第二篇第6章 Qwiic 连接到 I2C4、Arduino 侧使用 Wire1 和 3.3 V 电气边界；不把手册连接关系替代实机接线测量。 | main | Arduino 官方文档；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方配置 | ArduinoCore-zephyr UNO Q 当前 I2C overlay | https://github.com/arduino/ArduinoCore-zephyr/blob/main/variants/arduino_uno_q_stm32u585xx/arduino_uno_q_stm32u585xx.overlay | 核对第二篇第6章 i2cs = <&i2c2>, <&i2c4>, <&i2c3>、I2C4/I2C3 状态、pinctrl、延迟初始化和 FAST 速率声明；不把源代码声明当作物理波形。 | main | Arduino 官方仓库；本项目只链接和原创解释，不复制配置文件。 | 2026-09-21 |
+| 官方配置 | ArduinoCore-zephyr 变体配置说明 | https://github.com/arduino/ArduinoCore-zephyr/blob/main/documentation/variants.md | 核对第二篇第6章 i2cs 数组顺序与 Wire、Wire1、Wire2 对象的通用关系；不把通用顺序替代最终构建核验。 | main | Arduino 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方文档 | Zephyr I2C 外设文档 | https://docs.zephyrproject.org/latest/hardware/peripherals/i2c.html | 核对第二篇第6章 controller/target、控制器事务、时钟拉伸、超时配置和目标 API 的支持边界。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 API | Zephyr I2C API 参考 | https://docs.zephyrproject.org/latest/doxygen/html/group__i2c__interface.html | 核对第二篇第6章 i2c_dt_spec、I2C_DT_SPEC_GET、i2c_is_ready_dt、i2c_write_read_dt、i2c_recover_bus、事务标志和错误返回。 | 网页内容（核验时） | Zephyr 官方文档；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方协议资料 | NXP UM10204 I2C-bus specification and user manual | https://www.nxp.com/webapp/Download?colCode=UM10204&location=null | 核对第二篇第6章开漏/上拉、START/STOP、ACK/NACK、时钟拉伸、仲裁和总线清理的协议背景。 | UM10204（核验时） | NXP 官方协议资料；本项目只链接和原创解释，不复制正文或图表。 | 2026-09-21 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

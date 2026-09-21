@@ -1,0 +1,18 @@
+flowchart LR
+    REQ[I2C需求\n设备/地址/速率] --> BUS{SDA/SCL、电压和上拉已核验?}
+    BUS -- 否 --> STOP1[停止：先核对电气与连接]
+    BUS -- 是 --> ADDR[确认7位地址\n无冲突/无保留]
+    ADDR --> MAP{Wire对象与DT节点已对应?}
+    MAP -- 否 --> STOP2[停止：核对overlay/i2cs/pinctrl]
+    MAP -- 是 --> TXN[定义START/STOP/RESTART\nACK/NACK/读写序列]
+    TXN --> API{抽象与时序?}
+    API -- Arduino --> ARD[Wire/Wire1\n超时与返回码]
+    API -- Zephyr --> ZEP[I2C DT spec\nwrite_read]
+    ARD --> HEALTH[设备ID/回环/超时/总线恢复]
+    ZEP --> HEALTH
+    HEALTH --> STUCK{总线空闲且错误可恢复?}
+    STUCK -- 否 --> RECOVER[恢复：释放/脉冲/STOP/复位]
+    RECOVER --> HEALTH
+    STUCK -- 是 --> OWNER{MCU/Linux所有权已定义?}
+    OWNER -- 否 --> STOP3[停止：补齐所有权与故障动作]
+    OWNER -- 是 --> RECORD[记录地址/速率/电压/证据]

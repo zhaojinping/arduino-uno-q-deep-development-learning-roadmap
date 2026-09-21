@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～5 章已建立为初稿**。Blink 示例和 Mermaid 源文件已存在；第一篇第 5 章提供 IDE、CLI、App Lab 的验证闭环，第二篇第 2 章补充 PWM 与定时输出的资源核验框架，第二篇第 3 章补充 ADC 采样、输入保护和数据证据框架，第二篇第 4 章补充 UART 资源、帧格式、缓冲和 MCU/Linux 边界框架，第二篇第 5 章补充 SPI 时序、片选、Devicetree 设备节点和 MCU/Linux 总线所有权框架，但本环境仍未完成 Arduino CLI 编译、上传和硬件实机验证。章节编号按篇重置，第二篇不使用“第 6 章”。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～6 章已建立为初稿**。Blink 示例和 Mermaid 源文件已存在；第一篇第 5 章提供 IDE、CLI、App Lab 的验证闭环，第二篇第 2 章补充 PWM 与定时输出的资源核验框架，第二篇第 3 章补充 ADC 采样、输入保护和数据证据框架，第二篇第 4 章补充 UART 资源、帧格式、缓冲和 MCU/Linux 边界框架，第二篇第 5 章补充 SPI 时序、片选、Devicetree 设备节点和 MCU/Linux 总线所有权框架，第二篇第 6 章补充 I2C 电气模型、7 位地址、Wire/Zephyr 事务、总线恢复和 MCU/Linux 所有权框架，但本环境仍未完成 Arduino CLI 编译、上传和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 ## 目录结构
 
@@ -73,6 +73,7 @@ book/第2篇_STM32/第2章_PWM与定时输出_从占空比到安全控制.md
 book/第2篇_STM32/第3章_ADC与模拟采样_从电压读数到可验证数据.md
 book/第2篇_STM32/第4章_串口通信_从帧格式到MCU_Linux边界.md
 book/第2篇_STM32/第5章_SPI通信_从片选时序到设备驱动边界.md
+book/第2篇_STM32/第6章_I2C通信_从设备地址到总线恢复.md
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
@@ -87,8 +88,9 @@ diagrams/uno-q-stm32-pwm-duty-cycle-boundary.mmd
 diagrams/uno-q-stm32-adc-measurement-boundary.mmd
 diagrams/uno-q-stm32-uart-boundary.mmd
 diagrams/uno-q-stm32-spi-boundary.mmd
+diagrams/uno-q-stm32-i2c-recovery-boundary.mmd
 images/第1篇_认识UNOQ/README.md
 images/第2篇_STM32/README.md
 ```
 
-本次检查覆盖第一篇、第二篇第 1 章、第二篇第 2 章、第二篇第 3 章、第二篇第 4 章和第二篇第 5 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；GPIO、PWM、ADC、UART 和 SPI Mermaid 源文件已完成一致性检查，但当前环境未安装 `mmdc`，未生成或验证 SVG，也未执行 `arduino-cli` 编译、上传或硬件实机运行。
+本次检查覆盖第一篇、第二篇第 1 章、第二篇第 2 章、第二篇第 3 章、第二篇第 4 章、第二篇第 5 章和第二篇第 6 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；GPIO、PWM、ADC、UART、SPI 和 I2C Mermaid 源文件已完成一致性检查，但当前环境未安装 `mmdc`，未生成或验证 SVG，也未执行 `arduino-cli` 编译、上传或硬件实机运行。

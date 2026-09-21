@@ -49,3 +49,13 @@
 - 正文位置：[第二篇第 5 章第 6 节：SPI 通信决策图](../../book/第2篇_STM32/第5章_SPI通信_从片选时序到设备驱动边界.md#fig-11-uno-q-stm32-spi-boundary)
 - 内容要求：展示 SPI 需求从控制器、引脚和 CS 核验，经过 CPOL/CPHA、位序、字宽、频率、事务和 Arduino/Zephyr API 选择，到设备 ID、逻辑分析、错误注入及 MCU/Linux 所有权记录的成功和停止路径
 - 来源边界：基于 Arduino、Zephyr 和 ST 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 2-6：I2C 通信与总线恢复决策图
+
+- 图号：Fig-12
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch06-fig12-uno-q-stm32-i2c-recovery-boundary.svg
+- 图源：[I2C 通信与总线恢复 Mermaid 源文件](../../diagrams/uno-q-stm32-i2c-recovery-boundary.mmd)
+- 正文位置：[第二篇第 6 章第 6 节：I2C 通信与总线恢复决策图](../../book/第2篇_STM32/第6章_I2C通信_从设备地址到总线恢复.md#fig-12-uno-q-stm32-i2c-recovery-boundary)
+- 内容要求：展示 I2C 需求从 SDA/SCL、电压、上拉和 7 位地址核验，经过 Wire/Zephyr 事务、ACK/NACK、超时、总线恢复和 MCU/Linux 所有权记录的成功与停止路径
+- 来源边界：基于 Arduino、Zephyr、NXP 和 ArduinoCore-zephyr 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
