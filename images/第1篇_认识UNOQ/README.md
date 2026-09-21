@@ -38,3 +38,12 @@
 - 正文位置：[第 4 章第 6 节：软件架构图：入口、责任与资源](../../book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md#fig-05-uno-q-software-architecture)
 - 内容要求：展示开发入口、MPU Debian Linux、MCU Zephyr 与 Arduino Sketch、Bridge/RPC 逻辑服务边界及各侧资源归属
 - 来源边界：基于已登记的 Arduino 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片
+
+## 图 1-6：UNO Q Blink 验证流程图
+- 图号：Fig-06
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch05-fig06-uno-q-blink-validation.svg
+- 图源：[UNO Q Blink 验证流程 Mermaid 源文件](../../diagrams/uno-q-first-experiment-validation.mmd)
+- 正文位置：[第 5 章第 4 节：Blink 验证流程](../../book/第1篇_认识UNOQ/第5章_第一个实验_Blink验证闭环.md#fig-06-uno-q-blink-validation)
+- 内容要求：展示准备、静态检查、IDE/CLI/App Lab 三种入口、MCU LED 观察、App Lab 日志、失败停止和 Blink 的验证边界
+- 来源边界：基于已登记的 Arduino 官方资料原创重绘；不直接复制官方产品图、数据表框图或第三方图片

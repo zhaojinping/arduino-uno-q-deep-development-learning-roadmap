@@ -1,0 +1,20 @@
+flowchart TD
+    START[实验目标\n验证 UNO Q 的最小 Blink 路径] --> PREP[准备\n板卡、数据线、核心、工具、端口]
+    PREP --> STATIC[静态检查\n代码路径与 setup/loop/LED 逻辑]
+    STATIC --> ENTRY{选择入口}
+    ENTRY --> IDE[Arduino IDE\n验证/编译/上传]
+    ENTRY --> CLI[Arduino CLI\ncompile + board list + upload]
+    ENTRY --> APP[Arduino App Lab\n打开 Blink LED + Run]
+    IDE --> MCU[MCU Sketch 路径\nSTM32U585 / Zephyr]
+    CLI --> MCU
+    APP --> MCU
+    APP --> LINUX[App Lab Linux/Python 路径\n按日志单独核验]
+    MCU --> OBSERVE[观察\n板载 LED 周期变化]
+    OBSERVE --> RECORD[记录证据\n工具、核心、FQBN、端口、输出、现象]
+    LINUX --> LOGS[检查 Start-up、Main、Sketch 日志]
+    LOGS --> RECORD
+    IDE -.-> FAIL[失败：保存输出\n停止并定位单一变量]
+    CLI -.-> FAIL
+    APP -.-> FAIL
+    OBSERVE -.-> CHECK[无现象：复核目标、供电、端口、LED 映射]
+    RECORD --> BOUNDARY[边界结论\nBlink 不单独证明 Linux 或 Bridge/RPC]

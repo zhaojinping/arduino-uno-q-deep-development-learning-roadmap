@@ -28,7 +28,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇持续写作中**。第 1～4 章已完成写作，Blink 示例和 Mermaid 源文件已存在；第一篇其余主题，以及 Arduino CLI 编译、上传和硬件实机验证仍待后续任务完成。
+当前状态：**第一篇持续写作中**。第 1～5 章已完成写作，Blink 示例和 Mermaid 源文件已存在；第 5 章提供 IDE、CLI、App Lab 的验证闭环，但本环境仍未完成 Arduino CLI 编译、上传和硬件实机验证。
 
 ## 目录结构
 
@@ -51,9 +51,9 @@ docs/       项目设计说明和写作规范
 
 新增或修改章节时，先按照[写作规范](docs/writing-guidelines.md)补齐元数据、代码说明、图示占位和交叉引用，再同步更新 `SUMMARY.md` 及相关资源记录。新增外部来源必须先登记到[参考资料索引](resources/references.md)，并在提交说明中写清验证日期、许可边界和复现结果。变更保持小步、可复现，并在合并前运行本任务或对应章节规定的检查。
 
-## 首期验证记录
+## 当前验证记录
 
-最后验证日期：`2026-09-20`。首期已创建并核验的文件/目录如下：
+最后验证日期：`2026-09-21`。当前已创建并核验的文件/目录如下：
 
 ```text
 README.md
@@ -65,6 +65,7 @@ book/第1篇_认识UNOQ/第1章_Arduino的发展.md
 book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md
 book/第1篇_认识UNOQ/第3章_UNO_Q的硬件架构.md
 book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md
+book/第1篇_认识UNOQ/第5章_第一个实验_Blink验证闭环.md
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
@@ -73,7 +74,8 @@ diagrams/uno-q-dual-brain.mmd
 diagrams/uno-q-execution-boundary.mmd
 diagrams/uno-q-hardware-map.mmd
 diagrams/uno-q-software-architecture.mmd
+diagrams/uno-q-first-experiment-validation.mmd
 images/第1篇_认识UNOQ/README.md
 ```
 
-本次首期检查覆盖文件存在性、相对 Markdown 链接、章节元数据、Mermaid 声明、图示占位、Blink 源代码结构和 UTF-8；未完成 `arduino-cli` 编译、上传或硬件实机运行。
+本次首期检查覆盖文件存在性、相对 Markdown 链接、章节元数据、Mermaid 声明、图示占位、Blink 源代码结构和 UTF-8；第 5 章新增的静态检查同样不等同于 `arduino-cli` 编译、上传或硬件实机运行。
