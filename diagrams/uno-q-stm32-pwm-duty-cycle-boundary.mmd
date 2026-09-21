@@ -1,0 +1,15 @@
+flowchart LR
+    REQ[PWM需求\n调光/调速/脉宽] --> PARAM[定义频率/周期/占空比/极性]
+    PARAM --> MAP[解析板级PWM资源\n逻辑引脚/定时器/通道/复用]
+    MAP --> CONFIG{Core/Devicetree/驱动可用?}
+    CONFIG -- 否 --> STOP1[停止：查板卡定义与版本]
+    CONFIG -- 是 --> SAFE[先设置安全状态\n0%或关闭]
+    SAFE --> API[选择analogWrite或Zephyr PWM API]
+    API --> REALTIME{更新是否需要严格时序?}
+    REALTIME -- 是 --> MCU[MCU定时器/本地任务\nLinux不参与每个载波周期]
+    REALTIME -- 否 --> SETPOINT[Bridge/Linux只传设定值]
+    MCU --> EVIDENCE[编译/上传/波形/负载观察]
+    SETPOINT --> EVIDENCE
+    EVIDENCE --> CHECK{频率/占空比/极性/温升已验证?}
+    CHECK -- 否 --> STOP2[停止：记录待验证]
+    CHECK -- 是 --> RECORD[记录版本、条件和结果]

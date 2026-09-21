@@ -4,6 +4,12 @@
 
 | 类别 | 名称 | URL | 用途 | 版本/分支（核验时） | 许可证/声明 | 最后核验日期 |
 |---|---|---|---|---|---|---|
+| 官方文档 | Zephyr PWM 文档 | https://docs.zephyrproject.org/latest/hardware/peripherals/pwm.html | 核对第二篇第 2 章的 PWM 周期、脉宽、占空比、时间单位辅助宏、Devicetree pwms 和 pwm_set/pwm_set_dt 通用 API 边界。 | 网页内容（核验时） | Zephyr 官方文档，按项目声明使用；本项目只链接和原创解释，不复制示例正文。 | 2026-09-21 |
+| 官方示例 | Zephyr PWM Blinky 示例说明 | https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/basic/blinky_pwm/README.rst | 核对第二篇第 2 章中 pwm_led0 别名和板级 PWM 示例所需的 Devicetree 前提；不将通用示例当作 UNO Q 实测。 | main | Zephyr 官方仓库，按仓库声明使用；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方 API | Zephyr pwm_dt_spec API 说明 | https://docs.zephyrproject.org/latest/doxygen/html/structpwm__dt__spec.html | 核对第二篇第 2 章中 PWM 设备、通道、周期和标志的资源描述。 | 网页内容（核验时） | Zephyr 官方文档，按项目声明使用；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方 API | Zephyr PWM API 参考 | https://docs.zephyrproject.org/latest/doxygen/html/group__pwm__interface.html | 核对第二篇第 2 章中 pwm_set_dt 和 PWM 接口调用边界。 | 网页内容（核验时） | Zephyr 官方文档，按项目声明使用；本项目只链接和原创解释。 | 2026-09-21 |
+| 官方参考 | Arduino analogWrite 参考 | https://github.com/arduino/reference-en/blob/master/Language/Functions/Analog%20IO/analogWrite.adoc | 核对第二篇第 2 章中 Arduino 高层 PWM 入口的通用语义；UNO Q 的实际映射和参数范围仍回到目标 Core 核验。 | master | Arduino 官方参考仓库，按仓库声明使用；本项目只链接和原创重述。 | 2026-09-21 |
+| 官方配置 | ArduinoCore-zephyr UNO Q 变体 overlay | https://github.com/arduino/ArduinoCore-zephyr/blob/main/variants/arduino_uno_q_stm32u585xx/arduino_uno_q_stm32u585xx.overlay | 核对第二篇第 2 章中当前仓库分支的 UNO Q 板级 PWM/引脚描述入口；不把当前 main 的映射承诺为未来版本或实机测量结果。 | main | Arduino 官方仓库，按仓库声明使用；本项目只链接和原创解释，不复制配置文件。 | 2026-09-21 |
 | 官方文档 | Zephyr GPIO 文档 | https://docs.zephyrproject.org/latest/hardware/peripherals/gpio.html | 核对第二篇第 1 章的 GPIO 抽象、输入/输出/上下拉/中断、Devicetree 与 gpio_dt_spec 关系；本项目只原创整理 API 使用边界。 | 网页内容（核验时） | Zephyr 官方文档，按项目声明使用；本项目只链接和原创解释，不复制示例正文。 | 2026-09-21 |
 | 官方示例 | Zephyr Blinky 示例说明 | https://github.com/zephyrproject-rtos/zephyr/blob/main/samples/basic/blinky/README.rst | 核对第二篇第 1 章中 led0、gpio_dt_spec、Devicetree 别名和 GPIO 配置流程的通用示例边界；不将通用示例当作 UNO Q 实测。 | main | Zephyr 官方仓库，按仓库声明使用；本项目只链接和原创重述。 | 2026-09-21 |
 | 官方板卡文档 | Zephyr Arduino UNO Q board documentation | https://github.com/zephyrproject-rtos/zephyr/blob/main/boards/arduino/uno_q/doc/index.rst | 核对第二篇第 1 章中 UNO Q 的 QRB2210 MPU、STM32U585 MCU、Zephyr 板卡目标和 MCU 侧开发边界。 | main | Zephyr 官方仓库，按仓库声明使用；本项目只链接和原创重述。 | 2026-09-21 |
