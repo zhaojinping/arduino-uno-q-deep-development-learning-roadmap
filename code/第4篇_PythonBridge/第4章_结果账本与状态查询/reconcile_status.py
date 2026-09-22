@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from ledger import RequestRecord
+from ledger import RequestRecord, State
 
 
 @dataclass(frozen=True)
@@ -21,7 +21,7 @@ class Observation:
 @dataclass(frozen=True)
 class Decision:
     action: str
-    target: str | None
+    target: State | None
     reason: str
 
 

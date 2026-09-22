@@ -74,3 +74,31 @@ git diff --check
 ```
 
 实际输出：`DIFF_CHECK_EXIT=0`。
+
+## Decision.target 类型修正追加记录
+
+按复审前的接口核对意见，将 `reconcile_status.Decision.target` 从 `str | None` 修正为 `State | None`，并从 `ledger` 导入 `State`。该变更仍限于 Task 1 公共类型骨架，没有加入 SQLite 或真实执行逻辑。
+
+修正后执行：
+
+```text
+python -B "code/第4篇_PythonBridge/第4章_结果账本与状态查询/test_ledger.py"
+```
+
+实际输出摘要：
+
+```text
+Ran 10 tests in 0.011s
+FAILED (errors=9)
+TEST_EXIT=1
+```
+
+`test_state_vocabulary_is_exactly_seven_members` 为 `ok`；其余失败仍是未实现骨架触发的 `NotImplementedError`。
+
+同时执行：
+
+```text
+git diff --check
+```
+
+实际输出：`DIFF_CHECK_EXIT=0`。
