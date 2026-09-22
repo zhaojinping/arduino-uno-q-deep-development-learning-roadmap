@@ -6,7 +6,7 @@ import tempfile
 import unittest
 
 from ledger import Evidence, Ledger, LedgerConflict, RequestSpec, State
-from reconcile_status import Decision, Observation, reconcile
+from reconcile_status import Observation, reconcile
 
 
 def make_request() -> RequestSpec:
@@ -35,18 +35,36 @@ class LedgerContractTests(unittest.TestCase):
         record = self.ledger.create(make_request(), now=10.0)
         self.assertEqual(record.state, State.PENDING)
 
+    def test_state_vocabulary_is_exactly_seven_members(self) -> None:
+        self.assertEqual(
+            {state.value for state in State},
+            {
+                "PENDING", "SENT", "UNKNOWN", "APPLIED",
+                "REJECTED", "EXPIRED", "NOT_APPLIED_FINAL",
+            },
+        )
+
     def test_intended_pending_sent_unknown_applied_path_is_supported(self) -> None:
         request = make_request()
         self.ledger.create(request, now=10.0)
         self.ledger.transition("req-001", expected=State.PENDING, target=State.SENT,
-                               evidence=Evidence("send", "accepted"), now=11.0)
+                               evidence=Evidence("send", "router", 11.0, "accepted"), now=11.0)
         self.ledger.transition("req-001", expected=State.SENT, target=State.UNKNOWN,
-                               evidence=Evidence("lost-response"), now=12.0)
+                               evidence=Evidence("lost-response", "local", 12.0), now=12.0)
         record = self.ledger.transition(
             "req-001", expected=State.UNKNOWN, target=State.APPLIED,
-            evidence=Evidence("authoritative-query", "confirmed"), now=13.0
+            evidence=Evidence("authoritative-query", "router", 13.0, "confirmed"), now=13.0
         )
         self.assertEqual(record.state, State.APPLIED)
+
+    def test_sent_rejects_missing_or_non_send_evidence(self) -> None:
+        self.ledger.create(make_request(), now=10.0)
+        for evidence in (None, Evidence("query", "router", 11.0)):
+            with self.subTest(evidence=evidence), self.assertRaises(LedgerConflict):
+                self.ledger.transition(
+                    "req-001", expected=State.PENDING, target=State.SENT,
+                    evidence=evidence, now=11.0,
+                )
 
     def test_wrong_expected_state_fails_closed(self) -> None:
         self.ledger.create(make_request(), now=10.0)
@@ -65,13 +83,24 @@ class LedgerContractTests(unittest.TestCase):
 
     def test_identity_mismatch_reconciles_safely(self) -> None:
         record = self.ledger.create(make_request(), now=10.0)
-        observation = Observation("req-001", "output:led:2", "sha256:demo", "APPLIED", 11.0)
-        self.assertEqual(reconcile(record, observation, now=11.0), Decision.KEEP_UNKNOWN)
+        observation = Observation(
+            "req-001", "output:led:2", "set_output", "sha256:demo",
+            "result", "router", 11.0, True, "different operation key",
+        )
+        self.assertEqual(reconcile(record, observation, now=11.0).action, "KEEP_UNKNOWN")
+
+    def test_matching_unknown_observation_remains_keep_unknown(self) -> None:
+        record = self.ledger.create(make_request(), now=10.0)
+        observation = Observation(
+            "req-001", "output:led:1", "set_output", "sha256:demo",
+            "result", "router", 11.0, False, "not authoritative",
+        )
+        self.assertEqual(reconcile(record, observation, now=11.0).action, "KEEP_UNKNOWN")
 
     def test_reopening_database_retains_record_and_event_history(self) -> None:
         self.ledger.create(make_request(), now=10.0)
         self.ledger.transition("req-001", expected=State.PENDING, target=State.SENT,
-                               evidence=Evidence("send"), now=11.0)
+                               evidence=Evidence("send", "router", 11.0), now=11.0)
         self.ledger.close()
         reopened = Ledger(self.database)
         try:

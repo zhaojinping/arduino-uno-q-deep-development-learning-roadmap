@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Any
+from pathlib import Path
 
 
 class State(str, Enum):
@@ -30,8 +30,9 @@ class RequestSpec:
 @dataclass(frozen=True)
 class Evidence:
     kind: str
-    detail: str = ""
+    source: str
     observed_at: float | None = None
+    detail: str = ""
 
 
 @dataclass(frozen=True)
@@ -57,7 +58,7 @@ class LedgerConflict(Exception):
 class Ledger:
     """SQLite-backed public ledger API; implementation is supplied by a later task."""
 
-    def __init__(self, database: str) -> None:
+    def __init__(self, database: str | Path) -> None:
         self.database = database
 
     def create(self, request: RequestSpec, *, now: float | None = None) -> RequestRecord:
@@ -77,7 +78,7 @@ class Ledger:
     def get(self, request_id: str) -> RequestRecord | None:
         raise NotImplementedError("ledger reads are not implemented in Task 1")
 
-    def events(self, request_id: str) -> list[LedgerEvent]:
+    def events(self, request_id: str) -> tuple[LedgerEvent, ...]:
         raise NotImplementedError("ledger event history is not implemented in Task 1")
 
     def close(self) -> None:

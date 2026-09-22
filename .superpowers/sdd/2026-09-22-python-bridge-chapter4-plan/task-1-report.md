@@ -40,3 +40,37 @@ git diff --check
 ## 关注事项
 
 后续任务必须实现 SQLite 持久化、事件历史、合法状态转换、重复请求保护、身份校验和 `reconcile` 安全判定，之后同一测试命令才应转为通过。当前提交不是可运行的账本实现，也不提供任何 UNO Q 硬件执行或成功证据。
+
+## 审查修复追加记录
+
+已按审查意见更新：
+
+- 增加 `SENT` 缺少发送证据或使用非发送证据时必须失败的契约测试。
+- 增加匹配的 `UNKNOWN` 观察仍产生 `KEEP_UNKNOWN` 的契约测试，并断言 `decision.action`。
+- 增加精确七成员 `State` 词汇测试。
+- 移除 `ledger.py` 中未使用的 `Any` 导入。
+- 将 `Decision` 调整为包含 `action`、`target`、`reason` 的冻结数据类；对齐 `Evidence`、`Observation` 字段及 `Ledger(str | Path)`、`events() -> tuple[...]` 签名。
+
+修复后执行：
+
+```text
+python -B "code/第4篇_PythonBridge/第4章_结果账本与状态查询/test_ledger.py"
+```
+
+实际输出摘要：
+
+```text
+Ran 10 tests in 0.011s
+FAILED (errors=9)
+TEST_EXIT=1
+```
+
+其中 `test_state_vocabulary_is_exactly_seven_members` 为 `ok`；其余 9 项仍因任务范围内明确保留的 `NotImplementedError` 骨架失败。
+
+同时执行：
+
+```text
+git diff --check
+```
+
+实际输出：`DIFF_CHECK_EXIT=0`。

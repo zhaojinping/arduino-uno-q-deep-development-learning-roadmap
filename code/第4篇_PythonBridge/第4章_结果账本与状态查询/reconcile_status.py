@@ -2,8 +2,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import Enum
-
 from ledger import RequestRecord
 
 
@@ -11,17 +9,20 @@ from ledger import RequestRecord
 class Observation:
     request_id: str
     operation_key: str
+    operation: str
     payload_digest: str
-    state: str
+    kind: str
+    source: str
     observed_at: float
+    authoritative: bool
+    detail: str = ""
 
 
-class Decision(str, Enum):
-    APPLIED = "APPLIED"
-    REJECTED = "REJECTED"
-    KEEP_UNKNOWN = "KEEP_UNKNOWN"
-    NOT_APPLIED_FINAL = "NOT_APPLIED_FINAL"
-    EXPIRED = "EXPIRED"
+@dataclass(frozen=True)
+class Decision:
+    action: str
+    target: str | None
+    reason: str
 
 
 def reconcile(record: RequestRecord, observation: Observation, now: float) -> Decision:
