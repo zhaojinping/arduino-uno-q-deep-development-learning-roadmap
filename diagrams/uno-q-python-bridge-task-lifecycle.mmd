@@ -1,0 +1,16 @@
+stateDiagram-v2
+    [*] --> CREATED
+    CREATED --> REJECTED: local validation fails
+    CREATED --> QUEUED: accepted into bounded queue
+    QUEUED --> REJECTED: queue full or policy denies
+    QUEUED --> RUNNING: worker leases task
+    RUNNING --> COMPLETED: correlated APPLIED plus observation
+    RUNNING --> CANCEL_REQUESTED: caller requests cancellation
+    CANCEL_REQUESTED --> COMPLETED: cooperative cancellation acknowledged
+    CANCEL_REQUESTED --> UNKNOWN: remote result not known
+    RUNNING --> UNKNOWN: deadline or transport lost
+    UNKNOWN --> COMPLETED: reconciliation confirms APPLIED
+    UNKNOWN --> REJECTED: reconciliation confirms not applied
+    UNKNOWN --> [*]: human decision or safety freeze
+    COMPLETED --> [*]
+    REJECTED --> [*]

@@ -35,6 +35,8 @@
 
 第四篇第 1 章已建立为初稿，围绕 Python App、Router、Bridge/RPC、MCU Sketch 的消息模型、调用边界、超时、幂等和 UNKNOWN 处理展开；本章的标准库概念实验只验证本地逻辑，未完成 Router/Bridge、App Lab、MCU 或 UNO Q 实机联调。
 
+第四篇第 2 章已建立为初稿，围绕有界队列、worker、并发上限、背压、任务取消、超时、对账和 UNKNOWN 冻结展开；两个 asyncio 示例只验证本地调度逻辑，不构成 UNO Q 并发性能或硬件证据。
+
 ## 目录结构
 
 ```text
@@ -92,6 +94,7 @@ book/第3篇_Linux/第7章_Linux与Python_Bridge现场部署与服务化治理_�
 book/第3篇_Linux/第8章_Linux与Python_Bridge综合运行手册_从预检到交接.md
 book/第4篇_PythonBridge/README.md
 book/第4篇_PythonBridge/第1章_Python_Bridge开发基础_消息模型与调用边界.md
+book/第4篇_PythonBridge/第2章_Python_Bridge并发与任务生命周期_从单次调用到有界协同.md
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
@@ -119,6 +122,7 @@ diagrams/uno-q-linux-test-performance-fault-injection.mmd
 diagrams/uno-q-linux-bridge-deployment-rollback.mmd
 diagrams/uno-q-linux-operational-handoff.mmd
 diagrams/uno-q-python-bridge-message-lifecycle.mmd
+diagrams/uno-q-python-bridge-task-lifecycle.mmd
 images/第1篇_认识UNOQ/README.md
 images/第2篇_STM32/README.md
 images/第3篇_Linux/README.md
