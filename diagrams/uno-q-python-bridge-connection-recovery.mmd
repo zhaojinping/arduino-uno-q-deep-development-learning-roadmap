@@ -1,0 +1,18 @@
+stateDiagram-v2
+    [*] --> ACTIVE
+    state "Connection owner" as ACTIVE {
+        [*] --> DISCONNECTED
+        DISCONNECTED --> CONNECTING: begin recovery
+        CONNECTING --> PROBING: channel opened
+        CONNECTING --> BACKOFF: transient error
+        CONNECTING --> PAUSED: recovery cancelled
+        PROBING --> READY: method verified
+        PROBING --> BACKOFF: not ready yet
+        PROBING --> PAUSED: incompatible or cancelled
+        READY --> DISCONNECTED: link lost
+        BACKOFF --> CONNECTING: delay elapsed
+        BACKOFF --> PAUSED: exhausted or cancelled
+        PAUSED --> CONNECTING: explicit restart
+    }
+    ACTIVE --> STOPPED: application shutdown
+    STOPPED --> [*]

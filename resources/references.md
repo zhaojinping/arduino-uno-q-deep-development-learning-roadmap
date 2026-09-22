@@ -108,4 +108,15 @@
 | 官方服务文档 | systemd credentials | https://github.com/systemd/systemd/blob/main/docs/CREDENTIALS.md | 核对第三篇第7章凭据注入、秘密不入 unit/日志和目标支持边界；不在本项目保存或分发真实凭据。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 | 官方服务文档 | systemd-analyze | https://github.com/systemd/systemd/blob/main/man/systemd-analyze.xml | 核对第三篇第7章 unit verify、security 审查和工具输出的辅助性质；不把安全分析结果替代现场风险评估。 | main | systemd 官方仓库；本项目只链接和原创解释。 | 2026-09-21 |
 
+## 第四篇第3章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方代码仓库 | Arduino Router README（连接生命周期） | https://github.com/arduino/arduino-router#readme | 核对方法注册、客户端断开后移除注册、转发消息编号映射；不推定客户端自动恢复或业务恰好一次执行。 | main 页面，核验时 | 官方仓库标注 GPL-3.0-or-later；只链接和原创重述，不复制源码。 | 2026-09-22 |
+| 官方应用规范 | Arduino App specification（双侧职责） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Linux/Python 与 MCU Sketch 的 RPC 协作；应用恢复模型不冒充官方内置 API。 | main 页面，核验时 | 只链接和原创解释。 | 2026-09-22 |
+| 官方 Python 文档 | Python 3.10 Synchronization Primitives | https://docs.python.org/3.10/library/asyncio-sync.html | 核对 asyncio.Lock 互斥及非线程安全边界，用于单事件循环共享恢复。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释。 | 2026-09-22 |
+| 官方 Python 文档 | Python 3.10 Coroutines and Tasks | https://docs.python.org/3.10/library/asyncio-task.html | 核对 wait_for 超时取消、等待清理可能超过期限、gather 和取消传播；不把本地取消当远端撤销。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释。 | 2026-09-22 |
+| 官方 Python 文档 | Python 3.10 time | https://docs.python.org/3.10/library/time.html | 核对 monotonic 起点未定义、适合经过时间；不把不兼容的时钟值跨进程重启或设备比较。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释。 | 2026-09-22 |
+| 官方 Python 文档 | Python 3.10 random | https://docs.python.org/3.10/library/random.html | 核对 uniform 区间采样；退避上限、抖动策略和随机种子使用范围为本书原创设计。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释。 | 2026-09-22 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。

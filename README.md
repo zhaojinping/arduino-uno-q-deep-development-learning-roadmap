@@ -37,6 +37,8 @@
 
 第四篇第 2 章已建立为初稿，围绕有界队列、worker、并发上限、背压、任务取消、超时、对账和 UNKNOWN 冻结展开；两个 asyncio 示例只验证本地调度逻辑，不构成 UNO Q 并发性能或硬件证据。
 
+第四篇第 3 章已建立为初稿，围绕连接复用、连接代次、重连退避、已发送/可能已发送请求的恢复、幂等键和可判定结果展开；连接管理与恢复策略示例只验证本地逻辑，不构成 Router/Bridge、App Lab、MCU 或 UNO Q 实机联调证据。
+
 ## 目录结构
 
 ```text
@@ -95,6 +97,14 @@ book/第3篇_Linux/第8章_Linux与Python_Bridge综合运行手册_从预检到�
 book/第4篇_PythonBridge/README.md
 book/第4篇_PythonBridge/第1章_Python_Bridge开发基础_消息模型与调用边界.md
 book/第4篇_PythonBridge/第2章_Python_Bridge并发与任务生命周期_从单次调用到有界协同.md
+book/第4篇_PythonBridge/第3章_Python_Bridge连接复用与请求恢复_从断线到可判定结果.md
+code/第4篇_PythonBridge/第3章_连接复用与请求恢复/README.md
+code/第4篇_PythonBridge/第3章_连接复用与请求恢复/connection_owner.py
+code/第4篇_PythonBridge/第3章_连接复用与请求恢复/recovery_policy.py
+code/第4篇_PythonBridge/第3章_连接复用与请求恢复/test_recovery.py
+code/第4篇_PythonBridge/第3章_连接复用与请求恢复/check_chapter.py
+diagrams/uno-q-python-bridge-connection-recovery.mmd
+images/第4篇_PythonBridge/ch03-fig26-uno-q-python-bridge-connection-recovery.svg
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
@@ -130,3 +140,5 @@ images/第4篇_PythonBridge/README.md
 ```
 
 本次检查覆盖第一篇、第二篇第 1 章、第二篇第 2 章、第二篇第 3 章、第二篇第 4 章、第二篇第 5 章、第二篇第 6 章、第二篇第 7 章、第二篇第 8 章、第二篇第 9 章、第三篇第 1 章、第三篇第 2 章、第三篇第 3 章、第三篇第 4 章、第三篇第 5 章、第三篇第 6 章、第三篇第 7 章和第三篇第 8 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；GPIO、PWM、ADC、UART、SPI、I2C、实时任务、硬件验证、综合实验、Linux 执行边界、Linux 设备网络服务边界、Linux 可观测性资源回滚边界、远程 Bridge 请求时序、现场自动化队列重连缓存、测试性能故障注入和 Linux Bridge 部署回滚和 Linux 综合运行交接 Mermaid 源文件已完成一致性检查，但当前环境未安装 mmdc，未生成或验证 SVG，也未执行 arduino-cli 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、systemd unit 安装/启用/重启、配置或凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调或硬件实机运行。
+
+第四篇第 1～3 章的 Markdown 链接、代码说明、Python 3.10 语法兼容性、针对性示例/测试和 Fig-26 资源登记已完成本地检查；第 3 章的 Fig-26 已使用缓存 Mermaid CLI 11.12.0 生成 SVG 并完成预览审阅。当前仍未执行 Python 3.10 解释器、目标 UNO Q 镜像、Router/Bridge、App Lab、MCU 或硬件实机验证。
