@@ -29,6 +29,7 @@
 - [第5章 Linux 现场自动化与 Python Bridge：队列、重连与状态缓存](book/第3篇_Linux/第5章_Linux现场自动化与Python_Bridge_队列重连与状态缓存.md)
 - [第6章 Linux 与 Python Bridge 现场测试与性能治理：从基准、压测到故障注入](book/第3篇_Linux/第6章_Linux与Python_Bridge现场测试与性能治理_从基准压测到故障注入.md)
 - [第7章 Linux 与 Python Bridge 现场部署与服务化治理：从 systemd、配置分层到安全回滚](book/第3篇_Linux/第7章_Linux与Python_Bridge现场部署与服务化治理_从systemd配置分层到安全回滚.md)
+- [第8章 Linux 与 Python Bridge 综合运行手册：从预检到篇末交接](book/第3篇_Linux/第8章_Linux与Python_Bridge综合运行手册_从预检到交接.md)
 
 ## 第四篇：Python Bridge
 - [本篇范围](book/第4篇_PythonBridge/README.md)

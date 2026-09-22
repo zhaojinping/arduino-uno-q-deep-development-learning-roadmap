@@ -1,0 +1,14 @@
+flowchart LR
+    A["范围确认"] --> B["只读盘点"]
+    B --> C["Dry-run"]
+    C --> D{"健康门"}
+    D -->|APPLIED| E["受控运行"]
+    D -->|REJECTED| X["停止并保留证据"]
+    E -->|APPLIED| F["证据归档"]
+    E -->|UNKNOWN| G["人工裁决"]
+    G -->|ROLLED_BACK| H["回滚验证"]
+    H --> F
+    F --> I["交接包"]
+    I -.-> J["第四篇 Python Bridge"]
+    I -.-> K["第五篇 App Lab"]
+    I -.-> L["第九篇 Project"]

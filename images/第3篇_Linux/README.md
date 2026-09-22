@@ -69,3 +69,13 @@
 - 正文位置：[第三篇第 7 章第 4 节：Linux Bridge 部署、健康门与安全回滚闭环](../../book/第3篇_Linux/第7章_Linux与Python_Bridge现场部署与服务化治理_从systemd配置分层到安全回滚.md#fig-22-linux-bridge-deployment-rollback)
 - 内容要求：展示应用、配置、凭据和 systemd unit 的隔离暂存、schema/权限/秘密校验、unit 验证、旧版本快照、受控激活、只读健康门、UNKNOWN 对账、回滚和回滚验证。
 - 来源边界：基于 systemd.service、systemd.exec、systemd.resource-control、systemctl、systemd credentials、systemd-analyze、Arduino UNO Q User Manual 和前述 Linux/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。
+
+## 图 3-8：Linux、Python Bridge、服务治理与跨篇交接闭环
+
+- 图号：Fig-23
+- 状态：占位说明（Mermaid 源文件已存在，SVG 尚未提交）
+- 目标文件：ch08-fig23-uno-q-linux-python-bridge-operational-handoff.svg
+- 图源：[Linux 综合运行交接 Mermaid 源文件](../../diagrams/uno-q-linux-operational-handoff.mmd)
+- 正文位置：[第三篇第 8 章第 2 节：Linux、Python Bridge、服务治理与跨篇交接闭环](../../book/第3篇_Linux/第8章_Linux与Python_Bridge综合运行手册_从预检到交接.md#fig-23-linux-python-bridge-operational-handoff)
+- 内容要求：展示范围确认、只读盘点、Dry-run、健康门、受控运行、证据归档、UNKNOWN 人工裁决、ROLLED_BACK 回滚验证和交接到第四篇、第五篇、第九篇的综合运行路径；虚线只表示逻辑交接，不表示物理连线或已完成实机部署。
+- 来源边界：基于 Arduino UNO Q User Manual、Arduino App specification、systemd 服务文档、Python 标准库文档和前述 Linux/Bridge 契约原创重绘；不直接复制官方产品图、代码或第三方图片。
