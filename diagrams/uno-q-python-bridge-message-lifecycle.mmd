@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant P as Python App
+    participant R as Router
+    participant B as Bridge/RPC
+    participant M as MCU Sketch
+    participant E as Evidence
+
+    P->>P: validate and create request_id
+    P->>R: request_id + method + args
+    R->>B: route message
+    B->>M: invoke
+    alt MCU accepts
+        M-->>B: APPLIED + result
+        B-->>R: correlated response
+        R-->>P: APPLIED
+        P->>E: record response and observation
+    else MCU rejects
+        M-->>B: REJECTED + reason
+        B-->>R: correlated error
+        R-->>P: REJECTED
+        P->>E: record rejection
+    else timeout or correlation mismatch
+        R--x P: timeout or mismatched response
+        P->>E: record UNKNOWN and freeze retry
+    end

@@ -33,6 +33,8 @@
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
+第四篇第 1 章已建立为初稿，围绕 Python App、Router、Bridge/RPC、MCU Sketch 的消息模型、调用边界、超时、幂等和 UNKNOWN 处理展开；本章的标准库概念实验只验证本地逻辑，未完成 Router/Bridge、App Lab、MCU 或 UNO Q 实机联调。
+
 ## 目录结构
 
 ```text
@@ -88,6 +90,8 @@ book/第3篇_Linux/第5章_Linux现场自动化与Python_Bridge_队列重连与�
 book/第3篇_Linux/第6章_Linux与Python_Bridge现场测试与性能治理_从基准压测到故障注入.md
 book/第3篇_Linux/第7章_Linux与Python_Bridge现场部署与服务化治理_从systemd配置分层到安全回滚.md
 book/第3篇_Linux/第8章_Linux与Python_Bridge综合运行手册_从预检到交接.md
+book/第4篇_PythonBridge/README.md
+book/第4篇_PythonBridge/第1章_Python_Bridge开发基础_消息模型与调用边界.md
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
@@ -114,9 +118,11 @@ diagrams/uno-q-linux-job-queue-reconnect-state-cache.mmd
 diagrams/uno-q-linux-test-performance-fault-injection.mmd
 diagrams/uno-q-linux-bridge-deployment-rollback.mmd
 diagrams/uno-q-linux-operational-handoff.mmd
+diagrams/uno-q-python-bridge-message-lifecycle.mmd
 images/第1篇_认识UNOQ/README.md
 images/第2篇_STM32/README.md
 images/第3篇_Linux/README.md
+images/第4篇_PythonBridge/README.md
 ```
 
 本次检查覆盖第一篇、第二篇第 1 章、第二篇第 2 章、第二篇第 3 章、第二篇第 4 章、第二篇第 5 章、第二篇第 6 章、第二篇第 7 章、第二篇第 8 章、第二篇第 9 章、第三篇第 1 章、第三篇第 2 章、第三篇第 3 章、第三篇第 4 章、第三篇第 5 章、第三篇第 6 章、第三篇第 7 章和第三篇第 8 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；GPIO、PWM、ADC、UART、SPI、I2C、实时任务、硬件验证、综合实验、Linux 执行边界、Linux 设备网络服务边界、Linux 可观测性资源回滚边界、远程 Bridge 请求时序、现场自动化队列重连缓存、测试性能故障注入和 Linux Bridge 部署回滚和 Linux 综合运行交接 Mermaid 源文件已完成一致性检查，但当前环境未安装 mmdc，未生成或验证 SVG，也未执行 arduino-cli 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、systemd unit 安装/启用/重启、配置或凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调或硬件实机运行。

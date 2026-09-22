@@ -33,6 +33,7 @@
 
 ## 第四篇：Python Bridge
 - [本篇范围](book/第4篇_PythonBridge/README.md)
+- [第1章 Python Bridge 开发基础：消息模型与调用边界](book/第4篇_PythonBridge/第1章_Python_Bridge开发基础_消息模型与调用边界.md)
 
 ## 第五篇：App Lab
 - [本篇范围](book/第5篇_AppLab/README.md)
