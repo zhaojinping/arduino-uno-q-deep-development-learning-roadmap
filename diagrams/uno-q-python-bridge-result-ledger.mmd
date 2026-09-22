@@ -1,0 +1,31 @@
+stateDiagram-v2
+    direction TB
+    [*] --> PENDING
+    PENDING --> SENT: send evidence recorded
+    PENDING --> EXPIRED: deadline closes unsent request
+    SENT --> APPLIED: matched final evidence
+    SENT --> REJECTED: matched final rejection
+    SENT --> UNKNOWN: response lost or uncertain
+    SENT --> EXPIRED: explicit expiry closure
+    UNKNOWN --> QUERY: query original identity
+    state QUERY <<choice>>
+    QUERY --> UNKNOWN: NOT_FOUND or identity mismatch
+    QUERY --> UNKNOWN: insufficient proof / KEEP_UNKNOWN
+    QUERY --> UNKNOWN: expired without final proof / STOP_EXPIRED
+    QUERY --> APPLIED: authoritative APPLIED
+    QUERY --> REJECTED: authoritative REJECTED
+    QUERY --> NOT_APPLIED_FINAL: authoritative final non-application
+    note right of UNKNOWN
+        Expiry blocks send and replay.
+        STOP_EXPIRED leaves UNKNOWN open.
+        Late authoritative proof can still close it.
+    end note
+    note left of QUERY
+        Decision boundary, not a ledger state.
+        Match identity before accepting final proof.
+        Caller commits the chosen transition.
+    end note
+    APPLIED --> [*]
+    REJECTED --> [*]
+    EXPIRED --> [*]
+    NOT_APPLIED_FINAL --> [*]

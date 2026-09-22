@@ -119,4 +119,11 @@
 | 官方 Python 文档 | Python 3.10 time | https://docs.python.org/3.10/library/time.html | 核对 monotonic 起点未定义、适合经过时间；不把不兼容的时钟值跨进程重启或设备比较。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释。 | 2026-09-22 |
 | 官方 Python 文档 | Python 3.10 random | https://docs.python.org/3.10/library/random.html | 核对 uniform 区间采样；退避上限、抖动策略和随机种子使用范围为本书原创设计。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释。 | 2026-09-22 |
 
+## 第四篇第4章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方 Python 文档 | Python 3.10 sqlite3 | https://docs.python.org/3.10/library/sqlite3.html | 核对标准库数据库接口、参数绑定、事务与连接上下文的提交/回滚行为；本章本地账本不提供 Router/Bridge 或设备执行证据，也不构成掉电持久性或并发性能验收。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释，不复制外部代码或图表；Fig-27 为本书原创教学设计。 | 2026-09-22 |
+| 官方 Python 文档 | Python 3.10 dataclasses | https://docs.python.org/3.10/library/dataclasses.html | 核对 frozen 数据类对字段赋值的限制，用于请求、记录、事件、观察和决策；不把 frozen=True 当作输入验证、数据库防篡改或绝对不可变保证。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释，不复制外部代码或图表。 | 2026-09-22 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。
