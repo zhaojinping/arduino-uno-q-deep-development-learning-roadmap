@@ -36,6 +36,7 @@
 - [第1章 Python Bridge 开发基础：消息模型与调用边界](book/第4篇_PythonBridge/第1章_Python_Bridge开发基础_消息模型与调用边界.md)
 - [第2章 Python Bridge 并发与任务生命周期：从单次调用到有界协同](book/第4篇_PythonBridge/第2章_Python_Bridge并发与任务生命周期_从单次调用到有界协同.md)
 - [第3章 Python Bridge 连接复用与请求恢复：从断线到可判定结果](book/第4篇_PythonBridge/第3章_Python_Bridge连接复用与请求恢复_从断线到可判定结果.md)
+- [第4章 Python Bridge 结果账本与状态查询：从返回值到可验证证据](book/第4篇_PythonBridge/第4章_Python_Bridge结果账本与状态查询_从返回值到可验证证据.md)
 
 ## 第五篇：App Lab
 - [本篇范围](book/第5篇_AppLab/README.md)

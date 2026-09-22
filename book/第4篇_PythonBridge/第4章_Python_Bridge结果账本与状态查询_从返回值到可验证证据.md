@@ -182,7 +182,7 @@ stateDiagram-v2
     NOT_APPLIED_FINAL --> [*]
 ~~~
 
-图 4-4（Fig-27）：请求状态、查询观察判定与结果收敛。图源为[Mermaid 文件](../../diagrams/uno-q-python-bridge-result-ledger.mmd)，[导出 SVG（预留入口）](../../images/第4篇_PythonBridge/ch04-fig27-uno-q-python-bridge-result-ledger.svg) 将由后续 Task 5 渲染并预览，本任务没有生成或验证 SVG。此图依据[已登记的官方资料](../../resources/references.md)原创设计，不是 Arduino 官方协议图；只链接外部资料，不复制其图表。
+图 4-4（Fig-27）：请求状态、查询观察判定与结果收敛。图源为[Mermaid 文件](../../diagrams/uno-q-python-bridge-result-ledger.mmd)，[导出 SVG](../../images/第4篇_PythonBridge/ch04-fig27-uno-q-python-bridge-result-ledger.svg) 已于 `2026-09-22` 使用缓存 Mermaid CLI `11.12.0` 渲染并完成独立预览，详见[图示登记](../../images/第4篇_PythonBridge/README.md#fig-27-python-bridge-result-ledger)。此图依据[已登记的官方资料](../../resources/references.md)原创设计，不是 Arduino 官方协议图；只链接外部资料，不复制其图表。
 
 图中的 `QUERY` 是临时判定边界，不是数据库中的第八种状态；它将实验二的判定与调用方负责的写入组合展示。`NOT_FOUND` 返回 `UNKNOWN`；期限到达阻止重放，但保留迟到权威证据入口。图展示批准设计和查询策略的主路径；底层额外允许的 `UNKNOWN → EXPIRED` 及其不可逆关闭含义见第 3.1 节。
 
@@ -748,9 +748,9 @@ SIMULATED mismatch: KEEP_UNKNOWN
 
 ### 9.3 交接给下一任务的内容
 
-Task 5 负责章节检查器、Fig-27 SVG 的实际渲染和预览，以及导航和图示登记。本任务提供正文、同步的 Mermaid 源码与官方来源登记，没有声称章节检查器或 SVG 检查已通过。
+Task 5 已补齐[章节检查器](../../code/第4篇_PythonBridge/第4章_结果账本与状态查询/check_chapter.py)、Fig-27 SVG 的实际渲染与独立预览，以及导航和图示登记。检查器验证元数据、章节顺序、两个演示的精确输出、Python 3.10 AST、代码与 Mermaid 逐字同步、SVG XML、内部链接和来源登记；运行入口见[配套代码说明](../../code/第4篇_PythonBridge/第4章_结果账本与状态查询/README.md)。
 
-配套代码 README 当前仍使用早期预留正文路径，需在后续导航同步时改为本章的完整文件名；本章直接链接实际 Python 文件供复现。后续应继续检查代码块逐字同步、内部链接、来源登记和图文一致性，并把实际渲染工具版本、日期与视觉检查结果写入图示记录。
+配套代码 README 已链接本章的完整文件名，渲染工具版本、日期与视觉检查结果已写入图示记录。后续总体审查仍需独立复核这些产物；本章保持 `draft`，上述本地检查不构成 Router/Bridge、App Lab、MCU、Linux 镜像或 UNO Q 硬件验收。
 
 ## 10. 常见问题
 
@@ -782,7 +782,7 @@ Task 5 负责章节检查器、Fig-27 SVG 的实际渲染和预览，以及导�
 
 请求身份把发送、查询和历史结果关联起来；当前投影便于读取，追加式事件保留形成结论的过程。两者必须在同一事务里更新，才能避免“状态变了却没有证据历史”的本地不一致。
 
-连接恢复之后，仍需依据原请求身份查询。未知结果不能靠超时或查无记录变成确定结论；过期停止新动作，迟到权威证据则仍可关闭未决请求。下一步进入真实 App 的集成时，应先验证查询协议和接收端能力，再把本地接口映射到现场证据。阅读顺序以[全书目录](../../SUMMARY.md)为准，导航将在后续任务同步。
+连接恢复之后，仍需依据原请求身份查询。未知结果不能靠超时或查无记录变成确定结论；过期停止新动作，迟到权威证据则仍可关闭未决请求。下一步进入真实 App 的集成时，应先验证查询协议和接收端能力，再把本地接口映射到现场证据。阅读顺序以[全书目录](../../SUMMARY.md)为准。
 
 ## 延伸阅读
 
