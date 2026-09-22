@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import sqlite3
 import tempfile
 import unittest
 
@@ -9,9 +10,9 @@ from ledger import Evidence, Ledger, LedgerConflict, LedgerEvent, RequestSpec, S
 from reconcile_status import Observation, reconcile
 
 
-def make_request() -> RequestSpec:
+def make_request(request_id: str = "req-001") -> RequestSpec:
     return RequestSpec(
-        request_id="req-001",
+        request_id=request_id,
         operation_key="output:led:1",
         operation="set_output",
         payload_digest="sha256:demo",
@@ -83,6 +84,93 @@ class LedgerContractTests(unittest.TestCase):
         self.assertEqual(self.ledger.get("req-001").state, State.PENDING)
         self.assertEqual(len(self.ledger.events("req-001")), 1)
 
+    def test_event_write_failure_rolls_back_current_projection_and_history(self) -> None:
+        self.ledger.create(make_request(), now=10.0)
+        before_record = self.ledger.get("req-001")
+        before_events = self.ledger.events("req-001")
+        connection = sqlite3.connect(self.database)
+        try:
+            connection.execute(
+                """
+                CREATE TRIGGER abort_second_event
+                BEFORE INSERT ON request_events
+                WHEN NEW.request_id = 'req-001' AND NEW.sequence = 2
+                BEGIN
+                    SELECT RAISE(ABORT, 'forced event insert failure');
+                END
+                """
+            )
+            connection.commit()
+        finally:
+            connection.close()
+
+        with self.assertRaises(sqlite3.IntegrityError):
+            self.ledger.transition(
+                "req-001",
+                expected=State.PENDING,
+                target=State.SENT,
+                evidence=Evidence("send", "router", 11.0),
+                now=11.0,
+            )
+
+        self.assertEqual(self.ledger.get("req-001"), before_record)
+        self.assertEqual(self.ledger.events("req-001"), before_events)
+
+    def test_every_allowed_transition_is_supported(self) -> None:
+        allowed = (
+            (State.PENDING, State.SENT),
+            (State.PENDING, State.EXPIRED),
+            (State.SENT, State.UNKNOWN),
+            (State.SENT, State.APPLIED),
+            (State.SENT, State.REJECTED),
+            (State.SENT, State.EXPIRED),
+            (State.UNKNOWN, State.APPLIED),
+            (State.UNKNOWN, State.REJECTED),
+            (State.UNKNOWN, State.EXPIRED),
+            (State.UNKNOWN, State.NOT_APPLIED_FINAL),
+        )
+        for source, target in allowed:
+            with self.subTest(source=source, target=target):
+                request_id = f"{source.value}-{target.value}"
+                self.ledger.create(make_request(request_id), now=10.0)
+                self._advance_to(request_id, source)
+                evidence = Evidence("send", "router", 20.0) if target == State.SENT else Evidence("test", "ledger", 20.0)
+                record = self.ledger.transition(
+                    request_id,
+                    expected=source,
+                    target=target,
+                    evidence=evidence,
+                    now=20.0,
+                )
+                self.assertEqual(record.state, target)
+
+    def test_terminal_states_have_no_outgoing_transitions(self) -> None:
+        terminals = (
+            (State.APPLIED, State.SENT),
+            (State.REJECTED, State.SENT),
+            (State.EXPIRED, State.PENDING),
+            (State.NOT_APPLIED_FINAL, State.UNKNOWN),
+        )
+        for terminal, source in terminals:
+            with self.subTest(terminal=terminal):
+                request_id = f"terminal-{terminal.value}"
+                self.ledger.create(make_request(request_id), now=10.0)
+                self._advance_to(request_id, source)
+                self.ledger.transition(
+                    request_id,
+                    expected=source,
+                    target=terminal,
+                    evidence=Evidence("test", "ledger", 20.0),
+                    now=20.0,
+                )
+                with self.assertRaises(LedgerConflict):
+                    self.ledger.transition(
+                        request_id,
+                        expected=terminal,
+                        target=State.PENDING,
+                        now=21.0,
+                    )
+
     def test_wrong_expected_state_fails_closed(self) -> None:
         self.ledger.create(make_request(), now=10.0)
         with self.assertRaises(LedgerConflict):
@@ -125,6 +213,25 @@ class LedgerContractTests(unittest.TestCase):
             self.assertEqual(len(reopened.events("req-001")), 2)
         finally:
             reopened.close()
+
+    def _advance_to(self, request_id: str, target: State) -> None:
+        if target == State.PENDING:
+            return
+        self.ledger.transition(
+            request_id,
+            expected=State.PENDING,
+            target=State.SENT,
+            evidence=Evidence("send", "router", 11.0),
+            now=11.0,
+        )
+        if target == State.UNKNOWN:
+            self.ledger.transition(
+                request_id,
+                expected=State.SENT,
+                target=State.UNKNOWN,
+                evidence=Evidence("test", "ledger", 12.0),
+                now=12.0,
+            )
 
 
 if __name__ == "__main__":
