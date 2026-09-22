@@ -5,8 +5,9 @@ import os
 import sqlite3
 import tempfile
 import unittest
+import math
 
-from ledger import Evidence, Ledger, LedgerConflict, LedgerEvent, RequestSpec, State
+from ledger import Evidence, Ledger, LedgerConflict, LedgerEvent, RequestRecord, RequestSpec, State
 from reconcile_status import Observation, reconcile
 
 
@@ -19,6 +20,31 @@ def make_request(request_id: str = "req-001") -> RequestSpec:
         generation=1,
         created_at=10.0,
         expires_at=30.0,
+    )
+
+
+def make_unknown_record(request_id: str = "req-001") -> RequestRecord:
+    return RequestRecord(make_request(request_id), State.UNKNOWN, 12.0)
+
+
+def make_observation(
+    kind: str,
+    *,
+    request_id: str = "req-001",
+    operation_key: str = "output:led:1",
+    operation: str = "set_output",
+    payload_digest: str = "sha256:demo",
+    authoritative: bool = True,
+) -> Observation:
+    return Observation(
+        request_id,
+        operation_key,
+        operation,
+        payload_digest,
+        kind,
+        "router",
+        20.0,
+        authoritative,
     )
 
 
@@ -186,21 +212,83 @@ class LedgerContractTests(unittest.TestCase):
         with self.assertRaises(LedgerConflict):
             self.ledger.create(make_request(), now=11.0)
 
-    def test_identity_mismatch_reconciles_safely(self) -> None:
-        record = self.ledger.create(make_request(), now=10.0)
-        observation = Observation(
-            "req-001", "output:led:2", "set_output", "sha256:demo",
-            "result", "router", 11.0, True, "different operation key",
-        )
-        self.assertEqual(reconcile(record, observation, now=11.0).action, "KEEP_UNKNOWN")
+    def test_authoritative_final_observations_close_matching_unknown_request(self) -> None:
+        expected = {
+            "APPLIED": ("CLOSE_APPLIED", State.APPLIED),
+            "REJECTED": ("CLOSE_REJECTED", State.REJECTED),
+            "NOT_APPLIED_FINAL": ("CLOSE_NOT_APPLIED", State.NOT_APPLIED_FINAL),
+        }
+        for kind, (action, target) in expected.items():
+            with self.subTest(kind=kind):
+                decision = reconcile(make_unknown_record(), make_observation(kind), now=20.0)
+                self.assertEqual((decision.action, decision.target), (action, target))
 
-    def test_matching_unknown_observation_remains_keep_unknown(self) -> None:
-        record = self.ledger.create(make_request(), now=10.0)
-        observation = Observation(
-            "req-001", "output:led:1", "set_output", "sha256:demo",
-            "result", "router", 11.0, False, "not authoritative",
+    def test_not_found_never_closes_matching_unknown_request(self) -> None:
+        for authoritative in (False, True):
+            with self.subTest(authoritative=authoritative):
+                decision = reconcile(
+                    make_unknown_record(),
+                    make_observation("NOT_FOUND", authoritative=authoritative),
+                    now=20.0,
+                )
+                self.assertEqual((decision.action, decision.target), ("KEEP_UNKNOWN", None))
+
+    def test_non_authoritative_or_unsupported_observation_stays_unknown_before_expiry(self) -> None:
+        observations = (
+            make_observation("APPLIED", authoritative=False),
+            make_observation("UNSUPPORTED", authoritative=True),
         )
-        self.assertEqual(reconcile(record, observation, now=11.0).action, "KEEP_UNKNOWN")
+        for observation in observations:
+            with self.subTest(kind=observation.kind, authoritative=observation.authoritative):
+                decision = reconcile(make_unknown_record(), observation, now=20.0)
+                self.assertEqual((decision.action, decision.target), ("KEEP_UNKNOWN", None))
+
+    def test_any_identity_mismatch_stays_unknown(self) -> None:
+        mismatches = (
+            {"request_id": "req-002"},
+            {"operation_key": "output:led:2"},
+            {"operation": "read_output"},
+            {"payload_digest": "sha256:other"},
+        )
+        for replacement in mismatches:
+            with self.subTest(replacement=replacement):
+                decision = reconcile(
+                    make_unknown_record(),
+                    make_observation("APPLIED", **replacement),
+                    now=20.0,
+                )
+                self.assertEqual((decision.action, decision.target), ("KEEP_UNKNOWN", None))
+
+    def test_malformed_identity_stays_unknown_without_coercion(self) -> None:
+        for operation_key in ("", None, 7):
+            with self.subTest(operation_key=operation_key):
+                decision = reconcile(
+                    make_unknown_record(),
+                    make_observation("APPLIED", operation_key=operation_key),
+                    now=20.0,
+                )
+                self.assertEqual((decision.action, decision.target), ("KEEP_UNKNOWN", None))
+
+    def test_expired_non_final_observation_stops_reconciliation(self) -> None:
+        decision = reconcile(make_unknown_record(), make_observation("UNSUPPORTED"), now=30.0)
+        self.assertEqual((decision.action, decision.target), ("STOP_EXPIRED", None))
+
+    def test_expired_authoritative_not_applied_final_closes_request(self) -> None:
+        decision = reconcile(make_unknown_record(), make_observation("NOT_APPLIED_FINAL"), now=30.0)
+        self.assertEqual(
+            (decision.action, decision.target),
+            ("CLOSE_NOT_APPLIED", State.NOT_APPLIED_FINAL),
+        )
+
+    def test_late_authoritative_applied_closes_request(self) -> None:
+        decision = reconcile(make_unknown_record(), make_observation("APPLIED"), now=31.0)
+        self.assertEqual((decision.action, decision.target), ("CLOSE_APPLIED", State.APPLIED))
+
+    def test_non_finite_now_fails_closed(self) -> None:
+        for now in (math.nan, math.inf, -math.inf):
+            with self.subTest(now=now):
+                with self.assertRaises(ValueError):
+                    reconcile(make_unknown_record(), make_observation("APPLIED"), now=now)
 
     def test_reopening_database_retains_record_and_event_history(self) -> None:
         self.ledger.create(make_request(), now=10.0)
