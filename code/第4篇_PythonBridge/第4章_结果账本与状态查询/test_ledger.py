@@ -5,7 +5,7 @@ import os
 import tempfile
 import unittest
 
-from ledger import Evidence, Ledger, LedgerConflict, RequestSpec, State
+from ledger import Evidence, Ledger, LedgerConflict, LedgerEvent, RequestSpec, State
 from reconcile_status import Observation, reconcile
 
 
@@ -34,6 +34,20 @@ class LedgerContractTests(unittest.TestCase):
     def test_create_record_starts_pending(self) -> None:
         record = self.ledger.create(make_request(), now=10.0)
         self.assertEqual(record.state, State.PENDING)
+
+    def test_create_persists_identity_and_initial_event(self) -> None:
+        record = self.ledger.create(make_request(), now=10.0)
+
+        self.assertEqual(record.request, make_request())
+        self.assertEqual(record.updated_at, 10.0)
+        self.assertEqual(
+            self.ledger.events("req-001"),
+            (LedgerEvent("req-001", None, State.PENDING, None, 10.0),),
+        )
+
+    def test_unknown_request_has_no_projection_or_events(self) -> None:
+        self.assertIsNone(self.ledger.get("missing"))
+        self.assertEqual(self.ledger.events("missing"), ())
 
     def test_state_vocabulary_is_exactly_seven_members(self) -> None:
         self.assertEqual(
@@ -65,6 +79,9 @@ class LedgerContractTests(unittest.TestCase):
                     "req-001", expected=State.PENDING, target=State.SENT,
                     evidence=evidence, now=11.0,
                 )
+
+        self.assertEqual(self.ledger.get("req-001").state, State.PENDING)
+        self.assertEqual(len(self.ledger.events("req-001")), 1)
 
     def test_wrong_expected_state_fails_closed(self) -> None:
         self.ledger.create(make_request(), now=10.0)
