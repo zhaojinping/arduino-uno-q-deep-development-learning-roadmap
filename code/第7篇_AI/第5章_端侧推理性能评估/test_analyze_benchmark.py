@@ -62,7 +62,10 @@ class PercentileTests(unittest.TestCase):
 
 class AnalyzeRunTests(unittest.TestCase):
     def test_warmups_do_not_affect_latency_or_observed_rss_summary(self):
-        report = analyze_run(make_run([999.0, 888.0], [10.0, 20.0, 30.0, 40.0]))
+        run = make_run([999.0, 888.0], [10.0, 20.0, 30.0, 40.0])
+        run["samples"][0]["rss_mib"] = 1000.0
+        run["samples"][1]["rss_mib"] = 2000.0
+        report = analyze_run(run)
 
         self.assertEqual(report["latency_ms"]["p50_nearest_rank"], 20.0)
         self.assertEqual(report["latency_ms"]["p95_nearest_rank"], 40.0)
