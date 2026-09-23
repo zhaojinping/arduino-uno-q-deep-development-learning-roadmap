@@ -1,0 +1,13 @@
+flowchart LR
+    INPUT["二值掩膜<br/>前景 255 / 背景 0"] --> VALID{"非空、二维 uint8<br/>且只有 0/255？"}
+    VALID -- 否 --> STOP1["拒绝输入并停止"]
+    VALID -- 是 --> FIND["findContours<br/>RETR_EXTERNAL / CHAIN_APPROX_SIMPLE"]
+    FIND --> FILTER{"轮廓面积达到门限<br/>且 m00 非零？"}
+    FILTER -- 否 --> DISCARD["记录剔除的小轮廓"]
+    FILTER -- 是 --> MEASURE["计算面积、周长<br/>外接矩形、质心"]
+    MEASURE --> REVIEW{"像素坐标、帧身份<br/>和任务阈值已核验？"}
+    REVIEW -- 否 --> STOP2["仅保留候选结果<br/>禁止硬件动作"]
+    REVIEW -- 是 --> OUTPUT["输出几何记录<br/>仍需独立控制安全门"]
+    DISCARD --> END["本示例不读写图像、不控制硬件"]
+    STOP2 --> END
+    OUTPUT --> END

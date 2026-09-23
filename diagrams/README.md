@@ -15,3 +15,4 @@
 - [第六篇第1章 Fig-35：视觉处理管线与控制边界](uno-q-opencv-image-pipeline.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。
 - [第六篇第2章 Fig-36：摄像头采集与帧校验生命周期](uno-q-opencv-capture-validation.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。
 - [第六篇第3章 Fig-37：去噪到边缘候选的处理流程](uno-q-opencv-denoise-canny.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。
+- [第六篇第4章 Fig-38：二值区域到几何记录的验证流程](uno-q-opencv-contour-geometry.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。

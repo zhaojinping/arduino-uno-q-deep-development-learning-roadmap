@@ -214,3 +214,13 @@
 | 官方教程 | OpenCV 4.12 Canny Edge Detector | https://docs.opencv.org/4.12.0/da/d5c/tutorial_canny_detector.html | 核对 Canny 的噪声抑制、梯度、非极大值抑制、滞后阈值和候选边缘输出；阈值比例仅作为调参起点，不当作通用验收标准。 | OpenCV 4.12.0 文档 | OpenCV 官方文档；只链接和原创解释，不复制教程正文或图表。 | 2026-09-23 |
 
 本章脚本与测试为本书原创，使用确定性合成数组，不读取/写入图片，不访问相机、网络、GPIO、MCU 或 UNO Q。3 项测试和示例在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境验证；目标系统和实机未验证。Fig-37 Mermaid 为原创教学图，本次未渲染 SVG。
+
+## 第六篇第4章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方教程 | OpenCV Contours: Getting Started | https://docs.opencv.org/4.12.0/d4/d73/tutorial_py_contours_begin.html | 核对二值输入、白色前景、`findContours` 的轮廓概念；不把边缘候选自动等同于可信区域掩膜。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程正文或图表。 | 2026-09-23 |
+| 官方教程 | OpenCV Contour Features | https://docs.opencv.org/4.12.0/dd/d49/tutorial_py_contour_features.html | 核对 `contourArea`、`arcLength`、`boundingRect`、`moments` 及质心语义；像素几何不是标定后的物理尺寸。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程正文或图表。 | 2026-09-23 |
+| 官方教程 | OpenCV Contours Hierarchy | https://docs.opencv.org/4.12.0/d9/d8b/tutorial_py_contours_hierarchy.html | 核对 `RETR_EXTERNAL` 仅保留最外层轮廓及内部孔洞不进入本章净面积计算的边界。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程正文或图表。 | 2026-09-23 |
+
+本章脚本、测试与 Fig-38 Mermaid 为本书原创。4 项测试及脚本在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境执行；仅使用合成掩膜，未访问摄像头、网络、文件、GPIO、MCU 或 UNO Q。目标板软件栈、物理标定、真实图像效果和硬件性能未验证；Fig-38 SVG 未渲染审阅。
