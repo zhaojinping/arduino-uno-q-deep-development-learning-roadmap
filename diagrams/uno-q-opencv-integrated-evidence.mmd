@@ -1,0 +1,12 @@
+flowchart LR
+    SYN["8 帧内存合成 BGR 图"] --> LOC["第5章 HSV 分割与像素候选"]
+    LOC --> GATE["第6章 TemporalGate<br/>连续命中 / 丢失 / 跳变"]
+    GATE --> REVIEW["第7章 review_feedback<br/>会话 / 帧绑定 / 年龄 / ROI / 幅度"]
+    REVIEW -- 合格 --> PREVIEW["PREVIEW_ONLY<br/>仅供人工复核"]
+    REVIEW -- 不合格 --> BLOCK["BLOCKED<br/>记录理由并停止"]
+    LOC -- 无候选 --> GATE
+    GATE -- 未稳定或被拒绝 --> REVIEW
+    FRAME3["第3帧副本：错会话故障注入"] --> REVIEW
+    PREVIEW --> EVIDENCE["JSONL 审查记录 + 缺口清单"]
+    BLOCK --> EVIDENCE
+    EVIDENCE --> STOP["不调用相机、Bridge 或 MCU"]

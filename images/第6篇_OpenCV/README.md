@@ -85,3 +85,15 @@
 - 内容要求：展示来源/会话、事件与帧绑定、绝对时效、像素区域、反馈幅度和模拟批准门；区分阻断与仅供复核的预览。
 - 来源边界：依据登记的 Arduino UNO Q 产品页、App 规范和 Python Bridge 接口，结合本书原创审查规则绘制；不是官方安全认证或硬件执行协议。
 - 验证边界：本次未渲染 SVG；离线预览不构成相机、Bridge/Router、MCU、接线或物理输出验收。
+
+<a id="fig-42-uno-q-opencv-integrated-evidence"></a>
+
+## 图 6-8：从合成帧到离线审查记录
+
+- 图号：Fig-42
+- 状态：Mermaid 正文与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[综合验证 Mermaid](../../diagrams/uno-q-opencv-integrated-evidence.mmd)
+- 正文位置：[第六篇第8章 Fig-42](../../book/第6篇_OpenCV/第8章_OpenCV综合验证_从合成画面到反馈审查证据包.md#fig-42-uno-q-opencv-integrated-evidence)
+- 内容要求：展示第5～7章串联、合成帧成功/拒绝路径与仅走审查门的错会话探针；输出证据记录，不暗示硬件执行。
+- 来源边界：依据本书前三章原创脚本及已登记的 OpenCV、Arduino 官方资料绘制；不是官方设备拓扑、安全认证协议或相机接线图。
+- 验证边界：本次未渲染 SVG；合成链路不构成真实相机、目标身份、Bridge/MCU 或物理反馈验收。

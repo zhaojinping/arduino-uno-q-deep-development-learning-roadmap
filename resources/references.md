@@ -253,3 +253,14 @@
 | 官方源码 | Arduino Python Bridge（app-bricks-py） | https://github.com/arduino/app-bricks-py/blob/main/src/arduino/app_utils/bridge.py | 核对公开 `call`/`notify` 接口语义；本章不导入 SDK，也不据此声称调用、回执或物理动作已经发生。 | main 页面（核验时） | 仅链接并解释接口边界，不复制源码。 | 2026-09-23 |
 
 本章脚本、测试与 Fig-41 Mermaid 为本书原创。10 项测试及脚本在本机 Python 3.14.6 执行；示例只处理合成记录，不调用相机、OpenCV、Bridge、GPIO、MCU、网络或执行器。真实采集时钟、操作者认证、幂等、路由回执、MCU 侧保护与物理输出均未验证；Fig-41 SVG 尚未渲染审阅。
+
+## 第六篇第8章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方教程 | OpenCV Changing Colorspaces | https://docs.opencv.org/4.12.0/df/d9d/tutorial_py_colorspaces.html | 核对 BGR→HSV 与 `inRange` 颜色掩膜的接口；本章实际调用本仓库第5章脚本，合成阈值不能外推为真实相机参数。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程代码、图像或正文。 | 2026-09-23 |
+| 官方教程 | OpenCV Contours: Getting Started 与 Contour Features | https://docs.opencv.org/4.12.0/d4/d73/tutorial_py_contours_begin.html · https://docs.opencv.org/4.12.0/dd/d49/tutorial_py_contour_features.html | 核对二值掩膜外轮廓与 `contourArea` 面积语义；像素坐标平方不等于物理面积，20×20 个前景像素不等于本示例的轮廓面积 361.0。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程代码、图像或正文。 | 2026-09-23 |
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对产品级 Linux/MCU 分工与 Bridge/RPC 能力；不能当作本章相机、Bridge 或硬件联调证据。 | 页面内容（核验时） | 仅链接并原创重述，不复制图表。 | 2026-09-23 |
+| 官方规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Python/Linux 与 Sketch/MCU 的职责分界；本章审查门和证据包是原创教学模型，不是官方 App 或安全规范。 | main 页面（核验时） | 仅链接并原创解释，不复制正文或源码。 | 2026-09-23 |
+
+本章综合脚本、六项测试、交接模板与 Fig-42 Mermaid 为本书原创。实际复用本仓库第5～7章代码，在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境运行；只创建内存合成图并输出九条 JSONL，不访问相机、网络、Bridge、MCU 或执行器。错会话故障注入复用第3帧，仅进入审查门。目标板、真实相机、时钟、身份认证、物理反馈与 SVG 视觉审阅均未验证。
