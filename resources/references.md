@@ -316,4 +316,4 @@
 | 官方文档 | ONNX Runtime：Profiling tools | https://onnxruntime.ai/docs/performance/tune-performance/profiling-tools.html | 核对运行时性能 profiling 可输出线程及算子延迟等详细 trace；特定执行提供程序的 profiling 能力须在该提供程序/目标环境验证。 | 页面内容（核验时） | 仅链接和原创摘要，不复制文档正文、代码或 trace 示例。 | 2026-09-24 |
 | 官方语言库文档 | Python：`time` — Time access and conversions | https://docs.python.org/3/library/time.html | 核对 `perf_counter_ns()` 适于测量短时差值、绝对参考点无意义，以及 `process_time()` 与经过时间口径不同；不代表本章使用它测量了模型。 | Python 3.14 文档（核验时） | 仅链接和原创解释，不复制文档正文或示例代码。 | 2026-09-24 |
 
-本章 `analyze_benchmark.py`、20 项标准库行为测试、23 条合成记录及 Fig-47 Mermaid 为本书原创。样例分析只计算 20 条合成正式记录的最近秩 P50/P95、均值、最大值及输入的最大 RSS 观测；报告固定 `REPORT_ONLY`，无阈值判定。未运行模型/ONNX Runtime、未采集真实运行时或目标资源、未连接 UNO Q，Fig-47 SVG 尚未渲染并目视审阅。
+本章 `analyze_benchmark.py`、21 项标准库行为测试、23 条合成记录及 Fig-47 Mermaid 为本书原创。样例分析只计算 20 条合成正式记录的最近秩 P50/P95、均值、最大值及输入的最大 RSS 观测；报告固定 `REPORT_ONLY`，无阈值判定。未运行模型/ONNX Runtime、未采集真实运行时或目标资源、未连接 UNO Q，Fig-47 SVG 尚未渲染并目视审阅。

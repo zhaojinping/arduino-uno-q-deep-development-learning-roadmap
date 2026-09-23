@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～8 章已建立为初稿，第七篇第 1～4 章已建立为初稿**，全书当前共 45 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～8 章已建立为初稿，第七篇第 1～5 章已建立为初稿**，全书当前共 46 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
@@ -78,6 +78,8 @@
 第七篇第 3 章[模型工件与部署契约：从清单到目标预检](book/第7篇_AI/第3章_模型工件与部署契约_从清单到目标预检.md)已建立为 `draft` 初稿；用不可执行的教学文本工件演示清单字段、I/O契约、路径限制与 SHA-256，配套 10 项标准库测试和 Fig-45 Mermaid。摘要与元数据检查通过仍只得到 `REVIEW_REQUIRED_NOT_DEPLOYABLE`；未验证真实模型、运行时兼容、UNO Q 实机和性能，图示未渲染 SVG。
 
 第七篇第 4 章[推理回归与数值一致性：从黄金样例到目标验收](book/第7篇_AI/第4章_推理回归与数值一致性_从黄金样例到目标验收.md)已建立为 `draft` 初稿；用合成配对输出演示逐值绝对/相对容差、top-1 翻转和 margin 弃判门变化，配套 17 项标准库测试及 Fig-46 Mermaid。结果仅为离线比较报告，不验证参考模型质量、真实运行时、UNO Q 目标或部署验收；图示尚未渲染 SVG。
+
+第七篇第 5 章[端侧推理性能评估：从测量方案到资源预算](book/第7篇_AI/第5章_端侧推理性能评估_从测量方案到资源预算.md)已建立为 `draft` 初稿；以 23 条合成记录演示预热隔离、最近秩 P50/P95、最大时延和观测 RSS，配套 21 项标准库行为测试及 Fig-47 Mermaid。报告固定为 `REPORT_ONLY`；未执行模型、ONNX Runtime、UNO Q 或真实性能/资源测量，图示尚未渲染 SVG。
 
 ## 目录结构
 
@@ -280,6 +282,7 @@ book/第7篇_AI/第1章_AI开发基础_从任务定义到可验证推理.md
 book/第7篇_AI/第2章_数据集与离线评估_从分组切分到混淆矩阵.md
 book/第7篇_AI/第3章_模型工件与部署契约_从清单到目标预检.md
 book/第7篇_AI/第4章_推理回归与数值一致性_从黄金样例到目标验收.md
+book/第7篇_AI/第5章_端侧推理性能评估_从测量方案到资源预算.md
 code/第7篇_AI/第1章_AI开发基础/README.md
 code/第7篇_AI/第1章_AI开发基础/teaching_inference.py
 code/第7篇_AI/第1章_AI开发基础/test_teaching_inference.py
@@ -296,10 +299,15 @@ code/第7篇_AI/第4章_推理回归与数值一致性/README.md
 code/第7篇_AI/第4章_推理回归与数值一致性/comparison.json
 code/第7篇_AI/第4章_推理回归与数值一致性/compare_inference.py
 code/第7篇_AI/第4章_推理回归与数值一致性/test_compare_inference.py
+code/第7篇_AI/第5章_端侧推理性能评估/README.md
+code/第7篇_AI/第5章_端侧推理性能评估/analyze_benchmark.py
+code/第7篇_AI/第5章_端侧推理性能评估/benchmark.json
+code/第7篇_AI/第5章_端侧推理性能评估/test_analyze_benchmark.py
 diagrams/uno-q-ai-inference-evidence-gate.mmd
 diagrams/uno-q-ai-dataset-evaluation-gate.mmd
 diagrams/uno-q-ai-model-deployment-contract.mmd
 diagrams/uno-q-ai-inference-regression.mmd
+diagrams/uno-q-ai-inference-performance.mmd
 images/第7篇_AI/README.md
 ```
 
@@ -309,4 +317,4 @@ images/第7篇_AI/README.md
 
 第六篇第1～7章的 Markdown 正文、配套代码、目录和来源登记已建立；第3章的 3 项测试、第4章和第5章各 4 项测试、第6章的 7 项、第7章的 10 项测试在本机环境通过。Fig-35～Fig-41 保留 Mermaid 源文件，尚未渲染 SVG。本次未验证相机驱动、真实摄像头采集、目标 UNO Q OpenCV/NumPy 版本、色彩/几何标定、对象身份、Bridge/MCU 联动或硬件性能。
 
-第七篇第1～4章的目录、交叉链接、来源登记和 Mermaid 双源已更新；第4章的 17 项标准库行为测试在本机通过，合成输出报告检出类别变化与弃判门变化。全书回归复验 20 个 Python 测试模块、共 170 项测试，全部通过。Fig-43～Fig-46 保留 Mermaid 源文件；本机未找到 `mmdc`，SVG 未生成或视觉审阅；没有真实模型、UNO Q、App Lab、运行时兼容、资源性能或硬件验收。
+第七篇第1～5章的目录、交叉链接、来源登记和 Mermaid 双源已更新；第4章 17 项及第5章 21 项标准库行为测试均在本机通过，第5章样例报告仅来自合成记录。全书回归复验 21 个 Python 测试模块，191 项测试及 135 个子测试全部通过。第5章新增的 15 个内部链接、Fig-47 双源一致性和资源登记通过检查。Fig-43～Fig-47 保留 Mermaid 源文件；本机未找到 `mmdc`，SVG 未生成或视觉审阅；没有真实模型、UNO Q、App Lab、运行时兼容、性能/资源实测或硬件验收。
