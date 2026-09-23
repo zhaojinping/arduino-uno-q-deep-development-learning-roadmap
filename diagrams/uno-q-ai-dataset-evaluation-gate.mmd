@@ -1,0 +1,12 @@
+flowchart LR
+    DATA["20 条合成 CSV<br/>样本 / 组 / 标签 / 特征"] --> AUDIT{"字段、数值、组隔离合格？"}
+    AUDIT -- 否 --> STOP["停止：修订数据<br/>不拟合"]
+    AUDIT -- 是 --> SPLIT["按已声明分区读取<br/>train / validation / test"]
+    SPLIT --> TRAIN["train：计算两类中心"]
+    TRAIN --> VAL["validation：比较预设门限"]
+    VAL --> ELIGIBLE{"存在零 FP 候选？"}
+    ELIGIBLE -- 否 --> STOP2["停止：无合格教学门限"]
+    ELIGIBLE -- 是 --> FREEZE["冻结中心、特征契约与门限"]
+    FREEZE --> TEST["test：只计数一次<br/>四格 + 弃判"]
+    TEST --> REPORT["REPORT_ONLY<br/>仅供复核"]
+    REPORT --> NOACT["不访问相机、App Lab、Bridge 或 MCU"]
