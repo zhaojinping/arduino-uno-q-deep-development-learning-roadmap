@@ -189,7 +189,7 @@ class ChapterChecks(unittest.TestCase):
         self.assertIn("./第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md", part_readme)
         self.assertIn("第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/README.md", code_readme)
         self.assertIn("第五篇第 4 章", root_readme)
-        self.assertIn("全书当前共 30 章", root_readme)
+        self.assertIn("全书当前共 31 章", root_readme)
         self.assertIn("ch04-fig31-uno-q-app-lab-config-layering.svg", read(REGISTRY))
 
 

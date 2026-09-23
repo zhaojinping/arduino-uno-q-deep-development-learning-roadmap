@@ -20,3 +20,4 @@
 - [第五篇第2章：App Lab 运行生命周期](第5篇_AppLab/第2章_AppLab运行生命周期/README.md)：生命周期状态机、`run_id` 会话隔离和本地证据分类测试。
 - [第五篇第3章：App Lab 启动配置与 Brick 依赖](第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/README.md)：声明契约、能力快照解析和可部署性预检。
 - [第五篇第4章：App Lab 配置分层与多环境运行参数](第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/README.md)：多环境覆盖、锁定键和脱敏运行配置快照。
+- [第五篇第5章：App Lab 运行证据包与日志关联](第5篇_AppLab/第5章_AppLab运行证据包与日志关联/README.md)：规范化 JSONL 事件按 `run_id` 和配置指纹关联，区分陈旧、未关联与冲突日志。

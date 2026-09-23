@@ -1,0 +1,24 @@
+flowchart LR
+    subgraph CONSOLE["App Lab Console：官方输出类别"]
+        START["Start-up<br/>启动序列"]
+        PY["Main (Python)<br/>应用输出"]
+        MCU["Sketch (Microcontroller)<br/>串口输出"]
+    end
+    START --> RAW["原始日志<br/>来源与采集时间"]
+    PY --> RAW
+    MCU --> RAW
+    RAW --> NORMAL["规范化事件<br/>event_id · ts_utc · source"]
+    SNAP["run.json + 脱敏配置快照<br/>run_id · config_fingerprint"] --> MATCH{"关联判定"}
+    NORMAL --> MATCH
+    MATCH -->|"run_id 缺失"| ORPHAN["UNCORRELATED<br/>未关联"]
+    MATCH -->|"run_id 不同"| STALE["STALE<br/>陈旧运行"]
+    MATCH -->|"run_id 相同"| FP{"配置指纹"}
+    FP -->|"一致"| MATCHED["完整关联"]
+    FP -->|"事件未提供"| PARTIAL["按 run_id 关联<br/>指纹缺失"]
+    FP -->|"不一致"| CONFLICT["FINGERPRINT_CONFLICT<br/>隔离调查"]
+    ORPHAN --> BUNDLE["证据包<br/>清单 · 摘要 · 文件校验值"]
+    STALE --> BUNDLE
+    MATCHED --> BUNDLE
+    PARTIAL --> BUNDLE
+    CONFLICT --> BUNDLE
+    BUNDLE --> REVIEW["脱敏复核<br/>按需交付"]

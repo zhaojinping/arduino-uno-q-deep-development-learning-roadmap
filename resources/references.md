@@ -163,3 +163,9 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 官方规范 | Arduino App specification（App 声明与持久化边界） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 `app.yaml`、Brick 变量、Secret 脱敏、`data/` 和 `.cache/` 的公开边界；本章配置分层、锁定键和快照是原创治理模型。 | main | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释，不复制源码或图表。 | 2026-09-23 |
 | 官方用户文档 | Arduino App CLI user documentation（运行环境参考） | https://github.com/arduino/arduino-app-cli/blob/main/docs/user-documentation.md | 核对 App CLI 用户目录、运行时目录和环境变量参考；不把默认值替代当前目标镜像、权限或 Secret 实测。 | main | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释。 | 2026-09-23 |
+
+## 第五篇第5章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方数据表 | Arduino UNO Q datasheet（App Lab Console 输出类别） | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Start-up、Main (Python)、Sketch (Microcontroller) 三类 Console 标签的官方说明，以及启动成功仍需检查运行日志的边界；本章事件字段与关联规则是原创建议，不推定平台自动导出或关联日志。 | ABX00162 PDF（核验时） | 官方资料；本项目只链接和原创重述，不复制表格或图片。 | 2026-09-23 |

@@ -190,7 +190,7 @@ class ChapterChecks(unittest.TestCase):
         self.assertIn("./第2章_AppLab运行生命周期_导入启动运行与停止.md", part_readme)
         self.assertIn("第5篇_AppLab/第2章_AppLab运行生命周期/README.md", code_readme)
         self.assertIn("第五篇第 2 章", root_readme)
-        self.assertIn("全书当前共 30 章", root_readme)
+        self.assertIn("全书当前共 31 章", root_readme)
         self.assertIn("ch02-fig29-uno-q-app-lab-run-lifecycle.svg", read(REGISTRY))
 
 

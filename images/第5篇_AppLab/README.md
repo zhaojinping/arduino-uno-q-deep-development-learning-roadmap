@@ -57,3 +57,15 @@
 - 内容要求：展示 App 声明、基础层、环境层、运行层、类型校验、锁定键、Secret 注入、脱敏快照、`run_id`、生命周期和结果账本边界
 - 来源边界：依据已登记的 Arduino App specification、App CLI user documentation 和 UNO Q 数据表原创绘制；配置分层是本书工程治理模型，不是官方 UI 或部署拓扑
 - 验证边界：图示只证明 Mermaid 可解析和视觉布局可读，不证明 App Lab 内置配置覆盖、Secret 可用、目标环境一致或 UNO Q 实机运行
+
+<a id="fig-32-uno-q-app-lab-evidence-package"></a>
+
+## 图 5-5：App Lab 运行证据包与日志关联
+
+- 图号：Fig-32
+- 状态：Mermaid 正文与独立源文件已建立；SVG 待生成并完成预览审阅
+- 图源：[App Lab 运行证据包 Mermaid](../../diagrams/uno-q-app-lab-evidence-package.mmd)
+- 正文位置：[第五篇第5章 Fig-32](../../book/第5篇_AppLab/第5章_AppLab运行证据包与日志关联_从run_id到可检索证据.md#fig-32-uno-q-app-lab-evidence-package)
+- 内容要求：展示 Start-up、Main (Python)、Sketch (Microcontroller) 三类官方 Console 输出如何保留来源，经 `run_id`、脱敏配置指纹关联，并把陈旧、未关联和冲突分支纳入证据包
+- 来源边界：依据已登记的 Arduino UNO Q datasheet 中 App Lab Console 说明原创绘制；关联字段、证据包和判定分支是本书工程建议，不是官方日志导出流程
+- 验证边界：本次未渲染 SVG、未采集实际 Console 输出；图示不证明日志自动关联、留存、导出或 UNO Q 实机运行

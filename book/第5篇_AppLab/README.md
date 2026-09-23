@@ -16,6 +16,7 @@
 - [第2章 App Lab 运行生命周期：导入、启动、运行与停止](./第2章_AppLab运行生命周期_导入启动运行与停止.md)
 - [第3章 App Lab 启动配置与 Brick 依赖：从声明到可部署性检查](./第3章_AppLab启动配置与Brick依赖_从声明到可部署性检查.md)
 - [第4章 App Lab 配置分层与多环境运行参数：从开发机到现场板](./第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md)
+- [第5章 App Lab 运行证据包与日志关联：从 run_id 到可检索证据](./第5章_AppLab运行证据包与日志关联_从run_id到可检索证据.md)
 
 ## 前置知识
 
@@ -23,4 +24,4 @@
 
 ## 当前状态
 
-第 1～4 章已建立为 `draft` 初稿。第 1 章覆盖 `app.yaml`、Python/Sketch 入口、Brick、`data/`、`.cache/`、App Lab 入口和分层验证证据；第 2 章覆盖导入、准备、启动、运行、停止、失败、`run_id` 和陈旧日志过滤；第 3 章覆盖启动声明、Brick 依赖、能力快照、端口冲突、`UNKNOWN` 和发布数据边界；第 4 章覆盖配置分层、环境优先级、锁定键、Secret 脱敏快照和配置指纹。四章的本地实验、Fig-28～Fig-31 和来源已登记；当前未执行 App Lab、Router/Bridge、MCU、目标 Linux 镜像或 UNO Q 实机验证。
+第 1～5 章已建立为 `draft` 初稿。第 1 章覆盖 `app.yaml`、Python/Sketch 入口、Brick、`data/`、`.cache/`、App Lab 入口和分层验证证据；第 2 章覆盖导入、准备、启动、运行、停止、失败、`run_id` 和陈旧日志过滤；第 3 章覆盖启动声明、Brick 依赖、能力快照、端口冲突、`UNKNOWN` 和发布数据边界；第 4 章覆盖配置分层、环境优先级、锁定键、Secret 脱敏快照和配置指纹；第 5 章覆盖 Console 三类输出、运行 ID/配置指纹关联、证据包结构、脱敏与证据缺口。Fig-28～Fig-32 的源文件或登记已更新；本次未运行新示例或自动测试，且未执行 App Lab、Router/Bridge、MCU、目标 Linux 镜像或 UNO Q 实机验证。
