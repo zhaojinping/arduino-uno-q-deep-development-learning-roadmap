@@ -126,6 +126,16 @@
 | 官方 Python 文档 | Python 3.10 sqlite3 | https://docs.python.org/3.10/library/sqlite3.html | 核对标准库数据库接口、参数绑定、事务与连接上下文的提交/回滚行为；本章本地账本不提供 Router/Bridge 或设备执行证据，也不构成掉电持久性或并发性能验收。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释，不复制外部代码或图表；Fig-27 为本书原创教学设计。 | 2026-09-22 |
 | 官方 Python 文档 | Python 3.10 dataclasses | https://docs.python.org/3.10/library/dataclasses.html | 核对 frozen 数据类对字段赋值的限制，用于请求、记录、事件、观察和决策；不把 frozen=True 当作输入验证、数据库防篡改或绝对不可变保证。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释，不复制外部代码或图表。 | 2026-09-22 |
 
+## 第五篇第2章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方规范 | Arduino App specification（组件与运行边界） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对第五篇第2章 App 由 Python、Sketch、Brick/容器组成以及 Linux/MCU/RPC 的职责边界；本章状态机和证据字段是原创教学模型，不冒充官方运行状态。 | main 页面，核验时 | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释，不复制源码或图表。 | 2026-09-23 |
+| 官方用户文档 | Arduino App CLI user documentation | https://github.com/arduino/arduino-app-cli/blob/main/docs/user-documentation.md | 核对 App 用户目录、运行时目录和环境变量参考；不把文档中的默认路径直接当作 UNO Q 当前镜像或生产权限事实。 | main 页面，核验时 | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释，不复制源码或图表。 | 2026-09-23 |
+| 官方教程 | Arduino App Lab examples | https://docs.arduino.cc/software/app-lab/tutorials/examples/ | 核对示例选择、Run、等待启动和交互的公开操作流程；不把示例运行说明替代本章的本地测试或实机验收。 | 页面内容（核验时） | 官方文档；本项目只链接和原创重述，不复制正文或截图。 | 2026-09-23 |
+| 官方数据表 | Arduino UNO Q datasheet | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Run 操作构建 Linux 组件、刷写 MCU Sketch、部署 Brick、启动组件以及控制台观察的产品级说明；不把产品说明写成当前环境实测。 | ABX00162 PDF（核验时） | 官方数据表；本项目只链接和原创重述，不复制表格或图片。 | 2026-09-23 |
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对双处理器、App Lab 和 Bridge 的产品层角色；不把产品页替代目标设备、版本或物理动作验证。 | 页面内容（核验时） | 官方网页；本项目只链接和原创解释。 | 2026-09-23 |
+
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。
 
 ## 第五篇第1章补充核验

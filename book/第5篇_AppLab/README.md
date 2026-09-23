@@ -13,6 +13,7 @@
 范围覆盖 App/Brick 组成、项目生命周期、运行日志、启动配置与部署验证；章节编号从本篇重新开始。
 
 - [第1章 App Lab 开发基础：应用结构、设备入口与验证边界](./第1章_App_Lab开发基础_应用结构与验证边界.md)
+- [第2章 App Lab 运行生命周期：导入、启动、运行与停止](./第2章_AppLab运行生命周期_导入启动运行与停止.md)
 
 ## 前置知识
 
@@ -20,4 +21,4 @@
 
 ## 当前状态
 
-第 1 章已建立为 `draft` 初稿，覆盖 `app.yaml`、Python/Sketch 入口、Brick、`data/`、`.cache/`、App Lab 入口和分层验证证据；配套结构契约、启动证据实验和 Fig-28 已登记。当前未执行 App Lab、Router/Bridge、MCU、目标 Linux 镜像或 UNO Q 实机验证。
+第 1 章和第 2 章已建立为 `draft` 初稿。第 1 章覆盖 `app.yaml`、Python/Sketch 入口、Brick、`data/`、`.cache/`、App Lab 入口和分层验证证据；第 2 章覆盖导入、准备、启动、运行、停止、失败、`run_id` 和陈旧日志过滤。两章的本地实验、Fig-28、Fig-29 和来源已登记；当前未执行 App Lab、Router/Bridge、MCU、目标 Linux 镜像或 UNO Q 实机验证。

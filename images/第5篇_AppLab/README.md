@@ -16,3 +16,18 @@
 - 预览记录：`2026-09-23`，独立打开生成的 SVG 并截图检查；中文标签可读、箭头完整、结构边界清楚、无裁切文字；`viewBox` 越界检查为空
 - 来源边界：依据已登记的 Arduino App specification、UNO Q User Manual 和产品页原创绘制；不复制官方图表或内部连线
 - 验证边界：图示只证明 Mermaid 可解析和视觉布局可读，不证明 App Lab、Router/Bridge、MCU、目标 Linux 镜像或 UNO Q 实机验收
+
+<a id="fig-29-uno-q-app-lab-run-lifecycle"></a>
+
+## 图 5-2：App Lab 运行生命周期与证据窗口
+
+- 图号：Fig-29
+- 状态：SVG 已生成并完成独立预览审阅，Mermaid 源文件与正文逐字一致
+- 图源：[App Lab 运行生命周期 Mermaid](../../diagrams/uno-q-app-lab-run-lifecycle.mmd)
+- 产物：[App Lab 运行生命周期 SVG](ch02-fig29-uno-q-app-lab-run-lifecycle.svg)
+- 正文位置：[第五篇第2章 Fig-29](../../book/第5篇_AppLab/第2章_AppLab运行生命周期_导入启动运行与停止.md#fig-29-uno-q-app-lab-run-lifecycle)
+- 内容要求：展示导入、准备、启动、运行、停止请求、停止、失败、未知，以及按 `run_id` 过滤到证据窗口的关系
+- 生成记录：`2026-09-23`，缓存 Mermaid CLI `11.12.0`，本地 Chrome 无界面渲染，白色背景；未安装包或修改全局配置
+- 预览记录：`2026-09-23`，独立打开生成的 SVG 并截图检查；中文标签可读、箭头完整、状态分支清楚、无裁切文字；`viewBox` 为 `0 0 1451.078125 427`
+- 来源边界：依据已登记的 Arduino App specification、App CLI user documentation、App Lab examples 和 UNO Q 数据表原创绘制；不复制官方图表或 UI 截图
+- 验证边界：图示只证明 Mermaid 可解析和视觉布局可读，不证明 App Lab、Router/Bridge、MCU、目标 Linux 镜像或 UNO Q 实机验收

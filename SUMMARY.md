@@ -41,6 +41,7 @@
 ## 第五篇：App Lab
 - [本篇范围](book/第5篇_AppLab/README.md)
 - [第1章 App Lab 开发基础：应用结构、设备入口与验证边界](book/第5篇_AppLab/第1章_App_Lab开发基础_应用结构与验证边界.md)
+- [第2章 App Lab 运行生命周期：导入、启动、运行与停止](book/第5篇_AppLab/第2章_AppLab运行生命周期_导入启动运行与停止.md)
 
 ## 第六篇：OpenCV
 - [本篇范围](book/第6篇_OpenCV/README.md)

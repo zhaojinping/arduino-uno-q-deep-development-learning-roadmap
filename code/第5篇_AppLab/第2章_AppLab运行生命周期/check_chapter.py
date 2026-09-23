@@ -1,4 +1,4 @@
-"""Offline publication checks for App Lab Chapter 1."""
+"""Offline publication checks for App Lab Chapter 2."""
 from __future__ import annotations
 
 import ast
@@ -13,40 +13,37 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 PART = ROOT / "book/第5篇_AppLab"
-CHAPTER = PART / "第1章_App_Lab开发基础_应用结构与验证边界.md"
-DIAGRAM = ROOT / "diagrams/uno-q-app-lab-app-structure-boundary.mmd"
-IMAGE = ROOT / "images/第5篇_AppLab/ch01-fig28-uno-q-app-lab-app-structure-boundary.svg"
+CHAPTER = PART / "第2章_AppLab运行生命周期_导入启动运行与停止.md"
+DIAGRAM = ROOT / "diagrams/uno-q-app-lab-run-lifecycle.mmd"
+IMAGE = ROOT / "images/第5篇_AppLab/ch02-fig29-uno-q-app-lab-run-lifecycle.svg"
 REGISTRY = IMAGE.parent / "README.md"
-FIGURE_ANCHOR = "fig-28-uno-q-app-lab-app-structure-boundary"
+FIGURE_ANCHOR = "fig-29-uno-q-app-lab-run-lifecycle"
 HEADINGS = [
-    "学习目标", "背景与边界", "1. App Lab 不是单一脚本编辑器",
-    "2. App 根目录与运行角色", "3. `app.yaml`：声明应用意图，不是设备验收",
-    "4. Fig-28：项目结构与设备入口", "5. 从导入到运行：先验证入口再验证行为",
-    "6. 实验一：验证 App 文件结构", "7. 实验二：按日志证据判定启动状态",
-    "8. 设备入口、网络模式与权限边界", "9. Brick、数据目录与秘密",
-    "10. 验证矩阵、练习与交接", "11. 常见问题", "12. 本章小结与下一步",
-    "延伸阅读",
+    "学习目标", "背景与边界", "1. Run 不是一个布尔值", "2. 生命周期状态机",
+    "3. Fig-29：一次 App 运行的证据窗口", "4. 从导入到运行：四个阶段，五类结果",
+    "5. 实验一：用不可变状态机管理一次运行", "6. 实验二：按 `run_id` 过滤陈旧日志",
+    "7. 停止、失败与重新运行", "8. 证据矩阵与现场记录",
+    "9. 验证矩阵、练习与交接", "10. 常见问题", "11. 本章小结与下一步", "延伸阅读",
 ]
 EXPECTED_OUTPUT = {
-    "app_contract.py": (
-        "SIMULATED valid=PYTHON_AND_SKETCH app_yaml=present python_main=present\n"
-        "SIMULATED sketch=optional-present sketch_ino=present sketch_yaml=present\n"
-        "SIMULATED reserved=data:persistent,.cache:volatile\n"
-        "SIMULATED invalid=missing python/main.py\n"
+    "lifecycle.py": (
+        "SIMULATED session=run-001 phase=RUNNING history=IMPORTED>PREPARING>STARTING>RUNNING\n"
+        "SIMULATED rejected=IMPORTED cannot advance to STOPPED\n"
+        "SIMULATED terminal=STOPPED history=IMPORTED>PREPARING>STARTING>RUNNING>STOPPING>STOPPED\n"
     ),
-    "launch_evidence.py": (
-        "SIMULATED compile_error=BLOCKED_STARTUP\n"
-        "SIMULATED python_only=PYTHON_LOG_READY\n"
-        "SIMULATED app_with_sketch=SKETCH_LOG_READY_NEEDS_DEVICE_ASSERTION\n"
-        "SIMULATED missing_sketch=MISSING_SKETCH_LOG\n"
+    "session_evidence.py": (
+        "SIMULATED stale_error=RUNNING channels=python,startup\n"
+        "SIMULATED no_current=UNKNOWN_NO_CURRENT_LINES\n"
+        "SIMULATED runtime_error=FAILED\n"
+        "SIMULATED stopped=STOPPED\n"
     ),
 }
 EXTERNAL_URLS = {
     "https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md",
-    "https://docs.arduino.cc/hardware/uno-q",
-    "https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md",
-    "https://docs.arduino.cc/software/app-lab/getting-started/examples",
     "https://github.com/arduino/arduino-app-cli/blob/main/docs/user-documentation.md",
+    "https://docs.arduino.cc/software/app-lab/tutorials/examples/",
+    "https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf",
+    "https://docs.arduino.cc/hardware/uno-q",
 }
 
 
@@ -108,17 +105,17 @@ class ChapterChecks(unittest.TestCase):
         pairs = [line.split(": ", 1) for line in match[1].splitlines()]
         self.assertTrue(all(len(pair) == 2 for pair in pairs), "Malformed metadata")
         self.assertEqual(dict(pairs), {
-            "title": "App Lab 开发基础：应用结构、设备入口与验证边界",
-            "part": "5", "chapter": "1", "status": "draft",
+            "title": "App Lab 运行生命周期：导入、启动、运行与停止",
+            "part": "5", "chapter": "2", "status": "draft",
             "last_verified": "2026-09-23", "updated": "2026-09-23",
-            "prerequisites": "第三篇第8章、第四篇第1～4章",
-            "tags": "App Lab, app.yaml, Python, Arduino Sketch, Brick, Bridge, 证据边界",
+            "prerequisites": "第五篇第1章、第三篇第8章、第四篇第1～4章",
+            "tags": "App Lab, 生命周期, run_id, 日志, 停止, 重启, 证据",
         })
 
     def test_headings_and_anchor(self) -> None:
         prose = without_fences(self.text)
         self.assertEqual(re.findall(r"^# (.+)$", prose, re.M), [
-            "第1章 App Lab 开发基础：应用结构、设备入口与验证边界"
+            "第2章 App Lab 运行生命周期：导入、启动、运行与停止"
         ])
         self.assertEqual(re.findall(r"^## (.+)$", prose, re.M), HEADINGS)
         self.assertEqual(prose.count(f'<a id="{FIGURE_ANCHOR}"></a>'), 1)
@@ -152,7 +149,7 @@ class ChapterChecks(unittest.TestCase):
 
     def test_experiment_explanations(self) -> None:
         expected = ["用途", "运行环境", "文件位置", "依赖", "操作步骤", "预期输出", "故障排查", "验证方式"]
-        for title in (HEADINGS[7], HEADINGS[8]):
+        for title in (HEADINGS[6], HEADINGS[7]):
             section = self.text.split("## " + title + "\n", 1)[1].split("\n## ", 1)[0]
             self.assertEqual(re.findall(r"^- ([^：\n]+)：", section, re.M), expected)
 
@@ -163,10 +160,10 @@ class ChapterChecks(unittest.TestCase):
         self.assertEqual(root.tag, "{http://www.w3.org/2000/svg}svg")
         self.assertRegex(root.get("style", ""), r"background-color:\s*white")
         labels = " ".join(root.itertext())
-        for label in ("app.yaml", "python", "sketch", "data", ".cache", "Bridge / RPC", "证据分层"):
+        for label in ("导入", "run_id", "证据窗口", "运行", "已停止", "失败"):
             self.assertIn(label, labels)
         self.assertTrue(root.get("viewBox"))
-        self.assertIn("Fig-28", read(REGISTRY))
+        self.assertIn("Fig-29", read(REGISTRY))
 
     def test_links_and_anchors(self) -> None:
         all_local = self.docs + [CHAPTER]
@@ -189,12 +186,12 @@ class ChapterChecks(unittest.TestCase):
         root_readme = read(ROOT / "README.md")
         part_readme = read(PART / "README.md")
         code_readme = read(ROOT / "code/README.md")
-        self.assertIn("book/第5篇_AppLab/第1章_App_Lab开发基础_应用结构与验证边界.md", summary)
-        self.assertIn("./第1章_App_Lab开发基础_应用结构与验证边界.md", part_readme)
-        self.assertIn("第5篇_AppLab/第1章_App_Lab开发基础/README.md", code_readme)
-        self.assertIn("第五篇第 1 章", root_readme)
+        self.assertIn("book/第5篇_AppLab/第2章_AppLab运行生命周期_导入启动运行与停止.md", summary)
+        self.assertIn("./第2章_AppLab运行生命周期_导入启动运行与停止.md", part_readme)
+        self.assertIn("第5篇_AppLab/第2章_AppLab运行生命周期/README.md", code_readme)
+        self.assertIn("第五篇第 2 章", root_readme)
         self.assertIn("全书当前共 28 章", root_readme)
-        self.assertIn("ch01-fig28-uno-q-app-lab-app-structure-boundary.svg", read(REGISTRY))
+        self.assertIn("ch02-fig29-uno-q-app-lab-run-lifecycle.svg", read(REGISTRY))
 
 
 if __name__ == "__main__":

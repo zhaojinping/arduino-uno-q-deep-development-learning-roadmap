@@ -1,0 +1,22 @@
+flowchart LR
+    IMPORT[导入\napp.yaml + 入口] --> PREP[准备\n依赖 · 资源 · 运行内容]
+    PREP --> START[启动\nLinux · MCU · Brick]
+    START --> RUN[运行\nPython · Sketch · Brick]
+    RUN --> STOPPING[停止请求\n记录意图]
+    STOPPING --> STOPPED[已停止\n结束证据]
+    PREP --> FAILED[失败\n保留来源与原因]
+    START --> FAILED
+    RUN --> FAILED
+    RUN --> UNKNOWN[未知\n证据缺口或断线]
+    OLD[旧 run_id 日志] -.过滤.-> WINDOW[证据窗口\nrun_id + channel + event]
+    NEW[当前 run_id] --> WINDOW
+    WINDOW --> RUN
+    WINDOW --> FAILED
+    WINDOW --> STOPPED
+
+    classDef phase fill:#e8f1ff,stroke:#2563eb,color:#0f172a
+    classDef terminal fill:#fee2e2,stroke:#dc2626,color:#0f172a
+    classDef evidence fill:#dcfce7,stroke:#16a34a,color:#0f172a
+    class IMPORT,PREP,START,RUN,STOPPING phase
+    class STOPPED,FAILED,UNKNOWN terminal
+    class OLD,NEW,WINDOW evidence
