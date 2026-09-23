@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "atol": 0.03,
+  "rtol": 0.02,
+  "min_margin": 0.15,
+  "reference": [
+    {
+      "sample_id": "normal-01",
+      "preprocess_id": "rgb-f32-v1",
+      "labels": ["normal", "fault"],
+      "scores": [0.92, 0.08]
+    },
+    {
+      "sample_id": "fault-01",
+      "preprocess_id": "rgb-f32-v1",
+      "labels": ["normal", "fault"],
+      "scores": [0.12, 0.88]
+    },
+    {
+      "sample_id": "margin-01",
+      "preprocess_id": "rgb-f32-v1",
+      "labels": ["normal", "fault"],
+      "scores": [0.56, 0.44]
+    },
+    {
+      "sample_id": "top1-flip-01",
+      "preprocess_id": "rgb-f32-v1",
+      "labels": ["normal", "fault"],
+      "scores": [0.51, 0.49]
+    }
+  ],
+  "candidate": [
+    {
+      "sample_id": "top1-flip-01",
+      "preprocess_id": "rgb-f32-v1",
+      "labels": ["normal", "fault"],
+      "scores": [0.49, 0.51]
+    },
+    {
+      "sample_id": "normal-01",
+      "preprocess_id": "rgb-f32-v1",
+      "labels": ["normal", "fault"],
+      "scores": [0.918, 0.082]
+    },
+    {
+      "sample_id": "margin-01",
+      "preprocess_id": "rgb-f32-v1",
+      "labels": ["normal", "fault"],
+      "scores": [0.59, 0.41]
+    },
+    {
+      "sample_id": "fault-01",
+      "preprocess_id": "rgb-f32-v1",
+      "labels": ["normal", "fault"],
+      "scores": [0.125, 0.875]
+    }
+  ]
+}

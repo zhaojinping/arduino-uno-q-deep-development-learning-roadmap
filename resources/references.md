@@ -297,3 +297,13 @@
 | 官方文档 | ONNX Runtime compatibility | https://onnxruntime.ai/docs/reference/compatibility.html | 核对运行时版本与平台、依赖、opset 兼容信息；通用兼容表不证明 UNO Q 指定镜像和执行提供程序已验证。 | 页面内容（核验时） | 仅链接和原创解释，不复制文档内容或表格。 | 2026-09-23 |
 
 本章 `model_preflight.py`、教学 JSON 清单、文本占位工件、10 项标准库行为测试及 Fig-45 Mermaid 为本书原创。本机 Python 3.14.6 只验证清单字段/张量形状、模型与运行时格式声明、单文件相对路径和 SHA-256；样例摘要匹配仍产生 `REVIEW_REQUIRED_NOT_DEPLOYABLE`。没有真实模型、ONNX 解析、模型许可核验、运行时安装、UNO Q 目标镜像、App Lab、Bridge、MCU、性能、功耗或硬件动作验证；Fig-45 SVG 尚未渲染和目视审阅。
+
+## 第七篇第4章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+|---|---|---|---|---|---|---|
+| 官方教程 | ONNX Runtime：Export PyTorch model | https://onnxruntime.ai/docs/tutorials/export-pytorch-model.html | 核对框架输出与 ONNX Runtime 输出逐值比较的范例，以及 `assert_allclose` 中绝对/相对容差的用法；页面参数仅属于该教程示例，不是通用模型或 UNO Q 推荐值。 | 页面内容（核验时） | 仅链接并原创归纳，不复制教程代码、正文或图表。 | 2026-09-24 |
+| 官方文档 | ONNX Runtime：Quantize ONNX models | https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html | 核对量化可能造成精度变化，以及比较浮点/量化模型权重和激活以定位差异的调试思路；不据此推断特定目标板兼容或精度。 | 页面内容（核验时） | 仅链接并原创归纳，不复制文档正文、表格或源码。 | 2026-09-24 |
+| 官方 API 文档 | ONNX Runtime Python API | https://onnxruntime.ai/docs/api/python/api_summary | 核对 `InferenceSession` 输出接口、数据输入/输出表示及执行提供程序配置边界；通用 API 文档不证明 UNO Q 指定镜像/运行时已验证。 | 页面内容（核验时） | 仅链接并原创解释，不复制 API 文档内容或代码。 | 2026-09-24 |
+
+本章 `compare_inference.py`、4 条合成对照记录、17 项标准库行为测试及 Fig-46 Mermaid 为本书原创。比较器仅读取离线分数，不运行模型、预处理、ONNX Runtime 或 UNO Q；容差与 `min_margin` 是教学输入，不是官方规范或产品验收门槛。参考输出质量、真实数据指标、目标运行时、资源/时延、现场环境和硬件动作均未验证；Fig-46 SVG 尚未渲染和目视审阅。

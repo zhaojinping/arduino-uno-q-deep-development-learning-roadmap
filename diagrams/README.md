@@ -23,3 +23,4 @@
 - [第七篇第1章 Fig-43：教学推理契约与停止边界](uno-q-ai-inference-evidence-gate.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
 - [第七篇第2章 Fig-44：离线评估中的数据隔离与报告边界](uno-q-ai-dataset-evaluation-gate.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
 - [第七篇第3章 Fig-45：模型工件到目标部署的证据门](uno-q-ai-model-deployment-contract.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
+- [第七篇第4章 Fig-46：固定样例推理回归与目标验收边界](uno-q-ai-inference-regression.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。

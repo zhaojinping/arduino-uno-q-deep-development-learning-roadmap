@@ -1,0 +1,15 @@
+flowchart LR
+    A[固定黄金样例与已审核输入] --> B[参考路径输出]
+    A --> C[候选路径输出]
+    B --> D[按 sample_id 配对]
+    C --> D
+    D --> E{样例、预处理声明、类别顺序一致？}
+    E -- 否 --> F[BLOCKED：修复输入契约]
+    E -- 是 --> G[逐值检查 atol + rtol × 参考值绝对量]
+    G --> H[比较 top-1 与 margin 弃判决策]
+    H --> I{数值或任务决策发生变化？}
+    I -- 是 --> J[REVIEW_REQUIRED：定位差异并复核]
+    I -- 否 --> K[MATCH_WITHIN_TOLERANCE：仅离线比较报告]
+    J --> L[独立任务质量与风险评估]
+    K --> L
+    L --> M[指定目标运行时、资源和端到端验收仍须另做]
