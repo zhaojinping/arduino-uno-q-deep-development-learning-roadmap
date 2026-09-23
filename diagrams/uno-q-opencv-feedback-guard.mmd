@@ -1,0 +1,19 @@
+flowchart LR
+    INPUT["帧记录 + 时间门事件 + 拟议反馈"] --> POLICY{"审查策略有效？"}
+    POLICY -- 否 --> ERROR["拒绝配置<br/>不生成预览"]
+    POLICY -- 是 --> SOURCE{"来源与会话匹配？"}
+    SOURCE -- 否 --> BLOCK["BLOCKED<br/>preview=None"]
+    SOURCE -- 是 --> STABLE{"STABLE 或 CONTINUING？"}
+    STABLE -- 否 --> BLOCK
+    STABLE -- 是 --> BIND{"帧号与质心匹配？"}
+    BIND -- 否 --> BLOCK
+    BIND -- 是 --> AGE{"绝对时效合格？"}
+    AGE -- 否 --> BLOCK
+    AGE -- 是 --> ROI{"像素区域与幅度合格？"}
+    ROI -- 否 --> BLOCK
+    ROI -- 是 --> APPROVE{"模拟批准位为 True？"}
+    APPROVE -- 否 --> BLOCK
+    APPROVE -- 是 --> PREVIEW["PREVIEW_ONLY<br/>仍需独立硬件审查"]
+    PREVIEW --> END["不调用 Bridge<br/>不控制 MCU"]
+    BLOCK --> END
+    ERROR --> END

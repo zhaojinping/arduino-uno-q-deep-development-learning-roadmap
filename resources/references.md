@@ -243,3 +243,13 @@
 | 官方教程 | OpenCV Optical Flow | https://docs.opencv.org/4.12.0/d4/dee/tutorial_optical_flow.html | 核对光流与 `calcOpticalFlowPyrLK()` 特征点跟踪的用途，界定本章质心时间门并非光流、多目标跟踪或对象重识别。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程源码、正文或图表。 | 2026-09-23 |
 
 本章脚本、测试与 Fig-40 Mermaid 为本书原创。7 项测试和脚本在本机 Python 3.14.6 执行；仅使用硬编码合成记录和 Python 标准库，示例不访问摄像头、图像/业务数据文件、网络、GPIO、MCU 或 UNO Q；测试会加载本地脚本并启动子进程。目标板软件栈、真实时间戳与帧率、对象身份、绝对时效、Bridge/MCU 联动和硬件安全未验证；Fig-40 SVG 未渲染审阅。
+
+## 第六篇第7章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对 Linux/STM32U585 双侧职责与 Bridge/RPC 产品级说明；不把产品页当作本章硬件联调证据。 | 页面内容（核验时） | 仅链接并原创解释，不复制图表、代码或截图。 | 2026-09-23 |
+| 官方规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Python 运行于 Linux、Sketch 运行于 MCU、两侧以 RPC 消息协作；本章的反馈审查门与百分数限幅均为原创教学模型。 | main 页面（核验时） | 仅链接并原创重述，不复制正文或示例代码。 | 2026-09-23 |
+| 官方源码 | Arduino Python Bridge（app-bricks-py） | https://github.com/arduino/app-bricks-py/blob/main/src/arduino/app_utils/bridge.py | 核对公开 `call`/`notify` 接口语义；本章不导入 SDK，也不据此声称调用、回执或物理动作已经发生。 | main 页面（核验时） | 仅链接并解释接口边界，不复制源码。 | 2026-09-23 |
+
+本章脚本、测试与 Fig-41 Mermaid 为本书原创。10 项测试及脚本在本机 Python 3.14.6 执行；示例只处理合成记录，不调用相机、OpenCV、Bridge、GPIO、MCU、网络或执行器。真实采集时钟、操作者认证、幂等、路由回执、MCU 侧保护与物理输出均未验证；Fig-41 SVG 尚未渲染审阅。
