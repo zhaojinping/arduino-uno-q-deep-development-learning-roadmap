@@ -1,0 +1,14 @@
+flowchart LR
+    INPUT["BGR 彩色帧"] --> VALID{"非空 H×W×3<br/>uint8？"}
+    VALID -- 否 --> STOP["拒绝输入并停止"]
+    VALID -- 是 --> HSV["cvtColor<br/>BGR → HSV"]
+    HSV --> RANGE["inRange<br/>记录 HSV 上下界"]
+    RANGE --> OPEN["3×3 开运算<br/>记录核大小"]
+    OPEN --> CONTOUR["提取外轮廓<br/>计算面积"]
+    CONTOUR --> FILTER{"达到面积门限<br/>且零阶矩非零？"}
+    FILTER -- 无合格候选 --> NONE["NO_CANDIDATE<br/>不沿用旧坐标"]
+    FILTER -- 有合格候选 --> PICK["按面积选最大<br/>平局按 x/y 排序"]
+    PICK --> PIXEL["输出外接框与质心<br/>仅为像素候选"]
+    NONE --> END["不读写图像<br/>不控制硬件"]
+    PIXEL --> END
+    STOP --> END

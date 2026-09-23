@@ -224,3 +224,13 @@
 | 官方教程 | OpenCV Contours Hierarchy | https://docs.opencv.org/4.12.0/d9/d8b/tutorial_py_contours_hierarchy.html | 核对 `RETR_EXTERNAL` 仅保留最外层轮廓及内部孔洞不进入本章净面积计算的边界。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程正文或图表。 | 2026-09-23 |
 
 本章脚本、测试与 Fig-38 Mermaid 为本书原创。4 项测试及脚本在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境执行；仅使用合成掩膜，未访问摄像头、网络、文件、GPIO、MCU 或 UNO Q。目标板软件栈、物理标定、真实图像效果和硬件性能未验证；Fig-38 SVG 未渲染审阅。
+
+## 第六篇第5章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方教程 | OpenCV Changing Colorspaces | https://docs.opencv.org/4.12.0/df/d9d/tutorial_py_colorspaces.html | 核对 BGR→HSV、8 位 H/S/V 范围、`inRange` 颜色掩膜；教程示例参数不是实际摄像头的通用阈值。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程源码、正文或图表。 | 2026-09-23 |
+| 官方教程 | OpenCV Morphological Transformations | https://docs.opencv.org/4.12.0/d9/d61/tutorial_py_morphological_ops.html | 核对开运算的腐蚀后膨胀与结构元素作用；不能由合成噪点移除推断真实小目标不会被误删。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程源码、正文或图表。 | 2026-09-23 |
+| 官方教程 | OpenCV Contours: Getting Started | https://docs.opencv.org/4.12.0/d4/d73/tutorial_py_contours_begin.html | 核对二值掩膜、白色前景与外轮廓输入约定；目标身份、跨帧关联和物理位置并非本接口自动提供。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程源码、正文或图表。 | 2026-09-23 |
+
+本章脚本、测试与 Fig-39 Mermaid 为本书原创。4 项测试及脚本在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境执行；仅使用合成 BGR 数组，未访问摄像头、网络、图像文件、GPIO、MCU 或 UNO Q。目标板软件栈、色彩标定、真实阈值鲁棒性、实时性能和硬件动作未验证；Fig-39 SVG 未渲染审阅。
