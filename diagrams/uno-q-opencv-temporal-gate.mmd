@@ -1,0 +1,24 @@
+flowchart LR
+    INPUT["帧元数据与像素候选"] --> VALID{"结构与来源有效？"}
+    VALID -- 否 --> BAD["拒绝输入<br/>清除轨迹"]
+    VALID -- 是 --> ORDER{"帧号与时间递增？"}
+    ORDER -- 否 --> BADORDER["REJECTED_ORDER<br/>清除位置"]
+    ORDER -- 是 --> GAP{"帧号连续且时间差合格？"}
+    GAP -- 否 --> BADGAP["REJECTED_GAP<br/>清除位置"]
+    GAP -- 是 --> HAS{"本帧有候选？"}
+    HAS -- 否 --> LOST["LOST 或 NO_CANDIDATE<br/>清除位置"]
+    HAS -- 是 --> STEP{"有前驱且位移超限？"}
+    STEP -- 是 --> JUMP["REJECTED_JUMP<br/>清除位置"]
+    STEP -- 否 --> COUNT["连续命中数加一"]
+    COUNT --> LEVEL{"与最少命中数比较"}
+    LEVEL -- 未达到 --> TENT["TENTATIVE"]
+    LEVEL -- 首次达到 --> STABLE["STABLE"]
+    LEVEL -- 超过 --> CONT["CONTINUING"]
+    BAD --> END["只报告事件<br/>不发硬件命令"]
+    BADORDER --> END
+    BADGAP --> END
+    LOST --> END
+    JUMP --> END
+    TENT --> END
+    STABLE --> END
+    CONT --> END

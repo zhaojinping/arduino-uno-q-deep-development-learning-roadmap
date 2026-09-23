@@ -234,3 +234,12 @@
 | 官方教程 | OpenCV Contours: Getting Started | https://docs.opencv.org/4.12.0/d4/d73/tutorial_py_contours_begin.html | 核对二值掩膜、白色前景与外轮廓输入约定；目标身份、跨帧关联和物理位置并非本接口自动提供。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程源码、正文或图表。 | 2026-09-23 |
 
 本章脚本、测试与 Fig-39 Mermaid 为本书原创。4 项测试及脚本在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境执行；仅使用合成 BGR 数组，未访问摄像头、网络、图像文件、GPIO、MCU 或 UNO Q。目标板软件栈、色彩标定、真实阈值鲁棒性、实时性能和硬件动作未验证；Fig-39 SVG 未渲染审阅。
+
+## 第六篇第6章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方教程 | OpenCV Getting Started with Videos | https://docs.opencv.org/4.12.0/dd/d43/tutorial_py_video_display.html | 核对 `VideoCapture.read()` 的成功标志、逐帧读取与资源释放；本章的来源 ID、帧号和时间戳是原创教学输入契约，不是该 API 自动提供的可靠证据。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程源码、正文或图表。 | 2026-09-23 |
+| 官方教程 | OpenCV Optical Flow | https://docs.opencv.org/4.12.0/d4/dee/tutorial_optical_flow.html | 核对光流与 `calcOpticalFlowPyrLK()` 特征点跟踪的用途，界定本章质心时间门并非光流、多目标跟踪或对象重识别。 | OpenCV 4.12.0 文档 | 仅链接并原创解释，不复制教程源码、正文或图表。 | 2026-09-23 |
+
+本章脚本、测试与 Fig-40 Mermaid 为本书原创。7 项测试和脚本在本机 Python 3.14.6 执行；仅使用硬编码合成记录和 Python 标准库，示例不访问摄像头、图像/业务数据文件、网络、GPIO、MCU 或 UNO Q；测试会加载本地脚本并启动子进程。目标板软件栈、真实时间戳与帧率、对象身份、绝对时效、Bridge/MCU 联动和硬件安全未验证；Fig-40 SVG 未渲染审阅。
