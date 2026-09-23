@@ -9,3 +9,7 @@
 ## 使用约定
 
 每张图只表达一个主要关系或流程，按 [写作规范](../docs/writing-guidelines.md) 编写 Mermaid，使用稳定图号，并在正文中说明图示用途、来源和许可状态。外部素材不得以无法核验来源的截图形式直接进入本目录。
+
+## 新增图示
+
+- [第六篇第1章 Fig-35：视觉处理管线与控制边界](uno-q-opencv-image-pipeline.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。

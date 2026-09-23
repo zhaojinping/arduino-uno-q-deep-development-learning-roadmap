@@ -184,3 +184,13 @@
 | 官方规范 | Arduino App specification（项目组成和声明） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 `app.yaml`、Python 入口、可选 Sketch、Brick 和 Linux/MCU 分工；本章 G0～G7 与交接模板不是官方格式。 | main 页面，核验时 | 仅链接和原创解释，不复制源码或图表。 | 2026-09-23 |
 | 官方教程 | Arduino App Lab examples | https://docs.arduino.cc/software/app-lab/tutorials/examples/ | 核对选示例、Run、等待启动、交互以及复制示例后编辑的公开流程；本章不将教程步骤当作已执行。 | 页面内容（核验时） | 仅链接和原创重述，不复制截图或示例源码。 | 2026-09-23 |
 | 官方数据表 | Arduino UNO Q datasheet（Console 与运行时边界） | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Start-up、Main (Python)、Sketch (Microcontroller) 输出和启动后仍可能有运行时错误；交接门、证据等级与回退条件为本书建议。 | ABX00162 PDF（核验时） | 仅链接和原创解释，不复制图表。 | 2026-09-23 |
+
+## 第六篇第1章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对产品资料列出的 SBC 模式 USB 摄像头与底部高速连接器 MIPI-CSI 相机路线；不推断任意相机、驱动或采集后端均可用。 | 页面内容（核验时） | 官方网页；只链接和原创解释，不复制图表或截图。 | 2026-09-23 |
+| 官方配件页 | Arduino UNO Media Carrier | https://docs.arduino.cc/hardware/uno-media-carrier | 核对特定载板的 MIPI-CSI 接口及官方说明的相机兼容范围；不外推为任意 CSI 相机兼容，也不当作本项目实机测试。 | 页面内容（核验时） | 官方网页；只链接和原创解释，不复制图表或截图。 | 2026-09-23 |
+| 官方教程 | OpenCV 4.12 Basic Operations on Images | https://docs.opencv.org/4.12.0/d3/df2/tutorial_py_basic_ops.html | 核对 Python 图像数组、NumPy 索引、ROI 切片和 `imread` 彩色图像的 BGR 通道约定；摄像头后端的格式仍需按实际接口核实。 | OpenCV 4.12.0 文档 | OpenCV 官方文档；只链接和原创解释，不复制教程正文或图表。 | 2026-09-23 |
+
+本章示例为本书原创的合成数组操作，不包含外部代码或图像；其预期输出由代码逻辑推导，本次未运行。Mermaid 图为原创教学流程，不是官方硬件架构、相机接线或设备通信协议。
