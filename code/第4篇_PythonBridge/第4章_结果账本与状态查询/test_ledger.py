@@ -97,6 +97,24 @@ class LedgerContractTests(unittest.TestCase):
             evidence=Evidence("authoritative-query", "router", 13.0, "confirmed"), now=13.0
         )
         self.assertEqual(record.state, State.APPLIED)
+        self.assertEqual(
+            self.ledger.events("req-001"),
+            (
+                LedgerEvent("req-001", None, State.PENDING, None, 10.0),
+                LedgerEvent(
+                    "req-001", State.PENDING, State.SENT,
+                    Evidence("send", "router", 11.0, "accepted"), 11.0,
+                ),
+                LedgerEvent(
+                    "req-001", State.SENT, State.UNKNOWN,
+                    Evidence("lost-response", "local", 12.0), 12.0,
+                ),
+                LedgerEvent(
+                    "req-001", State.UNKNOWN, State.APPLIED,
+                    Evidence("authoritative-query", "router", 13.0, "confirmed"), 13.0,
+                ),
+            ),
+        )
 
     def test_sent_rejects_missing_or_non_send_evidence(self) -> None:
         self.ledger.create(make_request(), now=10.0)
