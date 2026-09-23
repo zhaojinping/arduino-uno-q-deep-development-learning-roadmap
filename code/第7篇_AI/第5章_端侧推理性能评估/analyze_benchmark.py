@@ -171,6 +171,8 @@ def analyze_run(run: Mapping[str, object]) -> dict[str, object]:
     measured_samples = [sample for sample in samples if sample["phase"] == "measured"]
     latencies = [float(sample["latency_ms"]) for sample in measured_samples]
     rss_values = [float(sample["rss_mib"]) for sample in measured_samples]
+    latency_scale = max(latencies)
+    mean_latency = latency_scale * statistics.fmean(value / latency_scale for value in latencies)
 
     return {
         "schema_version": 1,
@@ -185,7 +187,7 @@ def analyze_run(run: Mapping[str, object]) -> dict[str, object]:
             "quantile_method": "nearest_rank",
             "p50_nearest_rank": percentile_nearest_rank(latencies, 0.50),
             "p95_nearest_rank": percentile_nearest_rank(latencies, 0.95),
-            "mean": statistics.fmean(latencies),
+            "mean": mean_latency,
             "max": max(latencies),
         },
         "memory_mib": {

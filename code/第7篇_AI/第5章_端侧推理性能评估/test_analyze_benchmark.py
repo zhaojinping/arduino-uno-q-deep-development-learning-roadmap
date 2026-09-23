@@ -93,6 +93,11 @@ class AnalyzeRunTests(unittest.TestCase):
         self.assertEqual(report["latency_ms"]["p95_nearest_rank"], 19)
         self.assertEqual(report["latency_ms"]["max"], 20)
 
+    def test_mean_does_not_overflow_for_finite_large_latencies(self):
+        report = analyze_run(make_run([], [1e308, 1e308]))
+
+        self.assertEqual(report["latency_ms"]["mean"], 1e308)
+
     def test_wrong_schema_version_is_rejected(self):
         run = make_run([], [1.0])
         run["schema_version"] = 2
