@@ -176,3 +176,11 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 官方规范 | Arduino App specification（双侧职责与通信） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 App 的 Python、可选 Sketch、Brick/容器组成及 Linux/MCU RPC 协作；本章健康检查、状态和恢复门均为原创教学模型。 | main 页面，核验时 | 官方资料；只链接和原创解释，不复制源码或图表。 | 2026-09-23 |
 | 官方数据表 | Arduino UNO Q datasheet（App Lab Console 与运行边界） | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对三类 Console 输出和启动成功仍可能有运行时错误；不能由此推断 App Lab 自带本章探针、30 秒阈值或自动恢复。 | ABX00162 PDF（核验时） | 官方资料；只链接和原创重述，不复制图表。 | 2026-09-23 |
+
+## 第五篇第7章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方规范 | Arduino App specification（项目组成和声明） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 `app.yaml`、Python 入口、可选 Sketch、Brick 和 Linux/MCU 分工；本章 G0～G7 与交接模板不是官方格式。 | main 页面，核验时 | 仅链接和原创解释，不复制源码或图表。 | 2026-09-23 |
+| 官方教程 | Arduino App Lab examples | https://docs.arduino.cc/software/app-lab/tutorials/examples/ | 核对选示例、Run、等待启动、交互以及复制示例后编辑的公开流程；本章不将教程步骤当作已执行。 | 页面内容（核验时） | 仅链接和原创重述，不复制截图或示例源码。 | 2026-09-23 |
+| 官方数据表 | Arduino UNO Q datasheet（Console 与运行时边界） | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Start-up、Main (Python)、Sketch (Microcontroller) 输出和启动后仍可能有运行时错误；交接门、证据等级与回退条件为本书建议。 | ABX00162 PDF（核验时） | 仅链接和原创解释，不复制图表。 | 2026-09-23 |

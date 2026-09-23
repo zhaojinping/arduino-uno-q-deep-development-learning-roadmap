@@ -46,6 +46,7 @@
 - [第4章 App Lab 配置分层与多环境运行参数：从开发机到现场板](book/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md)
 - [第5章 App Lab 运行证据包与日志关联：从 run_id 到可检索证据](book/第5篇_AppLab/第5章_AppLab运行证据包与日志关联_从run_id到可检索证据.md)
 - [第6章 App Lab 健康观察与故障处置：从信号到安全恢复](book/第5篇_AppLab/第6章_AppLab健康观察与故障处置_从信号到安全恢复.md)
+- [第7章 App Lab 综合部署验证与篇末交接：从预检到交接](book/第5篇_AppLab/第7章_AppLab综合部署验证与篇末交接_从预检到交接.md)
 
 ## 第六篇：OpenCV
 - [本篇范围](book/第6篇_OpenCV/README.md)
