@@ -1,0 +1,19 @@
+flowchart LR
+    HW["记录相机型号、连接方式、载板和镜像"] --> COMP{"已确认兼容组合与采集后端？"}
+    COMP -- 否 --> STOP1["停止；查阅对应官方资料并记录缺项"]
+    COMP -- 是 --> SRC["显式选择 camera:index 或本地 file:path"]
+    SRC --> OPEN["创建 VideoCapture"]
+    OPEN --> READY{"isOpened()？"}
+    READY -- 否 --> FAIL1["记录打开失败；不自动扫描其他编号"]
+    READY -- 是 --> READ["有限次数调用 read()"]
+    READ --> VALID{"返回成功且帧非空、维度有效？"}
+    VALID -- 否 --> FAIL2["记录失败帧序号与原因；不送入算法"]
+    VALID -- 是 --> OBS["记录实际 shape / dtype 和后端报告属性"]
+    OBS --> MORE{"达到本次采样帧数？"}
+    MORE -- 否 --> READ
+    MORE -- 是 --> PASS["仅判定本次有限帧样本有效"]
+    FAIL1 --> RELEASE["release() 并结束"]
+    FAIL2 --> RELEASE
+    PASS --> RELEASE
+    STOP1 --> END["停止；不执行硬件控制"]
+    RELEASE --> END

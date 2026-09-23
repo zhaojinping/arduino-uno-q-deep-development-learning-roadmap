@@ -13,3 +13,4 @@
 ## 新增图示
 
 - [第六篇第1章 Fig-35：视觉处理管线与控制边界](uno-q-opencv-image-pipeline.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。
+- [第六篇第2章 Fig-36：摄像头采集与帧校验生命周期](uno-q-opencv-capture-validation.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。

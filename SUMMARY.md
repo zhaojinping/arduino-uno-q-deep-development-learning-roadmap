@@ -51,6 +51,7 @@
 ## 第六篇：OpenCV
 - [本篇范围](book/第6篇_OpenCV/README.md)
 - [第1章 OpenCV 开发基础：图像、像素与视觉处理流水线](book/第6篇_OpenCV/第1章_OpenCV开发基础_图像像素与视觉处理流水线.md)
+- [第2章 摄像头接入与视频帧采集：从设备确认到帧校验](book/第6篇_OpenCV/第2章_摄像头接入与视频帧采集_从设备确认到帧校验.md)
 
 ## 第七篇：AI
 - [本篇范围](book/第7篇_AI/README.md)

@@ -194,3 +194,14 @@
 | 官方教程 | OpenCV 4.12 Basic Operations on Images | https://docs.opencv.org/4.12.0/d3/df2/tutorial_py_basic_ops.html | 核对 Python 图像数组、NumPy 索引、ROI 切片和 `imread` 彩色图像的 BGR 通道约定；摄像头后端的格式仍需按实际接口核实。 | OpenCV 4.12.0 文档 | OpenCV 官方文档；只链接和原创解释，不复制教程正文或图表。 | 2026-09-23 |
 
 本章示例为本书原创的合成数组操作，不包含外部代码或图像；其预期输出由代码逻辑推导，本次未运行。Mermaid 图为原创教学流程，不是官方硬件架构、相机接线或设备通信协议。
+
+## 第六篇第2章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对产品资料列出的 SBC 模式 USB 摄像头接入条件及底部高速连接器 MIPI-CSI 相机路线；不推断任意相机、驱动、载板或镜像均兼容。 | 页面内容（核验时） | 官方网页；只链接和原创解释，不复制图表或截图。 | 2026-09-23 |
+| 官方配件页 | Arduino UNO Media Carrier | https://docs.arduino.cc/hardware/uno-media-carrier | 核对该载板的双 MIPI-CSI 接口及 IMX219 相机兼容说明；不外推到任意 CSI 相机，也不当作本项目实机验证。 | 页面内容（核验时） | 官方网页；只链接和原创解释，不复制图表或截图。 | 2026-09-23 |
+| 官方教程 | OpenCV 4.12 Video Input with OpenCV | https://docs.opencv.org/4.12.0/d5/dc4/tutorial_video_input_psnr_ssim.html | 核对视频文件/设备来源、打开状态、逐帧读取、空帧判断、属性查询和释放生命周期；示例脚本为本书原创 Python 代码。 | OpenCV 4.12.0 文档 | OpenCV 官方文档；只链接和原创解释，不复制教程正文或图表。 | 2026-09-23 |
+| 官方 API 文档 | OpenCV 4.12 Video I/O flags | https://docs.opencv.org/4.12.0/d4/d15/group__videoio__flags__base.html | 核对视频采集属性及打开/读取超时属性的适用后端限制；不把特定后端能力推及所有设备。 | OpenCV 4.12.0 文档 | OpenCV 官方文档；只链接和原创解释，不复制文档内容或图表。 | 2026-09-23 |
+
+本章脚本为本书原创，仅接收显式摄像头索引或本地文件，不扫描设备、不接受网络流、不写图像文件，也不控制硬件。代码本次未运行；图示未渲染为 SVG；没有相机、载板或 UNO Q 实机验证。
