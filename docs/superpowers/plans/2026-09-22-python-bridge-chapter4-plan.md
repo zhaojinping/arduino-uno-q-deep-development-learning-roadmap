@@ -34,7 +34,7 @@
 - `reconcile_status.py` 将提供 `Observation`、`Decision`、`reconcile(record, observation, now)`。
 - 测试只依赖这些公开名称，不依赖 SQLite 私有连接对象。
 
-- [ ] **Step 1: 写出最小失败测试**
+- [x] **Step 1: 写出最小失败测试**
 
 在 `test_ledger.py` 中先固定以下行为：创建记录得到 `PENDING`；`PENDING -> SENT -> UNKNOWN -> APPLIED` 可行；错误的期望状态、非法转移、重复请求 ID 和身份不匹配必须抛出或返回明确的安全决策；关闭并重新打开同一个 SQLite 文件后仍能读取当前记录和事件。
 
@@ -53,7 +53,7 @@ def make_request():
     )
 ```
 
-- [ ] **Step 2: 运行测试确认失败**
+- [x] **Step 2: 运行测试确认失败**
 
 运行：
 
@@ -63,11 +63,11 @@ python -B "code/第4篇_PythonBridge/第4章_结果账本与状态查询/test_le
 
 预期：由于 `ledger.py` 和 `reconcile_status.py` 尚未实现，测试失败；此失败只用于确认测试契约已经被执行。
 
-- [ ] **Step 3: 写代码目录说明**
+- [x] **Step 3: 写代码目录说明**
 
 在 `README.md` 说明本目录的两个示例、测试命令、Python 版本下限、SQLite 本地模型边界，并明确不需要网络或 UNO Q 硬件。
 
-- [ ] **Step 4: 提交测试契约**
+- [x] **Step 4: 提交测试契约**
 
 运行 `git diff --check`，确认新增文件没有空白错误后提交：
 
@@ -90,19 +90,19 @@ git commit -m "test: define Python Bridge result ledger contract"
 - `Ledger.transition()` 接收 `request_id`、`expected`、`target` 和 `Evidence`，成功时原子更新请求投影并追加事件，冲突时抛出 `LedgerConflict`。
 - `Ledger.get()` 和 `Ledger.events()` 返回不可变数据类对象；`Ledger` 支持 `close()`、`__enter__` 和 `__exit__`。
 
-- [ ] **Step 1: 建立 schema 和数据类**
+- [x] **Step 1: 建立 schema 和数据类**
 
 创建 `requests` 表保存身份、状态和最后证据，创建 `request_events` 表保存递增事件序号、前后状态、证据字段和时间；启用外键和显式提交。所有 SQL 参数使用参数绑定，不拼接用户输入。
 
-- [ ] **Step 2: 实现创建、读取和事件映射**
+- [x] **Step 2: 实现创建、读取和事件映射**
 
 实现 schema 初始化、`RequestSpec`/`RequestRecord`/`LedgerEvent` 的行映射、重复 ID 检查、`create()`、`get()` 和 `events()`。创建事件的 `previous_state` 为 `None`，`next_state` 为 `PENDING`。
 
-- [ ] **Step 3: 实现安全状态转移**
+- [x] **Step 3: 实现安全状态转移**
 
 用显式允许表限制合法转移；`transition()` 在事务中先按 `request_id` 和 `expected` 检查当前状态，再更新投影、插入事件并提交。终态不得继续转移，预期状态不匹配必须回滚。
 
-- [ ] **Step 4: 运行账本测试并补齐回归用例**
+- [x] **Step 4: 运行账本测试并补齐回归用例**
 
 运行：
 
@@ -123,11 +123,11 @@ python -B "code/第4篇_PythonBridge/第4章_结果账本与状态查询/test_le
 - `Decision` 保存 `action`、`target` 和 `reason`；`target` 为 `State | None`。
 - `reconcile()` 只返回判定，不直接写 SQLite；调用方根据 `Decision.target` 调用 `Ledger.transition()`，保持查询策略与存储层解耦。
 
-- [ ] **Step 1: 写查询判定测试**
+- [x] **Step 1: 写查询判定测试**
 
 覆盖：完整匹配的权威 `APPLIED` 关闭为 `APPLIED`；权威 `REJECTED` 关闭为 `REJECTED`；权威 `NOT_APPLIED_FINAL` 关闭为 `NOT_APPLIED_FINAL`；`NOT_FOUND` 保持 `KEEP_UNKNOWN`；任一身份字段不匹配保持未知；已过期且无权威终态时返回 `STOP_EXPIRED`；过期但有权威 `NOT_APPLIED_FINAL` 时返回 `CLOSE_NOT_APPLIED`。
 
-- [ ] **Step 2: 实现身份匹配和终止判定**
+- [x] **Step 2: 实现身份匹配和终止判定**
 
 先比较 `request_id`、`operation_key`、`operation` 和 `payload_digest`，任一不匹配即不允许关闭。再按 `authoritative`、观察类型和 `now >= expires_at` 判断 `CLOSE_APPLIED`、`CLOSE_REJECTED`、`CLOSE_NOT_APPLIED`、`KEEP_UNKNOWN` 或 `STOP_EXPIRED`。
 
@@ -148,11 +148,11 @@ def reconcile(record, observation, now):
     return Decision("KEEP_UNKNOWN", None, "insufficient evidence")
 ```
 
-- [ ] **Step 3: 运行测试确认查询闭环**
+- [x] **Step 3: 运行测试确认查询闭环**
 
 运行同一 `test_ledger.py`，预期账本测试和查询测试全部通过；输出中不得出现“NOT_FOUND 即未执行”或“UNKNOWN 自动重放”的路径。
 
-- [ ] **Step 4: 增加独立演示输出**
+- [x] **Step 4: 增加独立演示输出**
 
 让 `reconcile_status.py` 在直接运行时输出以下稳定行，正文将按原样引用：
 
@@ -175,19 +175,19 @@ SIMULATED mismatch: KEEP_UNKNOWN
 - 正文必须包含与 `uno-q-python-bridge-result-ledger.mmd` 完全一致的 Mermaid 代码块，并登记唯一锚点 `fig-27-python-bridge-result-ledger`。
 - 新增官方来源至少包括 Python 3.10 `sqlite3` 文档；Arduino Router/App specification 继续引用已登记来源，不重复伪造 API 事实。
 
-- [ ] **Step 1: 写背景、边界和状态语义**
+- [x] **Step 1: 写背景、边界和状态语义**
 
 解释“返回值、发送证据、业务账本、设备状态”四层差异，明确 `SENT`、`UNKNOWN`、`NOT_FOUND`、`NOT_APPLIED_FINAL` 的边界，并链接第四篇第 3 章。
 
-- [ ] **Step 2: 写 Fig-27 状态图**
+- [x] **Step 2: 写 Fig-27 状态图**
 
 使用 Mermaid `stateDiagram-v2` 表达 `PENDING -> SENT -> UNKNOWN` 以及 `APPLIED`、`REJECTED`、`EXPIRED`、`NOT_APPLIED_FINAL` 终态；在图下注明这是本书教学模型，不是 Arduino 官方协议图。
 
-- [ ] **Step 3: 写两个实验章节**
+- [x] **Step 3: 写两个实验章节**
 
 实验一运行 `ledger.py`，展示创建、发送、未知、关闭、文件重启和事件历史；实验二运行 `reconcile_status.py`，展示四种查询观察判定。每个实验写齐用途、环境、文件位置、依赖、操作步骤、预期输出、故障排查和验证方式。
 
-- [ ] **Step 4: 写接入顺序、验证门槛、FAQ 和小结**
+- [x] **Step 4: 写接入顺序、验证门槛、FAQ 和小结**
 
 说明真实 App 接入时先持久化请求身份，再记录发送证据，再查询收敛，最后才允许业务层显示最终结果；FAQ 覆盖 SQLite 是否等于可靠落盘、为什么 `NOT_FOUND` 不足够、过期后为什么还能接收迟到权威结果、为什么当前值相同仍不能证明历史请求。
 
@@ -207,19 +207,19 @@ SIMULATED mismatch: KEEP_UNKNOWN
 - `check_chapter.py` 检查 frontmatter、两个示例输出、Python 3.10 AST、Mermaid 一致性、SVG XML、图示锚点、内部链接和外部来源登记。
 - Fig-27 登记包含源图、SVG、正文锚点、渲染日期、Mermaid CLI 版本和预览结果。
 
-- [ ] **Step 1: 渲染 SVG**
+- [x] **Step 1: 渲染 SVG**
 
 使用缓存 Mermaid CLI 11.12.0 和已验证 Chrome 路径生成 SVG，不修改全局依赖；用 `view_image` 或等效预览检查文字、箭头、终态边界和白色背景。
 
-- [ ] **Step 2: 编写章节检查器**
+- [x] **Step 2: 编写章节检查器**
 
 复用第四篇第 3 章检查器的检查风格，但把示例输出、文件路径、图号、元数据和内部链接替换为第 4 章实际内容；脚本失败时使用非零退出码。
 
-- [ ] **Step 3: 同步所有入口**
+- [x] **Step 3: 同步所有入口**
 
 在 `SUMMARY.md` 和第四篇 README 添加第 4 章；在根 README 的进度、文件清单和验证记录补充本章；在代码、图片和参考资料 README 中登记对应入口和来源。
 
-- [ ] **Step 4: 运行章节检查**
+- [x] **Step 4: 运行章节检查**
 
 运行：
 
@@ -234,7 +234,7 @@ python -B "code/第4篇_PythonBridge/第4章_结果账本与状态查询/check_c
 **Files:**
 - Modify: `docs/superpowers/plans/2026-09-22-python-bridge-chapter4-plan.md`
 
-- [ ] **Step 1: 运行两个示例和完整测试**
+- [x] **Step 1: 运行两个示例和完整测试**
 
 ```text
 python -B "code/第4篇_PythonBridge/第4章_结果账本与状态查询/ledger.py"
@@ -246,15 +246,15 @@ git diff --check
 
 逐条记录实际输出、测试数量和未完成的 Python 3.10/UNO Q 实机验证，不用“应该通过”替代结果。
 
-- [ ] **Step 2: 进行只读代码审查**
+- [x] **Step 2: 进行只读代码审查**
 
 重点复核事务原子性、状态转移白名单、事件历史顺序、身份匹配、过期请求、`NOT_FOUND` 和权威迟到结果；审查意见若要求修改，先补测试再改实现。
 
-- [ ] **Step 3: 更新计划验证记录**
+- [x] **Step 3: 更新计划验证记录**
 
 把实际解释器版本、测试数量、章节检查结果、SVG 渲染版本、预览状态和未执行的板端验证写入本计划，勾选已经完成的任务。
 
-- [ ] **Step 4: 提交章节实现**
+- [x] **Step 4: 提交章节实现**
 
 ```text
 git add --all
@@ -262,6 +262,18 @@ git diff --cached --check
 git commit -m "docs: add Python Bridge result ledger chapter"
 ```
 
-- [ ] **Step 5: 验证提交状态**
+- [x] **Step 5: 验证提交状态**
 
 运行 `git status --short --branch`、`git log -2 --oneline --decorate` 和 `git diff --check`；只有在输出确认工作树和提交内容符合计划后，才报告本章本地完成。推送动作单独等待用户明确要求。
+
+## Task 6 validation record
+
+- 验证日期：`2026-09-23`；解释器：Python `3.14.6`；本地 AST 检查使用 Python 3.10 grammar，未声称使用 Python 3.10 解释器执行。
+- 两个示例输出与章节记录一致：账本示例为 `UNKNOWN/events=3`、重启后仍为 `UNKNOWN/events=3`、收敛为 `APPLIED/events=4`；查询示例为 `KEEP_UNKNOWN`、`CLOSE_APPLIED`、`CLOSE_NOT_APPLIED`、`KEEP_UNKNOWN`。
+- `test_ledger.py`：`Ran 22 tests`，`OK`；新增精确断言覆盖 `PENDING → SENT → UNKNOWN → APPLIED` 的四条事件序列。
+- `check_chapter.py`：`Ran 12 tests`，`OK`；元数据、14 个二级标题、两个源码块、演示输出、Python 3.10 AST、Mermaid 字节一致性、SVG XML、125 个内部链接、5 个来源登记和共享导航均通过。
+- 第三篇第 3 章检查器：通过，130 个内部链接；`git diff --check`：通过。
+- Fig-27：缓存 Mermaid CLI `11.12.0`、白色背景 SVG；已独立打开生成 SVG 并检查标签、箭头、终态、QUERY 判定说明和无裁切文字。该证据仍只是图示渲染证据。
+- 只读审查结论：事务投影/事件写入同事务、状态白名单、`SENT` 发送证据门槛、完整四元身份匹配、`NOT_FOUND` 保持未知、过期无终态停止重放、迟到权威终态可收敛；未发现 Critical/Important 问题。由于账户使用额度耗尽，未能获得第二模型任务审查，已在 SDD 账本记录该限制。
+- 提交：`e1a6419 docs: publish Python Bridge chapter navigation`；补强提交：`1ca8459 test: assert Python Bridge ledger event order`。当前工作树在最终检查前保持无未提交内容；本轮不执行远程推送。
+- 未执行且不能由本记录替代的验证：Router/Bridge 真实连接、App Lab、MCU Sketch、目标 Linux 镜像、设备查询协议、Python 3.10 实机解释器、掉电持久性、并发压力、UNO Q 实机和硬件验收。章节状态仍为 `draft`。
