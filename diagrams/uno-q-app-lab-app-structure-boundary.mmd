@@ -1,0 +1,35 @@
+flowchart LR
+    subgraph APP[Arduino App 根目录]
+        MANIFEST[app.yaml\n必需：应用描述]
+        PYTHON[python/\nmain.py 必需]
+        SKETCH[sketch/\n可选：sketch.ino + sketch.yaml]
+        README[README.md\n可选：说明入口]
+        DATA[data/\n持久应用数据]
+        CACHE[.cache/\n易失运行数据]
+    end
+
+    LAB[App Lab / App CLI\n导入 · 运行 · 观察]
+    LINUX[Linux / Python / Bricks\nMPU 侧运行时]
+    MCU[Arduino Sketch\nMCU 侧实时边界]
+    BRIDGE[Bridge / RPC\n逻辑通信边界]
+    EVIDENCE[证据分层\n启动 · Python · Sketch · 设备观察]
+
+    LAB --> MANIFEST
+    LAB --> PYTHON
+    LAB --> SKETCH
+    LAB --> README
+    MANIFEST --> LINUX
+    PYTHON --> LINUX
+    SKETCH --> MCU
+    LINUX <--> BRIDGE
+    BRIDGE <--> MCU
+    LAB --> EVIDENCE
+    LINUX --> EVIDENCE
+    MCU --> EVIDENCE
+
+    classDef required fill:#e8f1ff,stroke:#2563eb,color:#0f172a
+    classDef optional fill:#fef3c7,stroke:#d97706,color:#0f172a
+    classDef boundary fill:#dcfce7,stroke:#16a34a,color:#0f172a
+    class MANIFEST,PYTHON required
+    class SKETCH,README,DATA,CACHE optional
+    class LAB,LINUX,MCU,BRIDGE,EVIDENCE boundary

@@ -127,3 +127,13 @@
 | 官方 Python 文档 | Python 3.10 dataclasses | https://docs.python.org/3.10/library/dataclasses.html | 核对 frozen 数据类对字段赋值的限制，用于请求、记录、事件、观察和决策；不把 frozen=True 当作输入验证、数据库防篡改或绝对不可变保证。 | Python 3.10 文档 | Python 官方文档，只链接和原创解释，不复制外部代码或图表。 | 2026-09-22 |
 
 核验边界：官方来源用于 UNO Q 事实基线，社区来源只作课程/知识库结构参考。当前本项目只引用链接和原创解释，不打包外部代码、正文、图片或其他材料；任何外部材料的再分发许可仍需按其文件级声明另行核验。
+
+## 第五篇第1章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 App 根目录、`app.yaml`、Python 入口、可选 Sketch、README、`data/`、`.cache/`、Brick 字段和变量脱敏语义；不把目录规范替代目标板运行结果。 | main | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释，不复制源码或图表。 | 2026-09-23 |
+| 官方板卡文档 | Arduino UNO Q User Manual（App Lab 入口与运行观察） | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对 PC-hosted、SBC、Network Mode、mDNS、Hello World、启动项和运行入口边界；不把网络发现或日志替代设备行为证据。 | main | 官方文档；本项目只链接和原创重述。 | 2026-09-23 |
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对双处理器、App Lab、Arduino IDE 和 Bridge 的产品层角色描述；不把产品介绍当作本地实机测试。 | 页面内容（核验时） | 官方产品资料；本项目只链接和原创解释。 | 2026-09-23 |
+| 官方教程 | Arduino App Lab examples | https://docs.arduino.cc/software/app-lab/getting-started/examples | 核对 App Lab 示例入口和示例类型的公开索引；不复制示例源码，也不把示例可见性替代本章验证。 | 页面内容（核验时） | 官方文档；本项目只链接和原创说明。 | 2026-09-23 |
+| 官方用户文档 | Arduino App CLI user documentation | https://github.com/arduino/arduino-app-cli/blob/main/docs/user-documentation.md | 核对 App 存储目录、运行时目录和环境变量的参考边界；目标镜像实际路径、权限和版本仍需现场核验。 | main | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释。 | 2026-09-23 |
