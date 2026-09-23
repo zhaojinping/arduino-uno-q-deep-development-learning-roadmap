@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～2 章已建立为初稿**，全书当前共 35 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～3 章已建立为初稿**，全书当前共 36 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
@@ -58,6 +58,8 @@
 第六篇第 1 章[OpenCV 开发基础：图像、像素与视觉处理流水线](book/第6篇_OpenCV/第1章_OpenCV开发基础_图像像素与视觉处理流水线.md)已建立为初稿；本章讲解图像数组、行列坐标、BGR/灰度、ROI、阈值处理和采集至反馈的阶段边界，附离线合成图像示例与 Fig-35 Mermaid。示例输出为按代码推导的预期值，本次未运行程序、未渲染 SVG、未验证摄像头或 UNO Q 实机。
 
 第六篇第 2 章[摄像头接入与视频帧采集：从设备确认到帧校验](book/第6篇_OpenCV/第2章_摄像头接入与视频帧采集_从设备确认到帧校验.md)已建立为初稿；提供相机/载板/镜像/后端兼容核对、显式来源的有限帧诊断脚本及 Fig-36 Mermaid。脚本本次未运行，图示未渲染 SVG，未验证任何摄像头、载板或 UNO Q 实机组合。
+
+第六篇第 3 章[图像预处理与边缘提取：从去噪到结构特征](book/第6篇_OpenCV/第3章_图像预处理与边缘提取_从去噪到结构特征.md)已建立为初稿；提供高斯/中值滤波、Canny 边缘候选的离线合成示例、3 项命令行测试和 Fig-37 Mermaid。测试在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境通过；未验证目标 UNO Q 软件栈、摄像头或实机性能，图示未渲染 SVG。
 
 ## 目录结构
 
@@ -223,9 +225,14 @@ images/第4篇_PythonBridge/README.md
 book/第6篇_OpenCV/README.md
 book/第6篇_OpenCV/第1章_OpenCV开发基础_图像像素与视觉处理流水线.md
 book/第6篇_OpenCV/第2章_摄像头接入与视频帧采集_从设备确认到帧校验.md
+book/第6篇_OpenCV/第3章_图像预处理与边缘提取_从去噪到结构特征.md
 code/第6篇_OpenCV/第2章_摄像头接入与视频帧采集/README.md
 code/第6篇_OpenCV/第2章_摄像头接入与视频帧采集/inspect_capture.py
 diagrams/uno-q-opencv-capture-validation.mmd
+code/第6篇_OpenCV/第3章_图像预处理与边缘提取/README.md
+code/第6篇_OpenCV/第3章_图像预处理与边缘提取/preprocess_edges.py
+code/第6篇_OpenCV/第3章_图像预处理与边缘提取/test_preprocess_edges.py
+diagrams/uno-q-opencv-denoise-canny.mmd
 code/第6篇_OpenCV/第1章_OpenCV开发基础/README.md
 code/第6篇_OpenCV/第1章_OpenCV开发基础/image_basics.py
 diagrams/uno-q-opencv-image-pipeline.mmd
@@ -236,4 +243,4 @@ images/第6篇_OpenCV/README.md
 
 第四篇第 1～4 章的 Markdown 链接、代码说明、Python 3.10 AST 语法兼容性、针对性示例/测试和 Fig-26、Fig-27 资源登记已完成本地检查；第五篇第 1 章的两个结构/日志实验、11 项 Python 测试、章节检查、Fig-28 SVG 和来源登记已完成本地检查；第五篇第 2 章的两个生命周期/会话证据实验、10 项 Python 测试、章节检查、Fig-29 SVG 和来源登记已完成本地检查；第五篇第 3 章的两个声明/依赖实验、11 项 Python 测试、章节检查、Fig-30 SVG 和来源登记已完成本地检查；第五篇第 4 章的两个配置/快照实验、10 项 Python 测试、章节检查、Fig-31 SVG 和来源登记已完成本地检查。Fig-26～Fig-31 使用缓存 Mermaid CLI 11.12.0 生成 SVG 并完成预览审阅。章节仍为 draft；SVG 生成与本地测试不等于 Python 3.10 解释器、目标 UNO Q Linux 镜像、Router/Bridge、App Lab、MCU 或 UNO Q 硬件验收，这些验证当前仍未执行。
 
-第六篇第1章的 Markdown 正文、配套示例、Mermaid 源文件、Fig-35 资源登记、目录链接和来源表已建立；本次未运行示例、自动测试或 Mermaid 渲染，也未验证 OpenCV 安装、摄像头采集和 UNO Q 硬件。
+第六篇第1～3章的 Markdown 正文、配套代码、目录和来源登记已建立；第3章离线示例及 3 项命令行测试在本机环境通过。Fig-35～Fig-37 保留 Mermaid 源文件，尚未渲染 SVG。本次未验证相机驱动、真实摄像头采集、目标 UNO Q OpenCV/NumPy 版本或硬件性能。

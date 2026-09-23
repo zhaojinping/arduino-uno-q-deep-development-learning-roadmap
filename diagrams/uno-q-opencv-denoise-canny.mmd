@@ -1,0 +1,12 @@
+flowchart LR
+    INPUT["输入灰度图"] --> VALID{"非空、二维 uint8？"}
+    VALID -- 否 --> STOP1["报告输入契约不符并停止"]
+    VALID -- 是 --> NOISE{"主要噪声类型？"}
+    NOISE -- 高斯扰动 --> GAUSS["GaussianBlur<br/>记录核大小"]
+    NOISE -- 脉冲噪声 --> MEDIAN["medianBlur<br/>记录核大小"]
+    GAUSS --> CANNY["Canny<br/>记录低/高阈值"]
+    MEDIAN --> CANNY
+    CANNY --> OUTPUT{"输出尺寸与类型有效？"}
+    OUTPUT -- 否 --> STOP2["报告处理输出异常并停止"]
+    OUTPUT -- 是 --> EDGE["统计边缘候选<br/>后续分析仍需独立校验"]
+    EDGE --> END["本示例不写图像、不控制硬件"]

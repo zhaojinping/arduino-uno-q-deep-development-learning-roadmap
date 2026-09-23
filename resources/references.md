@@ -205,3 +205,12 @@
 | 官方 API 文档 | OpenCV 4.12 Video I/O flags | https://docs.opencv.org/4.12.0/d4/d15/group__videoio__flags__base.html | 核对视频采集属性及打开/读取超时属性的适用后端限制；不把特定后端能力推及所有设备。 | OpenCV 4.12.0 文档 | OpenCV 官方文档；只链接和原创解释，不复制文档内容或图表。 | 2026-09-23 |
 
 本章脚本为本书原创，仅接收显式摄像头索引或本地文件，不扫描设备、不接受网络流、不写图像文件，也不控制硬件。代码本次未运行；图示未渲染为 SVG；没有相机、载板或 UNO Q 实机验证。
+
+## 第六篇第3章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方教程 | OpenCV 4.12 Smoothing Images | https://docs.opencv.org/4.12.0/d4/d13/tutorial_py_filtering.html | 核对高斯、中值及双边平滑的基本机制、核参数约束和去噪/边缘细节权衡；本章离线样例为原创。 | OpenCV 4.12.0 文档 | OpenCV 官方文档；只链接和原创解释，不复制教程正文或图表。 | 2026-09-23 |
+| 官方教程 | OpenCV 4.12 Canny Edge Detector | https://docs.opencv.org/4.12.0/da/d5c/tutorial_canny_detector.html | 核对 Canny 的噪声抑制、梯度、非极大值抑制、滞后阈值和候选边缘输出；阈值比例仅作为调参起点，不当作通用验收标准。 | OpenCV 4.12.0 文档 | OpenCV 官方文档；只链接和原创解释，不复制教程正文或图表。 | 2026-09-23 |
+
+本章脚本与测试为本书原创，使用确定性合成数组，不读取/写入图片，不访问相机、网络、GPIO、MCU 或 UNO Q。3 项测试和示例在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境验证；目标系统和实机未验证。Fig-37 Mermaid 为原创教学图，本次未渲染 SVG。

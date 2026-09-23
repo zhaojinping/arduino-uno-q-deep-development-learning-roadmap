@@ -25,3 +25,15 @@
 - 内容要求：展示硬件与软件兼容组合确认、显式来源选择、打开状态、有限取帧、帧校验、失败停止和资源释放；不表达具体设备树或接线定义。
 - 来源边界：依据 Arduino UNO Q、UNO Media Carrier 与 OpenCV 官方资料原创绘制；不是官方驱动拓扑或协议图。
 - 验证边界：本次未渲染 SVG，未连接摄像头、载板或 UNO Q 实机；流程不证明特定相机组合受支持或实时性能达标。
+
+<a id="fig-37-uno-q-opencv-denoise-canny"></a>
+
+## 图 6-3：去噪到边缘候选的处理流程
+
+- 图号：Fig-37
+- 状态：Mermaid 正文与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[去噪与 Canny Mermaid](../../diagrams/uno-q-opencv-denoise-canny.mmd)
+- 正文位置：[第六篇第3章 Fig-37](../../book/第6篇_OpenCV/第3章_图像预处理与边缘提取_从去噪到结构特征.md#fig-37-uno-q-opencv-denoise-canny)
+- 内容要求：展示输入图像校验、按噪声类型选择高斯或中值滤波、Canny 双阈值和输出契约检查；不表达识别结果或硬件控制协议。
+- 来源边界：依据 OpenCV 官方平滑和 Canny 文档原创绘制，不复制官方图表。
+- 验证边界：正文与 Mermaid 源码对应；本次未渲染 SVG，且实验不访问摄像头或 UNO Q 实机。
