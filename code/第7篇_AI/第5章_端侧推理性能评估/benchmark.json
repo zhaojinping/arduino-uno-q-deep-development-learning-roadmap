@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "run_id": "synthetic-benchmark-001",
+  "environment": {
+    "platform_id": "synthetic-host",
+    "os_image_id": "synthetic-linux-image",
+    "runtime_id": "synthetic-runtime-v1",
+    "execution_provider_id": "synthetic-cpu",
+    "artifact_id": "synthetic-model-metadata-only",
+    "input_shape": [1, 3, 224, 224],
+    "batch_size": 1,
+    "thread_count": 2
+  },
+  "warmup_count": 3,
+  "measured_count": 20,
+  "samples": [
+    {"index": 1, "phase": "warmup", "latency_ms": 62.0, "rss_mib": 500.0},
+    {"index": 2, "phase": "warmup", "latency_ms": 31.0, "rss_mib": 501.0},
+    {"index": 3, "phase": "warmup", "latency_ms": 24.0, "rss_mib": 502.0},
+    {"index": 4, "phase": "measured", "latency_ms": 15.0, "rss_mib": 503.1},
+    {"index": 5, "phase": "measured", "latency_ms": 12.0, "rss_mib": 503.3},
+    {"index": 6, "phase": "measured", "latency_ms": 14.0, "rss_mib": 503.4},
+    {"index": 7, "phase": "measured", "latency_ms": 13.0, "rss_mib": 503.2},
+    {"index": 8, "phase": "measured", "latency_ms": 17.0, "rss_mib": 503.6},
+    {"index": 9, "phase": "measured", "latency_ms": 11.0, "rss_mib": 503.0},
+    {"index": 10, "phase": "measured", "latency_ms": 18.0, "rss_mib": 504.1},
+    {"index": 11, "phase": "measured", "latency_ms": 16.0, "rss_mib": 504.0},
+    {"index": 12, "phase": "measured", "latency_ms": 14.5, "rss_mib": 503.8},
+    {"index": 13, "phase": "measured", "latency_ms": 13.5, "rss_mib": 504.2},
+    {"index": 14, "phase": "measured", "latency_ms": 19.0, "rss_mib": 504.3},
+    {"index": 15, "phase": "measured", "latency_ms": 12.5, "rss_mib": 504.0},
+    {"index": 16, "phase": "measured", "latency_ms": 15.5, "rss_mib": 504.6},
+    {"index": 17, "phase": "measured", "latency_ms": 14.2, "rss_mib": 504.7},
+    {"index": 18, "phase": "measured", "latency_ms": 23.0, "rss_mib": 505.2},
+    {"index": 19, "phase": "measured", "latency_ms": 13.2, "rss_mib": 504.5},
+    {"index": 20, "phase": "measured", "latency_ms": 12.8, "rss_mib": 505.0},
+    {"index": 21, "phase": "measured", "latency_ms": 16.3, "rss_mib": 505.3},
+    {"index": 22, "phase": "measured", "latency_ms": 17.1, "rss_mib": 506.1},
+    {"index": 23, "phase": "measured", "latency_ms": 14.8, "rss_mib": 507.4}
+  ]
+}
