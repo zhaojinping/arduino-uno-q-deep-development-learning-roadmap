@@ -1,0 +1,11 @@
+flowchart LR
+    ART["模型工件/伴随文件"] --> HASH{"路径受限且摘要一致？"}
+    MAN["教学模型清单"] --> SCHEMA{"字段、张量与标签契约完整？"}
+    HASH -- 否 --> STOP1["阻断：文件缺失、越界或摘要不符"]
+    SCHEMA -- 否 --> STOP2["阻断：修订清单与I/O契约"]
+    HASH -- 是 --> TARGET{"格式、算子集、运行时<br/>与目标镜像证据已核对？"}
+    SCHEMA -- 是 --> TARGET
+    TARGET -- 否 --> REVIEW["REVIEW_REQUIRED_NOT_DEPLOYABLE"]
+    TARGET -- 是 --> BENCH{"目标板实测：输出、资源、时延与失效路径？"}
+    BENCH -- 否 --> REVIEW
+    BENCH -- 是 --> HUMAN["独立人工/业务验收<br/>（本章工具不执行发布）"]

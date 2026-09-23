@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "model": {
+    "name": "synthetic-two-class-demo",
+    "version": "0.1.0",
+    "format": "teaching-fixture-text",
+    "artifact": {
+      "path": "teaching-artifact.txt",
+      "sha256": "f487288a7b526f960a17827de918a27814a84d8666c9d34965e601323e96423d"
+    },
+    "license_id": "NO_MODEL_WEIGHTS_INCLUDED"
+  },
+  "target": {
+    "board": "Arduino UNO Q",
+    "execution_plane": "linux_mpu",
+    "software_release": "not_pinned"
+  },
+  "runtime": {
+    "name": "not_selected",
+    "version": "not_pinned",
+    "model_format": "teaching-fixture-text",
+    "execution_provider": "not_selected",
+    "operator_set": "not_applicable"
+  },
+  "io_contract": {
+    "inputs": [
+      {"name": "features", "dtype": "float32", "shape": ["batch", 2]}
+    ],
+    "outputs": [
+      {"name": "scores", "dtype": "float32", "shape": ["batch", 2]}
+    ],
+    "output_labels": ["candidate_like", "other"]
+  },
+  "preprocessing": {
+    "version": "features-v1",
+    "steps": ["two precomputed synthetic features; no image preprocessing"]
+  },
+  "evaluation": {
+    "protocol": "chapter-7-chapter-2-synthetic-example",
+    "dataset_id": "synthetic_samples.csv",
+    "report_id": "REPORT_ONLY"
+  },
+  "resource_budget": {
+    "peak_memory_bytes": null,
+    "p95_latency_ms": null
+  }
+}

@@ -13,3 +13,4 @@
 ## 分篇图示登记
 
 - [第六篇 OpenCV 图示登记](第6篇_OpenCV/README.md)：Fig-35 Mermaid 源文件已登记，SVG 和实机视觉管线验证尚未完成。
+- [第七篇 AI 图示登记](第7篇_AI/README.md)：Fig-43～Fig-45 Mermaid 源文件已登记；SVG 尚未渲染审阅，目标板模型兼容未验证。

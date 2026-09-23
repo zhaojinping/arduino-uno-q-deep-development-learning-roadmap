@@ -286,3 +286,14 @@
 | 官方课程 | Google Machine Learning Crash Course：Classification metrics | https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall | 核对 TP/FP/TN/FN、准确率、精确率和召回率；本章的弃判分账和条件指标是原创示例。 | 页面内容（核验时） | 页面标注 CC BY 4.0（代码示例另有声明）；本项目只链接和原创重述。 | 2026-09-23 |
 
 本章 `synthetic_samples.csv`、`dataset_evaluation.py`、19 项标准库测试和 Fig-44 Mermaid 均为本书原创。20 条手填记录只用于演示数据契约、组隔离、类别中心拟合、验证门限选择和测试计数；`group_id` 不认证采集来源，`model_kind` 不代表模型工件，`raw_score` 不是概率。当前仅有本机 Python 3.14.6 离线测试，不含真实标注、UNO Q、App Lab、Bridge、MCU、执行器或 SVG 目视审阅。
+
+## 第七篇第3章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+|---|---|---|---|---|---|---|
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对 QRB2210 Linux MPU、STM32U585 Zephyr MCU 及产品级 AI/App Lab 定位；不把产品宣传当成任意模型格式、运行时或加速器的兼容证明。 | 页面内容（核验时） | 仅链接和原创解释，不复制图表、截图或正文。 | 2026-09-23 |
+| 官方规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Python/Brick/容器的 Linux 侧、Sketch 的 MCU 侧、RPC 协作、`app.yaml` 中 Brick/模型标识及额外文件不会被自动执行；本章 `model_manifest.json` 是本书原创教学清单。 | main 页面（核验时） | 仅链接和原创重述，不复制规范正文或代码。 | 2026-09-23 |
+| 官方规范 | ONNX Intermediate Representation Specification | https://onnx.ai/onnx/repo-docs/IR.html | 核对计算图、数据类型、operator set/opset 元数据和外部张量数据边界；本章预检器不解析 ONNX 二进制。 | ONNX 1.24.0 文档（核验时） | 仅链接并原创摘要，不复制规范文本、图表或源码。 | 2026-09-23 |
+| 官方文档 | ONNX Runtime compatibility | https://onnxruntime.ai/docs/reference/compatibility.html | 核对运行时版本与平台、依赖、opset 兼容信息；通用兼容表不证明 UNO Q 指定镜像和执行提供程序已验证。 | 页面内容（核验时） | 仅链接和原创解释，不复制文档内容或表格。 | 2026-09-23 |
+
+本章 `model_preflight.py`、教学 JSON 清单、文本占位工件、10 项标准库行为测试及 Fig-45 Mermaid 为本书原创。本机 Python 3.14.6 只验证清单字段/张量形状、模型与运行时格式声明、单文件相对路径和 SHA-256；样例摘要匹配仍产生 `REVIEW_REQUIRED_NOT_DEPLOYABLE`。没有真实模型、ONNX 解析、模型许可核验、运行时安装、UNO Q 目标镜像、App Lab、Bridge、MCU、性能、功耗或硬件动作验证；Fig-45 SVG 尚未渲染和目视审阅。

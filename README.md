@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～8 章已建立为初稿，第七篇第 1～2 章已建立为初稿**，全书当前共 43 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～8 章已建立为初稿，第七篇第 1～3 章已建立为初稿**，全书当前共 44 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
@@ -74,6 +74,8 @@
 第七篇第 1 章[AI 开发基础：从任务定义到可验证推理](book/第7篇_AI/第1章_AI开发基础_从任务定义到可验证推理.md)已建立为 `draft` 初稿；区分规则、模型推理、TinyML、边缘与生成式 AI 的任务和部署边界，提供手设权重的合成特征实验、九项标准库测试及 Fig-43 Mermaid。示例不是训练或部署真实模型；未验证 UNO Q 实机、模型精度、App Lab、Bridge/MCU 或硬件动作，图示未渲染 SVG。
 
 第七篇第 2 章[数据集与离线评估：从分组切分到混淆矩阵](book/第7篇_AI/第2章_数据集与离线评估_从分组切分到混淆矩阵.md)已建立为 `draft` 初稿；以 20 条人工合成 CSV 演示组隔离、类别中心拟合、验证集弃判门限、测试集混淆矩阵与指标分母，配套 19 项标准库测试及 Fig-44 Mermaid。结果不是现场识别准确率、可部署模型或 UNO Q 实机性能，图示未渲染 SVG。
+
+第七篇第 3 章[模型工件与部署契约：从清单到目标预检](book/第7篇_AI/第3章_模型工件与部署契约_从清单到目标预检.md)已建立为 `draft` 初稿；用不可执行的教学文本工件演示清单字段、I/O契约、路径限制与 SHA-256，配套 10 项标准库测试和 Fig-45 Mermaid。摘要与元数据检查通过仍只得到 `REVIEW_REQUIRED_NOT_DEPLOYABLE`；未验证真实模型、运行时兼容、UNO Q 实机和性能，图示未渲染 SVG。
 
 ## 目录结构
 
@@ -271,6 +273,26 @@ code/第6篇_OpenCV/第1章_OpenCV开发基础/README.md
 code/第6篇_OpenCV/第1章_OpenCV开发基础/image_basics.py
 diagrams/uno-q-opencv-image-pipeline.mmd
 images/第6篇_OpenCV/README.md
+book/第7篇_AI/README.md
+book/第7篇_AI/第1章_AI开发基础_从任务定义到可验证推理.md
+book/第7篇_AI/第2章_数据集与离线评估_从分组切分到混淆矩阵.md
+book/第7篇_AI/第3章_模型工件与部署契约_从清单到目标预检.md
+code/第7篇_AI/第1章_AI开发基础/README.md
+code/第7篇_AI/第1章_AI开发基础/teaching_inference.py
+code/第7篇_AI/第1章_AI开发基础/test_teaching_inference.py
+code/第7篇_AI/第2章_数据集与离线评估/README.md
+code/第7篇_AI/第2章_数据集与离线评估/dataset_evaluation.py
+code/第7篇_AI/第2章_数据集与离线评估/synthetic_samples.csv
+code/第7篇_AI/第2章_数据集与离线评估/test_dataset_evaluation.py
+code/第7篇_AI/第3章_模型工件与部署契约/README.md
+code/第7篇_AI/第3章_模型工件与部署契约/model_manifest.json
+code/第7篇_AI/第3章_模型工件与部署契约/model_preflight.py
+code/第7篇_AI/第3章_模型工件与部署契约/teaching-artifact.txt
+code/第7篇_AI/第3章_模型工件与部署契约/test_model_preflight.py
+diagrams/uno-q-ai-inference-evidence-gate.mmd
+diagrams/uno-q-ai-dataset-evaluation-gate.mmd
+diagrams/uno-q-ai-model-deployment-contract.mmd
+images/第7篇_AI/README.md
 ```
 
 本次检查覆盖第一篇、第二篇第 1～9 章、第三篇第 1～8 章、第四篇第 1～4 章和第五篇第 1～3 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；第五篇第 1 章另检查 App 结构契约、启动证据分类，第 2 章另检查生命周期状态机、`run_id` 证据过滤，第 3 章另检查声明契约、能力快照解析和发布边界；三章均检查 Python 3.10 AST 语法、演示输出、Mermaid 与 SVG 一致性、来源登记和导航入口。当前仍未执行 Arduino CLI 编译、上传、App Lab 真实导入/运行、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、systemd unit 安装/启用/重启、配置或凭据替换、ADB/SSH、Router/Bridge 重连、远程写操作、Bridge 联调或硬件实机运行。
@@ -278,3 +300,5 @@ images/第6篇_OpenCV/README.md
 第四篇第 1～4 章的 Markdown 链接、代码说明、Python 3.10 AST 语法兼容性、针对性示例/测试和 Fig-26、Fig-27 资源登记已完成本地检查；第五篇第 1 章的两个结构/日志实验、11 项 Python 测试、章节检查、Fig-28 SVG 和来源登记已完成本地检查；第五篇第 2 章的两个生命周期/会话证据实验、10 项 Python 测试、章节检查、Fig-29 SVG 和来源登记已完成本地检查；第五篇第 3 章的两个声明/依赖实验、11 项 Python 测试、章节检查、Fig-30 SVG 和来源登记已完成本地检查；第五篇第 4 章的两个配置/快照实验、10 项 Python 测试、章节检查、Fig-31 SVG 和来源登记已完成本地检查。Fig-26～Fig-31 使用缓存 Mermaid CLI 11.12.0 生成 SVG 并完成预览审阅。章节仍为 draft；SVG 生成与本地测试不等于 Python 3.10 解释器、目标 UNO Q Linux 镜像、Router/Bridge、App Lab、MCU 或 UNO Q 硬件验收，这些验证当前仍未执行。
 
 第六篇第1～7章的 Markdown 正文、配套代码、目录和来源登记已建立；第3章的 3 项测试、第4章和第5章各 4 项测试、第6章的 7 项、第7章的 10 项测试在本机环境通过。Fig-35～Fig-41 保留 Mermaid 源文件，尚未渲染 SVG。本次未验证相机驱动、真实摄像头采集、目标 UNO Q OpenCV/NumPy 版本、色彩/几何标定、对象身份、Bridge/MCU 联动或硬件性能。
+
+第七篇第1～3章的目录、交叉链接、来源登记和 Mermaid 双源已更新；第3章的 10 项标准库行为测试在本机 Python 3.14.6 通过，教学清单摘要正确时仍明确返回 `REVIEW_REQUIRED_NOT_DEPLOYABLE`。本次还重跑仓库 19 个 Python 测试模块，共 153 项测试，全部通过。Fig-43～Fig-45 保留 Mermaid 源文件，本机未找到 `mmdc`，SVG 未生成或视觉审阅；没有真实模型、UNO Q、App Lab、运行时兼容、资源性能或硬件验收。
