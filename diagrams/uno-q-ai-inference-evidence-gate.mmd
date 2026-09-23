@@ -1,0 +1,12 @@
+flowchart LR
+    TASK["任务定义与证据目标"] --> INPUT["合成特征记录<br/>来源 / 会话 / 版本 / 时间"]
+    INPUT --> CONTRACT{"元数据、时效和特征契约合格？"}
+    CONTRACT -- 否 --> REJECT["REJECTED<br/>不计算 margin"]
+    CONTRACT -- 是 --> FORWARD["手设固定权重前向计算<br/>未训练、未校准"]
+    FORWARD --> MARGIN{"原始 abs(margin) 达到教学门限？"}
+    MARGIN -- 否 --> ABSTAIN["ABSTAIN<br/>无标签"]
+    MARGIN -- 是 --> REPORT["REPORT_ONLY<br/>仅供复核"]
+    REJECT --> RECORD["JSONL 证据记录"]
+    ABSTAIN --> RECORD
+    REPORT --> RECORD
+    RECORD --> STOP["不调用相机、网络、Bridge 或 MCU"]

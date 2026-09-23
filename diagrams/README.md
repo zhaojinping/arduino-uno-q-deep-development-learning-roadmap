@@ -20,3 +20,4 @@
 - [第六篇第6章 Fig-40：单帧候选到视觉事件的时间门](uno-q-opencv-temporal-gate.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。
 - [第六篇第7章 Fig-41：视觉事件到离线反馈意图的审查门](uno-q-opencv-feedback-guard.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。
 - [第六篇第8章 Fig-42：从合成帧到离线审查记录](uno-q-opencv-integrated-evidence.mmd)：对应正文和图片资源登记见 [images/第6篇_OpenCV/README.md](../images/第6篇_OpenCV/README.md)。
+- [第七篇第1章 Fig-43：教学推理契约与停止边界](uno-q-ai-inference-evidence-gate.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。

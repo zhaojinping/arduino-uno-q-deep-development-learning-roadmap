@@ -264,3 +264,13 @@
 | 官方规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Python/Linux 与 Sketch/MCU 的职责分界；本章审查门和证据包是原创教学模型，不是官方 App 或安全规范。 | main 页面（核验时） | 仅链接并原创解释，不复制正文或源码。 | 2026-09-23 |
 
 本章综合脚本、六项测试、交接模板与 Fig-42 Mermaid 为本书原创。实际复用本仓库第5～7章代码，在本机 Python 3.14.6、OpenCV 5.0.0、NumPy 2.4.6 环境运行；只创建内存合成图并输出九条 JSONL，不访问相机、网络、Bridge、MCU 或执行器。错会话故障注入复用第3帧，仅进入审查门。目标板、真实相机、时钟、身份认证、物理反馈与 SVG 视觉审阅均未验证。
+
+## 第七篇第1章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对 QRB2210 Linux 与 STM32U585 MCU 的双侧架构、App Lab 与 Bridge/RPC 产品级定位；页面不证明本章公式运行于板上，也不保证任意模型格式或推理性能。 | 页面内容（核验时） | 仅链接并原创解释，不复制图表、截图或产品正文。 | 2026-09-23 |
+| 官方规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Python/Brick/容器运行于 Linux、Sketch 运行于 MCU，二者通过 RPC 协作；本章特征契约、`REPORT_ONLY` 和弃判门均为原创教学规则。 | main 页面（核验时） | 仅链接并原创重述，不复制规范内容或代码。 | 2026-09-23 |
+| 官方学习索引 | Arduino Learn 的 Edge AI 栏目 | https://docs.arduino.cc/learn | 核对官方设有 AI/机器学习基础与边缘 AI 工作流学习入口；本章任务分类与模型验证清单是本书综合归纳，不把索引当作具体板卡的实测资料。 | 页面内容（核验时） | 仅链接并原创解释，不复制课程正文或图像。 | 2026-09-23 |
+
+本章 `teaching_inference.py`、九项标准库测试及 Fig-43 Mermaid 为本书原创。程序仅消费人工合成特征，用手设线性公式产生原始间隔、弃判或拒绝结果；没有训练、模型工件、真实图像/传感器输入、概率校准、App Lab、网络、Bridge、MCU 或执行器调用。测试只验证本机 Python 3.14.6 的离线契约；目标板运行时、模型性能、时延和物理安全均未验证，Fig-43 SVG 尚未渲染审阅。
