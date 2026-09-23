@@ -1,4 +1,4 @@
-# App Lab 模拟运行 run-043：阻断交接示例
+# App Lab 模拟运行 run-043：阻断复盘示例
 
 > `SIMULATED`。此文件仅演示怎样诚实交接不完整证据；无 Arduino UNO Q、App Lab、Router/Bridge 或 MCU 实测。请勿复制为现场验收记录。
 

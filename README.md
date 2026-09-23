@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿**，全书当前共 33 章。第五篇的正文范围已由第 7 章“综合部署验证与篇末交接”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿**，全书当前共 33 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
@@ -53,7 +53,7 @@
 
 第五篇第 6 章[App Lab 健康观察与故障处置：从信号到安全恢复](book/第5篇_AppLab/第6章_AppLab健康观察与故障处置_从信号到安全恢复.md)已建立为 `draft` 初稿。第 6 章提供信号分层、身份/新鲜度判定、故障与未知处置、人工恢复门、两份离线模拟快照及 Fig-33 Mermaid；本地模型不构成 App Lab 或 UNO Q 实机验收。
 
-第五篇第 7 章[App Lab 综合部署验证与篇末交接：从预检到交接](book/第5篇_AppLab/第7章_AppLab综合部署验证与篇末交接_从预检到交接.md)已建立为 `draft` 初稿。第 7 章串联八个证据门，提供离线分项演练、可复制的交接模板、故意阻断的模拟交接记录和 Fig-34 Mermaid；正文范围至此收束，未进行 App Lab 或 UNO Q 实机部署/验收，暂不预设第 8 章。
+第五篇第 7 章[App Lab 综合验证：从部署预检到运行复盘](book/第5篇_AppLab/第7章_AppLab综合验证_从部署预检到运行复盘.md)已建立为 `draft` 初稿。第 7 章串联八个证据门，提供离线分项演练、可复制的复盘/交接模板、故意阻断的模拟记录和 Fig-34 Mermaid；正文范围至此收束，未进行 App Lab 或 UNO Q 实机部署/验收，暂不预设第 8 章。
 
 ## 目录结构
 
@@ -161,7 +161,7 @@ images/第5篇_AppLab/ch03-fig30-uno-q-app-lab-deployability-boundary.svg
 book/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md
 book/第5篇_AppLab/第5章_AppLab运行证据包与日志关联_从run_id到可检索证据.md
 book/第5篇_AppLab/第6章_AppLab健康观察与故障处置_从信号到安全恢复.md
-book/第5篇_AppLab/第7章_AppLab综合部署验证与篇末交接_从预检到交接.md
+book/第5篇_AppLab/第7章_AppLab综合验证_从部署预检到运行复盘.md
 code/第5篇_AppLab/第5章_AppLab运行证据包与日志关联/README.md
 code/第5篇_AppLab/第5章_AppLab运行证据包与日志关联/correlate_events.py
 code/第5篇_AppLab/第5章_AppLab运行证据包与日志关联/sample_run.json
@@ -172,9 +172,9 @@ code/第5篇_AppLab/第6章_AppLab健康观察与故障处置/evaluate_health.py
 code/第5篇_AppLab/第6章_AppLab健康观察与故障处置/sample_stale.json
 code/第5篇_AppLab/第6章_AppLab健康观察与故障处置/sample_fault.json
 diagrams/uno-q-app-lab-health-and-recovery.mmd
-code/第5篇_AppLab/第7章_AppLab综合部署验证与篇末交接/README.md
-code/第5篇_AppLab/第7章_AppLab综合部署验证与篇末交接/handoff-template.md
-code/第5篇_AppLab/第7章_AppLab综合部署验证与篇末交接/sample-handoff.md
+code/第5篇_AppLab/第7章_AppLab综合验证_从部署预检到运行复盘/README.md
+code/第5篇_AppLab/第7章_AppLab综合验证_从部署预检到运行复盘/handoff-template.md
+code/第5篇_AppLab/第7章_AppLab综合验证_从部署预检到运行复盘/sample-handoff.md
 diagrams/uno-q-app-lab-deployment-handoff.mmd
 code/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/README.md
 code/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/config_layers.py

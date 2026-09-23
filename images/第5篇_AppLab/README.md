@@ -84,12 +84,12 @@
 
 <a id="fig-34-uno-q-app-lab-deployment-handoff"></a>
 
-## 图 5-7：App Lab 综合部署验证与交接
+## 图 5-7：App Lab 部署预检与运行复盘
 
 - 图号：Fig-34
 - 状态：Mermaid 正文与独立源文件已建立；SVG 待生成并完成预览审阅
 - 图源：[App Lab 部署验证与交接 Mermaid](../../diagrams/uno-q-app-lab-deployment-handoff.mmd)
-- 正文位置：[第五篇第7章 Fig-34](../../book/第5篇_AppLab/第7章_AppLab综合部署验证与篇末交接_从预检到交接.md#fig-34-uno-q-app-lab-deployment-handoff)
+- 正文位置：[第五篇第7章 Fig-34](../../book/第5篇_AppLab/第7章_AppLab综合验证_从部署预检到运行复盘.md#fig-34-uno-q-app-lab-deployment-handoff)
 - 内容要求：展示 G0～G7 的范围、声明、目标与配置、受控启动、健康、功能结果、异常处置和交接，以及阻断/未知停止路径
 - 来源边界：依据已登记的 Arduino App specification、App Lab 示例教程与 UNO Q 数据表原创绘制；证据门与交接状态为本书工程建议
 - 验证边界：尚未渲染 SVG 或进行 UNO Q 实测；图示不代表官方内置部署审批流程或目标设备验收
