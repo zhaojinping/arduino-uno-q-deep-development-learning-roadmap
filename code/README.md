@@ -19,3 +19,4 @@
 - [第五篇第1章：App Lab 开发基础](第5篇_AppLab/第1章_App_Lab开发基础/README.md)：App 目录契约、启动日志证据分类和本地回归测试。
 - [第五篇第2章：App Lab 运行生命周期](第5篇_AppLab/第2章_AppLab运行生命周期/README.md)：生命周期状态机、`run_id` 会话隔离和本地证据分类测试。
 - [第五篇第3章：App Lab 启动配置与 Brick 依赖](第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/README.md)：声明契约、能力快照解析和可部署性预检。
+- [第五篇第4章：App Lab 配置分层与多环境运行参数](第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/README.md)：多环境覆盖、锁定键和脱敏运行配置快照。

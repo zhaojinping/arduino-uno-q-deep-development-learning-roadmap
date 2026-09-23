@@ -1,4 +1,4 @@
-"""Offline publication checks for App Lab Chapter 2."""
+"""Offline publication checks for App Lab Chapter 4."""
 from __future__ import annotations
 
 import ast
@@ -13,29 +13,29 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 PART = ROOT / "book/第5篇_AppLab"
-CHAPTER = PART / "第2章_AppLab运行生命周期_导入启动运行与停止.md"
-DIAGRAM = ROOT / "diagrams/uno-q-app-lab-run-lifecycle.mmd"
-IMAGE = ROOT / "images/第5篇_AppLab/ch02-fig29-uno-q-app-lab-run-lifecycle.svg"
+CHAPTER = PART / "第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md"
+DIAGRAM = ROOT / "diagrams/uno-q-app-lab-config-layering.mmd"
+IMAGE = ROOT / "images/第5篇_AppLab/ch04-fig31-uno-q-app-lab-config-layering.svg"
 REGISTRY = IMAGE.parent / "README.md"
-FIGURE_ANCHOR = "fig-29-uno-q-app-lab-run-lifecycle"
+FIGURE_ANCHOR = "fig-31-uno-q-app-lab-config-layering"
 HEADINGS = [
-    "学习目标", "背景与边界", "1. Run 不是一个布尔值", "2. 生命周期状态机",
-    "3. Fig-29：一次 App 运行的证据窗口", "4. 从导入到运行：四个阶段，五类结果",
-    "5. 实验一：用不可变状态机管理一次运行", "6. 实验二：按 `run_id` 过滤陈旧日志",
-    "7. 停止、失败与重新运行", "8. 证据矩阵与现场记录",
-    "9. 验证矩阵、练习与交接", "10. 常见问题", "11. 本章小结与下一步", "延伸阅读",
+    "学习目标", "背景与边界", "1. 配置不是一个文件", "2. 三层配置与覆盖顺序",
+    "3. 运行参数与身份锁定", "4. Fig-31：从分层配置到运行快照",
+    "5. 实验一：合并配置层并保留来源", "6. 实验二：生成脱敏运行配置快照",
+    "7. Secret、`data/` 与 `.cache/` 的边界", "8. 与 `run_id` 和生命周期的衔接",
+    "9. 多环境检查单与验证矩阵", "10. 常见问题", "11. 本章小结与下一步", "延伸阅读",
 ]
 EXPECTED_OUTPUT = {
-    "lifecycle.py": (
-        "SIMULATED session=run-001 phase=RUNNING history=IMPORTED>PREPARING>STARTING>RUNNING\n"
-        "SIMULATED rejected=IMPORTED cannot advance to STOPPED\n"
-        "SIMULATED terminal=STOPPED history=IMPORTED>PREPARING>STARTING>RUNNING>STOPPING>STOPPED\n"
+    "config_layers.py": (
+        "SIMULATED env=staging valid=true values=APP_MODE=staging,LOG_LEVEL=debug,TARGET_BOARD=test-q\n"
+        "SIMULATED overrides=APP_MODE,LOG_LEVEL\n"
+        "SIMULATED invalid=UNKNOWN_KEY:environment.EXTRA\n"
+        "SIMULATED locked=LOCKED_OVERRIDE:runtime.TARGET_BOARD\n"
     ),
-    "session_evidence.py": (
-        "SIMULATED stale_error=RUNNING channels=python,startup\n"
-        "SIMULATED no_current=UNKNOWN_NO_CURRENT_LINES\n"
-        "SIMULATED runtime_error=FAILED\n"
-        "SIMULATED stopped=STOPPED\n"
+    "run_config_snapshot.py": (
+        "SIMULATED snapshot=run-042 env=staging redacted=DB_PASSWORD\n"
+        "SIMULATED payload={\"environment\":\"staging\",\"run_id\":\"run-042\",\"values\":{\"APP_MODE\":\"staging\",\"DB_PASSWORD\":\"<redacted>\",\"LOG_LEVEL\":\"debug\"}}\n"
+        "SIMULATED fingerprint=44da1cca1074\n"
     ),
 }
 EXTERNAL_URLS = {
@@ -43,7 +43,6 @@ EXTERNAL_URLS = {
     "https://github.com/arduino/arduino-app-cli/blob/main/docs/user-documentation.md",
     "https://docs.arduino.cc/software/app-lab/tutorials/examples/",
     "https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf",
-    "https://docs.arduino.cc/hardware/uno-q",
 }
 
 
@@ -105,17 +104,17 @@ class ChapterChecks(unittest.TestCase):
         pairs = [line.split(": ", 1) for line in match[1].splitlines()]
         self.assertTrue(all(len(pair) == 2 for pair in pairs), "Malformed metadata")
         self.assertEqual(dict(pairs), {
-            "title": "App Lab 运行生命周期：导入、启动、运行与停止",
-            "part": "5", "chapter": "2", "status": "draft",
+            "title": "App Lab 配置分层与多环境运行参数：从开发机到现场板",
+            "part": "5", "chapter": "4", "status": "draft",
             "last_verified": "2026-09-23", "updated": "2026-09-23",
-            "prerequisites": "第五篇第1章、第三篇第8章、第四篇第1～4章",
-            "tags": "App Lab, 生命周期, run_id, 日志, 停止, 重启, 证据",
+            "prerequisites": "第五篇第1～3章、第三篇第8章、第四篇第1～4章",
+            "tags": "App Lab, 配置分层, 多环境, 运行参数, Secret, run_id, 指纹",
         })
 
     def test_headings_and_anchor(self) -> None:
         prose = without_fences(self.text)
         self.assertEqual(re.findall(r"^# (.+)$", prose, re.M), [
-            "第2章 App Lab 运行生命周期：导入、启动、运行与停止"
+            "第4章 App Lab 配置分层与多环境运行参数：从开发机到现场板"
         ])
         self.assertEqual(re.findall(r"^## (.+)$", prose, re.M), HEADINGS)
         self.assertEqual(prose.count(f'<a id="{FIGURE_ANCHOR}"></a>'), 1)
@@ -160,10 +159,10 @@ class ChapterChecks(unittest.TestCase):
         self.assertEqual(root.tag, "{http://www.w3.org/2000/svg}svg")
         self.assertRegex(root.get("style", ""), r"background-color:\s*white")
         labels = " ".join(root.itertext())
-        for label in ("导入", "run_id", "证据窗口", "运行", "已停止", "失败"):
+        for label in ("app.yaml", "environment", "runtime", "run_config_snapshot", "run_id", "指纹"):
             self.assertIn(label, labels)
         self.assertTrue(root.get("viewBox"))
-        self.assertIn("Fig-29", read(REGISTRY))
+        self.assertIn("Fig-31", read(REGISTRY))
 
     def test_links_and_anchors(self) -> None:
         all_local = self.docs + [CHAPTER]
@@ -186,12 +185,12 @@ class ChapterChecks(unittest.TestCase):
         root_readme = read(ROOT / "README.md")
         part_readme = read(PART / "README.md")
         code_readme = read(ROOT / "code/README.md")
-        self.assertIn("book/第5篇_AppLab/第2章_AppLab运行生命周期_导入启动运行与停止.md", summary)
-        self.assertIn("./第2章_AppLab运行生命周期_导入启动运行与停止.md", part_readme)
-        self.assertIn("第5篇_AppLab/第2章_AppLab运行生命周期/README.md", code_readme)
-        self.assertIn("第五篇第 2 章", root_readme)
+        self.assertIn("book/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md", summary)
+        self.assertIn("./第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md", part_readme)
+        self.assertIn("第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/README.md", code_readme)
+        self.assertIn("第五篇第 4 章", root_readme)
         self.assertIn("全书当前共 30 章", root_readme)
-        self.assertIn("ch02-fig29-uno-q-app-lab-run-lifecycle.svg", read(REGISTRY))
+        self.assertIn("ch04-fig31-uno-q-app-lab-config-layering.svg", read(REGISTRY))
 
 
 if __name__ == "__main__":

@@ -44,3 +44,16 @@
 - 内容要求：展示 App 根目录和 `app.yaml` 的声明检查、Brick/模型/设备/端口能力快照、`READY`/`MISSING_*`/`CONFLICTING_PORT`/`UNKNOWN` 分支，以及目标预检和 `data/`、`.cache/`、Secret 边界
 - 来源边界：依据已登记的 Arduino App specification、App CLI user documentation 和 UNO Q 数据表原创绘制；不复制官方图表、部署协议或 UI 截图
 - 验证边界：图示只证明 Mermaid 可解析和视觉布局可读，不证明 Brick 已安装、模型可加载、端口空闲、App Lab 部署或 UNO Q 实机验收
+
+<a id="fig-31-uno-q-app-lab-config-layering"></a>
+
+## 图 5-4：App Lab 配置分层与运行快照
+
+- 图号：Fig-31
+- 状态：SVG 待生成并完成独立预览审阅，Mermaid 源文件与正文需逐字一致
+- 图源：[App Lab 配置分层 Mermaid](../../diagrams/uno-q-app-lab-config-layering.mmd)
+- 产物：[App Lab 配置分层 SVG](ch04-fig31-uno-q-app-lab-config-layering.svg)
+- 正文位置：[第五篇第4章 Fig-31](../../book/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md#fig-31-uno-q-app-lab-config-layering)
+- 内容要求：展示 App 声明、基础层、环境层、运行层、类型校验、锁定键、Secret 注入、脱敏快照、`run_id`、生命周期和结果账本边界
+- 来源边界：依据已登记的 Arduino App specification、App CLI user documentation 和 UNO Q 数据表原创绘制；配置分层是本书工程治理模型，不是官方 UI 或部署拓扑
+- 验证边界：图示只证明 Mermaid 可解析和视觉布局可读，不证明 App Lab 内置配置覆盖、Secret 可用、目标环境一致或 UNO Q 实机运行

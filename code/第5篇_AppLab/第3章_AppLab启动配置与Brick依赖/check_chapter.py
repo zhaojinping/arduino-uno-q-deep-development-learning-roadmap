@@ -189,7 +189,7 @@ class ChapterChecks(unittest.TestCase):
         self.assertIn("./第3章_AppLab启动配置与Brick依赖_从声明到可部署性检查.md", part_readme)
         self.assertIn("第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/README.md", code_readme)
         self.assertIn("第五篇第 3 章", root_readme)
-        self.assertIn("全书当前共 29 章", root_readme)
+        self.assertIn("全书当前共 30 章", root_readme)
         self.assertIn("ch03-fig30-uno-q-app-lab-deployability-boundary.svg", read(REGISTRY))
 
 

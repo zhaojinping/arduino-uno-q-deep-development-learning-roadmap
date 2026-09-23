@@ -156,3 +156,10 @@
 | 官方用户文档 | Arduino App CLI user documentation（目标环境参考） | https://github.com/arduino/arduino-app-cli/blob/main/docs/user-documentation.md | 核对 App CLI 用户目录、运行时目录和环境变量参考；不把文档默认值直接当作当前 UNO Q 镜像、权限或 Brick 清单事实。 | main | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释。 | 2026-09-23 |
 | 官方教程 | Arduino App Lab examples | https://docs.arduino.cc/software/app-lab/tutorials/examples/ | 核对 App Lab 示例入口的公开文档边界；不复制示例源码，也不把示例可运行性替代本章本地或实机证据。 | 页面内容（核验时） | 官方文档；本项目只链接和原创说明。 | 2026-09-23 |
 | 官方板卡资料 | Arduino UNO Q datasheet | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 作为 UNO Q 双侧职责和运行观察的硬件资料入口；本章不把数据表替代 App Lab、Linux、MCU 或 Brick 实机验证。 | ABX00162 | 官方资料；本项目只链接和原创解释。 | 2026-09-23 |
+
+## 第五篇第4章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方规范 | Arduino App specification（App 声明与持久化边界） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 `app.yaml`、Brick 变量、Secret 脱敏、`data/` 和 `.cache/` 的公开边界；本章配置分层、锁定键和快照是原创治理模型。 | main | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释，不复制源码或图表。 | 2026-09-23 |
+| 官方用户文档 | Arduino App CLI user documentation（运行环境参考） | https://github.com/arduino/arduino-app-cli/blob/main/docs/user-documentation.md | 核对 App CLI 用户目录、运行时目录和环境变量参考；不把默认值替代当前目标镜像、权限或 Secret 实测。 | main | 官方仓库标注 GPL-3.0-or-later；本项目只链接和原创解释。 | 2026-09-23 |

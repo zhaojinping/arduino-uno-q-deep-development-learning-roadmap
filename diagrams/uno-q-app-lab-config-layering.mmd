@@ -1,0 +1,21 @@
+flowchart LR
+    MANIFEST["项目声明<br/>app.yaml · 代码入口"] --> BASE["基础层<br/>稳定默认值"]
+    BASE --> ENV["环境层 / environment<br/>development · staging · production"]
+    ENV --> RUNTIME["运行层 / runtime<br/>本次安全参数"]
+    RUNTIME --> MERGE["类型校验与合并<br/>来源 · 覆盖 · 锁定键"]
+    MERGE --> SNAPSHOT["run_config_snapshot<br/>run_id · 环境 · 脱敏值 · 指纹"]
+    SNAPSHOT --> LIFE["第2章生命周期<br/>导入 · 准备 · 启动"]
+    SNAPSHOT --> EVIDENCE["证据与结果账本<br/>可复核配置身份"]
+    SECRET["Secret 提供方<br/>不进入仓库与日志"] -.运行时注入.-> MERGE
+    LOCK["目标身份锁定<br/>TARGET_BOARD · APP_ID"] -.禁止覆盖.-> MERGE
+    DATA["data/<br/>持久化状态"] -.环境隔离.-> ENV
+    CACHE[".cache/<br/>易失运行数据"] -.不作为配置源.-> RUNTIME
+
+    classDef source fill:#e8f1ff,stroke:#2563eb,color:#0f172a
+    classDef control fill:#dcfce7,stroke:#16a34a,color:#0f172a
+    classDef evidence fill:#fef3c7,stroke:#d97706,color:#0f172a
+    classDef risk fill:#fee2e2,stroke:#dc2626,color:#0f172a
+    class MANIFEST,BASE,ENV,RUNTIME source
+    class MERGE,SNAPSHOT,LIFE control
+    class EVIDENCE,DATA,CACHE evidence
+    class SECRET,LOCK risk
