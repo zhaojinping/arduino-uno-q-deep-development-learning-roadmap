@@ -31,3 +31,16 @@
 - 预览记录：`2026-09-23`，独立打开生成的 SVG 并截图检查；中文标签可读、箭头完整、状态分支清楚、无裁切文字；`viewBox` 为 `0 0 1451.078125 427`
 - 来源边界：依据已登记的 Arduino App specification、App CLI user documentation、App Lab examples 和 UNO Q 数据表原创绘制；不复制官方图表或 UI 截图
 - 验证边界：图示只证明 Mermaid 可解析和视觉布局可读，不证明 App Lab、Router/Bridge、MCU、目标 Linux 镜像或 UNO Q 实机验收
+
+<a id="fig-30-uno-q-app-lab-deployability-boundary"></a>
+
+## 图 5-3：App Lab 启动配置、Brick 依赖与可部署性边界
+
+- 图号：Fig-30
+- 状态：SVG 待生成并完成独立预览审阅，Mermaid 源文件与正文需逐字一致
+- 图源：[App Lab 可部署性边界 Mermaid](../../diagrams/uno-q-app-lab-deployability-boundary.mmd)
+- 产物：[App Lab 可部署性边界 SVG](ch03-fig30-uno-q-app-lab-deployability-boundary.svg)
+- 正文位置：[第五篇第3章 Fig-30](../../book/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖_从声明到可部署性检查.md#fig-30-uno-q-app-lab-deployability-boundary)
+- 内容要求：展示 App 根目录和 `app.yaml` 的声明检查、Brick/模型/设备/端口能力快照、`READY`/`MISSING_*`/`CONFLICTING_PORT`/`UNKNOWN` 分支，以及目标预检和 `data/`、`.cache/`、Secret 边界
+- 来源边界：依据已登记的 Arduino App specification、App CLI user documentation 和 UNO Q 数据表原创绘制；不复制官方图表、部署协议或 UI 截图
+- 验证边界：图示只证明 Mermaid 可解析和视觉布局可读，不证明 Brick 已安装、模型可加载、端口空闲、App Lab 部署或 UNO Q 实机验收

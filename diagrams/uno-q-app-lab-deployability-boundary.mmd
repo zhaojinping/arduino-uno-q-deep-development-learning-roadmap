@@ -1,0 +1,23 @@
+flowchart LR
+    APP["App 根目录<br/>app.yaml · python/main.py"] --> CONTRACT["声明契约检查<br/>字段 · 端口 · Brick 选项"]
+    CONTRACT -->|通过| RESOLVE["能力快照解析<br/>Brick · model · devices"]
+    CONTRACT -->|失败| REPAIR["修复声明<br/>重新检查"]
+    RESOLVE --> READY["READY<br/>声明与快照匹配"]
+    RESOLVE --> MISSING["MISSING_*<br/>Brick · 模型 · 设备缺口"]
+    RESOLVE --> CONFLICT["CONFLICTING_PORT<br/>端口已被占用"]
+    RESOLVE --> UNKNOWN["UNKNOWN<br/>能力或端口清单不可用"]
+    READY --> PREFLIGHT["目标环境预检<br/>版本 · 权限 · 资源 · 入口"]
+    PREFLIGHT --> TRY["可尝试部署<br/>不是部署回执"]
+    PREFLIGHT --> BLOCK["阻断或人工复核<br/>保留证据"]
+    SECRET["variables<br/>Secret 由 Brick 定义"] -.导出时脱敏边界.-> BUNDLE["Import/Export<br/>共享包"]
+    DATA["data/<br/>持久化数据"] -.分享前清理.-> BUNDLE
+    CACHE[".cache/<br/>易失运行数据"] -.停止后可清理.-> BUNDLE
+
+    classDef declaration fill:#e8f1ff,stroke:#2563eb,color:#0f172a
+    classDef decision fill:#dcfce7,stroke:#16a34a,color:#0f172a
+    classDef blocked fill:#fee2e2,stroke:#dc2626,color:#0f172a
+    classDef boundary fill:#fef3c7,stroke:#d97706,color:#0f172a
+    class APP,CONTRACT,REPAIR declaration
+    class RESOLVE,READY,PREFLIGHT,TRY decision
+    class MISSING,CONFLICT,UNKNOWN,BLOCK blocked
+    class SECRET,DATA,CACHE,BUNDLE boundary

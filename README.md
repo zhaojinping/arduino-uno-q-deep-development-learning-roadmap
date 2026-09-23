@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～2 章已建立为初稿**，全书当前共 28 章。Blink 示例和 Mermaid 源文件已存在；第一篇第 5 章提供 IDE、CLI、App Lab 的验证闭环，第二篇第 2 章补充 PWM 与定时输出的资源核验框架，第二篇第 3 章补充 ADC 采样、输入保护和数据证据框架，第二篇第 4 章补充 UART 资源、帧格式、缓冲和 MCU/Linux 边界框架，第二篇第 5 章补充 SPI 时序、片选、Devicetree 设备节点和 MCU/Linux 总线所有权框架，第二篇第 6 章补充 I2C 电气模型、7 位地址、Wire/Zephyr 事务、总线恢复和 MCU/Linux 所有权框架，第二篇第 7 章补充周期任务、Zephyr 调度、同步对象、超载、看门狗和 MCU/Linux 实时责任框架，第二篇第 8 章补充硬件验证等级、工具链、外设验证向量、故障隔离和证据归档框架，第二篇第 9 章补充传感、控制、状态机、Bridge 数据契约、故障注入和第二篇到第三篇交接框架，第三篇第 1 章补充 Linux/MPU、MCU、Bridge、文件系统、进程、访问入口和证据分层框架，第三篇第 2 章补充设备可见性、网络分层、NetworkManager、服务状态、日志和 Bridge 结果关联框架，第三篇第 3 章补充 journal 字段、时间基准、资源压力、证据包、远程变更和安全回滚框架，第三篇第 4 章补充 ADB/SSH/App Lab 入口、命令白名单、Python 子进程、请求信封、幂等和 UNKNOWN 处理框架，第三篇第 5 章补充有界队列、背压、任务租约、退避重连、状态缓存和优雅停止框架，第三篇第 6 章补充测试层级、基线与分位数指标、确定性故障注入、性能预算和现场测试运行手册，第三篇第 7 章补充部署对象、systemd 生命周期、配置/凭据分层、资源权限、健康门、回滚和发布证据框架，第三篇第 8 章补充综合运行对象、结果状态、预检、Dry-run、健康门、UNKNOWN 处理、证据包、回滚验证和跨篇交接框架，但本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～3 章已建立为初稿**，全书当前共 29 章。Blink 示例和 Mermaid 源文件已存在；第五篇第 3 章新增 App Descriptor 声明契约、Brick 能力快照、模型/设备/端口解析、`UNKNOWN` 语义、发布数据边界和 Fig-30。已有章节的本地实验、Mermaid 图示、来源登记和导航入口持续保持；本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
@@ -41,9 +41,11 @@
 
 第四篇第 4 章[结果账本与状态查询：从返回值到可验证证据](book/第4篇_PythonBridge/第4章_Python_Bridge结果账本与状态查询_从返回值到可验证证据.md)已建立为 `draft` 初稿；第四篇目前共 4 章。第 4 章提供 SQLite 结果账本、追加式事件、UNKNOWN 查询收敛、两个本地模拟示例、22 项契约测试和章节检查器；Fig-27 展示查询判定与结果收敛边界。本地持久化和查询模型不构成设备执行或硬件验收证据。
 
-第五篇第 1 章[App Lab 开发基础：应用结构、设备入口与验证边界](book/第5篇_AppLab/第1章_App_Lab开发基础_应用结构与验证边界.md)已建立为 `draft` 初稿；第五篇目前共 2 章。第 1 章提供 App 目录契约、启动证据分类、两个本地 Python 实验和 Fig-28；本地结构检查不构成 App Lab、Router/Bridge、MCU 或 UNO Q 实机验收证据。
+第五篇第 1 章[App Lab 开发基础：应用结构、设备入口与验证边界](book/第5篇_AppLab/第1章_App_Lab开发基础_应用结构与验证边界.md)已建立为 `draft` 初稿；第五篇目前共 3 章。第 1 章提供 App 目录契约、启动证据分类、两个本地 Python 实验和 Fig-28；本地结构检查不构成 App Lab、Router/Bridge、MCU 或 UNO Q 实机验收证据。
 
 第五篇第 2 章[App Lab 运行生命周期：导入、启动、运行与停止](book/第5篇_AppLab/第2章_AppLab运行生命周期_导入启动运行与停止.md)已建立为 `draft` 初稿。第 2 章提供生命周期状态机、`run_id` 会话证据分类、两个本地 Python 实验和 Fig-29；本地状态迁移与日志过滤不构成 App Lab、Router/Bridge、MCU 或 UNO Q 实机验收证据。
+
+第五篇第 3 章[App Lab 启动配置与 Brick 依赖：从声明到可部署性检查](book/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖_从声明到可部署性检查.md)已建立为 `draft` 初稿。第 3 章提供声明契约、能力快照解析、两个本地 Python 实验和 Fig-30；`VALID`/`READY` 只代表本地模型结果，不构成 App Lab、Router/Bridge、MCU 或 UNO Q 实机部署证据。
 
 ## 目录结构
 
@@ -139,6 +141,15 @@ code/第5篇_AppLab/第2章_AppLab运行生命周期/test_session_evidence.py
 code/第5篇_AppLab/第2章_AppLab运行生命周期/check_chapter.py
 diagrams/uno-q-app-lab-run-lifecycle.mmd
 images/第5篇_AppLab/ch02-fig29-uno-q-app-lab-run-lifecycle.svg
+book/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖_从声明到可部署性检查.md
+code/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/README.md
+code/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/deployment_contract.py
+code/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/dependency_resolution.py
+code/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/test_deployment_contract.py
+code/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/test_dependency_resolution.py
+code/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/check_chapter.py
+diagrams/uno-q-app-lab-deployability-boundary.mmd
+images/第5篇_AppLab/ch03-fig30-uno-q-app-lab-deployability-boundary.svg
 code/第1章_Arduino的发展/README.md
 code/第1章_Arduino的发展/Blink/Blink.ino
 code/第1章_Arduino的发展/Blink/README.md
@@ -173,6 +184,6 @@ images/第3篇_Linux/README.md
 images/第4篇_PythonBridge/README.md
 ```
 
-本次检查覆盖第一篇、第二篇第 1～9 章、第三篇第 1～8 章、第四篇第 1～4 章和第五篇第 1～2 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；第五篇第 1 章另检查 App 结构契约、启动证据分类，第 2 章另检查生命周期状态机、`run_id` 证据过滤、Python 3.10 AST 语法、两个章节的演示输出、Mermaid 与 SVG 一致性、来源登记和导航入口。当前仍未执行 Arduino CLI 编译、上传、App Lab 真实导入/运行、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、systemd unit 安装/启用/重启、配置或凭据替换、ADB/SSH、Router/Bridge 重连、远程写操作、Bridge 联调或硬件实机运行。
+本次检查覆盖第一篇、第二篇第 1～9 章、第三篇第 1～8 章、第四篇第 1～4 章和第五篇第 1～3 章的文件存在性、相对 Markdown 链接、篇内章节元数据、Mermaid 声明、图示占位、代码说明字段和 UTF-8；第五篇第 1 章另检查 App 结构契约、启动证据分类，第 2 章另检查生命周期状态机、`run_id` 证据过滤，第 3 章另检查声明契约、能力快照解析和发布边界；三章均检查 Python 3.10 AST 语法、演示输出、Mermaid 与 SVG 一致性、来源登记和导航入口。当前仍未执行 Arduino CLI 编译、上传、App Lab 真实导入/运行、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、systemd unit 安装/启用/重启、配置或凭据替换、ADB/SSH、Router/Bridge 重连、远程写操作、Bridge 联调或硬件实机运行。
 
-第四篇第 1～4 章的 Markdown 链接、代码说明、Python 3.10 AST 语法兼容性、针对性示例/测试和 Fig-26、Fig-27 资源登记已完成本地检查；第五篇第 1 章的两个结构/日志实验、11 项 Python 测试、章节检查、Fig-28 SVG 和来源登记已完成本地检查；第五篇第 2 章的两个生命周期/会话证据实验、10 项 Python 测试、章节检查、Fig-29 SVG 和来源登记已完成本地检查。Fig-26、Fig-27、Fig-28、Fig-29 已使用缓存 Mermaid CLI 11.12.0 生成 SVG 并完成预览审阅。章节仍为 draft；SVG 生成与本地测试不等于 Python 3.10 解释器、目标 UNO Q Linux 镜像、Router/Bridge、App Lab、MCU 或 UNO Q 硬件验收，这些验证当前仍未执行。
+第四篇第 1～4 章的 Markdown 链接、代码说明、Python 3.10 AST 语法兼容性、针对性示例/测试和 Fig-26、Fig-27 资源登记已完成本地检查；第五篇第 1 章的两个结构/日志实验、11 项 Python 测试、章节检查、Fig-28 SVG 和来源登记已完成本地检查；第五篇第 2 章的两个生命周期/会话证据实验、10 项 Python 测试、章节检查、Fig-29 SVG 和来源登记已完成本地检查；第五篇第 3 章的两个声明/依赖实验、11 项 Python 测试、章节检查、Fig-30 SVG 和来源登记已完成本地检查。Fig-26～Fig-30 使用缓存 Mermaid CLI 11.12.0 生成 SVG 并完成预览审阅。章节仍为 draft；SVG 生成与本地测试不等于 Python 3.10 解释器、目标 UNO Q Linux 镜像、Router/Bridge、App Lab、MCU 或 UNO Q 硬件验收，这些验证当前仍未执行。

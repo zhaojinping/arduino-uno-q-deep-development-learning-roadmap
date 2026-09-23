@@ -18,3 +18,4 @@
 - [第四篇第4章：结果账本与状态查询](第4篇_PythonBridge/第4章_结果账本与状态查询/README.md)：SQLite 账本与纯查询判定实验、22 项契约测试及章节检查器。
 - [第五篇第1章：App Lab 开发基础](第5篇_AppLab/第1章_App_Lab开发基础/README.md)：App 目录契约、启动日志证据分类和本地回归测试。
 - [第五篇第2章：App Lab 运行生命周期](第5篇_AppLab/第2章_AppLab运行生命周期/README.md)：生命周期状态机、`run_id` 会话隔离和本地证据分类测试。
+- [第五篇第3章：App Lab 启动配置与 Brick 依赖](第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/README.md)：声明契约、能力快照解析和可部署性预检。

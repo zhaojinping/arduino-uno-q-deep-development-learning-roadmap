@@ -1,4 +1,4 @@
-"""Offline publication checks for App Lab Chapter 2."""
+"""Offline publication checks for App Lab Chapter 3."""
 from __future__ import annotations
 
 import ast
@@ -13,29 +13,29 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 PART = ROOT / "book/第5篇_AppLab"
-CHAPTER = PART / "第2章_AppLab运行生命周期_导入启动运行与停止.md"
-DIAGRAM = ROOT / "diagrams/uno-q-app-lab-run-lifecycle.mmd"
-IMAGE = ROOT / "images/第5篇_AppLab/ch02-fig29-uno-q-app-lab-run-lifecycle.svg"
+CHAPTER = PART / "第3章_AppLab启动配置与Brick依赖_从声明到可部署性检查.md"
+DIAGRAM = ROOT / "diagrams/uno-q-app-lab-deployability-boundary.mmd"
+IMAGE = ROOT / "images/第5篇_AppLab/ch03-fig30-uno-q-app-lab-deployability-boundary.svg"
 REGISTRY = IMAGE.parent / "README.md"
-FIGURE_ANCHOR = "fig-29-uno-q-app-lab-run-lifecycle"
+FIGURE_ANCHOR = "fig-30-uno-q-app-lab-deployability-boundary"
 HEADINGS = [
-    "学习目标", "背景与边界", "1. Run 不是一个布尔值", "2. 生命周期状态机",
-    "3. Fig-29：一次 App 运行的证据窗口", "4. 从导入到运行：四个阶段，五类结果",
-    "5. 实验一：用不可变状态机管理一次运行", "6. 实验二：按 `run_id` 过滤陈旧日志",
-    "7. 停止、失败与重新运行", "8. 证据矩阵与现场记录",
+    "学习目标", "背景与边界", "1. 从“声明存在”到“可以部署”", "2. `app.yaml` 的三层检查",
+    "3. Brick 依赖的最小模型", "4. Fig-30：声明、能力解析与部署边界",
+    "5. 实验一：检查 App Descriptor 的声明契约", "6. 实验二：解析 Brick 能力快照与端口占用",
+    "7. `data/`、`.cache/` 和敏感变量的发布边界", "8. 可部署性检查单",
     "9. 验证矩阵、练习与交接", "10. 常见问题", "11. 本章小结与下一步", "延伸阅读",
 ]
 EXPECTED_OUTPUT = {
-    "lifecycle.py": (
-        "SIMULATED session=run-001 phase=RUNNING history=IMPORTED>PREPARING>STARTING>RUNNING\n"
-        "SIMULATED rejected=IMPORTED cannot advance to STOPPED\n"
-        "SIMULATED terminal=STOPPED history=IMPORTED>PREPARING>STARTING>RUNNING>STOPPING>STOPPED\n"
+    "deployment_contract.py": (
+        "SIMULATED manifest=VALID ports=5000 bricks=arduino:dbstorage,arduino:objectdetection\n"
+        "SIMULATED invalid=PORT_INVALID:ports[0]\n"
+        "SIMULATED invalid_type=VARIABLE_VALUE_INVALID:bricks[0].arduino:camera.variables.MODE\n"
     ),
-    "session_evidence.py": (
-        "SIMULATED stale_error=RUNNING channels=python,startup\n"
-        "SIMULATED no_current=UNKNOWN_NO_CURRENT_LINES\n"
-        "SIMULATED runtime_error=FAILED\n"
-        "SIMULATED stopped=STOPPED\n"
+    "dependency_resolution.py": (
+        "SIMULATED deploy=READY missing=none conflicts=none\n"
+        "SIMULATED deploy=MISSING_MODEL missing=arduino:objectdetection:model:yolo-v8\n"
+        "SIMULATED deploy=CONFLICTING_PORT conflicts=5000\n"
+        "SIMULATED deploy=UNKNOWN reason=Brick inventory is unavailable; port inventory is unavailable\n"
     ),
 }
 EXTERNAL_URLS = {
@@ -43,7 +43,6 @@ EXTERNAL_URLS = {
     "https://github.com/arduino/arduino-app-cli/blob/main/docs/user-documentation.md",
     "https://docs.arduino.cc/software/app-lab/tutorials/examples/",
     "https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf",
-    "https://docs.arduino.cc/hardware/uno-q",
 }
 
 
@@ -105,17 +104,17 @@ class ChapterChecks(unittest.TestCase):
         pairs = [line.split(": ", 1) for line in match[1].splitlines()]
         self.assertTrue(all(len(pair) == 2 for pair in pairs), "Malformed metadata")
         self.assertEqual(dict(pairs), {
-            "title": "App Lab 运行生命周期：导入、启动、运行与停止",
-            "part": "5", "chapter": "2", "status": "draft",
+            "title": "App Lab 启动配置与 Brick 依赖：从声明到可部署性检查",
+            "part": "5", "chapter": "3", "status": "draft",
             "last_verified": "2026-09-23", "updated": "2026-09-23",
-            "prerequisites": "第五篇第1章、第三篇第8章、第四篇第1～4章",
-            "tags": "App Lab, 生命周期, run_id, 日志, 停止, 重启, 证据",
+            "prerequisites": "第五篇第1～2章、第三篇第8章、第四篇第1～4章",
+            "tags": "App Lab, app.yaml, Brick, 依赖, 部署预检, 端口, 证据",
         })
 
     def test_headings_and_anchor(self) -> None:
         prose = without_fences(self.text)
         self.assertEqual(re.findall(r"^# (.+)$", prose, re.M), [
-            "第2章 App Lab 运行生命周期：导入、启动、运行与停止"
+            "第3章 App Lab 启动配置与 Brick 依赖：从声明到可部署性检查"
         ])
         self.assertEqual(re.findall(r"^## (.+)$", prose, re.M), HEADINGS)
         self.assertEqual(prose.count(f'<a id="{FIGURE_ANCHOR}"></a>'), 1)
@@ -160,10 +159,10 @@ class ChapterChecks(unittest.TestCase):
         self.assertEqual(root.tag, "{http://www.w3.org/2000/svg}svg")
         self.assertRegex(root.get("style", ""), r"background-color:\s*white")
         labels = " ".join(root.itertext())
-        for label in ("导入", "run_id", "证据窗口", "运行", "已停止", "失败"):
+        for label in ("app.yaml", "能力快照", "READY", "UNKNOWN", "预检", "不是部署回执"):
             self.assertIn(label, labels)
         self.assertTrue(root.get("viewBox"))
-        self.assertIn("Fig-29", read(REGISTRY))
+        self.assertIn("Fig-30", read(REGISTRY))
 
     def test_links_and_anchors(self) -> None:
         all_local = self.docs + [CHAPTER]
@@ -186,12 +185,12 @@ class ChapterChecks(unittest.TestCase):
         root_readme = read(ROOT / "README.md")
         part_readme = read(PART / "README.md")
         code_readme = read(ROOT / "code/README.md")
-        self.assertIn("book/第5篇_AppLab/第2章_AppLab运行生命周期_导入启动运行与停止.md", summary)
-        self.assertIn("./第2章_AppLab运行生命周期_导入启动运行与停止.md", part_readme)
-        self.assertIn("第5篇_AppLab/第2章_AppLab运行生命周期/README.md", code_readme)
-        self.assertIn("第五篇第 2 章", root_readme)
+        self.assertIn("book/第5篇_AppLab/第3章_AppLab启动配置与Brick依赖_从声明到可部署性检查.md", summary)
+        self.assertIn("./第3章_AppLab启动配置与Brick依赖_从声明到可部署性检查.md", part_readme)
+        self.assertIn("第5篇_AppLab/第3章_AppLab启动配置与Brick依赖/README.md", code_readme)
+        self.assertIn("第五篇第 3 章", root_readme)
         self.assertIn("全书当前共 29 章", root_readme)
-        self.assertIn("ch02-fig29-uno-q-app-lab-run-lifecycle.svg", read(REGISTRY))
+        self.assertIn("ch03-fig30-uno-q-app-lab-deployability-boundary.svg", read(REGISTRY))
 
 
 if __name__ == "__main__":
