@@ -102,8 +102,8 @@ def evaluate_rows(rows, centroids, threshold):
     samples = []
     for row in rows:
         features = (row["color_fraction"], row["shape_score"])
-        raw_score = score(features, centroids)
-        prediction = classify(raw_score, threshold)
+        decision_score = round(score(features, centroids), 6)
+        prediction = classify(decision_score, threshold)
         truth = row["label"]
         if prediction is None:
             key = "abstain_positive" if truth == "candidate_like" else "abstain_negative"
@@ -116,8 +116,8 @@ def evaluate_rows(rows, centroids, threshold):
         if prediction is not None:
             counts["decided"] += 1
         samples.append({
-            "sample_id": row["sample_id"], "truth": truth,
-            "raw_score": round(raw_score, 6), "prediction": prediction,
+            "sample_id": row["sample_id"], "group_id": row["group_id"], "truth": truth,
+            "raw_score": decision_score, "prediction": prediction,
         })
 
     def ratio(numerator, denominator):
@@ -151,7 +151,10 @@ def select_threshold(validation_rows, centroids):
 def load_csv(path):
     """Read local synthetic CSV records without touching devices or network."""
     with open(path, newline="", encoding="utf-8") as source:
-        return list(csv.DictReader(source))
+        reader = csv.DictReader(source)
+        if reader.fieldnames is None or len(reader.fieldnames) != len(FIELDS) or set(reader.fieldnames) != FIELDS:
+            raise ValueError("CSV header does not match schema")
+        return list(reader)
 
 
 def run_experiment(rows):

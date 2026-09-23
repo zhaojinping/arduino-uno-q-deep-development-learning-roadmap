@@ -285,16 +285,4 @@
 | 官方文档 | scikit-learn：Common pitfalls and recommended practices | https://scikit-learn.org/1.8/common_pitfalls.html | 核对拟合/预处理不得窥视测试集的泄漏边界；本章原始合成特征未拟合预处理器。 | 1.8 页面（核验时） | 仅链接和原创解释，不复制文档图文或代码。 | 2026-09-23 |
 | 官方课程 | Google Machine Learning Crash Course：Classification metrics | https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall | 核对 TP/FP/TN/FN、准确率、精确率和召回率；本章的弃判分账和条件指标是原创示例。 | 页面内容（核验时） | 页面标注 CC BY 4.0（代码示例另有声明）；本项目只链接和原创重述。 | 2026-09-23 |
 
-本章 `synthetic_samples.csv`、`dataset_evaluation.py`、17 项标准库测试和 Fig-44 Mermaid 均为本书原创。20 条手填记录只用于演示数据契约、组隔离、类别中心拟合、验证门限选择和测试计数；`group_id` 不认证采集来源，`model_kind` 不代表模型工件，`raw_score` 不是概率。当前仅有本机 Python 3.14.6 离线测试，不含真实标注、UNO Q、App Lab、Bridge、MCU、执行器或 SVG 目视审阅。
-
-## 第七篇第2章补充核验
-
-| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对 Linux/MCU 双侧及 App Lab AI 应用的产品背景；不以产品介绍证明本章合成分类器在板上运行或具备准确率。 | 页面内容（核验时） | 仅链接并原创解释，不复制图表或正文。 | 2026-09-23 |
-| 官方课程 | Google Machine Learning Crash Course：Dividing the original dataset | https://developers.google.com/machine-learning/crash-course/overfitting/dividing-datasets | 核对训练、验证、测试的职责以及反复使用测试集和重复样本的风险；本章固定 CSV 的组分区与门限策略为原创教学设计。 | 页面内容（核验时） | 页面标注 CC BY 4.0（代码示例另有声明）；本项目只链接和原创重述，不复制课程图文或代码。 | 2026-09-23 |
-| 官方文档 | scikit-learn：Cross-validation（grouped data） | https://scikit-learn.org/stable/modules/cross_validation.html | 核对相关样本按组隔离的原则；本章不使用 scikit-learn 或声称完成交叉验证。 | stable 页面（核验时） | 仅链接和原创解释，不复制文档图文或代码。 | 2026-09-23 |
-| 官方文档 | scikit-learn：Common pitfalls and recommended practices | https://scikit-learn.org/1.8/common_pitfalls.html | 核对拟合/预处理不得窥视测试集的泄漏边界；本章原始合成特征未拟合预处理器。 | 1.8 页面（核验时） | 仅链接和原创解释，不复制文档图文或代码。 | 2026-09-23 |
-| 官方课程 | Google Machine Learning Crash Course：Classification metrics | https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall | 核对 TP/FP/TN/FN、准确率、精确率和召回率；本章的弃判分账和条件指标是原创示例。 | 页面内容（核验时） | 页面标注 CC BY 4.0（代码示例另有声明）；本项目只链接和原创重述。 | 2026-09-23 |
-
-本章 `synthetic_samples.csv`、`dataset_evaluation.py`、17 项标准库测试和 Fig-44 Mermaid 均为本书原创。20 条手填记录只用于演示数据契约、组隔离、类别中心拟合、验证门限选择和测试计数；`group_id` 不认证采集来源，`model_kind` 不代表模型工件，`raw_score` 不是概率。当前仅有本机 Python 3.14.6 离线测试，不含真实标注、UNO Q、App Lab、Bridge、MCU、执行器或 SVG 目视审阅。
+本章 `synthetic_samples.csv`、`dataset_evaluation.py`、19 项标准库测试和 Fig-44 Mermaid 均为本书原创。20 条手填记录只用于演示数据契约、组隔离、类别中心拟合、验证门限选择和测试计数；`group_id` 不认证采集来源，`model_kind` 不代表模型工件，`raw_score` 不是概率。当前仅有本机 Python 3.14.6 离线测试，不含真实标注、UNO Q、App Lab、Bridge、MCU、执行器或 SVG 目视审阅。

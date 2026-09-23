@@ -3,6 +3,7 @@
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -36,7 +37,7 @@ def sample_rows():
 
 def scored_row(sample_id, label, color, shape):
     return {
-        "sample_id": sample_id, "label": label,
+        "sample_id": sample_id, "group_id": "teaching-group", "label": label,
         "color_fraction": color, "shape_score": shape,
     }
 
@@ -180,8 +181,32 @@ class EvaluationTests(unittest.TestCase):
         self.assertIsNone(result["metrics"]["recall_decided"])
         self.assertIsNone(result["metrics"]["accuracy_decided"])
 
+    def test_displayed_six_decimal_score_is_the_decision_boundary(self):
+        rows = [
+            scored_row("positive-edge", "candidate_like", 0.6, 0.7),
+            scored_row("negative-edge", "other", 0.3, 0.4),
+            scored_row("positive-inside", "candidate_like", 0.6, 0.699999),
+            scored_row("negative-inside", "other", 0.3, 0.400001),
+        ]
+        samples = evaluate_rows(rows, self.centroids, 0.36)["samples"]
+        self.assertEqual([item["raw_score"] for item in samples],
+                         [0.36, -0.36, 0.359999, -0.359999])
+        self.assertEqual([item["prediction"] for item in samples],
+                         ["candidate_like", "other", None, None])
+
 
 class IntegrationTests(unittest.TestCase):
+    def test_duplicate_csv_header_cannot_hide_a_column(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "duplicate-header.csv"
+            path.write_text(
+                "sample_id,group_id,split,label,color_fraction,shape_score,sample_id\n"
+                "first,group-A,train,candidate_like,0.8,0.8,second\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "CSV header"):
+                load_csv(path)
+
     def test_checked_in_csv_produces_hand_counted_test_results(self):
         path = Path(__file__).with_name("synthetic_samples.csv")
         report = run_experiment(load_csv(path))
@@ -196,6 +221,7 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(report["test"]["counts"]["fp"], 1)
         self.assertEqual(report["test"]["counts"]["fn"], 1)
         self.assertEqual(report["test"]["counts"]["decided"], 6)
+        self.assertEqual(report["test"]["samples"][0]["group_id"], "test-D")
 
     def test_changing_test_labels_does_not_change_fit_or_selected_gate(self):
         path = Path(__file__).with_name("synthetic_samples.csv")
