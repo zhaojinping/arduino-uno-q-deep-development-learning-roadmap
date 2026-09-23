@@ -307,3 +307,13 @@
 | 官方 API 文档 | ONNX Runtime Python API | https://onnxruntime.ai/docs/api/python/api_summary | 核对 `InferenceSession` 输出接口、数据输入/输出表示及执行提供程序配置边界；通用 API 文档不证明 UNO Q 指定镜像/运行时已验证。 | 页面内容（核验时） | 仅链接并原创解释，不复制 API 文档内容或代码。 | 2026-09-24 |
 
 本章 `compare_inference.py`、4 条合成对照记录、17 项标准库行为测试及 Fig-46 Mermaid 为本书原创。比较器仅读取离线分数，不运行模型、预处理、ONNX Runtime 或 UNO Q；容差与 `min_margin` 是教学输入，不是官方规范或产品验收门槛。参考输出质量、真实数据指标、目标运行时、资源/时延、现场环境和硬件动作均未验证；Fig-46 SVG 尚未渲染和目视审阅。
+
+## 第七篇第5章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+|---|---|---|---|---|---|---|
+| 官方文档 | ONNX Runtime：Performance tuning | https://onnxruntime.ai/docs/performance/tune-performance/ | 核对时延、吞吐量、内存利用率和模型/应用大小是随场景选择的常见性能维度；不据此推断特定模型、UNO Q 镜像或执行提供程序的性能。 | 页面内容（核验时） | 仅链接和原创摘要，不复制文档正文、表格或图表。 | 2026-09-24 |
+| 官方文档 | ONNX Runtime：Profiling tools | https://onnxruntime.ai/docs/performance/tune-performance/profiling-tools.html | 核对运行时性能 profiling 可输出线程及算子延迟等详细 trace；特定执行提供程序的 profiling 能力须在该提供程序/目标环境验证。 | 页面内容（核验时） | 仅链接和原创摘要，不复制文档正文、代码或 trace 示例。 | 2026-09-24 |
+| 官方语言库文档 | Python：`time` — Time access and conversions | https://docs.python.org/3/library/time.html | 核对 `perf_counter_ns()` 适于测量短时差值、绝对参考点无意义，以及 `process_time()` 与经过时间口径不同；不代表本章使用它测量了模型。 | Python 3.14 文档（核验时） | 仅链接和原创解释，不复制文档正文或示例代码。 | 2026-09-24 |
+
+本章 `analyze_benchmark.py`、20 项标准库行为测试、23 条合成记录及 Fig-47 Mermaid 为本书原创。样例分析只计算 20 条合成正式记录的最近秩 P50/P95、均值、最大值及输入的最大 RSS 观测；报告固定 `REPORT_ONLY`，无阈值判定。未运行模型/ONNX Runtime、未采集真实运行时或目标资源、未连接 UNO Q，Fig-47 SVG 尚未渲染并目视审阅。
