@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～5 章已建立为初稿**，全书当前共 31 章。Blink 示例和 Mermaid 源文件已存在；第五篇第 4 章覆盖配置分层、环境优先级、锁定键、Secret 脱敏快照、运行配置指纹和 Fig-31；第 5 章覆盖 Console 三类输出、`run_id`/配置指纹关联、运行证据包、脱敏和 Fig-32。第五篇第 5 章的模拟事件脚本已写入，但本次未运行脚本或自动测试；本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～6 章已建立为初稿**，全书当前共 32 章。Blink 示例和 Mermaid 源文件已存在；第五篇第 4～6 章依次覆盖运行配置、日志证据包与健康/故障处置。第五篇第 6 章的固定模拟快照、离线判定脚本和 Fig-33 Mermaid 已写入；本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
@@ -41,7 +41,7 @@
 
 第四篇第 4 章[结果账本与状态查询：从返回值到可验证证据](book/第4篇_PythonBridge/第4章_Python_Bridge结果账本与状态查询_从返回值到可验证证据.md)已建立为 `draft` 初稿；第四篇目前共 4 章。第 4 章提供 SQLite 结果账本、追加式事件、UNKNOWN 查询收敛、两个本地模拟示例、22 项契约测试和章节检查器；Fig-27 展示查询判定与结果收敛边界。本地持久化和查询模型不构成设备执行或硬件验收证据。
 
-第五篇第 1 章[App Lab 开发基础：应用结构、设备入口与验证边界](book/第5篇_AppLab/第1章_App_Lab开发基础_应用结构与验证边界.md)已建立为 `draft` 初稿；第五篇目前共 5 章。第 1 章提供 App 目录契约、启动证据分类、两个本地 Python 实验和 Fig-28；本地结构检查不构成 App Lab、Router/Bridge、MCU 或 UNO Q 实机验收证据。
+第五篇第 1 章[App Lab 开发基础：应用结构、设备入口与验证边界](book/第5篇_AppLab/第1章_App_Lab开发基础_应用结构与验证边界.md)已建立为 `draft` 初稿；第五篇目前共 6 章。第 1 章提供 App 目录契约、启动证据分类、两个本地 Python 实验和 Fig-28；本地结构检查不构成 App Lab、Router/Bridge、MCU 或 UNO Q 实机验收证据。
 
 第五篇第 2 章[App Lab 运行生命周期：导入、启动、运行与停止](book/第5篇_AppLab/第2章_AppLab运行生命周期_导入启动运行与停止.md)已建立为 `draft` 初稿。第 2 章提供生命周期状态机、`run_id` 会话证据分类、两个本地 Python 实验和 Fig-29；本地状态迁移与日志过滤不构成 App Lab、Router/Bridge、MCU 或 UNO Q 实机验收证据。
 
@@ -50,6 +50,8 @@
 第五篇第 4 章[App Lab 配置分层与多环境运行参数：从开发机到现场板](book/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md)已建立为 `draft` 初稿。第 4 章提供配置覆盖、来源保留、身份锁定、Secret 脱敏快照、两个本地 Python 实验和 Fig-31；配置治理模型不构成 App Lab 内置功能或 UNO Q 实机部署证据。
 
 第五篇第 5 章[App Lab 运行证据包与日志关联：从 run_id 到可检索证据](book/第5篇_AppLab/第5章_AppLab运行证据包与日志关联_从run_id到可检索证据.md)已建立为 `draft` 初稿。第 5 章提供规范化 JSONL 事件关联脚本、陈旧/未关联/配置指纹冲突分类、证据包结构建议和 Fig-32 Mermaid；固定数据为模拟样例，本次未运行脚本、自动测试、App Lab 或 UNO Q 实机验证。
+
+第五篇第 6 章[App Lab 健康观察与故障处置：从信号到安全恢复](book/第5篇_AppLab/第6章_AppLab健康观察与故障处置_从信号到安全恢复.md)已建立为 `draft` 初稿。第 6 章提供信号分层、身份/新鲜度判定、故障与未知处置、人工恢复门、两份离线模拟快照及 Fig-33 Mermaid；本地模型不构成 App Lab 或 UNO Q 实机验收。第五篇拟以第 7 章的综合部署验证与交接收束，暂不预设第 8 章。
 
 ## 目录结构
 
@@ -156,11 +158,17 @@ diagrams/uno-q-app-lab-deployability-boundary.mmd
 images/第5篇_AppLab/ch03-fig30-uno-q-app-lab-deployability-boundary.svg
 book/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数_从开发机到现场板.md
 book/第5篇_AppLab/第5章_AppLab运行证据包与日志关联_从run_id到可检索证据.md
+book/第5篇_AppLab/第6章_AppLab健康观察与故障处置_从信号到安全恢复.md
 code/第5篇_AppLab/第5章_AppLab运行证据包与日志关联/README.md
 code/第5篇_AppLab/第5章_AppLab运行证据包与日志关联/correlate_events.py
 code/第5篇_AppLab/第5章_AppLab运行证据包与日志关联/sample_run.json
 code/第5篇_AppLab/第5章_AppLab运行证据包与日志关联/sample_events.jsonl
 diagrams/uno-q-app-lab-evidence-package.mmd
+code/第5篇_AppLab/第6章_AppLab健康观察与故障处置/README.md
+code/第5篇_AppLab/第6章_AppLab健康观察与故障处置/evaluate_health.py
+code/第5篇_AppLab/第6章_AppLab健康观察与故障处置/sample_stale.json
+code/第5篇_AppLab/第6章_AppLab健康观察与故障处置/sample_fault.json
+diagrams/uno-q-app-lab-health-and-recovery.mmd
 code/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/README.md
 code/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/config_layers.py
 code/第5篇_AppLab/第4章_AppLab配置分层与多环境运行参数/run_config_snapshot.py

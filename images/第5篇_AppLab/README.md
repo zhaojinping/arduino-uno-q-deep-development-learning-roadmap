@@ -69,3 +69,15 @@
 - 内容要求：展示 Start-up、Main (Python)、Sketch (Microcontroller) 三类官方 Console 输出如何保留来源，经 `run_id`、脱敏配置指纹关联，并把陈旧、未关联和冲突分支纳入证据包
 - 来源边界：依据已登记的 Arduino UNO Q datasheet 中 App Lab Console 说明原创绘制；关联字段、证据包和判定分支是本书工程建议，不是官方日志导出流程
 - 验证边界：本次未渲染 SVG、未采集实际 Console 输出；图示不证明日志自动关联、留存、导出或 UNO Q 实机运行
+
+<a id="fig-33-uno-q-app-lab-health-and-recovery"></a>
+
+## 图 5-6：App Lab 健康信号与安全恢复门
+
+- 图号：Fig-33
+- 状态：Mermaid 正文与独立源文件已建立；SVG 待生成并完成预览审阅
+- 图源：[App Lab 健康与恢复 Mermaid](../../diagrams/uno-q-app-lab-health-and-recovery.mmd)
+- 正文位置：[第五篇第6章 Fig-33](../../book/第5篇_AppLab/第6章_AppLab健康观察与故障处置_从信号到安全恢复.md#fig-33-uno-q-app-lab-health-and-recovery)
+- 内容要求：展示运行身份与新鲜度、必需/可选检查、故障/未知/降级/观察到健康分支，以及证据保全和人工恢复门
+- 来源边界：依据已登记的 Arduino App specification 与 UNO Q 数据表原创绘制；探针、阈值和判定规则均为本书工程模型
+- 验证边界：尚未渲染 SVG 或进行硬件验证；图示不代表 App Lab 内置健康 API、自动恢复功能或安全认证

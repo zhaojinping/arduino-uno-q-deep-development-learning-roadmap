@@ -1,0 +1,35 @@
+{
+  "evidence_kind": "SIMULATED",
+  "run_id": "run-045",
+  "config_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "observed_at_utc": "2026-09-23T08:00:00Z",
+  "max_age_seconds": 30,
+  "required_checks": ["python.loop", "mcu.status"],
+  "optional_checks": ["brick.camera"],
+  "observations": [
+    {
+      "name": "python.loop",
+      "run_id": "run-045",
+      "config_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "FAIL",
+      "ts_utc": "2026-09-23T08:00:00Z",
+      "evidence_ref": "simulation:python-loop"
+    },
+    {
+      "name": "mcu.status",
+      "run_id": "run-045",
+      "config_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "PASS",
+      "ts_utc": "2026-09-23T08:00:00Z",
+      "evidence_ref": "simulation:mcu-status"
+    },
+    {
+      "name": "brick.camera",
+      "run_id": "run-045",
+      "config_fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "PASS",
+      "ts_utc": "2026-09-23T08:00:00Z",
+      "evidence_ref": "simulation:brick-camera"
+    }
+  ]
+}

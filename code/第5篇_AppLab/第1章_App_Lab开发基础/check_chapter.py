@@ -193,7 +193,8 @@ class ChapterChecks(unittest.TestCase):
         self.assertIn("./第1章_App_Lab开发基础_应用结构与验证边界.md", part_readme)
         self.assertIn("第5篇_AppLab/第1章_App_Lab开发基础/README.md", code_readme)
         self.assertIn("第五篇第 1 章", root_readme)
-        self.assertIn("全书当前共 31 章", root_readme)
+        chapter_count = sum(line.startswith("- [第") for line in summary.splitlines())
+        self.assertIn(f"全书当前共 {chapter_count} 章", root_readme)
         self.assertIn("ch01-fig28-uno-q-app-lab-app-structure-boundary.svg", read(REGISTRY))
 
 

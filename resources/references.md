@@ -169,3 +169,10 @@
 | 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
 | --- | --- | --- | --- | --- | --- | --- |
 | 官方数据表 | Arduino UNO Q datasheet（App Lab Console 输出类别） | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对 Start-up、Main (Python)、Sketch (Microcontroller) 三类 Console 标签的官方说明，以及启动成功仍需检查运行日志的边界；本章事件字段与关联规则是原创建议，不推定平台自动导出或关联日志。 | ABX00162 PDF（核验时） | 官方资料；本项目只链接和原创重述，不复制表格或图片。 | 2026-09-23 |
+
+## 第五篇第6章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方规范 | Arduino App specification（双侧职责与通信） | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 App 的 Python、可选 Sketch、Brick/容器组成及 Linux/MCU RPC 协作；本章健康检查、状态和恢复门均为原创教学模型。 | main 页面，核验时 | 官方资料；只链接和原创解释，不复制源码或图表。 | 2026-09-23 |
+| 官方数据表 | Arduino UNO Q datasheet（App Lab Console 与运行边界） | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对三类 Console 输出和启动成功仍可能有运行时错误；不能由此推断 App Lab 自带本章探针、30 秒阈值或自动恢复。 | ABX00162 PDF（核验时） | 官方资料；只链接和原创重述，不复制图表。 | 2026-09-23 |

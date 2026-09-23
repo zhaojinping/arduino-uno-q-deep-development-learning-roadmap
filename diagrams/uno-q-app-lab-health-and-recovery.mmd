@@ -1,0 +1,16 @@
+flowchart LR
+    SOURCE["运行证据包<br/>run_id · 配置指纹 · 检查记录"] --> QUALITY{"身份与新鲜度"}
+    QUALITY -->|"冲突 · 缺失 · 过期"| UNKNOWN["UNKNOWN<br/>冻结不可逆操作"]
+    QUALITY -->|"可关联的当前观察"| CHECK{"必需检查"}
+    CHECK -->|"当前 FAIL"| FAULT["FAULT_OBSERVED<br/>保留现场并诊断"]
+    CHECK -->|"缺失或 UNKNOWN"| UNKNOWN
+    CHECK -->|"全部 PASS"| OPTIONAL{"可选检查"}
+    OPTIONAL -->|"异常或不可信"| DEGRADED["DEGRADED<br/>人工评估降级"]
+    OPTIONAL -->|"全部 PASS"| HEALTHY["HEALTHY_OBSERVED<br/>继续观察"]
+    UNKNOWN --> EVIDENCE["证据保全 · 独立状态查询"]
+    FAULT --> EVIDENCE
+    DEGRADED --> EVIDENCE
+    HEALTHY --> EVIDENCE
+    EVIDENCE --> GATE{"人工恢复门<br/>风险 · 状态 · 权限"}
+    GATE -->|"未满足"| HOLD["保持安全状态"]
+    GATE -->|"满足"| NEW_RUN["受控恢复<br/>新 run_id + 复测"]
