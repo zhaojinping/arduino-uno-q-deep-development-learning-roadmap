@@ -50,7 +50,7 @@
 ### policy_linter.py
 
 - MAX_PROFILE_BYTES=32768、MAX_PROFILES=32、MAX_RULES_PER_PROFILE=16；都是固定教学上限。
-- parse_document(raw: bytes) -> dict[str, object]：严格 UTF-8；拒绝重复 JSON 键、NaN/Infinity、非对象根、未知字段及错误 schema_version。
+- parse_document(raw: bytes) -> dict[str, object]：严格 UTF-8；拒绝重复 JSON 键、NaN/Infinity、非对象根、未知根字段及错误 schema_version；profile 内嵌字段形状由 evaluate_document 校验。
 - parse_utc_timestamp(value: object) -> datetime.datetime：只接受秒精度 UTC 格式 YYYY-MM-DDTHH:MM:SSZ，返回 UTC-aware 值。
 - evaluate_document(document, *, reference_time) -> list[dict[str, object]]：按输入顺序产生报告；纯逻辑，不读时钟、文件或网络。
 - run_cli(argv=None, *, stdout=None, stderr=None) -> int：仅读取脚本同目录 profiles.json，并接受显式 --now；全 PASS 返回 0，有策略 DENY 返回 1，CLI/读文件/解析错误返回 2。
@@ -128,7 +128,7 @@ Expected: failure because policy_linter.py and its functions do not exist.
 
 - [ ] **Step 3: Implement bounded strict parsing**
 
-Define byte/profile/rule limits; use json.loads with object_pairs_hook to reject duplicates and parse_constant to reject NaN/Infinity; strictly decode UTF-8; enforce exact root fields, root object type, schema_version exact int, and 1–32 profile count. Parse UTC with datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ"), require strftime round-trip equality to reject non-zero-padded variants, then attach timezone.utc. Before schema errors, screen for the agreed sensitive key names and conspicuous PEM private-key markers; raise only the stable code SECRET_LITERAL_REJECTED and never include raw values. Stable ValueError messages must not contain raw input.
+Define byte/profile limits; use json.loads with object_pairs_hook to reject duplicates and parse_constant to reject NaN/Infinity; strictly decode UTF-8; enforce exact root fields, root object type, schema_version exact int, and 1–32 profile count. Nested profile, TLS, authorization, and rule field shapes are validated by evaluate_document in Task 2. Parse UTC with datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ"), require strftime round-trip equality to reject non-zero-padded variants, then attach timezone.utc. Stable ValueError messages must not contain raw input.
 
 ```python
 def _unique_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
@@ -450,8 +450,16 @@ Run: git commit -m "docs: register IoT identity chapter and sources"
 
 - [ ] **Step 1: Run every IoT chapter test**
 
-Run: python -B -m unittest discover -s "code/第8篇_IoT" -p "test_*.py" -v<br>
-Expected: all existing five-chapter tests and new Chapter 6 tests pass.
+Run each chapter directory separately; Python unittest discovery does not recursively enter these existing non-package chapter folders:
+
+- python -B -m unittest discover -s "code/第8篇_IoT/第1章_IoT开发基础" -p "test_*.py" -v
+- python -B -m unittest discover -s "code/第8篇_IoT/第2章_MQTT消息上报与幂等消费" -p "test_*.py" -v
+- python -B -m unittest discover -s "code/第8篇_IoT/第3章_离线缓存与补传" -p "test_*.py" -v
+- python -B -m unittest discover -s "code/第8篇_IoT/第4章_IoT可观测性与告警" -p "test_*.py" -v
+- python -B -m unittest discover -s "code/第8篇_IoT/第5章_IoT远程命令与受控维护" -p "test_*.py" -v
+- python -B -m unittest discover -s "code/第8篇_IoT/第6章_IoT设备身份与安全通信" -p "test_*.py" -v
+
+Expected: every command exits 0; the first five cover all existing IoT tests and the last covers Chapter 6.
 
 - [ ] **Step 2: Verify CLI outcomes and non-disclosure**
 
