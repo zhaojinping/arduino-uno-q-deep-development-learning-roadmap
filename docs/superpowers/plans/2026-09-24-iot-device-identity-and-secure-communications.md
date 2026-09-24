@@ -88,10 +88,41 @@
 Add these tests before implementation:
 
 ```python
+import json
 import unittest
-import policy_linter
 
+try:
+    import policy_linter
+except ModuleNotFoundError as error:
+    if error.name != "policy_linter":
+        raise
+    policy_linter = None
+
+class ParserBootstrapTests(unittest.TestCase):
+    def test_parser_module_is_available(self):
+        self.assertIsNotNone(policy_linter, "policy_linter.py has not been created")
+
+@unittest.skipIf(policy_linter is None, "parser implementation is not available yet")
 class ParserTests(unittest.TestCase):
+    def test_root_profile_and_byte_limits(self):
+        valid = json.dumps({
+            "schema_version": 1,
+            "profiles": [{}] * 32,
+        }).encode("utf-8")
+        self.assertEqual(len(policy_linter.parse_document(valid)["profiles"]), 32)
+        invalid = (
+            b"[]",
+            b'{"schema_version":1,"profiles":null}',
+            b'{"schema_version":1,"profiles":[]}',
+            b'{"schema_version":1,"profiles":[{}],"extra":0}',
+            json.dumps({"schema_version": 1, "profiles": [{}] * 33}).encode("utf-8"),
+        )
+        for raw in invalid:
+            with self.subTest(raw_length=len(raw)), self.assertRaises(ValueError):
+                policy_linter.parse_document(raw)
+        with self.assertRaisesRegex(ValueError, "INPUT_SIZE_INVALID"):
+            policy_linter.parse_document(b" " * 32769)
+
     def test_duplicate_member_is_rejected(self):
         with self.assertRaisesRegex(ValueError, "DUPLICATE_JSON_KEY"):
             policy_linter.parse_document(
@@ -124,7 +155,7 @@ class ParserTests(unittest.TestCase):
 - [ ] **Step 2: Run tests and confirm failure**
 
 Run: python -B -m unittest discover -s "code/第8篇_IoT/第6章_IoT设备身份与安全通信" -p "test_*.py" -v<br>
-Expected: failure because policy_linter.py and its functions do not exist.
+Expected: one ordinary assertion failure from ParserBootstrapTests because policy_linter.py does not exist yet; ParserTests are skipped, and discovery itself produces no import errors.
 
 - [ ] **Step 3: Implement bounded strict parsing**
 
