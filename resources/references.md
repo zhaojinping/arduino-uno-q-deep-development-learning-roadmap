@@ -373,3 +373,14 @@
 | 官方数据库文档 | SQLite Atomic Commit | https://www.sqlite.org/atomiccommit.html | 核对 SQLite 单个事务原子提交的设计说明及相关存储前提；不据此承诺所有文件系统/设备故障下的数据恢复。 | 页面内容（核验时） | 仅链接并原创归纳，不复制文档正文或图表。 | 2026-09-24 |
 
 本章 `idempotent_consumer.py`、两行合成 `qos1_redelivery.jsonl`、5 项标准库测试及 Fig-52 Mermaid 为本书原创。脚本调用第1章校验器，仅在本机 SQLite 中演示同库账本与模拟效果事务；没有 MQTT 库、QoS 包交换、PUBACK、Broker、网络、TLS/ACL、设备或外部副作用。两个进程测试只证明固定测试条件下本机数据库文件复用和重复抑制，不验证断电/存储故障恢复或生产保留策略；Fig-52 SVG 尚未渲染和目视审阅。
+
+## 第八篇第3章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 国际标准 | OASIS MQTT Version 5.0 | https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html | 核对第4.1节会话状态和存储限制、第4.3.2节 QoS 1 至少一次交付及 PUBACK 协议边界；不据此推断应用侧本地队列已落盘或端到端业务恰好一次。 | OASIS Standard，2019-03-07 | 仅链接并原创归纳，不复制标准文本或图表。 | 2026-09-24 |
+| 官方语言文档 | Python `sqlite3` 模块 | https://docs.python.org/3.14/library/sqlite3.html | 核对数据库连接、事务提交/回滚以及连接上下文管理器不会自动关闭连接的边界；本章实现为每次操作显式关闭连接。 | Python 3.14 文档（2026-09-24 核验） | 仅链接并原创解释，不复制文档正文或示例代码。 | 2026-09-24 |
+| 官方数据库文档 | SQLite Transactions | https://www.sqlite.org/lang_transaction.html | 核对 SQLite 显式事务及单写事务边界；不将本地数据库事务扩展为跨 Broker 或消费者的分布式原子提交。 | 页面内容（核验时） | 仅链接并原创说明，不复制文档正文或图表。 | 2026-09-24 |
+| 官方数据库文档 | SQLite Atomic Commit | https://www.sqlite.org/atomiccommit.html | 核对 SQLite 单库事务原子提交的模型及其存储环境前提；不据此宣称本章已验证掉电、文件系统或存储介质故障恢复。 | 页面内容（核验时） | 仅链接并原创归纳，不复制文档正文或图表。 | 2026-09-24 |
+
+本章 `outbox.py`、3 条合成 `offline_telemetry.jsonl`、11 项标准库测试及 Fig-53 Mermaid 均为本书原创。SQLite 逻辑队列容量与单条载荷上限不代表数据库物理文件或闪存写入量具有同等硬上限；没有真实 MQTT 包、Broker、网络、UNO Q、传感器、断电注入或目标介质耐久性测试；Fig-53 SVG 尚未生成和目视审阅。

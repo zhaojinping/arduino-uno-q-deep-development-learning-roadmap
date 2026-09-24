@@ -1,0 +1,21 @@
+flowchart LR
+    E[传感器事件或合成事件] --> V{第1章契约有效?}
+    V -- 否 --> I[INVALID_REJECTED<br/>不入队]
+    V -- 是 --> K[规范化 JSON<br/>保留 event_key]
+    K --> D{队列中已有此键?}
+    D -- 相同载荷 --> R[DUPLICATE_IGNORED]
+    D -- 不同载荷 --> C[CONFLICT_REVIEW<br/>不覆盖]
+    D -- 不存在 --> F{容量有空位?}
+    F -- 否 --> O[QUEUE_FULL<br/>拒绝最新事件]
+    F -- 是 --> P[(SQLite 持久化队列<br/>提交后才可发送)]
+    P --> X{队首是否到期?}
+    X -- 是 --> Z[返回 event_key 并清理<br/>按策略审计过期]
+    X -- 否 --> B{退避时间已到?}
+    B -- 否 --> W[等待；不跳过队首]
+    W --> P
+    B -- 是 --> S[发布适配器<br/>本章使用脚本模拟]
+    S --> A{记录到的结果?}
+    A -- ACKED --> Q[删除队列项<br/>仅到下一跳]
+    A -- RETRYABLE --> T[保留原 event_key<br/>增加尝试次数与退避]
+    A -- UNCERTAIN --> T
+    T --> P

@@ -25,3 +25,15 @@
 - 内容要求：展示合成 QoS 1 重投递、契约校验、事件键/载荷摘要分流、单 SQLite 事务及冲突审查；PUBACK 确认次序明确留给实际客户端库核验。
 - 来源边界：原创教学流程；MQTT 协议事实见 OASIS 标准，事务事实见 SQLite/Python 官方资料；不表示标准组织发布或认可本图。
 - 验证边界：本章只模拟 JSONL 重复输入与离线 SQLite 处理，不运行 MQTT 客户端或 Broker；SVG 尚未渲染和目视审阅。
+
+<a id="fig-53-uno-q-iot-offline-outbox"></a>
+
+## 图 8-3：持久化队列的离线补传与不确定结果恢复
+
+- 图号：Fig-53
+- 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[离线发件箱 Mermaid](../../diagrams/uno-q-iot-offline-outbox.mmd)
+- 正文位置：[第八篇第3章 Fig-53](../../book/第8篇_IoT/第3章_离线缓存与补传_从持久化队列到可验证恢复.md#fig-53-uno-q-iot-offline-outbox)
+- 内容要求：展示契约校验、事件键去重/冲突、容量上限、过期清理、严格 FIFO、模拟发布结果与保留事件键的退避重试。
+- 来源边界：原创教学流程；MQTT QoS/会话依据 OASIS 标准，事务与提交边界依据 Python/SQLite 官方文档；不表示这些组织发布或认可本图。
+- 验证边界：本地 SQLite 和脚本化结果模拟；不运行 MQTT 客户端、Broker、网络、传感器或 UNO Q 实机；SVG 尚未渲染和目视审阅。
