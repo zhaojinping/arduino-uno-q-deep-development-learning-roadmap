@@ -325,3 +325,16 @@
 | 官方文档 | ONNX Runtime：Quantize ONNX models | https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html | 核对该运行时文档所述线性量化表示、静态校准输入、动态参数计算与量化误差调试；具体格式/算子支持及性能须按目标模型、运行时和设备另行验证，不证明 UNO Q 兼容。 | 页面内容（核验时） | 仅链接并原创摘要，不复制文档正文、表格或源码。 | 2026-09-24 |
 
 本章 `quantization_demo.py`、固定标量向量、9 项标准库行为测试及 Fig-48 Mermaid 为本书原创。程序只模拟对称 int8 的数值量化/反量化，不生成模型工件、不评估任务精度、不测量实际文件/RAM/时延，也不访问 ONNX Runtime 或 UNO Q；Fig-48 SVG 尚未渲染和目视审阅。
+
+## 第七篇第7章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方 API 指南 | OpenAI Function Calling | https://developers.openai.com/api/docs/guides/function-calling | 核对工具调用的提案—应用执行—结果回传流程，以及应用侧负责执行工具的边界；该流程仅代表 OpenAI API 文档，不是通用协议或设备兼容证明。 | 页面内容（核验时） | 仅链接并原创摘要，不复制正文或代码。 | 2026-09-24 |
+| 官方安全指南 | OpenAI Guardrails and human review | https://developers.openai.com/api/docs/guides/agents/guardrails-approvals | 核对输入/输出/工具行为防护与副作用前人工审查暂停点；不把 SDK 工作流当作 Arduino UNO Q 内置功能。 | 页面内容（核验时） | 仅链接并原创摘要，不复制正文或代码。 | 2026-09-24 |
+| 社区安全指南 | OWASP GenAI LLM Top 10 2026 | https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/ | 核对 LLM03“过度代理权”关于工具功能、权限和自主性的风险及缓解方向；所链接 PDF 标示 Version 2026，封面发布日期字段待填写，不是法规、认证或本产品验收标准。 | 资源页及其链接 PDF（核验时） | 仅链接并原创摘要，不复制报告正文或图表。 | 2026-09-24 |
+| 社区标准草案/示例 | OWASP Agent Control Standard 与公开仓库 | https://genai.owasp.org/resource/agent-control-standard-acs/ · https://github.com/GenAI-Security-Project/agent-control-standard | 仅作策略钩子概念参考；核验的 v0.1.0 仓库示例包括未认证 Guardian 通道和默认 `proceed` 故障策略，不能当作可直接部署的安全控制。 | 公开仓库 v0.1.0（核验时） | 仅链接并原创说明；不复制源码或误称为认证产品。 | 2026-09-24 |
+| 官方风险管理指南 | NIST AI RMF Generative AI Profile | https://doi.org/10.6028/NIST.AI.600-1 | 核对生成式 AI 风险治理、测试、人类监督与记录建议；为自愿风险管理资料，不替代应用威胁建模或合规评估。 | NIST AI 600-1（2024） | 仅链接并原创摘要，不复制正文或图表。 | 2026-09-24 |
+| 官方产品资料 | Arduino UNO Q 与 App Lab | https://docs.arduino.cc/hardware/uno-q · https://docs.arduino.cc/software/app-lab/ | 核对产品资料所述 Linux MPU、MCU、App Lab、Python/sketch/AI 组合与 Bridge/RPC 定位；资料不证明通用 LLM 工具安全门已内置、兼容或实机验证。 | 页面内容（核验时） | 仅链接并原创摘要，不复制图表或产品正文。 | 2026-09-24 |
+
+本章文字、`tool_guard.py`、12 项标准库测试和 Fig-49 Mermaid 为本书原创教学材料。模拟器不调用模型/API、网络、App Lab、Bridge、MCU、GPIO 或执行器；测试只验证本机进程内策略契约，不证明真实身份认证、持久重放控制、生产部署或 UNO Q 实机兼容。Fig-49 SVG 尚未渲染和目视审阅。
