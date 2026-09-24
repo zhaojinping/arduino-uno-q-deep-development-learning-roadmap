@@ -25,3 +25,4 @@
 - [第七篇第3章 Fig-45：模型工件到目标部署的证据门](uno-q-ai-model-deployment-contract.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
 - [第七篇第4章 Fig-46：固定样例推理回归与目标验收边界](uno-q-ai-inference-regression.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
 - [第七篇第5章 Fig-47：端侧推理性能记录与离线报告边界](uno-q-ai-inference-performance.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
+- [第七篇第6章 Fig-48：量化校准、候选评估与目标证据门](uno-q-ai-quantization-calibration.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。

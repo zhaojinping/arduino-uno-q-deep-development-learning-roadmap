@@ -317,3 +317,11 @@
 | 官方语言库文档 | Python：`time` — Time access and conversions | https://docs.python.org/3/library/time.html | 核对 `perf_counter_ns()` 适于测量短时差值、绝对参考点无意义，以及 `process_time()` 与经过时间口径不同；不代表本章使用它测量了模型。 | Python 3.14 文档（核验时） | 仅链接和原创解释，不复制文档正文或示例代码。 | 2026-09-24 |
 
 本章 `analyze_benchmark.py`、21 项标准库行为测试、23 条合成记录及 Fig-47 Mermaid 为本书原创。样例分析只计算 20 条合成正式记录的最近秩 P50/P95、均值、最大值及输入的最大 RSS 观测；报告固定 `REPORT_ONLY`，无阈值判定。未运行模型/ONNX Runtime、未采集真实运行时或目标资源、未连接 UNO Q，Fig-47 SVG 尚未渲染并目视审阅。
+
+## 第七篇第6章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+|---|---|---|---|---|---|---|
+| 官方文档 | ONNX Runtime：Quantize ONNX models | https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html | 核对该运行时文档所述线性量化表示、静态校准输入、动态参数计算与量化误差调试；具体格式/算子支持及性能须按目标模型、运行时和设备另行验证，不证明 UNO Q 兼容。 | 页面内容（核验时） | 仅链接并原创摘要，不复制文档正文、表格或源码。 | 2026-09-24 |
+
+本章 `quantization_demo.py`、固定标量向量、9 项标准库行为测试及 Fig-48 Mermaid 为本书原创。程序只模拟对称 int8 的数值量化/反量化，不生成模型工件、不评估任务精度、不测量实际文件/RAM/时延，也不访问 ONNX Runtime 或 UNO Q；Fig-48 SVG 尚未渲染和目视审阅。

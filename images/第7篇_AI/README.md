@@ -61,3 +61,15 @@
 - 内容要求：明确工作负载/计时边界、环境快照、冷启动独立、预热与正式样本隔离、输入阻断、描述性时延/RSS统计及目标验收仍需另证。
 - 来源边界：图示为本书原创测量流程；参考 ONNX Runtime 性能维度和 profiling 文档、Python 计时 API；不是官方 benchmark、UNO Q 性能规范或兼容性声明。
 - 验证边界：配套数据为人工合成；本次没有模型、运行时、RSS 工具、UNO Q 板卡或硬件资源测量；SVG 尚未渲染和目视审阅。
+
+<a id="fig-48-uno-q-ai-quantization-calibration"></a>
+
+## 图 7-6：量化校准、候选评估与目标证据门
+
+- 图号：Fig-48
+- 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[量化校准 Mermaid](../../diagrams/uno-q-ai-quantization-calibration.mmd)
+- 正文位置：[第七篇第6章 Fig-48](../../book/第7篇_AI/第6章_模型量化与校准验证_从校准数据到资源精度权衡.md#fig-48-uno-q-ai-quantization-calibration)
+- 内容要求：分离校准/评估数据，比较浮点基线与量化候选，先审任务质量，再同边界测量资源，并把目标镜像/运行时/算子证据设为独立门槛。
+- 来源边界：参考 ONNX Runtime 官方量化文档并采用本书原创的标量教学模拟；不是 ONNX Runtime、Arduino 或 UNO Q 官方量化、性能或发布规范。
+- 验证边界：仅有合成数值案例和本机标准库测试；没有模型转换、任务质量评估、真实模型文件/内存对比、目标运行时或 UNO Q 实机验证；SVG 尚未渲染和目视审阅。
