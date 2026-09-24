@@ -1,0 +1,15 @@
+flowchart LR
+    E[第1章遥测事件] --> P[发布客户端<br/>QoS 1]
+    P -->|PUBLISH| B[(MQTT Broker)]
+    B -->|投递；可能重复| C[订阅客户端回调]
+    C --> V{第1章载荷契约有效?}
+    V -- 否 --> R[拒绝并记录原因]
+    V -- 是 --> K[计算 event_key 与规范化载荷摘要]
+    K --> Q{账本已有 event_key?}
+    Q -- 否 --> T[一个 SQLite 事务<br/>写入 processed_events<br/>写入 simulated_effects]
+    T -->|提交成功| A[APPLIED]
+    T -->|异常| X[回滚两项写入]
+    Q -- 是 --> H{摘要相同?}
+    H -- 是 --> D[DUPLICATE_IGNORED]
+    H -- 否 --> M[CONFLICT_REVIEW<br/>不覆盖，等待审查]
+    C -.-> ACK[客户端库负责 PUBACK<br/>确认时序须按实际库验证]

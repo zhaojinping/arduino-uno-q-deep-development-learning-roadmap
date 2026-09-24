@@ -1,0 +1,18 @@
+flowchart LR
+    S[传感器或合成输入] --> A[采样与读取状态]
+    A --> E[遥测事件契约<br/>device_id / boot_id / sequence<br/>event_time / metric / value / unit / quality]
+    E --> V{边缘结构校验}
+    V -- 不符合 --> X[拒绝并记录原因]
+    V -- 符合 --> P[应用数据处理]
+    subgraph UQ[UNO Q 双侧应用 可选]
+        M[MCU Sketch 与外设] -. 需要跨侧时 Bridge/RPC .-> L[Linux Python 应用]
+    end
+    M -. 采集来源可在 MCU 侧 .-> A
+    P -. 可部署在 Linux 侧 .-> L
+    P --> T[传输适配器]
+    T -->|发布/订阅| B[MQTT Broker]
+    T -->|请求/响应| H[HTTP 服务入口]
+    B --> I[服务端校验与事件去重]
+    H --> I
+    I -- 通过 --> O[存储、可观测性与业务处理]
+    I -- 拒绝 --> R[隔离或人工处置]

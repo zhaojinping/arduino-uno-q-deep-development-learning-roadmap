@@ -348,3 +348,28 @@
 | 官方应用规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Arduino App 中 Sketch 的 MCU 侧、Python/Brick/容器的 Linux 侧及 RPC 协作边界；本章证据字段与部署门槛为教程级设计，不是官方规范。 | main 分支页面（核验时） | 仅链接并原创归纳，不复制规范正文或代码。 | 2026-09-24 |
 
 本章 `readiness_gate.py`、合成 `evidence_manifest.json`、14 项标准库测试及 Fig-50 Mermaid 为本书原创。检查器仅核对清单结构和提交者状态声明，不读取证据引用、不验证模型/数据/设备事实，也不授权部署。未调用生成模型、网络、App Lab、Bridge、MCU 或 UNO Q；Fig-50 SVG 尚未渲染和目视审阅。
+
+## 第八篇第1章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方产品资料 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对双处理器平台、无线连接和产品级职责概况；不证明本章参考架构、特定传感器、网络服务或样例已在目标板运行。 | 页面内容（核验时） | 仅链接与原创说明，不复制图表、截图或正文。 | 2026-09-24 |
+| 官方应用规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Sketch/MCU、Python/Brick/容器/Linux 侧与 RPC 协作的应用格式边界；不把本章架构图误作 App Lab 自动配置或 MQTT 集成声明。 | main 分支页面（核验时） | 仅链接并原创归纳，不复制规范正文或代码。 | 2026-09-24 |
+| 国际标准 | OASIS MQTT Version 5.0 | https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html | 核对发布/订阅传输、载荷语义独立性、QoS 0/1/2 和协议确认范围；不推断端到端业务 exactly-once。 | OASIS Standard，2019-03-07 | 仅链接并原创摘要，不复制标准文本或图表。 | 2026-09-24 |
+| IETF 标准 | RFC 8259 JSON | https://www.rfc-editor.org/rfc/rfc8259.html | 核对 JSON 对象、数字及重复成员名的互操作注意事项；样例仅采用小型固定教学契约。 | RFC 8259，2017-12 | 仅链接并原创解释，不复制 RFC 正文。 | 2026-09-24 |
+| IETF 标准 | RFC 3339 时间戳与 RFC 9557 更新 | https://www.rfc-editor.org/rfc/rfc3339.html · https://www.rfc-editor.org/rfc/rfc9557.html | 核对互联网事件时间的日期/时区偏移格式及后续语义更新；本章校验器只实现受限子集，不支持闰秒，并拒绝 `-00:00` 未知本地偏移约定。 | RFC 3339；RFC 9557 部分更新 | 仅链接并原创解释，不复制 RFC 正文。 | 2026-09-24 |
+| 官方语言文档 | Python `json` 模块 | https://docs.python.org/3.14/library/json.html | 核对 `object_pairs_hook` 和 `parse_constant` 可用于自定义重复键及非标准常量处理；不把样例校验器当作通用安全解析器。 | Python 3.14 文档（核验时） | 仅链接并原创说明，不复制文档代码或正文。 | 2026-09-24 |
+| 官方语言文档 | Python `datetime` 模块 | https://docs.python.org/3.14/library/datetime.html | 核对 `datetime.fromisoformat()` 的日期时间解析接口；RFC 3339 子集限制由本章另行定义。 | Python 3.14 文档（核验时） | 仅链接并原创说明，不复制文档代码或正文。 | 2026-09-24 |
+
+本章 `validate_telemetry.py`、合成 `telemetry_sample.json`、16 项行为测试和 Fig-51 Mermaid 均为本书原创。校验器只检查 UTF-8/JSON 边界和教学字段契约；未访问传感器、网络、MQTT/HTTP 服务、Bridge/RPC、数据库或 UNO Q，未验证身份、真实性、时钟、校准、幂等和目标环境；Fig-51 SVG 尚未渲染和目视审阅。
+
+## 第八篇第2章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 国际标准 | OASIS MQTT Version 5.0 | https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html | 核对第2章主题层级/过滤器（第4.7节）、QoS 0/1/2 和确认流程（第4.3节）、消息保留（第3.3.1.3节）及会话到期（第3.1.2.11.2、4.1节）；不据此推断应用数据库或外部副作用恰好执行一次。 | OASIS Standard，2019-03-07 | 仅链接并原创归纳，不复制标准文本或图表。 | 2026-09-24 |
+| 官方语言文档 | Python `sqlite3` 模块 | https://docs.python.org/3.14/library/sqlite3.html | 核对 Python 数据库连接、事务提交/回滚与 `sqlite3` 事务控制接口；本章代码只验证本机教学样例，不表示目标板运行环境已验证。 | Python 3.14 文档（核验时） | 仅链接并原创解释，不复制文档正文或示例代码。 | 2026-09-24 |
+| 官方数据库文档 | SQLite Transactions | https://www.sqlite.org/lang_transaction.html | 核对显式事务的 `BEGIN`、`COMMIT`、`ROLLBACK` 语义；不把单库事务扩展为跨 Broker、API 或硬件的原子操作。 | 页面内容（核验时） | 仅链接并原创说明，不复制文档正文或图表。 | 2026-09-24 |
+| 官方数据库文档 | SQLite Atomic Commit | https://www.sqlite.org/atomiccommit.html | 核对 SQLite 单个事务原子提交的设计说明及相关存储前提；不据此承诺所有文件系统/设备故障下的数据恢复。 | 页面内容（核验时） | 仅链接并原创归纳，不复制文档正文或图表。 | 2026-09-24 |
+
+本章 `idempotent_consumer.py`、两行合成 `qos1_redelivery.jsonl`、5 项标准库测试及 Fig-52 Mermaid 为本书原创。脚本调用第1章校验器，仅在本机 SQLite 中演示同库账本与模拟效果事务；没有 MQTT 库、QoS 包交换、PUBACK、Broker、网络、TLS/ACL、设备或外部副作用。两个进程测试只证明固定测试条件下本机数据库文件复用和重复抑制，不验证断电/存储故障恢复或生产保留策略；Fig-52 SVG 尚未渲染和目视审阅。
