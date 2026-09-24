@@ -49,3 +49,15 @@
 - 内容要求：展示输入契约、设备身份与快照时效检查，随后按队列占比、最老事件年龄和发布窗口信号评估；所有结果停留于本地建议报告，不发告警或操作设备。
 - 来源边界：原创教学决策流程；OpenTelemetry 与 Prometheus 官方文档仅用于核对信号、基数和告警设计概念，不表示其组织发布或认可本图。
 - 验证边界：四条固定合成快照与标准库离线分类器；不接入 OpenTelemetry Collector、Prometheus、MQTT Broker、网络、传感器或 UNO Q 实机；SVG 尚未渲染和目视审阅。
+
+<a id="fig-55-uno-q-iot-remote-command-lifecycle"></a>
+
+## 图 8-5：远程命令的接纳、执行与结果对账
+
+- 图号：Fig-55
+- 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[远程命令生命周期 Mermaid](../../diagrams/uno-q-iot-remote-command-lifecycle.mmd)
+- 正文位置：[第八篇第5章 Fig-55](../../book/第8篇_IoT/第5章_IoT远程命令与受控维护_从授权请求到结果对账.md#fig-55-uno-q-iot-remote-command-lifecycle)
+- 内容要求：展示请求契约、目标/操作/权限及有效期门、命令 ID 幂等与冲突、接纳后执行、结果状态和 UNKNOWN 对账停止路径。
+- 来源边界：本书原创教学流程；NIST IoT 能力基线用于设计能力参照，OASIS MQTT 5.0 用于核对请求/响应关联属性；不表示 NIST、OASIS 或 Arduino 发布/认可本图。
+- 验证边界：30 项本机标准库测试和固定合成命令演示；不认证身份、不运行 MQTT/Broker/网络、不连接 UNO Q、MCU、Bridge、传感器或执行器；账本只在内存，SVG 尚未渲染和目视审阅。

@@ -1,0 +1,15 @@
+flowchart LR
+    A[命令请求<br/>契约与大小检查] --> B{目标、操作、权限有效?}
+    B -- 否 --> X[REJECTED<br/>不产生效果]
+    B -- 是 --> C{签发与到期时间有效?}
+    C -- 否或已过期 --> E[EXPIRED / REJECTED<br/>不排队或不执行]
+    C -- 是 --> D{命令 ID 已存在?}
+    D -- 相同内容 --> R[DUPLICATE_RETURNED<br/>返回原账本结果]
+    D -- 不同内容 --> F[ID_CONFLICT<br/>人工调查]
+    D -- 新命令 --> G[写入有界账本<br/>ACCEPTED]
+    G --> H{执行时仍在有效期内?}
+    H -- 否 --> E
+    H -- 是 --> I[模拟执行或只读观察]
+    I --> J[APPLIED / OBSERVED<br/>附带结果证据]
+    K[查询没有可信结果] --> U[UNKNOWN<br/>对账后再决定]
+    U --> N[禁止因超时而盲目重发]

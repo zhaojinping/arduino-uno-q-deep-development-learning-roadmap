@@ -152,7 +152,7 @@ if ($diagram -notmatch '^flowchart TB') { throw 'Mermaid flowchart declaration m
 在第 1 章链接之后追加：
 
 ```markdown
-- [第2章 什么是 Arduino UNO Q](book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md)
+- [第2章 什么是 Arduino UNO Q](../../../book/第1篇_认识UNOQ/第2章_什么是Arduino_UNO_Q.md)
 ```
 
 把第一篇 README 的“UNO Q 定位——”预留说明替换为指向第 2 章的描述；硬件架构、软件架构和第一个实验仍保留为未创建正文的主题说明。

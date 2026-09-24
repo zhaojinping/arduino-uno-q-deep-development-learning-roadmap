@@ -75,7 +75,7 @@ Add a paragraph explaining that solid arrows are responsibility/entry relationsh
 - Consumes: Task 1's chapter path, Fig-05 anchor, and Mermaid source path.
 - Produces: One canonical navigation entry, a chapter map entry, a Fig-05 registry row, and four official source rows whose usage explicitly covers Chapter 4.
 
-- [x] **Step 1: Add the chapter to `SUMMARY.md`.** Append `- [第4章 UNO Q 的软件架构](book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md)` immediately after the Chapter 3 entry, preserving the existing order and paths.
+- [x] **Step 1: Add the chapter to `SUMMARY.md`.** Append `- [第4章 UNO Q 的软件架构](../../../book/第1篇_认识UNOQ/第4章_UNO_Q的软件架构.md)` immediately after the Chapter 3 entry, preserving the existing order and paths.
 
 - [x] **Step 2: Update the First Part README and root progress.** Add Chapter 4 to the reading order and chapter map. Update the root README's current progress and verified file list to include Chapter 4 and `diagrams/uno-q-software-architecture.mmd`, without claiming hardware runtime verification.
 

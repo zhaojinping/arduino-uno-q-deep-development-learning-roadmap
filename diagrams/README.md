@@ -32,3 +32,4 @@
 - [第八篇第2章 Fig-52：MQTT 重复投递与消费端事务门](uno-q-mqtt-idempotent-consumer.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
 - [第八篇第3章 Fig-53：持久化队列的离线补传与不确定结果恢复](uno-q-iot-offline-outbox.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
 - [第八篇第4章 Fig-54：从健康快照到可操作信号](uno-q-iot-observability-alerts.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
+- [第八篇第5章 Fig-55：远程命令的接纳、执行与结果对账](uno-q-iot-remote-command-lifecycle.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。

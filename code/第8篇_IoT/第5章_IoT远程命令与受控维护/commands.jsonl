@@ -1,0 +1,6 @@
+{"schema_version":1,"command_id":"cmd-demo-001","correlation_id":"corr-demo-001","device_id":"uno-q-demo-01","operation":"set_sampling_period","parameters":{"seconds":20},"issued_at_unix":1900,"expires_at_unix":2200}
+{"schema_version":1,"command_id":"cmd-demo-001","correlation_id":"corr-demo-001","device_id":"uno-q-demo-01","operation":"set_sampling_period","parameters":{"seconds":20},"issued_at_unix":1900,"expires_at_unix":2200}
+{"schema_version":1,"command_id":"cmd-demo-001","correlation_id":"corr-demo-001","device_id":"uno-q-demo-01","operation":"set_sampling_period","parameters":{"seconds":30},"issued_at_unix":1900,"expires_at_unix":2200}
+{"schema_version":1,"command_id":"cmd-read-001","correlation_id":"corr-read-001","device_id":"uno-q-demo-01","operation":"read_status","parameters":{},"issued_at_unix":1900,"expires_at_unix":2200}
+{"schema_version":1,"command_id":"cmd-expire-apply-001","correlation_id":"corr-expire-001","device_id":"uno-q-demo-01","operation":"set_sampling_period","parameters":{"seconds":30},"issued_at_unix":1900,"expires_at_unix":2001}
+{"schema_version":1,"command_id":"cmd-expired-001","correlation_id":"corr-expired-001","device_id":"uno-q-demo-01","operation":"set_sampling_period","parameters":{"seconds":30},"issued_at_unix":1900,"expires_at_unix":1999}

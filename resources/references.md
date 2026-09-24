@@ -396,3 +396,13 @@
 | 官方实践指南 | Prometheus Alerting | https://prometheus.io/docs/practices/alerting/ | 核对关注症状、留出短暂抖动余量和控制告警噪声等通用实践；本章教学 finding 不是生产告警规则。 | 官方在线文档（核验时） | 仅链接和原创归纳，不复制文档正文或图表。 | 2026-09-24 |
 
 本章 `health_observer.py`、4 条合成 `health_snapshots.jsonl`、14 项标准库行为测试及 Fig-54 Mermaid 均为本书原创。判定器仅处理受限本地 JSONL，并按显式参考时刻输出建议；没有 OpenTelemetry SDK/Collector、Prometheus、指标后端、通知渠道、真实设备身份、Broker、网络或 UNO Q 实机验证。90 秒、300 秒、600 秒、0.80 与重试阈值是固定教学假设；单快照分类没有迟滞、告警去重/确认/恢复状态；Fig-54 SVG 尚未生成和目视审阅。
+
+## 第八篇第5章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方技术报告 | NISTIR 8259A：IoT Device Cybersecurity Capability Core Baseline | https://csrc.nist.gov/pubs/ir/8259/a/final | 作为按设备用途识别与裁剪 IoT 网络安全能力的基线参考；本章用其校准概念范围，不声明符合性或认证。 | NISTIR 8259A，最终版（2020-05） | 仅链接并原创归纳；不复制报告正文或图表。 | 2026-09-24 |
+| 官方能力目录 | NIST IoT Device Cybersecurity Requirement Catalogs：Technical Capabilities | https://pages.nist.gov/IoT-Device-Cybersecurity-Requirement-Catalogs/technical/ | 核对设备识别、配置、数据保护、逻辑访问、软件更新与安全状态感知等能力主题；目录须结合设备与风险配置文件裁剪。 | 官方在线目录（核验时） | 仅链接并原创归纳；不复制目录内容或图表。 | 2026-09-24 |
+| 国际标准 | OASIS MQTT Version 5.0 | https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html | 核对请求/响应模式及 Response Topic、Correlation Data 等关联属性；这些协议属性不承担请求者身份认证、应用授权或物理效果证明。 | OASIS Standard，2019-03-07 | 仅链接并原创解释，不复制标准文本或图表。 | 2026-09-24 |
+
+本章 `remote_command_gate.py`、6 条合成 JSONL 命令、30 项标准库测试及 Fig-55 Mermaid 均为本书原创。脚本限制 JSON 输入、命令有效期和进程内账本容量，只演示本地状态逻辑；固定命令样例的未知结果表示本地账本无对应记录，不模拟网络超时或设备回执丢失。没有身份认证、签名/TLS/MQTT ACL、真实 Broker/网络、持久账本、并发/崩溃恢复、Bridge/RPC、MCU、传感器、UNO Q 或物理执行验证。300 秒、4096 字节、64 条与采样周期范围都是教学策略；Fig-55 SVG 尚未生成和目视审阅。
