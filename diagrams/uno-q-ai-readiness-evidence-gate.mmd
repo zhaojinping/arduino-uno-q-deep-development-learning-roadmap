@@ -1,0 +1,16 @@
+flowchart LR
+    A[第1至7章证据引用与状态声明] --> B[限制16 KiB UTF-8 JSON解析]
+    B --> C{重复键、格式和字段集合有效?}
+    C -- 否 --> X[INVALID_MANIFEST]
+    C -- 是 --> D[核对固定八道证据门]
+    D --> E{是否有 BLOCKED?}
+    E -- 是 --> F[BLOCKED]
+    E -- 否 --> G{是否有 NOT_RUN 或 REVIEW_REQUIRED?}
+    G -- 是 --> H[INCOMPLETE]
+    G -- 否 --> I[READY_FOR_HUMAN_REVIEW]
+    X --> J[REPORT_ONLY 且不授权部署]
+    F --> J
+    H --> J
+    I --> J
+    J --> K[人工核验证据与目标环境]
+    K -. 独立组织决策 .-> L[部署授权流程]

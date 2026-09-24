@@ -338,3 +338,13 @@
 | 官方产品资料 | Arduino UNO Q 与 App Lab | https://docs.arduino.cc/hardware/uno-q · https://docs.arduino.cc/software/app-lab/ | 核对产品资料所述 Linux MPU、MCU、App Lab、Python/sketch/AI 组合与 Bridge/RPC 定位；资料不证明通用 LLM 工具安全门已内置、兼容或实机验证。 | 页面内容（核验时） | 仅链接并原创摘要，不复制图表或产品正文。 | 2026-09-24 |
 
 本章文字、`tool_guard.py`、12 项标准库测试和 Fig-49 Mermaid 为本书原创教学材料。模拟器不调用模型/API、网络、App Lab、Bridge、MCU、GPIO 或执行器；测试只验证本机进程内策略契约，不证明真实身份认证、持久重放控制、生产部署或 UNO Q 实机兼容。Fig-49 SVG 尚未渲染和目视审阅。
+
+## 第七篇第8章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方风险管理指南 | NIST AI RMF Generative AI Profile | https://doi.org/10.6028/NIST.AI.600-1 | 核对该跨行业档案的自愿使用定位、AI 生命周期风险管理目的，以及治理、内容来源、部署前测试、事件披露等关注点；本章八道证据门为本书综合设计，不是 NIST 清单。 | NIST AI 600-1，2024年7月 | 仅链接并原创归纳，不复制报告正文或图表。 | 2026-09-24 |
+| 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对 Debian Linux 侧 QRB2210 MPU、Zephyr 侧 STM32U585 MCU、App Lab 与 Bridge/RPC 的产品架构说明；不据此声称本章验收器在板上运行或已兼容。 | 页面内容（核验时） | 仅链接并原创解释，不复制产品图表、截图或正文。 | 2026-09-24 |
+| 官方应用规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Arduino App 中 Sketch 的 MCU 侧、Python/Brick/容器的 Linux 侧及 RPC 协作边界；本章证据字段与部署门槛为教程级设计，不是官方规范。 | main 分支页面（核验时） | 仅链接并原创归纳，不复制规范正文或代码。 | 2026-09-24 |
+
+本章 `readiness_gate.py`、合成 `evidence_manifest.json`、14 项标准库测试及 Fig-50 Mermaid 为本书原创。检查器仅核对清单结构和提交者状态声明，不读取证据引用、不验证模型/数据/设备事实，也不授权部署。未调用生成模型、网络、App Lab、Bridge、MCU 或 UNO Q；Fig-50 SVG 尚未渲染和目视审阅。

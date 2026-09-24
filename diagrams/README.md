@@ -27,3 +27,4 @@
 - [第七篇第5章 Fig-47：端侧推理性能记录与离线报告边界](uno-q-ai-inference-performance.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
 - [第七篇第6章 Fig-48：量化校准、候选评估与目标证据门](uno-q-ai-quantization-calibration.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
 - [第七篇第7章 Fig-49：从模型提案到受控工具执行](uno-q-ai-tool-call-guard.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
+- [第七篇第8章 Fig-50：从章节证据到人工验收](uno-q-ai-readiness-evidence-gate.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。

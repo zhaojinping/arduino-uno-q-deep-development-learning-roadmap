@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "report_id": "demo-ai-integration-001",
+  "gates": {
+    "task_definition": {"status": "CLAIMED_PASS", "reference": "EV-TASK-001"},
+    "dataset_evaluation": {"status": "CLAIMED_PASS", "reference": "EV-DATA-001"},
+    "model_artifact": {"status": "CLAIMED_PASS", "reference": "EV-MODEL-001"},
+    "inference_regression": {"status": "CLAIMED_PASS", "reference": "EV-REGRESSION-001"},
+    "performance_budget": {"status": "CLAIMED_PASS", "reference": "EV-PERFORMANCE-001"},
+    "quantization_evaluation": {"status": "CLAIMED_PASS", "reference": "EV-QUANTIZATION-001"},
+    "tool_call_safety": {"status": "CLAIMED_PASS", "reference": "EV-TOOLS-001"},
+    "target_acceptance": {"status": "NOT_RUN", "reference": null}
+  }
+}
