@@ -384,3 +384,15 @@
 | 官方数据库文档 | SQLite Atomic Commit | https://www.sqlite.org/atomiccommit.html | 核对 SQLite 单库事务原子提交的模型及其存储环境前提；不据此宣称本章已验证掉电、文件系统或存储介质故障恢复。 | 页面内容（核验时） | 仅链接并原创归纳，不复制文档正文或图表。 | 2026-09-24 |
 
 本章 `outbox.py`、3 条合成 `offline_telemetry.jsonl`、11 项标准库测试及 Fig-53 Mermaid 均为本书原创。SQLite 逻辑队列容量与单条载荷上限不代表数据库物理文件或闪存写入量具有同等硬上限；没有真实 MQTT 包、Broker、网络、UNO Q、传感器、断电注入或目标介质耐久性测试；Fig-53 SVG 尚未生成和目视审阅。
+
+## 第八篇第4章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方概念文档 | OpenTelemetry Signals | https://opentelemetry.io/docs/concepts/signals/ | 核对指标、日志和追踪作为不同遥测信号的概念；本章报告不是 OpenTelemetry SDK 或 Collector 输出。 | 官方在线文档（核验时） | 仅链接和原创转述，不复制文档正文或图表。 | 2026-09-24 |
+| 官方术语文档 | OpenTelemetry Glossary：Cardinality | https://opentelemetry.io/docs/concepts/glossary/ | 核对属性基数及高基数对后端资源的影响；本章只提出标签设计注意事项，不规定通用的设备标识方案。 | 官方在线文档（核验时） | 仅链接和原创转述，不复制文档正文或图表。 | 2026-09-24 |
+| 官方实践指南 | Prometheus Instrumentation | https://prometheus.io/docs/practices/instrumentation/ | 核对 counter/gauge、时间戳、队列长度/等待时间和标签基数相关实践；其中建议须结合目标监控系统与设备规模评估。 | 官方在线文档（核验时） | 仅链接和原创归纳，不复制文档示例代码或正文。 | 2026-09-24 |
+| 官方实践指南 | Prometheus Metric and label naming | https://prometheus.io/docs/practices/naming/ | 核对指标单位/名称与避免高基数标签的建议；本章没有定义 Prometheus 导出器或实际指标名。 | 官方在线文档（核验时） | 仅链接和原创归纳，不复制文档表格或正文。 | 2026-09-24 |
+| 官方实践指南 | Prometheus Alerting | https://prometheus.io/docs/practices/alerting/ | 核对关注症状、留出短暂抖动余量和控制告警噪声等通用实践；本章教学 finding 不是生产告警规则。 | 官方在线文档（核验时） | 仅链接和原创归纳，不复制文档正文或图表。 | 2026-09-24 |
+
+本章 `health_observer.py`、4 条合成 `health_snapshots.jsonl`、14 项标准库行为测试及 Fig-54 Mermaid 均为本书原创。判定器仅处理受限本地 JSONL，并按显式参考时刻输出建议；没有 OpenTelemetry SDK/Collector、Prometheus、指标后端、通知渠道、真实设备身份、Broker、网络或 UNO Q 实机验证。90 秒、300 秒、600 秒、0.80 与重试阈值是固定教学假设；单快照分类没有迟滞、告警去重/确认/恢复状态；Fig-54 SVG 尚未生成和目视审阅。

@@ -37,3 +37,15 @@
 - 内容要求：展示契约校验、事件键去重/冲突、容量上限、过期清理、严格 FIFO、模拟发布结果与保留事件键的退避重试。
 - 来源边界：原创教学流程；MQTT QoS/会话依据 OASIS 标准，事务与提交边界依据 Python/SQLite 官方文档；不表示这些组织发布或认可本图。
 - 验证边界：本地 SQLite 和脚本化结果模拟；不运行 MQTT 客户端、Broker、网络、传感器或 UNO Q 实机；SVG 尚未渲染和目视审阅。
+
+<a id="fig-54-uno-q-iot-observability-alerts"></a>
+
+## 图 8-4：从健康快照到可操作信号
+
+- 图号：Fig-54
+- 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[IoT 可观测性与告警 Mermaid](../../diagrams/uno-q-iot-observability-alerts.mmd)
+- 正文位置：[第八篇第4章 Fig-54](../../book/第8篇_IoT/第4章_IoT可观测性与告警_从设备状态到可操作信号.md#fig-54-uno-q-iot-observability-alerts)
+- 内容要求：展示输入契约、设备身份与快照时效检查，随后按队列占比、最老事件年龄和发布窗口信号评估；所有结果停留于本地建议报告，不发告警或操作设备。
+- 来源边界：原创教学决策流程；OpenTelemetry 与 Prometheus 官方文档仅用于核对信号、基数和告警设计概念，不表示其组织发布或认可本图。
+- 验证边界：四条固定合成快照与标准库离线分类器；不接入 OpenTelemetry Collector、Prometheus、MQTT Broker、网络、传感器或 UNO Q 实机；SVG 尚未渲染和目视审阅。

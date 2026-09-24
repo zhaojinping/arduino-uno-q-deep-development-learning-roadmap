@@ -1,0 +1,4 @@
+{"device_id":"uno-q-demo-01","boot_id":"boot-demo-a","observed_at_utc":"2026-09-24T10:00:00Z","last_publish_at_utc":"2026-09-24T09:59:50Z","queue_depth":2,"queue_capacity":20,"oldest_event_age_seconds":10,"retries_5m":0,"rejected_5m":0}
+{"device_id":"uno-q-demo-01","boot_id":"boot-demo-a","observed_at_utc":"2026-09-24T10:00:00Z","last_publish_at_utc":"2026-09-24T09:48:00Z","queue_depth":18,"queue_capacity":20,"oldest_event_age_seconds":601,"retries_5m":4,"rejected_5m":0}
+{"device_id":"uno-q-demo-01","boot_id":"boot-demo-a","observed_at_utc":"2026-09-24T09:58:29Z","last_publish_at_utc":"2026-09-24T09:57:00Z","queue_depth":20,"queue_capacity":20,"oldest_event_age_seconds":180,"retries_5m":4,"rejected_5m":0}
+{"device_id":"uno-q-demo-02","boot_id":"boot-demo-b","observed_at_utc":"2026-09-24T10:00:00Z","last_publish_at_utc":"2026-09-24T09:59:50Z","queue_depth":0,"queue_capacity":20,"oldest_event_age_seconds":0,"retries_5m":0,"rejected_5m":0}
