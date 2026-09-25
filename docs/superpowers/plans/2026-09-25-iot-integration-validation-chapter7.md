@@ -104,4 +104,4 @@ self.assertEqual([item["chapter"] for item in report["chapters"]], EXPECTED_CHAP
 - [x] **Step 2: 验证文档。** 新章/图登记链接和双源契约测试通过；排除 fenced code 的全仓 Git 跟踪/未跟踪 Markdown 行内链接扫描为 140 份 Markdown、1067 个本地目标、0 缺失；`git diff --check` 通过。
 - [x] **Step 3: 更新测试计数和验证边界。** 根 README 已更新总章数、测试和链接计数；IoT README/参考索引已更新为15项本章测试；SVG 未渲染与实机未测边界保留。
 - [x] **Step 4: 请求独立审阅并处理发现。** 独立只读审阅未发现 Critical/Important 项；一项 Minor 提醒执行环境变量会继承且该工具不是沙箱，已在章节和运行 README 明确标示边界，并复跑全书测试。另一项 Minor 指出旧链接统计未区分 fenced code；已用排除 fenced code 的全仓扫描重新核验并把正式计数更新为 1067 个目标、0 缺失。
-- [ ] **Step 5: 提交并尝试推送。** 提交消息为 `docs: add IoT integration validation chapter`；只在推送后检查远端分支确认成功，否则报告凭据错误和未同步状态。
+- [x] **Step 5: 提交并尝试推送。** 主交付提交 `fd8e170`（`docs: add IoT integration validation chapter`）已推送成功；受限网络中的首次尝试未能连接 `github.com:443`，经授权重试后远端 `main` 从 `f9c4e6a` 更新到 `fd8e170`。
