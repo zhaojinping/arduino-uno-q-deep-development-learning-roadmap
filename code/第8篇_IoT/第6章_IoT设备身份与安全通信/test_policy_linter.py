@@ -1,6 +1,7 @@
 import json
 import sys
 import unittest
+from datetime import datetime, timezone
 from unittest import mock
 
 try:
@@ -9,6 +10,29 @@ except ModuleNotFoundError as error:
     if error.name != "policy_linter":
         raise
     policy_linter = None
+
+
+def valid_profile(device_id="uno-q-demo-01"):
+    return {
+        "profile_id": "profile-" + device_id,
+        "device_id": device_id,
+        "client_id": device_id,
+        "principal_id": "device:" + device_id,
+        "credential_ref": "synthetic://credential/" + device_id,
+        "credential_type": "x509_client_certificate",
+        "credential_state": "active",
+        "not_before": "2026-01-01T00:00:00Z",
+        "not_after": "2027-01-01T00:00:00Z",
+        "rotation_due_at": "2026-10-01T00:00:00Z",
+        "tls": {
+            "enabled": True,
+            "verify_server": True,
+            "server_name": "broker.example.invalid",
+            "trust_ref": "synthetic://trust/demo-root",
+            "client_auth": "mutual_tls",
+        },
+        "authorization": {"default": "deny", "rules": []},
+    }
 
 
 class ParserBootstrapTests(unittest.TestCase):
@@ -103,3 +127,162 @@ class ParserTests(unittest.TestCase):
     def test_timestamp_requires_zero_padded_fields(self):
         with self.assertRaises(ValueError):
             policy_linter.parse_utc_timestamp("2026-9-24T12:00:00Z")
+
+    def test_valid_identity_tls_profile_has_stable_report_shape(self):
+        report = policy_linter.evaluate_document(
+            {"schema_version": 1, "profiles": [valid_profile()]},
+            reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+        )
+        self.assertEqual(
+            report,
+            [{
+                "profile_id": "profile-uno-q-demo-01",
+                "decision": "PASS",
+                "findings": [],
+            }],
+        )
+        self.assertEqual(set(report[0]), {"profile_id", "decision", "findings"})
+
+    def test_identity_fields_must_be_unique_across_profiles(self):
+        duplicate_cases = (
+            ("profile_id", "PROFILE_ID_REUSED"),
+            ("device_id", "DEVICE_ID_REUSED"),
+            ("principal_id", "DEVICE_PRINCIPAL_REUSED"),
+            ("client_id", "CLIENT_ID_REUSED"),
+            ("credential_ref", "CREDENTIAL_REF_REUSED"),
+        )
+        for field, expected_code in duplicate_cases:
+            first = valid_profile("uno-q-demo-01")
+            second = valid_profile("uno-q-demo-02")
+            second[field] = first[field]
+            with self.subTest(field=field):
+                reports = policy_linter.evaluate_document(
+                    {"schema_version": 1, "profiles": [first, second]},
+                    reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+                )
+                findings = reports[1]["findings"]
+                self.assertIn(expected_code, {finding["code"] for finding in findings})
+                self.assertTrue(all(set(finding) == {"code", "path"} for finding in findings))
+                self.assertNotIn(first[field], repr(findings))
+
+    def test_client_and_principal_must_match_device_mapping(self):
+        profile = valid_profile()
+        profile["client_id"] = "some-other-client"
+        profile["principal_id"] = "some-other-principal"
+        report = policy_linter.evaluate_document(
+            {"schema_version": 1, "profiles": [profile]},
+            reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+        )[0]
+        codes = {finding["code"] for finding in report["findings"]}
+        self.assertIn("CLIENT_ID_MISMATCH", codes)
+        self.assertIn("DEVICE_PRINCIPAL_MISMATCH", codes)
+
+    def test_tls_baseline_is_enforced(self):
+        profile = valid_profile()
+        profile["tls"].update({
+            "enabled": False,
+            "verify_server": False,
+            "server_name": "*.example.invalid",
+            "trust_ref": "",
+            "client_auth": "none",
+        })
+        report = policy_linter.evaluate_document(
+            {"schema_version": 1, "profiles": [profile]},
+            reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+        )[0]
+        codes = {finding["code"] for finding in report["findings"]}
+        self.assertTrue({
+            "TLS_DISABLED",
+            "TLS_SERVER_VERIFY_DISABLED",
+            "TLS_SERVER_NAME_INVALID",
+            "TLS_TRUST_REF_INVALID",
+            "TLS_CLIENT_AUTH_INVALID",
+        }.issubset(codes))
+
+    def test_nested_profile_tls_and_authorization_shapes_are_exact(self):
+        cases = []
+        profile = valid_profile()
+        del profile["credential_ref"]
+        cases.append((profile, "PROFILE_FIELDS_INVALID"))
+        profile = valid_profile()
+        profile["unexpected"] = "synthetic"
+        cases.append((profile, "PROFILE_FIELDS_INVALID"))
+        profile = valid_profile()
+        del profile["tls"]["trust_ref"]
+        cases.append((profile, "TLS_FIELDS_INVALID"))
+        profile = valid_profile()
+        profile["tls"]["unexpected"] = "synthetic"
+        cases.append((profile, "TLS_FIELDS_INVALID"))
+        profile = valid_profile()
+        del profile["authorization"]["rules"]
+        cases.append((profile, "AUTHORIZATION_FIELDS_INVALID"))
+        for profile, expected_code in cases:
+            with self.subTest(expected_code=expected_code, keys=tuple(profile)):
+                report = policy_linter.evaluate_document(
+                    {"schema_version": 1, "profiles": [profile]},
+                    reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+                )[0]
+                self.assertIn(expected_code, {f["code"] for f in report["findings"]})
+
+    def test_identity_tls_and_timestamp_types_are_checked(self):
+        profile = valid_profile()
+        profile["device_id"] = None
+        profile["tls"]["enabled"] = 1
+        profile["tls"]["verify_server"] = 1
+        profile["tls"]["server_name"] = 12
+        profile["tls"]["trust_ref"] = False
+        profile["credential_type"] = "other"
+        profile["not_before"] = "2026-9-1T00:00:00Z"
+        report = policy_linter.evaluate_document(
+            {"schema_version": 1, "profiles": [profile]},
+            reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+        )[0]
+        codes = {finding["code"] for finding in report["findings"]}
+        self.assertTrue({
+            "IDENTITY_FIELD_INVALID",
+            "TLS_ENABLED_INVALID",
+            "TLS_SERVER_VERIFY_INVALID",
+            "TLS_SERVER_NAME_INVALID",
+            "TLS_TRUST_REF_INVALID",
+            "CREDENTIAL_TYPE_INVALID",
+            "TIMESTAMP_INVALID",
+        }.issubset(codes))
+
+    def test_profile_order_and_malformed_profile_are_preserved(self):
+        reports = policy_linter.evaluate_document(
+            {"schema_version": 1, "profiles": [valid_profile("demo-1"), None, valid_profile("demo-2")]},
+            reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+        )
+        self.assertEqual(
+            [report["profile_id"] for report in reports],
+            ["profile-demo-1", None, "profile-demo-2"],
+        )
+        self.assertEqual(reports[1]["decision"], "DENY")
+        self.assertEqual(reports[1]["findings"], [{"code": "PROFILE_SHAPE_INVALID", "path": "profiles[1]"}])
+
+    def test_malformed_document_and_nested_containers_do_not_crash(self):
+        reference_time = datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc)
+        invalid_documents = (
+            ({"schema_version": True, "profiles": [valid_profile()]}, "DOCUMENT_SHAPE_INVALID"),
+            ({"schema_version": 1, "profiles": None}, "PROFILES_INVALID"),
+        )
+        for document, expected_code in invalid_documents:
+            with self.subTest(expected_code=expected_code):
+                report = policy_linter.evaluate_document(
+                    document, reference_time=reference_time
+                )[0]
+                self.assertEqual(report["decision"], "DENY")
+                self.assertEqual(report["findings"][0]["code"], expected_code)
+
+        for field, invalid_value, expected_code in (
+            ("tls", [], "TLS_FIELDS_INVALID"),
+            ("authorization", None, "AUTHORIZATION_FIELDS_INVALID"),
+        ):
+            profile = valid_profile()
+            profile[field] = invalid_value
+            with self.subTest(field=field):
+                report = policy_linter.evaluate_document(
+                    {"schema_version": 1, "profiles": [profile]},
+                    reference_time=reference_time,
+                )[0]
+                self.assertIn(expected_code, {f["code"] for f in report["findings"]})
