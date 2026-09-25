@@ -752,3 +752,82 @@ class ChapterContractTests(unittest.TestCase):
         for source, target in local_targets:
             with self.subTest(link=source):
                 self.assertTrue(target.is_file(), f"unresolved local link: {source}")
+
+    def test_summary_and_part_readme_register_chapter_six_in_order(self):
+        target = (
+            "book/第8篇_IoT/第6章_IoT设备身份与安全通信_从连接信任到最小权限.md"
+        )
+        summary = (REPOSITORY_ROOT / "SUMMARY.md").read_text(encoding="utf-8")
+        part_readme = (
+            REPOSITORY_ROOT / "book/第8篇_IoT/README.md"
+        ).read_text(encoding="utf-8")
+        root_readme = (REPOSITORY_ROOT / "README.md").read_text(encoding="utf-8")
+        chapter_five = "第5章 IoT 远程命令与受控维护"
+        chapter_six = "第6章 IoT 设备身份与安全通信"
+
+        self.assertIn(target, summary)
+        summary_five = summary.find(chapter_five)
+        summary_six = summary.find(chapter_six)
+        part_five = part_readme.find(chapter_five)
+        part_six = part_readme.find(chapter_six)
+        self.assertGreaterEqual(summary_six, 0)
+        self.assertGreaterEqual(part_six, 0)
+        if summary_five >= 0 and summary_six >= 0:
+            self.assertLess(summary_five, summary_six)
+        if part_five >= 0 and part_six >= 0:
+            self.assertLess(part_five, part_six)
+        self.assertTrue((REPOSITORY_ROOT / target).is_file())
+        self.assertIn("第八篇第1～6章已建立为初稿", root_readme)
+        self.assertIn("全书当前共 55 章", root_readme)
+
+    def test_chapter_six_sources_are_registered_with_versions_and_boundaries(self):
+        references = (REPOSITORY_ROOT / "resources/references.md").read_text(
+            encoding="utf-8"
+        )
+        marker = "## 第八篇第6章补充核验"
+        self.assertIn(marker, references)
+        section = references.split(marker, 1)[-1]
+        for source in (
+            "NIST IR 8259 Rev. 1",
+            "https://csrc.nist.gov/pubs/ir/8259/r1/final",
+            "NISTIR 8259A",
+            "https://csrc.nist.gov/pubs/ir/8259/a/final",
+            "IoT Device Cybersecurity Requirement Catalogs",
+            "https://pages.nist.gov/IoT-Device-Cybersecurity-Requirement-Catalogs/technical/",
+            "RFC 9846",
+            "https://datatracker.ietf.org/doc/rfc9846/",
+            "RFC 9525",
+            "https://datatracker.ietf.org/doc/html/rfc9525",
+            "OASIS MQTT Version 5.0",
+            "https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html",
+        ):
+            with self.subTest(source=source):
+                self.assertIn(source, section)
+        for field in ("用途与边界", "版本基线", "版权处理", "2026-09-25"):
+            self.assertIn(field, section)
+        self.assertIn("仅链接", section)
+
+    def test_fig56_registry_anchor_and_local_links_resolve(self):
+        registry_path = REPOSITORY_ROOT / "images/第8篇_IoT/README.md"
+        registry = registry_path.read_text(encoding="utf-8")
+        anchor = "fig-56-uno-q-iot-device-identity-secure-communication"
+        self.assertIn(f'<a id="{anchor}"></a>', registry)
+        self.assertIn("Fig-56", registry)
+        self.assertIn("SVG 待生成并完成预览审阅", registry)
+
+        targets = re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", registry)
+        chapter_targets = [target for target in targets if anchor in target]
+        self.assertTrue(chapter_targets, "Fig-56 chapter backlink is missing")
+        self.assertTrue(
+            any("uno-q-iot-device-identity-secure-communication.mmd" in target
+                for target in targets),
+            "Fig-56 Mermaid source link is missing",
+        )
+        for source in chapter_targets + [
+            target for target in targets
+            if "uno-q-iot-device-identity-secure-communication.mmd" in target
+        ]:
+            path_part = source.split("#", 1)[0]
+            resolved = (registry_path.parent / path_part).resolve()
+            with self.subTest(link=source):
+                self.assertTrue(resolved.is_file(), f"unresolved local link: {source}")

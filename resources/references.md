@@ -406,3 +406,16 @@
 | 国际标准 | OASIS MQTT Version 5.0 | https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html | 核对请求/响应模式及 Response Topic、Correlation Data 等关联属性；这些协议属性不承担请求者身份认证、应用授权或物理效果证明。 | OASIS Standard，2019-03-07 | 仅链接并原创解释，不复制标准文本或图表。 | 2026-09-24 |
 
 本章 `remote_command_gate.py`、6 条合成 JSONL 命令、30 项标准库测试及 Fig-55 Mermaid 均为本书原创。脚本限制 JSON 输入、命令有效期和进程内账本容量，只演示本地状态逻辑；固定命令样例的未知结果表示本地账本无对应记录，不模拟网络超时或设备回执丢失。没有身份认证、签名/TLS/MQTT ACL、真实 Broker/网络、持久账本、并发/崩溃恢复、Bridge/RPC、MCU、传感器、UNO Q 或物理执行验证。300 秒、4096 字节、64 条与采样周期范围都是教学策略；Fig-55 SVG 尚未生成和目视审阅。
+
+## 第八篇第6章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方技术报告 | [NIST IR 8259 Rev. 1：IoT 产品制造商基础网络安全活动](https://csrc.nist.gov/pubs/ir/8259/r1/final) | https://csrc.nist.gov/pubs/ir/8259/r1/final | 参考制造商在产品销售前可考虑的网络安全活动；本章将其作为风险管理背景，不把该报告解释为设备认证或本章实现要求。 | NIST IR 8259 Rev. 1 Final，2026-04-20；取代 2020 年 IR 8259 | 仅链接并原创归纳，不复制报告正文或图表。 | 2026-09-25 |
+| 官方技术报告 | [NISTIR 8259A：IoT 设备网络安全能力核心基线](https://csrc.nist.gov/pubs/ir/8259/a/final) | https://csrc.nist.gov/pubs/ir/8259/a/final | 作为识别设备网络安全能力的共同核心起点；本章只借鉴唯一识别、数据保护和逻辑访问等概念，不声称符合基线或通过认证。 | NISTIR 8259A Final，2020-05-29 | 仅链接并原创归纳，不复制报告正文或图表。 | 2026-09-25 |
+| 官方能力目录 | [NIST IoT Device Cybersecurity Requirement Catalogs：Technical Capabilities](https://pages.nist.gov/IoT-Device-Cybersecurity-Requirement-Catalogs/technical/) | https://pages.nist.gov/IoT-Device-Cybersecurity-Requirement-Catalogs/technical/ | 对照设备标识、配置、数据保护、接口逻辑访问、软件更新、网络安全状态感知和设备安全等能力；目录应按设备、用途和风险裁剪，不是普遍强制清单。 | 官方在线目录；目录说明当前版本为 Spring 2021，页面核验于 2026-09-25 | 仅链接并原创归纳，不复制目录内容或图表。 | 2026-09-25 |
+| IETF 标准 | [RFC 9846：TLS 1.3 协议](https://datatracker.ietf.org/doc/rfc9846/) | https://datatracker.ietf.org/doc/rfc9846/ | 核对 TLS 1.3 安全通道协议背景；协议本身不替应用定义服务身份校验或 MQTT 授权，本章代码也未实现或运行 TLS。 | RFC 9846，2026-07；取代 RFC 8446 | 仅链接并原创说明，不复制 RFC 正文。 | 2026-09-25 |
+| IETF 标准 | [RFC 9525：TLS 中的服务身份](https://datatracker.ietf.org/doc/html/rfc9525) | https://datatracker.ietf.org/doc/html/rfc9525 | 核对客户端参考身份与服务端呈现身份的匹配原则；该服务身份规则不替代证书链、信任锚或应用授权校验。 | RFC 9525，2023-11；取代 RFC 6125 | 仅链接并原创说明，不复制 RFC 正文。 | 2026-09-25 |
+| 国际标准 | [OASIS MQTT Version 5.0](https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html) | https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html | 核对 Client ID、连接认证/授权背景及主题发布订阅边界；本章精确到每设备、每方向的默认拒绝 ACL 是教程策略，不能由 Client ID 自动推导身份或授权。 | OASIS Standard，2019-03-07 | 仅链接并原创归纳，不复制标准文本或图表。 | 2026-09-25 |
+
+本章 `policy_linter.py`、合成 `profiles.json`、45 项本地标准库测试及 Fig-56 Mermaid 为本书原创。检查器只静态审阅固定 JSON 策略并报告 PASS/DENY；不验证密钥、证书链、TLS 握手、Broker 认证/授权、网络连接、Bridge/RPC、MCU 或 UNO Q 实机。Fig-56 SVG 尚未生成和目视审阅。

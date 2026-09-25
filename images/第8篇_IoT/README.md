@@ -61,3 +61,15 @@
 - 内容要求：展示请求契约、目标/操作/权限及有效期门、命令 ID 幂等与冲突、接纳后执行、结果状态和 UNKNOWN 对账停止路径。
 - 来源边界：本书原创教学流程；NIST IoT 能力基线用于设计能力参照，OASIS MQTT 5.0 用于核对请求/响应关联属性；不表示 NIST、OASIS 或 Arduino 发布/认可本图。
 - 验证边界：30 项本机标准库测试和固定合成命令演示；不认证身份、不运行 MQTT/Broker/网络、不连接 UNO Q、MCU、Bridge、传感器或执行器；账本只在内存，SVG 尚未渲染和目视审阅。
+
+<a id="fig-56-uno-q-iot-device-identity-secure-communication"></a>
+
+## 图 8-6：从连接信任到每设备最小权限
+
+- 图号：Fig-56
+- 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[IoT 设备身份与安全通信 Mermaid](../../diagrams/uno-q-iot-device-identity-secure-communication.mmd)
+- 正文位置：[第八篇第6章 Fig-56](../../book/第8篇_IoT/第6章_IoT设备身份与安全通信_从连接信任到最小权限.md#fig-56-uno-q-iot-device-identity-secure-communication)
+- 内容要求：展示设备入网、唯一设备身份、TLS 服务名验证、Broker 认证及主体绑定、默认拒绝 MQTT ACL、允许的数据流，以及轮换/吊销和拒绝/审计路径。
+- 来源边界：本书原创教学流程；NIST 能力资料、TLS RFC 与 OASIS MQTT 标准用于校准概念边界，不表示上述组织或 Arduino 发布或认可本图。
+- 验证边界：本机静态策略检查器与合成配置；未运行真实证书、TLS、Broker ACL、网络、Bridge/RPC、MCU 或 UNO Q 硬件；SVG 尚未渲染和目视审阅。
