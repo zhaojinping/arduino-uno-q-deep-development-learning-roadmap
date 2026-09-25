@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～8 章已建立为初稿，第七篇第 1～8 章已建立为初稿，第八篇第1～6章已建立为初稿**，全书当前共 55 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～8 章已建立为初稿，第七篇第 1～8 章已建立为初稿，第八篇第1～7章已建立为初稿**，全书当前共 56 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
@@ -97,7 +97,7 @@
 
 第八篇第5章[IoT 远程命令与受控维护：从授权请求到结果对账](book/第8篇_IoT/第5章_IoT远程命令与受控维护_从授权请求到结果对账.md)已建立为 `draft` 初稿；配套标准库命令门、6 条合成 JSONL 命令、30 项测试和 Fig-55 Mermaid。样例区分 `ACCEPTED`、`APPLIED`、`OBSERVED` 与 `UNKNOWN`，覆盖目标/权限/参数/时间检查、幂等回放和命令 ID 冲突；不实现身份认证、持久账本或真实网络设备操作。
 
-第八篇第6章 45 项标准库测试通过；六个 IoT 章节目录合计 121 项测试通过。全仓库 pytest 回归为 347 项测试、253 个子测试通过。全书 137 份受 Git 跟踪的 Markdown 文件含 1041 个本地文件链接目标，扫描均解析到现存目标；`SUMMARY.md` 登记 55 章。Fig-51～Fig-56 的 Mermaid 正文与源文件逐图核对；SVG 尚未生成或目视审阅。未运行真实 TLS、Broker、网络或 UNO Q 安全测试。
+第八篇第7章[IoT 综合验证：从分章测试到系统级证据](book/第8篇_IoT/第7章_IoT综合验证_从分章测试到系统级证据.md)已建立为 `draft` 初稿，提供固定范围的本地测试聚合器、15 项标准库测试和 Fig-57 Mermaid；本地报告始终为 `LOCAL_TESTS_ONLY`、`target_validation=NOT_RUN` 且不授权部署。第1～6章固定目录共 121 项测试通过。全仓库 pytest 回归为 362 项测试、298 个子测试通过。全仓 Markdown 扫描（排除 fenced code）覆盖 140 份文件和 1067 个本地行内链接目标，缺失目标为 0；`SUMMARY.md` 登记 56 章。Fig-51～Fig-57 的 Mermaid 正文与源文件逐图核对；SVG 尚未生成或目视审阅。未运行真实 TLS、Broker、网络或 UNO Q 安全测试。
 
 ## 目录结构
 
@@ -107,6 +107,10 @@ code/       可复现实验、Arduino 草图及配套脚本
 code/第8篇_IoT/第1章_IoT开发基础/
 code/第8篇_IoT/第2章_MQTT消息上报与幂等消费/
 code/第8篇_IoT/第4章_IoT可观测性与告警/
+code/第8篇_IoT/第7章_IoT综合验证/
+code/第8篇_IoT/第7章_IoT综合验证/README.md
+code/第8篇_IoT/第7章_IoT综合验证/aggregate_local_tests.py
+code/第8篇_IoT/第7章_IoT综合验证/test_aggregate_local_tests.py
 diagrams/   Mermaid 源文件及可追溯的图示产物
 images/     正文使用的图片及其说明
 resources/  参考资料索引与资源登记
@@ -125,9 +129,10 @@ docs/       项目设计说明和写作规范
 
 ## 当前验证记录
 
-最后验证日期：`2026-09-23`。当前已创建并核验的文件/目录如下：
+最后验证日期：`2026-09-25`。当前已创建并核验的文件/目录如下：
 
 ```text
+docs/superpowers/plans/2026-09-25-iot-integration-validation-chapter7.md
 README.md
 SUMMARY.md
 docs/writing-guidelines.md
@@ -347,6 +352,11 @@ diagrams/uno-q-ai-tool-call-guard.mmd
 diagrams/uno-q-ai-readiness-evidence-gate.mmd
 diagrams/uno-q-iot-telemetry-contract.mmd
 diagrams/uno-q-mqtt-idempotent-consumer.mmd
+book/第8篇_IoT/第7章_IoT综合验证_从分章测试到系统级证据.md
+code/第8篇_IoT/第7章_IoT综合验证/README.md
+code/第8篇_IoT/第7章_IoT综合验证/aggregate_local_tests.py
+code/第8篇_IoT/第7章_IoT综合验证/test_aggregate_local_tests.py
+diagrams/uno-q-iot-integration-validation.mmd
 images/第7篇_AI/README.md
 images/第8篇_IoT/README.md
 ```

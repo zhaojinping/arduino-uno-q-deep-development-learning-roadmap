@@ -419,3 +419,11 @@
 | 国际标准 | [OASIS MQTT Version 5.0](https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html) | https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html | 核对 Client ID、连接认证/授权背景及主题发布订阅边界；本章精确到每设备、每方向的默认拒绝 ACL 是教程策略，不能由 Client ID 自动推导身份或授权。 | OASIS Standard，2019-03-07 | 仅链接并原创归纳，不复制标准文本或图表。 | 2026-09-25 |
 
 本章 `policy_linter.py`、合成 `profiles.json`、45 项本地标准库测试及 Fig-56 Mermaid 为本书原创。检查器只静态审阅固定 JSON 策略并报告 PASS/DENY；不验证密钥、证书链、TLS 握手、Broker 认证/授权、网络连接、Bridge/RPC、MCU 或 UNO Q 实机。Fig-56 SVG 尚未生成和目视审阅。
+
+## 第八篇第7章补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方语言文档 | Python `unittest`：命令行与测试发现 | https://docs.python.org/3.14/library/unittest.html | 核对 `python -m unittest discover`、`-s` 起始目录和 `-p` 文件匹配参数；本章将这些选项用于六个仓库内固定目录，不对目标设备或部署环境作判断。 | Python 3.14.7 官方文档（页面核验于 2026-09-25） | 仅链接并原创说明，不复制文档正文或示例代码。 | 2026-09-25 |
+
+本章 `aggregate_local_tests.py`、第1～6章 121 项测试结果汇总、15 项聚合器/文档契约测试及 Fig-57 Mermaid 均为本书原创。聚合器本身只在本机依次启动仓库内六个固定 `unittest` 目录，不接受任意路径/命令，也不自行建立网络/Broker/硬件连接。测试子进程继承调用环境并以当前用户权限执行，故本工具不是沙箱，只应运行可信仓库的测试代码；本次固定样例未连接网络、Broker、传感器、Bridge/RPC、MCU 或 UNO Q。报告固定为 `LOCAL_TESTS_ONLY`、`target_validation=NOT_RUN` 与 `deployment_authorized=false`；本机测试结果不是目标环境验收或部署批准。Fig-57 SVG 尚未渲染和目视审阅。

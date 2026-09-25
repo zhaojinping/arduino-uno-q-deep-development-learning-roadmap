@@ -1,0 +1,20 @@
+flowchart LR
+    subgraph LOCAL[开发机：固定范围本地验证]
+        A[第1章测试目录] --> B[第2章测试目录]
+        B --> C[第3章测试目录]
+        C --> D[第4章测试目录]
+        D --> E[第5章测试目录]
+        E --> F[第6章测试目录]
+        F --> G{六章均发现非空测试且退出码为0?}
+    end
+    G -- 否：失败、超时或空测试 --> H[LOCAL_TESTS_FAIL]
+    G -- 是 --> I[LOCAL_TESTS_PASS<br/>target_validation = NOT_RUN<br/>deployment_authorized = false]
+    G -- 聚合记录缺项或顺序错误 --> J[LOCAL_TESTS_INCOMPLETE]
+    H --> K[保存本机报告并定位对应章节]
+    J --> K
+    I --> K
+    K -. 不触发目标板或部署动作 .-> L[项目责任人另行制定目标环境验证]
+    L --> M{精确目标、授权、安全前置条件和原始证据齐全?}
+    M -- 否 --> N[保持 BLOCKED / NOT_RUN / UNKNOWN]
+    M -- 是 --> O[独立复核目标环境证据]
+    O -. 组织内另行批准 .-> P[独立部署决策]

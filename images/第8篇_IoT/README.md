@@ -73,3 +73,15 @@
 - 内容要求：展示设备入网、唯一设备身份、TLS 服务名验证、Broker 认证及主体绑定、默认拒绝 MQTT ACL、允许的数据流，以及轮换/吊销和拒绝/审计路径。
 - 来源边界：本书原创教学流程；NIST 能力资料、TLS RFC 与 OASIS MQTT 标准用于校准概念边界，不表示上述组织或 Arduino 发布或认可本图。
 - 验证边界：本机静态策略检查器与合成配置；未运行真实证书、TLS、Broker ACL、网络、Bridge/RPC、MCU 或 UNO Q 硬件；SVG 尚未渲染和目视审阅。
+
+<a id="fig-57-uno-q-iot-integration-validation"></a>
+
+## 图 8-7：从章节测试聚合到独立目标验收
+
+- 图号：Fig-57
+- 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[IoT 综合验证 Mermaid](../../diagrams/uno-q-iot-integration-validation.mmd)
+- 正文位置：[第八篇第7章 Fig-57](../../book/第8篇_IoT/第7章_IoT综合验证_从分章测试到系统级证据.md#fig-57-uno-q-iot-integration-validation)
+- 内容要求：展示六章固定本机测试的串行执行、失败/超时/空测试与聚合缺项分支；本机结论不自动触发目标板验收或部署批准。
+- 来源边界：本书原创流程图；Python `unittest` 官方文档只核对固定目录发现命令的接口，不表示 Python、Arduino 或其他组织发布或认可本图。
+- 验证边界：121 项前六章本机合成/静态测试及本章聚合逻辑；不访问网络、Broker、传感器、Bridge/RPC、MCU、UNO Q 或部署环境；SVG 尚未渲染和目视审阅。

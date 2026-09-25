@@ -791,8 +791,8 @@ class ChapterContractTests(unittest.TestCase):
         if part_five >= 0 and part_six >= 0:
             self.assertLess(part_five, part_six)
         self.assertTrue((REPOSITORY_ROOT / target).is_file())
-        self.assertIn("第八篇第1～6章已建立为初稿", root_readme)
-        self.assertIn("全书当前共 55 章", root_readme)
+        self.assertIn("第八篇第1～7章已建立为初稿", root_readme)
+        self.assertIn("全书当前共 56 章", root_readme)
 
     def test_chapter_six_sources_are_registered_with_versions_and_boundaries(self):
         references = (REPOSITORY_ROOT / "resources/references.md").read_text(
@@ -800,7 +800,7 @@ class ChapterContractTests(unittest.TestCase):
         )
         marker = "## 第八篇第6章补充核验"
         self.assertIn(marker, references)
-        section = references.split(marker, 1)[-1]
+        section = references.split(marker, 1)[1].split("\n## ", 1)[0]
         for source in (
             "NIST IR 8259 Rev. 1",
             "https://csrc.nist.gov/pubs/ir/8259/r1/final",
@@ -821,17 +821,54 @@ class ChapterContractTests(unittest.TestCase):
             self.assertIn(field, section)
         self.assertIn("仅链接", section)
 
+        table_lines = [
+            line.strip()
+            for line in section.splitlines()
+            if line.strip().startswith("|")
+            and not all(
+                re.fullmatch(r":?-{3,}:?", cell.strip())
+                for cell in line.strip().strip("|").split("|")
+            )
+        ]
+        headers = [cell.strip() for cell in table_lines[0].strip("|").split("|")]
+        self.assertEqual(
+            headers,
+            ["类型", "来源", "地址", "用途与边界", "版本基线", "版权处理", "核验日期"],
+        )
+        rows = [
+            [cell.strip() for cell in line.strip("|").split("|")]
+            for line in table_lines[1:]
+        ]
+        self.assertEqual(len(rows), 6)
+        for row in rows:
+            with self.subTest(source=row[1] if len(row) > 1 else "missing"):
+                self.assertEqual(len(row), len(headers))
+                self.assertTrue(all(row))
+                self.assertEqual(row[6], "2026-09-25")
+
     def test_fig56_registry_anchor_and_local_links_resolve(self):
         registry_path = REPOSITORY_ROOT / "images/第8篇_IoT/README.md"
         registry = registry_path.read_text(encoding="utf-8")
+        chapter_path = (
+            REPOSITORY_ROOT
+            / "book/第8篇_IoT/第6章_IoT设备身份与安全通信_从连接信任到最小权限.md"
+        )
+        chapter = chapter_path.read_text(encoding="utf-8")
         anchor = "fig-56-uno-q-iot-device-identity-secure-communication"
-        self.assertIn(f'<a id="{anchor}"></a>', registry)
+        anchor_line = rf'^<a id="{re.escape(anchor)}"></a>$'
+        self.assertEqual(len(re.findall(anchor_line, registry, re.MULTILINE)), 1)
+        self.assertEqual(len(re.findall(anchor_line, chapter, re.MULTILINE)), 1)
         self.assertIn("Fig-56", registry)
         self.assertIn("SVG 待生成并完成预览审阅", registry)
 
         targets = re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", registry)
         chapter_targets = [target for target in targets if anchor in target]
         self.assertTrue(chapter_targets, "Fig-56 chapter backlink is missing")
+        for target in chapter_targets:
+            path_part, fragment = target.split("#", 1)
+            resolved = (registry_path.parent / path_part).resolve()
+            self.assertEqual(fragment, anchor)
+            self.assertEqual(resolved, chapter_path.resolve())
         self.assertTrue(
             any("uno-q-iot-device-identity-secure-communication.mmd" in target
                 for target in targets),
