@@ -1,0 +1,14 @@
+flowchart LR
+    A[登记：唯一 device_id<br/>签发并绑定独立凭据] --> B[Arduino UNO Q IoT 客户端<br/>稳定 ClientID 与受保护凭据]
+    B --> C{TLS：验证 Broker 证书链<br/>匹配独立 reference identifier}
+    C -- 失败 --> X[拒绝并留审计事件<br/>不回退明文]
+    C -- 通过 --> D{Broker 验证客户端凭据<br/>principal 是否绑定 device_id?}
+    D -- 认证失败或映射不符 --> X
+    D -- 通过 --> E{default deny<br/>校验动作、方向与设备主题}
+    E -- 未显式允许、通配或跨设备 --> X
+    E -- 最小权限允许 --> F[仅发布自身 telemetry/state<br/>或订阅自身 commands]
+    F --> G[安全 MQTT 通道中的业务数据]
+    G --> H{到期、计划轮换或凭据吊销?}
+    H -- 是 --> I[停用旧凭据<br/>登记、签发并绑定新凭据]
+    I --> A
+    H -- 否 --> B

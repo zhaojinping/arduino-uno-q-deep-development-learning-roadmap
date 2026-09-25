@@ -1,5 +1,6 @@
 import json
 import io
+import re
 import sys
 import tempfile
 import unittest
@@ -674,3 +675,80 @@ class CLITests(unittest.TestCase):
             "硬件验证",
         ):
             self.assertIn(limitation, readme)
+
+
+REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
+CHAPTER_PATH = (
+    REPOSITORY_ROOT
+    / "book/第8篇_IoT/第6章_IoT设备身份与安全通信_从连接信任到最小权限.md"
+)
+FIGURE_PATH = REPOSITORY_ROOT / "diagrams/uno-q-iot-device-identity-secure-communication.mmd"
+
+
+class ChapterBootstrapTests(unittest.TestCase):
+    def test_chapter_and_figure_assets_exist(self):
+        self.assertTrue(CHAPTER_PATH.is_file(), "Task 6 chapter has not been created")
+        self.assertTrue(FIGURE_PATH.is_file(), "Fig-56 source has not been created")
+
+
+@unittest.skipUnless(
+    CHAPTER_PATH.is_file() and FIGURE_PATH.is_file(),
+    "chapter and Fig-56 assets are not implemented yet",
+)
+class ChapterContractTests(unittest.TestCase):
+    def test_chapter_metadata_headings_and_cli_contract(self):
+        chapter = CHAPTER_PATH.read_text(encoding="utf-8")
+        front_matter = chapter.split("---", 2)[1]
+        self.assertIn("title: 第6章 IoT 设备身份与安全通信：从连接信任到最小权限", front_matter)
+        self.assertIn("part: 8", front_matter)
+        self.assertIn("chapter: 6", front_matter)
+        self.assertIn("status: draft", front_matter)
+        self.assertIn("last_verified: 2026-09-25", front_matter)
+        self.assertIn("# 第6章 IoT 设备身份与安全通信：从连接信任到最小权限", chapter)
+        for heading in (
+            "## 学习目标",
+            "## 背景与边界",
+            "## 操作与实验",
+            "## 验证结果",
+            "## 常见问题",
+            "## 延伸阅读",
+        ):
+            self.assertIn(heading, chapter)
+
+        command_fragment = '--now "2026-09-24T12:00:00Z"'
+        self.assertIn(command_fragment, chapter)
+        code_readme = (
+            REPOSITORY_ROOT
+            / "code/第8篇_IoT/第6章_IoT设备身份与安全通信/README.md"
+        ).read_text(encoding="utf-8")
+        self.assertIn(command_fragment, code_readme)
+        self.assertIn("PASS", chapter)
+        self.assertIn("DENY", chapter)
+        self.assertIn("Fig-56", chapter)
+
+    def test_mermaid_block_is_identical_to_fig56_source_and_has_fail_closed_paths(self):
+        chapter = CHAPTER_PATH.read_text(encoding="utf-8")
+        diagram = FIGURE_PATH.read_text(encoding="utf-8").strip()
+        marker = "```mermaid"
+        self.assertEqual(chapter.count(marker), 1)
+        body = chapter.split(marker, 1)[1].split("```", 1)[0].strip()
+        self.assertEqual(body, diagram)
+        self.assertIn("拒绝", diagram)
+        self.assertIn("审计", diagram)
+        self.assertIn("轮换", diagram)
+        self.assertIn("吊销", diagram)
+        self.assertIn("明文", diagram)
+
+    def test_local_markdown_links_resolve_to_repository_files(self):
+        chapter = CHAPTER_PATH.read_text(encoding="utf-8")
+        targets = re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", chapter)
+        local_targets = []
+        for target in targets:
+            path_part = target.split("#", 1)[0]
+            if not path_part or path_part.startswith(("http://", "https://", "mailto:")):
+                continue
+            local_targets.append((target, (CHAPTER_PATH.parent / path_part).resolve()))
+        self.assertGreaterEqual(len(local_targets), 5)
+        for source, target in local_targets:
+            with self.subTest(link=source):
+                self.assertTrue(target.is_file(), f"unresolved local link: {source}")
