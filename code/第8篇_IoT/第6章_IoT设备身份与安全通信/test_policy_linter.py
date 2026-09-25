@@ -1,5 +1,7 @@
 import json
+import sys
 import unittest
+from unittest import mock
 
 try:
     import policy_linter
@@ -22,6 +24,10 @@ class ParserTests(unittest.TestCase):
             "profiles": [{}] * 32,
         }).encode("utf-8")
         self.assertEqual(len(policy_linter.parse_document(valid)["profiles"]), 32)
+        at_limit = b'{"schema_version":1,"profiles":[{}]}'
+        at_limit += b" " * (32768 - len(at_limit))
+        self.assertEqual(len(at_limit), 32768)
+        self.assertEqual(len(policy_linter.parse_document(at_limit)["profiles"]), 1)
         invalid = (
             b"[]",
             b'{"schema_version":1,"profiles":null}',
@@ -36,14 +42,49 @@ class ParserTests(unittest.TestCase):
             policy_linter.parse_document(b" " * 32769)
 
     def test_duplicate_member_is_rejected(self):
-        with self.assertRaisesRegex(ValueError, "DUPLICATE_JSON_KEY"):
-            policy_linter.parse_document(
-                b'{"schema_version":1,"profiles":[],"profiles":[]}'
-            )
+        samples = (
+            b'{"schema_version":1,"profiles":[],"profiles":[]}',
+            b'{"schema_version":1,"profiles":[{"x":1,"x":2}]}',
+        )
+        for raw in samples:
+            with self.subTest(raw_length=len(raw)), self.assertRaisesRegex(
+                ValueError, "DUPLICATE_JSON_KEY"
+            ):
+                policy_linter.parse_document(raw)
 
     def test_nonfinite_and_invalid_utf8_are_rejected(self):
-        for raw in (b'{"schema_version":1,"profiles":[],"x":NaN}', bytes((255,))):
-            with self.subTest(raw=raw), self.assertRaises(ValueError):
+        nonfinite = (
+            b'{"schema_version":1,"profiles":[],"x":NaN}',
+            b'{"schema_version":1,"profiles":[Infinity]}',
+            b'{"schema_version":1,"profiles":[-Infinity]}',
+        )
+        for raw in nonfinite:
+            with self.subTest(raw=raw), self.assertRaisesRegex(
+                ValueError, "JSON_CONSTANT_INVALID"
+            ):
+                policy_linter.parse_document(raw)
+        with self.assertRaisesRegex(ValueError, "UTF8_INVALID"):
+            policy_linter.parse_document(bytes((255,)))
+
+    def test_long_integer_uses_stable_decoder_error(self):
+        set_limit = getattr(sys, "set_int_max_str_digits", None)
+        if set_limit is None:
+            self.skipTest("runtime has no configurable JSON integer digit limit")
+        previous_limit = sys.get_int_max_str_digits()
+        try:
+            set_limit(640)
+            raw = b'{"schema_version":' + b"9" * 1000 + b',"profiles":[{}]}'
+            with self.assertRaisesRegex(ValueError, "^JSON_INVALID$"):
+                policy_linter.parse_document(raw)
+        finally:
+            set_limit(previous_limit)
+
+    def test_decoder_recursion_error_uses_stable_code(self):
+        raw = b'{"schema_version":1,"profiles":[{}]}'
+        with mock.patch.object(
+            policy_linter.json, "loads", side_effect=RecursionError
+        ):
+            with self.assertRaisesRegex(ValueError, "^JSON_INVALID$"):
                 policy_linter.parse_document(raw)
 
     def test_bool_is_not_schema_version_one(self):

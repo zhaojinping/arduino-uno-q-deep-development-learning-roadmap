@@ -6,17 +6,21 @@ MAX_PROFILE_BYTES = 32768
 MAX_PROFILES = 32
 
 
+class _ParserInputError(ValueError):
+    """A deliberate parser rejection with a stable public problem code."""
+
+
 def _unique_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
     result: dict[str, object] = {}
     for key, value in pairs:
         if key in result:
-            raise ValueError("DUPLICATE_JSON_KEY")
+            raise _ParserInputError("DUPLICATE_JSON_KEY")
         result[key] = value
     return result
 
 
 def _reject_constant(_value: str) -> None:
-    raise ValueError("JSON_CONSTANT_INVALID")
+    raise _ParserInputError("JSON_CONSTANT_INVALID")
 
 
 def parse_document(raw: bytes) -> dict[str, object]:
@@ -36,7 +40,9 @@ def parse_document(raw: bytes) -> dict[str, object]:
             object_pairs_hook=_unique_object,
             parse_constant=_reject_constant,
         )
-    except json.JSONDecodeError:
+    except _ParserInputError:
+        raise
+    except (RecursionError, ValueError):
         raise ValueError("JSON_INVALID") from None
 
     if not isinstance(document, dict):
