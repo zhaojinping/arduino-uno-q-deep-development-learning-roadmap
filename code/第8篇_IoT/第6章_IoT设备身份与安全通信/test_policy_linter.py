@@ -35,6 +35,17 @@ def valid_profile(device_id="uno-q-demo-01"):
     }
 
 
+def evaluate_one(profile):
+    return policy_linter.evaluate_document(
+        {"schema_version": 1, "profiles": [profile]},
+        reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+    )[0]
+
+
+def finding_codes(report):
+    return {finding["code"] for finding in report["findings"]}
+
+
 class ParserBootstrapTests(unittest.TestCase):
     def test_parser_module_is_available(self):
         self.assertIsNotNone(policy_linter, "policy_linter.py has not been created")
@@ -223,6 +234,99 @@ class ParserTests(unittest.TestCase):
                     reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
                 )[0]
                 self.assertIn(expected_code, {f["code"] for f in report["findings"]})
+
+    def test_exact_own_device_acl_pairs_are_allowed(self):
+        profile = valid_profile()
+        device_id = profile["device_id"]
+        profile["authorization"]["rules"] = [
+            {"effect": "allow", "operation": "publish", "topic": f"demo/v1/devices/{device_id}/telemetry"},
+            {"effect": "allow", "operation": "publish", "topic": f"demo/v1/devices/{device_id}/state"},
+            {"effect": "allow", "operation": "subscribe", "topic": f"demo/v1/devices/{device_id}/commands"},
+        ]
+        report = evaluate_one(profile)
+        self.assertEqual(report["decision"], "PASS")
+        self.assertFalse(finding_codes(report))
+
+    def test_default_must_deny_and_wrong_topic_directions_are_rejected(self):
+        profile = valid_profile()
+        profile["authorization"] = {
+            "default": "allow",
+            "rules": [
+                {"effect": "allow", "operation": "subscribe", "topic": "demo/v1/devices/uno-q-demo-01/telemetry"},
+                {"effect": "allow", "operation": "publish", "topic": "demo/v1/devices/uno-q-demo-01/commands"},
+            ],
+        }
+        report = evaluate_one(profile)
+        codes = finding_codes(report)
+        self.assertIn("ACL_DEFAULT_NOT_DENY", codes)
+        self.assertIn("ACL_RULE_NOT_ALLOWED", codes)
+        self.assertEqual(report["decision"], "DENY")
+
+    def test_wildcards_and_cross_device_topics_are_rejected(self):
+        profile = valid_profile()
+        profile["authorization"]["rules"] = [
+            {"effect": "allow", "operation": "subscribe", "topic": "demo/v1/devices/+/commands"},
+            {"effect": "allow", "operation": "subscribe", "topic": "demo/v1/devices/#"},
+            {"effect": "allow", "operation": "subscribe", "topic": "demo/v1/devices/uno-q-demo-02/commands"},
+            {"effect": "allow", "operation": "publish", "topic": "demo/v1/devices/uno-q-demo-02"},
+        ]
+        codes = finding_codes(evaluate_one(profile))
+        self.assertIn("ACL_WILDCARD_TOO_BROAD", codes)
+        self.assertIn("ACL_CROSS_DEVICE_TOPIC", codes)
+
+    def test_unknown_duplicate_and_malformed_rules_are_rejected(self):
+        profile = valid_profile()
+        permitted = {
+            "effect": "allow",
+            "operation": "publish",
+            "topic": "demo/v1/devices/uno-q-demo-01/state",
+        }
+        profile["authorization"]["rules"] = [
+            permitted,
+            dict(permitted),
+            {"effect": "allow", "operation": "execute", "topic": "demo/v1/devices/uno-q-demo-01/state"},
+            {"effect": "deny", "operation": "publish", "topic": "demo/v1/devices/uno-q-demo-01/state"},
+            {"effect": "allow", "operation": "publish"},
+            {"effect": "allow", "operation": "publish", "topic": "demo/v1/devices/uno-q-demo-01/state", "qos": 1},
+            {"effect": "allow", "operation": "publish", "topic": None},
+        ]
+        report = evaluate_one(profile)
+        codes = finding_codes(report)
+        self.assertTrue({
+            "ACL_DUPLICATE_RULE",
+            "ACL_OPERATION_INVALID",
+            "ACL_RULE_NOT_ALLOWED",
+            "ACL_RULE_FIELDS_INVALID",
+        }.issubset(codes))
+        self.assertTrue(all(set(finding) == {"code", "path"} for finding in report["findings"]))
+
+    def test_acl_rule_limit_is_sixteen(self):
+        profile = valid_profile()
+        profile["authorization"]["rules"] = [
+            {
+                "effect": "allow",
+                "operation": "publish",
+                "topic": f"demo/v1/devices/uno-q-demo-01/custom/{index}",
+            }
+            for index in range(16)
+        ]
+        codes_at_limit = finding_codes(evaluate_one(profile))
+        self.assertNotIn("ACL_RULE_LIMIT_EXCEEDED", codes_at_limit)
+        profile["authorization"]["rules"].append({
+            "effect": "allow",
+            "operation": "publish",
+            "topic": "demo/v1/devices/uno-q-demo-01/custom/16",
+        })
+        self.assertIn("ACL_RULE_LIMIT_EXCEEDED", finding_codes(evaluate_one(profile)))
+
+    def test_acl_findings_do_not_echo_topic_values(self):
+        profile = valid_profile()
+        marker = "synthetic-topic-marker"
+        profile["authorization"]["rules"] = [
+            {"effect": "allow", "operation": "publish", "topic": marker}
+        ]
+        report = evaluate_one(profile)
+        self.assertNotIn(marker, json.dumps(report, sort_keys=True))
 
     def test_identity_tls_and_timestamp_types_are_checked(self):
         profile = valid_profile()

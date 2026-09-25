@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 
 MAX_PROFILE_BYTES = 32768
 MAX_PROFILES = 32
+MAX_RULES_PER_PROFILE = 16
 
 
 class _ParserInputError(ValueError):
@@ -129,6 +130,87 @@ def _invalid_document_report(code: str, path: str) -> list[dict[str, object]]:
     findings: list[dict[str, str]] = []
     _add_finding(findings, code, path)
     return [_report(None, findings)]
+
+
+def _evaluate_acl(
+    authorization: dict[str, object],
+    device_id: str | None,
+    profile_path: str,
+    findings: list[dict[str, str]],
+) -> None:
+    authorization_path = f"{profile_path}.authorization"
+    if authorization.get("default") != "deny":
+        _add_finding(
+            findings,
+            "ACL_DEFAULT_NOT_DENY",
+            f"{authorization_path}.default",
+        )
+
+    rules = authorization.get("rules")
+    if not isinstance(rules, list):
+        return
+    if len(rules) > MAX_RULES_PER_PROFILE:
+        _add_finding(
+            findings,
+            "ACL_RULE_LIMIT_EXCEEDED",
+            f"{authorization_path}.rules",
+        )
+        return
+
+    seen_rules: set[tuple[str, str, str]] = set()
+    allowed_pairs = set()
+    if device_id is not None:
+        device_topic = f"demo/v1/devices/{device_id}"
+        allowed_pairs = {
+            ("publish", f"{device_topic}/telemetry"),
+            ("publish", f"{device_topic}/state"),
+            ("subscribe", f"{device_topic}/commands"),
+        }
+
+    for index, rule in enumerate(rules):
+        rule_path = f"{authorization_path}.rules[{index}]"
+        if not isinstance(rule, dict) or set(rule) != {"effect", "operation", "topic"}:
+            _add_finding(findings, "ACL_RULE_FIELDS_INVALID", rule_path)
+            continue
+
+        effect = rule["effect"]
+        operation = rule["operation"]
+        topic = rule["topic"]
+        if not all(isinstance(value, str) and value.strip() for value in (effect, operation, topic)):
+            _add_finding(findings, "ACL_RULE_FIELDS_INVALID", rule_path)
+            continue
+
+        rule_identity = (effect, operation, topic)
+        if rule_identity in seen_rules:
+            _add_finding(findings, "ACL_DUPLICATE_RULE", rule_path)
+        else:
+            seen_rules.add(rule_identity)
+
+        if "+" in topic or "#" in topic:
+            _add_finding(findings, "ACL_WILDCARD_TOO_BROAD", f"{rule_path}.topic")
+            continue
+
+        if operation not in {"publish", "subscribe"}:
+            _add_finding(findings, "ACL_OPERATION_INVALID", f"{rule_path}.operation")
+            continue
+
+        if effect != "allow":
+            _add_finding(findings, "ACL_RULE_NOT_ALLOWED", rule_path)
+            continue
+
+        if (operation, topic) in allowed_pairs:
+            continue
+
+        topic_parts = topic.split("/")
+        if (
+            device_id is not None
+            and len(topic_parts) >= 4
+            and topic_parts[:3] == ["demo", "v1", "devices"]
+            and topic_parts[3] != device_id
+        ):
+            _add_finding(findings, "ACL_CROSS_DEVICE_TOPIC", f"{rule_path}.topic")
+        else:
+            _add_finding(findings, "ACL_RULE_NOT_ALLOWED", rule_path)
 
 
 def evaluate_document(
@@ -315,6 +397,13 @@ def evaluate_document(
                     findings,
                     "AUTHORIZATION_RULES_INVALID",
                     f"{authorization_path}.rules",
+                )
+            else:
+                _evaluate_acl(
+                    authorization,
+                    device_id,
+                    profile_path,
+                    findings,
                 )
 
         reports.append(_report(profile_id, findings))
