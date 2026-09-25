@@ -753,6 +753,20 @@ class ChapterContractTests(unittest.TestCase):
             with self.subTest(link=source):
                 self.assertTrue(target.is_file(), f"unresolved local link: {source}")
 
+        code_readme_path = (
+            REPOSITORY_ROOT
+            / "code/第8篇_IoT/第6章_IoT设备身份与安全通信/README.md"
+        )
+        code_readme = code_readme_path.read_text(encoding="utf-8")
+        code_links = re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", code_readme)
+        for source in code_links:
+            path_part = source.split("#", 1)[0]
+            if not path_part or path_part.startswith(("http://", "https://", "mailto:")):
+                continue
+            target = (code_readme_path.parent / path_part).resolve()
+            with self.subTest(code_readme_link=source):
+                self.assertTrue(target.is_file(), f"unresolved local link: {source}")
+
     def test_summary_and_part_readme_register_chapter_six_in_order(self):
         target = (
             "book/第8篇_IoT/第6章_IoT设备身份与安全通信_从连接信任到最小权限.md"
