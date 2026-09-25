@@ -107,6 +107,10 @@ _IDENTITY_FIELDS = {
 }
 
 
+def _is_valid_device_topic_segment(device_id: str) -> bool:
+    return bool(device_id) and not any(character in device_id for character in "/+#\x00")
+
+
 def _add_finding(
     findings: list[dict[str, str]], code: str, path: str
 ) -> None:
@@ -159,7 +163,7 @@ def _evaluate_acl(
 
     seen_rules: set[tuple[str, str, str]] = set()
     allowed_pairs = set()
-    if device_id is not None:
+    if device_id is not None and _is_valid_device_topic_segment(device_id):
         device_topic = f"demo/v1/devices/{device_id}"
         allowed_pairs = {
             ("publish", f"{device_topic}/telemetry"),
@@ -268,6 +272,12 @@ def evaluate_document(
         device_id = valid_identity.get("device_id")
         client_id = valid_identity.get("client_id")
         principal_id = valid_identity.get("principal_id")
+        if device_id is not None and not _is_valid_device_topic_segment(device_id):
+            _add_finding(
+                findings,
+                "DEVICE_ID_TOPIC_SEGMENT_INVALID",
+                f"{profile_path}.device_id",
+            )
         if device_id is not None and client_id is not None and client_id != device_id:
             _add_finding(
                 findings,

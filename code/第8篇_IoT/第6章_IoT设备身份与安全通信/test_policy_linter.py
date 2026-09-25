@@ -328,6 +328,22 @@ class ParserTests(unittest.TestCase):
         report = evaluate_one(profile)
         self.assertNotIn(marker, json.dumps(report, sort_keys=True))
 
+    def test_device_id_must_be_a_single_literal_mqtt_topic_level(self):
+        for invalid_device_id in (
+            "uno-q/demo",
+            "uno-q+demo",
+            "uno-q#demo",
+            "uno-q\x00demo",
+        ):
+            with self.subTest(device_id=invalid_device_id):
+                report = evaluate_one(valid_profile(invalid_device_id))
+                self.assertEqual(report["decision"], "DENY")
+                self.assertIn(
+                    "DEVICE_ID_TOPIC_SEGMENT_INVALID",
+                    finding_codes(report),
+                )
+                self.assertNotIn(invalid_device_id, repr(report["findings"]))
+
     def test_identity_tls_and_timestamp_types_are_checked(self):
         profile = valid_profile()
         profile["device_id"] = None
