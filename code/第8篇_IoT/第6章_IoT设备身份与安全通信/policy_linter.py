@@ -1,6 +1,8 @@
 import json
 import re
+import sys
 from datetime import datetime, timezone
+from pathlib import Path
 
 
 MAX_PROFILE_BYTES = 32768
@@ -8,6 +10,7 @@ MAX_PROFILES = 32
 MAX_RULES_PER_PROFILE = 16
 MAX_SECRET_SCAN_DEPTH = 256
 MAX_SECRET_SCAN_NODES = 50000
+PROFILE_FILE = Path(__file__).resolve().with_name("profiles.json")
 
 _SENSITIVE_FIELD_NAMES = frozenset({
     "password",
@@ -555,3 +558,69 @@ def evaluate_document(
         reports.append(_report(profile_id, findings))
 
     return reports
+
+
+_PARSER_ERROR_CODES = frozenset({
+    "INPUT_TYPE_INVALID",
+    "INPUT_SIZE_INVALID",
+    "SECRET_LITERAL_REJECTED",
+    "UTF8_INVALID",
+    "DUPLICATE_JSON_KEY",
+    "JSON_CONSTANT_INVALID",
+    "JSON_INVALID",
+    "ROOT_TYPE_INVALID",
+    "ROOT_KEYS_INVALID",
+    "SCHEMA_VERSION_INVALID",
+    "PROFILES_INVALID",
+})
+
+
+def run_cli(argv=None, *, stdout=None, stderr=None) -> int:
+    """Run the offline linter using only the adjacent synthetic profile file."""
+    output_stream = sys.stdout if stdout is None else stdout
+    error_stream = sys.stderr if stderr is None else stderr
+    arguments = sys.argv[1:] if argv is None else argv
+
+    if (
+        not isinstance(arguments, (list, tuple))
+        or len(arguments) != 2
+        or arguments[0] != "--now"
+        or not isinstance(arguments[1], str)
+    ):
+        error_stream.write("CLI_ARGUMENTS_INVALID\n")
+        return 2
+
+    try:
+        reference_time = parse_utc_timestamp(arguments[1])
+    except ValueError:
+        error_stream.write("TIMESTAMP_INVALID\n")
+        return 2
+
+    try:
+        raw = PROFILE_FILE.read_bytes()
+    except OSError:
+        error_stream.write("INPUT_READ_FAILED\n")
+        return 2
+
+    try:
+        document = parse_document(raw)
+    except ValueError as error:
+        problem_code = str(error)
+        if problem_code not in _PARSER_ERROR_CODES:
+            problem_code = "JSON_INVALID"
+        error_stream.write(problem_code + "\n")
+        return 2
+
+    reports = evaluate_document(document, reference_time=reference_time)
+    for report in reports:
+        output_stream.write(
+            json.dumps(report, ensure_ascii=False, separators=(",", ":")) + "\n"
+        )
+
+    if any(report["decision"] != "PASS" for report in reports):
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(run_cli())

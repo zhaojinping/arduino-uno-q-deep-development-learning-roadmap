@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "profiles": [
+    {
+      "profile_id": "profile-uno-q-demo-01",
+      "device_id": "uno-q-demo-01",
+      "client_id": "uno-q-demo-01",
+      "principal_id": "device:uno-q-demo-01",
+      "credential_ref": "synthetic://credential/uno-q-demo-01",
+      "credential_type": "x509_client_certificate",
+      "credential_state": "active",
+      "not_before": "2026-01-01T00:00:00Z",
+      "not_after": "2027-01-01T00:00:00Z",
+      "rotation_due_at": "2026-10-01T00:00:00Z",
+      "tls": {
+        "enabled": true,
+        "verify_server": true,
+        "server_name": "broker.example.invalid",
+        "trust_ref": "synthetic://trust/demo-root",
+        "client_auth": "mutual_tls"
+      },
+      "authorization": {
+        "default": "deny",
+        "rules": []
+      }
+    },
+    {
+      "profile_id": "tls-verification-disabled",
+      "device_id": "uno-q-tls-disabled",
+      "client_id": "uno-q-tls-disabled",
+      "principal_id": "device:uno-q-tls-disabled",
+      "credential_ref": "synthetic://credential/tls-disabled",
+      "credential_type": "x509_client_certificate",
+      "credential_state": "active",
+      "not_before": "2026-01-01T00:00:00Z",
+      "not_after": "2027-01-01T00:00:00Z",
+      "rotation_due_at": "2026-10-01T00:00:00Z",
+      "tls": {
+        "enabled": true,
+        "verify_server": false,
+        "server_name": "broker.example.invalid",
+        "trust_ref": "synthetic://trust/demo-root",
+        "client_auth": "mutual_tls"
+      },
+      "authorization": {
+        "default": "deny",
+        "rules": []
+      }
+    },
+    {
+      "profile_id": "shared-principal",
+      "device_id": "uno-q-shared-b",
+      "client_id": "uno-q-shared-b",
+      "principal_id": "device:uno-q-tls-disabled",
+      "credential_ref": "synthetic://credential/shared-b",
+      "credential_type": "x509_client_certificate",
+      "credential_state": "active",
+      "not_before": "2026-01-01T00:00:00Z",
+      "not_after": "2027-01-01T00:00:00Z",
+      "rotation_due_at": "2026-10-01T00:00:00Z",
+      "tls": {
+        "enabled": true,
+        "verify_server": true,
+        "server_name": "broker.example.invalid",
+        "trust_ref": "synthetic://trust/demo-root",
+        "client_auth": "mutual_tls"
+      },
+      "authorization": {
+        "default": "deny",
+        "rules": []
+      }
+    },
+    {
+      "profile_id": "wildcard-acl",
+      "device_id": "uno-q-wildcard",
+      "client_id": "uno-q-wildcard",
+      "principal_id": "device:uno-q-wildcard",
+      "credential_ref": "synthetic://credential/wildcard",
+      "credential_type": "x509_client_certificate",
+      "credential_state": "active",
+      "not_before": "2026-01-01T00:00:00Z",
+      "not_after": "2027-01-01T00:00:00Z",
+      "rotation_due_at": "2026-10-01T00:00:00Z",
+      "tls": {
+        "enabled": true,
+        "verify_server": true,
+        "server_name": "broker.example.invalid",
+        "trust_ref": "synthetic://trust/demo-root",
+        "client_auth": "mutual_tls"
+      },
+      "authorization": {
+        "default": "deny",
+        "rules": [
+          {
+            "effect": "allow",
+            "operation": "subscribe",
+            "topic": "demo/v1/devices/uno-q-wildcard/commands/#"
+          }
+        ]
+      }
+    },
+    {
+      "profile_id": "cross-device-acl",
+      "device_id": "uno-q-cross-device",
+      "client_id": "uno-q-cross-device",
+      "principal_id": "device:uno-q-cross-device",
+      "credential_ref": "synthetic://credential/cross-device",
+      "credential_type": "x509_client_certificate",
+      "credential_state": "active",
+      "not_before": "2026-01-01T00:00:00Z",
+      "not_after": "2027-01-01T00:00:00Z",
+      "rotation_due_at": "2026-10-01T00:00:00Z",
+      "tls": {
+        "enabled": true,
+        "verify_server": true,
+        "server_name": "broker.example.invalid",
+        "trust_ref": "synthetic://trust/demo-root",
+        "client_auth": "mutual_tls"
+      },
+      "authorization": {
+        "default": "deny",
+        "rules": [
+          {
+            "effect": "allow",
+            "operation": "subscribe",
+            "topic": "demo/v1/devices/uno-q-other/commands"
+          }
+        ]
+      }
+    },
+    {
+      "profile_id": "expired-credential",
+      "device_id": "uno-q-expired",
+      "client_id": "uno-q-expired",
+      "principal_id": "device:uno-q-expired",
+      "credential_ref": "synthetic://credential/expired",
+      "credential_type": "x509_client_certificate",
+      "credential_state": "active",
+      "not_before": "2024-01-01T00:00:00Z",
+      "not_after": "2025-12-31T23:59:59Z",
+      "rotation_due_at": "2026-10-01T00:00:00Z",
+      "tls": {
+        "enabled": true,
+        "verify_server": true,
+        "server_name": "broker.example.invalid",
+        "trust_ref": "synthetic://trust/demo-root",
+        "client_auth": "mutual_tls"
+      },
+      "authorization": {
+        "default": "deny",
+        "rules": []
+      }
+    },
+    {
+      "profile_id": "revoked-credential",
+      "device_id": "uno-q-revoked",
+      "client_id": "uno-q-revoked",
+      "principal_id": "device:uno-q-revoked",
+      "credential_ref": "synthetic://credential/revoked",
+      "credential_type": "x509_client_certificate",
+      "credential_state": "revoked",
+      "not_before": "2026-01-01T00:00:00Z",
+      "not_after": "2027-01-01T00:00:00Z",
+      "rotation_due_at": "2026-10-01T00:00:00Z",
+      "tls": {
+        "enabled": true,
+        "verify_server": true,
+        "server_name": "broker.example.invalid",
+        "trust_ref": "synthetic://trust/demo-root",
+        "client_auth": "mutual_tls"
+      },
+      "authorization": {
+        "default": "deny",
+        "rules": []
+      }
+    }
+  ]
+}

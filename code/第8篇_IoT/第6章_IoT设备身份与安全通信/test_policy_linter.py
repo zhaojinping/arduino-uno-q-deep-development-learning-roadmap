@@ -1,7 +1,10 @@
 import json
+import io
 import sys
+import tempfile
 import unittest
 from datetime import datetime, timezone
+from pathlib import Path
 from unittest import mock
 
 try:
@@ -507,3 +510,167 @@ class ParserTests(unittest.TestCase):
         repeated = {"safe": None}
         profile["unexpected"] = [repeated] * 50001
         self.assertIn("SECRET_LITERAL_REJECTED", finding_codes(evaluate_one(profile)))
+
+
+class CLIBootstrapTests(unittest.TestCase):
+    def test_cli_entrypoint_is_available(self):
+        self.assertTrue(callable(getattr(policy_linter, "run_cli", None)))
+
+
+@unittest.skipIf(
+    policy_linter is None or not callable(getattr(policy_linter, "run_cli", None)),
+    "offline CLI is not implemented yet",
+)
+class CLITests(unittest.TestCase):
+    def setUp(self):
+        self.tempdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tempdir.cleanup)
+        self.profile_file = Path(self.tempdir.name) / "profiles.json"
+
+    def write_profiles(self, profiles):
+        document = {"schema_version": 1, "profiles": profiles}
+        self.profile_file.write_text(json.dumps(document), encoding="utf-8")
+        return self.profile_file
+
+    def invoke_cli(self, argv):
+        stdout = io.StringIO()
+        stderr = io.StringIO()
+        with mock.patch.object(policy_linter, "PROFILE_FILE", self.profile_file):
+            status = policy_linter.run_cli(argv, stdout=stdout, stderr=stderr)
+        return status, stdout.getvalue(), stderr.getvalue()
+
+    def test_all_pass_profiles_return_zero(self):
+        self.write_profiles([valid_profile()])
+        status, stdout, stderr = self.invoke_cli(
+            ["--now", "2026-09-24T12:00:00Z"]
+        )
+        self.assertEqual(status, 0)
+        self.assertEqual(stderr, "")
+        self.assertIn('"decision":"PASS"', stdout)
+        self.assertEqual(len(stdout.splitlines()), 1)
+
+    def test_policy_denial_returns_one(self):
+        profile = valid_profile()
+        profile["tls"]["verify_server"] = False
+        self.write_profiles([profile])
+        status, stdout, stderr = self.invoke_cli(
+            ["--now", "2026-09-24T12:00:00Z"]
+        )
+        self.assertEqual(status, 1)
+        self.assertEqual(stderr, "")
+        self.assertIn('"decision":"DENY"', stdout)
+        self.assertIn("TLS_SERVER_VERIFY_DISABLED", stdout)
+
+    def test_missing_and_unreadable_files_return_stable_error(self):
+        self.profile_file = Path(self.tempdir.name) / "missing.json"
+        cases = (self.profile_file, Path(self.tempdir.name))
+        for profile_file in cases:
+            with self.subTest(profile_file_is_directory=profile_file.is_dir()):
+                self.profile_file = profile_file
+                status, stdout, stderr = self.invoke_cli(
+                    ["--now", "2026-09-24T12:00:00Z"]
+                )
+                self.assertEqual(status, 2)
+                self.assertEqual(stdout, "")
+                self.assertEqual(stderr, "INPUT_READ_FAILED\n")
+
+    def test_invalid_time_missing_now_and_path_options_are_rejected(self):
+        self.write_profiles([valid_profile()])
+        cases = (
+            ([], "CLI_ARGUMENTS_INVALID"),
+            (["--now", "not-a-time"], "TIMESTAMP_INVALID"),
+            (["--now", "2026-09-24T12:00:00Z", "--profile-file", "elsewhere.json"],
+             "CLI_ARGUMENTS_INVALID"),
+        )
+        for argv, expected_code in cases:
+            with self.subTest(argv=argv):
+                status, stdout, stderr = self.invoke_cli(argv)
+                self.assertEqual(status, 2)
+                self.assertEqual(stdout, "")
+                self.assertEqual(stderr, expected_code + "\n")
+
+    def test_parse_and_secret_errors_are_stable_and_never_echo_input(self):
+        samples = (
+            (b"{malformed", "JSON_INVALID", ""),
+            (
+                b'{"schema_version":1,"profiles":[{"private_key":"synthetic-fake-marker"}]}',
+                "SECRET_LITERAL_REJECTED",
+                "synthetic-fake-marker",
+            ),
+        )
+        for raw, expected_code, marker in samples:
+            with self.subTest(expected_code=expected_code):
+                self.profile_file.write_bytes(raw)
+                status, stdout, stderr = self.invoke_cli(
+                    ["--now", "2026-09-24T12:00:00Z"]
+                )
+                self.assertEqual(status, 2)
+                self.assertEqual(stdout, "")
+                self.assertEqual(stderr, expected_code + "\n")
+                if marker:
+                    self.assertNotIn(marker, stdout + stderr)
+
+    def test_jsonl_is_deterministic_and_keeps_profile_order(self):
+        profiles = [valid_profile("uno-q-order-a"), valid_profile("uno-q-order-b")]
+        self.write_profiles(profiles)
+        args = ["--now", "2026-09-24T12:00:00Z"]
+        first = self.invoke_cli(args)
+        second = self.invoke_cli(args)
+        self.assertEqual(first, second)
+        reports = [json.loads(line) for line in first[1].splitlines()]
+        self.assertEqual(
+            [report["profile_id"] for report in reports],
+            ["profile-uno-q-order-a", "profile-uno-q-order-b"],
+        )
+
+    def test_synthetic_fixture_and_readme_match_cli_contract(self):
+        chapter_dir = Path(__file__).resolve().parent
+        fixture_path = chapter_dir / "profiles.json"
+        readme_path = chapter_dir / "README.md"
+        document = policy_linter.parse_document(fixture_path.read_bytes())
+        reports = policy_linter.evaluate_document(
+            document,
+            reference_time=datetime(2026, 9, 24, 12, 0, tzinfo=timezone.utc),
+        )
+        decisions = {
+            report["profile_id"]: report["decision"] for report in reports
+        }
+        self.assertEqual(sum(value == "PASS" for value in decisions.values()), 1)
+        for profile_id in (
+            "shared-principal",
+            "tls-verification-disabled",
+            "wildcard-acl",
+            "cross-device-acl",
+            "expired-credential",
+            "revoked-credential",
+        ):
+            self.assertEqual(decisions[profile_id], "DENY")
+        shared_report = next(
+            report for report in reports if report["profile_id"] == "shared-principal"
+        )
+        self.assertIn("DEVICE_PRINCIPAL_REUSED", finding_codes(shared_report))
+
+        readme = readme_path.read_text(encoding="utf-8")
+        self.assertIn(
+            'python -B policy_linter.py --now "2026-09-24T12:00:00Z"', readme
+        )
+        for field in (
+            "用途：",
+            "运行环境：",
+            "文件位置：",
+            "依赖：",
+            "操作步骤：",
+            "预期输出：",
+            "故障排查：",
+            "验证方式：",
+        ):
+            self.assertIn(field, readme)
+        for limitation in (
+            "证书验证",
+            "密码学证明",
+            "真实 TLS",
+            "Broker",
+            "生产秘密发现",
+            "硬件验证",
+        ):
+            self.assertIn(limitation, readme)
