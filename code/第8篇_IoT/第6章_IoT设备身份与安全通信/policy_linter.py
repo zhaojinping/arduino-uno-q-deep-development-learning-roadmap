@@ -1,14 +1,104 @@
 import json
+import re
 from datetime import datetime, timezone
 
 
 MAX_PROFILE_BYTES = 32768
 MAX_PROFILES = 32
 MAX_RULES_PER_PROFILE = 16
+MAX_SECRET_SCAN_DEPTH = 256
+MAX_SECRET_SCAN_NODES = 50000
+
+_SENSITIVE_FIELD_NAMES = frozenset({
+    "password",
+    "passwd",
+    "token",
+    "accesstoken",
+    "refreshtoken",
+    "secret",
+    "clientsecret",
+    "apikey",
+    "privatekey",
+})
+_PEM_PRIVATE_KEY_HEADERS = (
+    "-----begin private key-----",
+    "-----begin rsa private key-----",
+    "-----begin ec private key-----",
+    "-----begin dsa private key-----",
+    "-----begin openssh private key-----",
+)
+_RAW_SENSITIVE_FIELD_PATTERN = re.compile(
+    rb'"(?:password|passwd|token|access[_ -]?token|refresh[_ -]?token|'
+    rb'secret|client[_ -]?secret|api[_ -]?key|private[_ -]?key)"\s*:',
+    re.IGNORECASE,
+)
 
 
 class _ParserInputError(ValueError):
     """A deliberate parser rejection with a stable public problem code."""
+
+
+def _normalize_field_name(value: str) -> str:
+    return value.replace("_", "").replace("-", "").replace(" ", "").casefold()
+
+
+def _contains_sensitive_text(value: str | bytes | bytearray) -> bool:
+    if isinstance(value, str):
+        normalized = value.casefold()
+        return any(header in normalized for header in _PEM_PRIVATE_KEY_HEADERS)
+
+    lowered = bytes(value).lower()
+    return any(header.encode("ascii") in lowered for header in _PEM_PRIVATE_KEY_HEADERS)
+
+
+def _contains_sensitive_content(value: object) -> bool:
+    """Return true for a known secret marker or incomplete bounded screening.
+
+    This deliberately checks only a fixed set of sensitive field names and
+    prominent PEM private-key headers; it is not a general secret detector.
+    """
+    pending: list[tuple[object, int]] = [(value, 0)]
+    visited_container_ids: set[int] = set()
+    visited_nodes = 0
+
+    while pending:
+        current, depth = pending.pop()
+        if depth > MAX_SECRET_SCAN_DEPTH:
+            return True
+
+        visited_nodes += 1
+        if visited_nodes > MAX_SECRET_SCAN_NODES:
+            return True
+
+        if isinstance(current, (dict, list, tuple)):
+            identity = id(current)
+            if identity in visited_container_ids:
+                continue
+            visited_container_ids.add(identity)
+
+        if isinstance(current, (str, bytes, bytearray)):
+            if _contains_sensitive_text(current):
+                return True
+            continue
+
+        if isinstance(current, dict):
+            for key, child in current.items():
+                if (
+                    isinstance(key, str)
+                    and _normalize_field_name(key) in _SENSITIVE_FIELD_NAMES
+                ):
+                    return True
+                pending.append((child, depth + 1))
+        elif isinstance(current, (list, tuple)):
+            pending.extend((child, depth + 1) for child in current)
+
+    return False
+
+
+def _raw_contains_sensitive_content(raw: bytes) -> bool:
+    if _RAW_SENSITIVE_FIELD_PATTERN.search(raw):
+        return True
+    return _contains_sensitive_text(raw)
 
 
 def _unique_object(pairs: list[tuple[str, object]]) -> dict[str, object]:
@@ -29,6 +119,8 @@ def parse_document(raw: bytes) -> dict[str, object]:
         raise ValueError("INPUT_TYPE_INVALID")
     if len(raw) > MAX_PROFILE_BYTES:
         raise ValueError("INPUT_SIZE_INVALID")
+    if _raw_contains_sensitive_content(raw):
+        raise _ParserInputError("SECRET_LITERAL_REJECTED")
 
     try:
         text = raw.decode("utf-8", errors="strict")
@@ -45,6 +137,9 @@ def parse_document(raw: bytes) -> dict[str, object]:
         raise
     except (RecursionError, ValueError):
         raise ValueError("JSON_INVALID") from None
+
+    if _contains_sensitive_content(document):
+        raise _ParserInputError("SECRET_LITERAL_REJECTED")
 
     if not isinstance(document, dict):
         raise ValueError("ROOT_TYPE_INVALID")
@@ -223,6 +318,9 @@ def evaluate_document(
     reference_time: datetime,
 ) -> list[dict[str, object]]:
     """Evaluate identity and TLS declarations without I/O or mutable state."""
+    if _contains_sensitive_content(document):
+        return _invalid_document_report("SECRET_LITERAL_REJECTED", "$")
+
     if (
         not isinstance(document, dict)
         or set(document) != {"schema_version", "profiles"}
@@ -304,22 +402,60 @@ def evaluate_document(
             )
 
         credential_state = profile.get("credential_state")
-        if not isinstance(credential_state, str) or not credential_state.strip():
+        if credential_state == "revoked":
+            _add_finding(
+                findings,
+                "CREDENTIAL_REVOKED",
+                f"{profile_path}.credential_state",
+            )
+        elif credential_state != "active":
             _add_finding(
                 findings,
                 "CREDENTIAL_STATE_INVALID",
                 f"{profile_path}.credential_state",
             )
 
+        parsed_timestamps: dict[str, datetime] = {}
         for field in ("not_before", "not_after", "rotation_due_at"):
             try:
-                parse_utc_timestamp(profile.get(field))
+                parsed_timestamps[field] = parse_utc_timestamp(profile.get(field))
             except ValueError:
                 _add_finding(
                     findings,
                     "TIMESTAMP_INVALID",
                     f"{profile_path}.{field}",
                 )
+
+        not_before = parsed_timestamps.get("not_before")
+        not_after = parsed_timestamps.get("not_after")
+        if not_before is not None and not_after is not None:
+            if not_before >= not_after:
+                _add_finding(
+                    findings,
+                    "CREDENTIAL_VALIDITY_INTERVAL_INVALID",
+                    f"{profile_path}.not_before",
+                )
+            else:
+                if not_before > reference_time:
+                    _add_finding(
+                        findings,
+                        "CREDENTIAL_NOT_YET_VALID",
+                        f"{profile_path}.not_before",
+                    )
+                if not_after <= reference_time:
+                    _add_finding(
+                        findings,
+                        "CREDENTIAL_EXPIRED",
+                        f"{profile_path}.not_after",
+                    )
+
+        rotation_due_at = parsed_timestamps.get("rotation_due_at")
+        if rotation_due_at is not None and rotation_due_at <= reference_time:
+            _add_finding(
+                findings,
+                "CREDENTIAL_ROTATION_OVERDUE",
+                f"{profile_path}.rotation_due_at",
+            )
 
         tls = profile.get("tls")
         if not isinstance(tls, dict):

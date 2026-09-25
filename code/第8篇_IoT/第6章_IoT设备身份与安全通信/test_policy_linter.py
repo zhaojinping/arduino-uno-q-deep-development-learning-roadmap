@@ -406,3 +406,104 @@ class ParserTests(unittest.TestCase):
                     reference_time=reference_time,
                 )[0]
                 self.assertIn(expected_code, {f["code"] for f in report["findings"]})
+
+    def test_credential_lifecycle_uses_strict_reference_time_boundaries(self):
+        lifecycle_codes = {
+            "CREDENTIAL_NOT_YET_VALID",
+            "CREDENTIAL_EXPIRED",
+            "CREDENTIAL_ROTATION_OVERDUE",
+            "CREDENTIAL_VALIDITY_INTERVAL_INVALID",
+        }
+        cases = (
+            ("not_before", "2026-09-24T12:00:00Z", None),
+            ("not_before", "2026-09-24T12:00:01Z", "CREDENTIAL_NOT_YET_VALID"),
+            ("not_after", "2026-09-24T12:00:00Z", "CREDENTIAL_EXPIRED"),
+            ("not_after", "2026-09-23T12:00:00Z", "CREDENTIAL_EXPIRED"),
+            ("rotation_due_at", "2026-09-24T12:00:00Z", "CREDENTIAL_ROTATION_OVERDUE"),
+        )
+        for field, value, expected_code in cases:
+            profile = valid_profile()
+            profile[field] = value
+            with self.subTest(field=field, value=value):
+                codes = finding_codes(evaluate_one(profile))
+                if expected_code is None:
+                    self.assertFalse(codes.intersection(lifecycle_codes))
+                else:
+                    self.assertIn(expected_code, codes)
+
+    def test_revoked_unknown_state_and_invalid_interval_are_rejected(self):
+        cases = (
+            ("credential_state", "revoked", "CREDENTIAL_REVOKED"),
+            ("credential_state", "pending", "CREDENTIAL_STATE_INVALID"),
+            ("not_after", "2026-01-01T00:00:00Z", "CREDENTIAL_VALIDITY_INTERVAL_INVALID"),
+        )
+        for field, value, expected_code in cases:
+            profile = valid_profile()
+            profile[field] = value
+            if field == "not_after":
+                profile["not_before"] = "2026-01-01T00:00:00Z"
+            with self.subTest(field=field, value=value):
+                self.assertIn(expected_code, finding_codes(evaluate_one(profile)))
+
+    def test_parser_secret_screening_precedes_json_and_schema_errors(self):
+        malformed = (
+            b'{"schema_version":1,"profiles":[{"private_key":"-----BEGIN RSA PRIVATE KEY----- fake"}',
+        )
+        for raw in malformed:
+            with self.subTest(raw_length=len(raw)), self.assertRaisesRegex(
+                ValueError, "^SECRET_LITERAL_REJECTED$"
+            ):
+                policy_linter.parse_document(raw)
+
+        for key in (
+            b'"PASSWORD"',
+            b'"access-token"',
+            b'"client_secret"',
+            b'"API KEY"',
+            b'"private key"',
+        ):
+            raw = b'{"schema_version":1,"profiles":[{' + key + b':"fake"}]}'
+            with self.subTest(key=key), self.assertRaisesRegex(
+                ValueError, "^SECRET_LITERAL_REJECTED$"
+            ):
+                policy_linter.parse_document(raw)
+
+    def test_parser_secret_screening_finds_escaped_field_names(self):
+        raw = b'{"schema_version":1,"profiles":[{"\\u0070assword":"synthetic-secret-marker"}]}'
+        with self.assertRaisesRegex(ValueError, "^SECRET_LITERAL_REJECTED$") as error:
+            policy_linter.parse_document(raw)
+        self.assertNotIn("synthetic-secret-marker", str(error.exception))
+
+    def test_direct_evaluation_rejects_secret_fields_and_redacts_profile_id(self):
+        profile = valid_profile()
+        marker = "synthetic-private-key-marker"
+        profile["client_secret"] = marker
+        report = evaluate_one(profile)
+        self.assertEqual(report["decision"], "DENY")
+        self.assertIn("SECRET_LITERAL_REJECTED", finding_codes(report))
+        self.assertNotIn(marker, json.dumps(report, sort_keys=True))
+
+        profile = valid_profile()
+        marker = "-----BEGIN PRIVATE KEY----- synthetic-marker"
+        profile["profile_id"] = marker
+        report = evaluate_one(profile)
+        self.assertIsNone(report["profile_id"])
+        self.assertIn("SECRET_LITERAL_REJECTED", finding_codes(report))
+        self.assertNotIn(marker, json.dumps(report, sort_keys=True))
+
+    def test_secret_screening_fails_closed_at_depth_and_node_limits(self):
+        deep_value = None
+        for _ in range(257):
+            deep_value = [deep_value]
+        profile = valid_profile()
+        profile["unexpected"] = deep_value
+        self.assertIn("SECRET_LITERAL_REJECTED", finding_codes(evaluate_one(profile)))
+
+        profile = valid_profile()
+        profile["unexpected"] = [None] * 50001
+        self.assertIn("SECRET_LITERAL_REJECTED", finding_codes(evaluate_one(profile)))
+
+        profile = valid_profile()
+        repeated = {"safe": None}
+        profile["unexpected"] = [repeated] * 50001
+        self.assertIn("SECRET_LITERAL_REJECTED", finding_codes(evaluate_one(profile)))
