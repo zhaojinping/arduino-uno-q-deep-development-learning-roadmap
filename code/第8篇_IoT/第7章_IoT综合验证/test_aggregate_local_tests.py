@@ -211,7 +211,7 @@ class ChapterContractTests(unittest.TestCase):
         self.assertIn(CHAPTER_PATH, summary)
         self.assertIn("第7章 IoT 综合验证", part_readme)
         self.assertIn("第八篇第1～7章", root_readme)
-        self.assertIn("全书当前共 59 章", root_readme)
+        self.assertIn("全书当前共 60 章", root_readme)
 
     def test_fig57_anchor_is_unique_and_mermaid_source_matches(self):
         chapter_path = REPOSITORY_ROOT / CHAPTER_PATH

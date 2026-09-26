@@ -34,7 +34,7 @@
 | 官方配置 | ArduinoCore-zephyr boards.txt | https://github.com/arduino/ArduinoCore-zephyr/blob/main/boards.txt | 核对第二篇第 1 章中 UNO Q 的 Zephyr 目标、STM32U585 变体、FQBN 和上传配置属于板级构建信息的边界。 | main | Arduino 官方仓库，按仓库声明使用；本项目只链接和原创解释，不复制配置文件。 | 2026-09-21 |
 | 官方数据表 | STM32U585xx Datasheet | https://www.st.com/resource/en/datasheet/stm32u585oi.pdf | 核对第二篇第 1 章中 STM32U585 的 GPIO/复用功能和电气参数应回到 MCU 数据表核验的边界；不把通用标称值替代具体板级测量。 | DS13086 Rev 10（核验时） | STMicroelectronics 官方数据表；本项目只链接和原创解释，不复制表格或图片。 | 2026-09-21 |
 | 官方文档 | Arduino UNO Q 产品页 | https://docs.arduino.cc/hardware/uno-q | 核对第 2 章的产品定位、双处理器与 Arduino IDE/App Lab 分工，以及第 3 章的 WCBN3536A、Wi-Fi 5、Bluetooth 5.1、UNO headers、Qwiic、底部高速连接器、USB-C 高层用途和内置 RPC，以及第 4 章的 App Lab/IDE/Bridge 边界。 | 网页内容（核验时） | 官方网页，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-20 |
-| 官方数据表 | Arduino UNO Q 数据表 | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对第 2 章的双处理器与 Bridge/RPC 定位，第 3 章的处理器/运行时、1.8 V/3.3 V 电气域、UNO headers、Qwiic、JMEDIA/JMISC 等连接器、USB-C/供电和硬件边界，第 4 章的处理器与 Bridge/RPC 边界，以及第 5 章 Blink LED、App Lab Run、MCU Sketch 与 Linux/Python 日志的验证边界。 | ABX00162 PDF（核验时） | 官方数据表，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-21 |
+| 官方数据表 | Arduino UNO Q 数据表 | https://docs.arduino.cc/resources/datasheets/ABX00162-datasheet.pdf | 核对第 2 章的双处理器与 Bridge/RPC 定位，第 3 章的处理器/运行时、1.8 V/3.3 V 电气域、UNO headers、Qwiic、JMEDIA/JMISC 等连接器、USB-C/供电和硬件边界，第 4 章的处理器与 Bridge/RPC 边界，以及第 5 章 Blink LED、App Lab Run、MCU Sketch 与 Linux/Python 日志的验证边界；第九篇第2章仅据此界定 MPU/MCU 平台边界，不推断具体传感器兼容或实测。 | ABX00162 PDF（核验时） | 官方数据表，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-21 |
 | 官方文档 | Arduino UNO Q User Manual（arduino/docs-content） | https://github.com/arduino/docs-content/blob/main/content/hardware/02.uno/boards/uno-q/tutorials/01.user-manual/content.md | 核对第 2 章的 UNO Q 架构、MPU/MCU、Debian Linux、Zephyr、Arduino IDE/App Lab 与 Blink 执行边界，第 3 章的 Qwiic `I2C4`/`Wire1` 和 3.3 V、USB-C 高层功能、Arduino IDE/App Lab/CLI 工具边界，第 4 章的 Debian/Zephyr/App Lab/IDE 工作流，以及第 5 章的 IDE Blink 操作路径。 | `main` | docs-content README 说明贡献内容采用 CC BY-SA 4.0；本项目只链接并原创重述，不复制正文或图片；访问不等于本项目取得外部材料再分发许可。 | 2026-09-21 |
 | 官方代码仓库 | ArduinoCore-zephyr | https://github.com/arduino/ArduinoCore-zephyr | 核对第 2 章的 UNO Q Zephyr core 与 Arduino IDE/CLI/App Lab 支持说明，第 3 章 MCU 侧基于 Zephyr 的 Arduino Core、Sketch 执行侧与工具支持边界，第 4 章 MCU 侧 Zephyr Core 与 IDE/CLI/App Lab 目标支持，以及第 5 章的 `arduino:zephyr:unoq` FQBN。 | `main` | 仓库当前标注 Apache-2.0；本项目只登记和链接，不复制代码。 | 2026-09-21 |
 | 官方文档 | Arduino CLI Getting Started | https://docs.arduino.cc/arduino-cli/getting-started | 核对第 5 章 `compile`、`board list` 和 `upload` 的命令行工作流；不把示例命令输出当成本次实测结果。 | 网页内容（核验时） | 官方文档，按页面声明使用；本项目只链接和原创重述，不取得外部材料再分发许可 | 2026-09-21 |
@@ -458,8 +458,8 @@
 
 本章 `aggregate_local_tests.py`、第1～6章 121 项测试结果汇总、15 项聚合器/文档契约测试及 Fig-59 Mermaid 均为本书原创。聚合器本身只在本机依次启动仓库内六个固定 `unittest` 目录，不接受任意路径/命令，也不自行建立网络/Broker/硬件连接。测试子进程继承调用环境并以当前用户权限执行，故本工具不是沙箱，只应运行可信仓库的测试代码；本次固定样例未连接网络、Broker、传感器、Bridge/RPC、MCU 或 UNO Q。报告固定为 `LOCAL_TESTS_ONLY`、`target_validation=NOT_RUN` 与 `deployment_authorized=false`；本机测试结果不是目标环境验收或部署批准。Fig-59 SVG 尚未渲染和目视审阅。
 
-## 第九篇第1章 技术背景核验
+## 第九篇第1～2章 技术背景核验
 
 | 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
 |---|---|---|---|---|---|---|
-| 官方板卡文档 | [Arduino UNO Q User Manual](https://docs.arduino.cc/tutorials/uno-q/user-manual/) | https://docs.arduino.cc/tutorials/uno-q/user-manual/ | 仅引用官方 UNO Q 用户手册作为目标平台背景入口；本章不据此推断环境传感器已集成，也不把产品文档作为本项目实机、传感器、告警或现场验证证据。 | 页面最近修订 2026-09-22；访问 2026-09-26 | Arduino 官方文档；本项目只链接并原创重述，不复制正文或图片；访问不代表取得外部材料再分发许可。 | 2026-09-26 |
+| 官方板卡文档 | [Arduino UNO Q User Manual](https://docs.arduino.cc/tutorials/uno-q/user-manual/) | https://docs.arduino.cc/tutorials/uno-q/user-manual/ | 核对第九篇第1章的平台背景，以及第2章 Linux/MPU、STM32/MCU、标准数字引脚归属和 Bridge/RPC/Router 软件边界；不据此推断具体传感器、电气连接、恢复语义或现场部署已验证。 | 页面最近修订 2026-09-22；访问 2026-09-26 | Arduino 官方文档；本项目只链接并原创重述，不复制正文或图片；访问不代表取得外部材料再分发许可。 | 2026-09-26 |

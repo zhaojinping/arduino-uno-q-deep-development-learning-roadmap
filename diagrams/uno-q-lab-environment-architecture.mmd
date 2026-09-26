@@ -1,0 +1,16 @@
+flowchart LR
+    sensor["传感器输入<br/>物理量、型号与接口待选"] --> mcu["STM32U585 / Zephyr<br/>采集与初步质量标记"]
+    mcu --> bridge["Arduino Bridge / RPC<br/>版本化事件；不承诺恰好一次"]
+    bridge --> ingest["Linux 本地应用<br/>校验、去重、接纳"]
+    ingest --> store[("本地事件记录<br/>介质与容量待选")]
+    ingest --> rules["规则与告警<br/>仅使用已批准版本"]
+    rules --> ui["本地界面<br/>正常 / 告警 / 等待 / 未知"]
+    store --> ui
+
+    bridge -. "断连 / 超时" .-> degraded["可见退化 / UNKNOWN"]
+    store -. "写入失败 / 空间不足" .-> degraded
+    rules -. "规则缺失 / 未批准" .-> degraded
+    degraded --> ui
+
+    ingest -. "独立审批后才可评估；默认关闭" .-> remote["可选远程遥测出口<br/>未配置"]
+    scope["项目范围：监测、记录、告警与展示<br/>不包含物理执行器控制"]

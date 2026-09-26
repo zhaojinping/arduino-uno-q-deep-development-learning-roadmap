@@ -38,3 +38,4 @@
 - [第八篇第6章 Fig-58：从连接信任到每设备最小权限](uno-q-iot-device-identity-secure-communication.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
 - [第八篇第7章 Fig-59：从章节测试聚合到独立目标验收](uno-q-iot-integration-validation.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
 - [第九篇第1章 Fig-60：实验室环境监测项目的数据流与范围边界](uno-q-lab-environment-project-baseline.mmd)：对应正文和图片资源登记见 [images/第9篇_Project/README.md](../images/第9篇_Project/README.md)。
+- [第九篇第2章 Fig-61：从处理器边界到可验证数据流](uno-q-lab-environment-architecture.mmd)：对应正文和图片资源登记见 [images/第9篇_Project/README.md](../images/第9篇_Project/README.md)。

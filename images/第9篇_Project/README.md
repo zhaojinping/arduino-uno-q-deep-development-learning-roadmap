@@ -13,3 +13,13 @@
 - 图示状态：正文与独立 Mermaid 源码保持一致；截至 2026-09-26 尚未生成 SVG，也未做目视渲染审阅。
 - 来源与许可：本书原创概念图；不包含第三方图片或复制的官方图表。
 - 验证边界：图示表达需求层概念，不表示已选传感器、部署处理器、真实网络或已完成 UNO Q 实测。
+
+<a id="fig-61-uno-q-lab-environment-architecture"></a>
+
+- 图号：Fig-61
+- 名称：系统架构设计：从处理器边界到可验证数据流
+- 正文：[第九篇第2章 Fig-61](../../book/第9篇_Project/第2章_系统架构设计_从处理器边界到可验证数据流.md#fig-61-uno-q-lab-environment-architecture)
+- Mermaid 源文件：[uno-q-lab-environment-architecture.mmd](../../diagrams/uno-q-lab-environment-architecture.mmd)
+- 图示状态：正文与独立 Mermaid 源码保持一致；截至 2026-09-26 尚未生成 SVG，也未做目视渲染审阅。
+- 来源与许可：本书原创概念图；不包含第三方图片或复制的官方图表。
+- 验证边界：候选逻辑架构，不表示传感器/存储已选、Bridge 故障恢复已验证、远程遥测已启用或 UNO Q 实机已测。
