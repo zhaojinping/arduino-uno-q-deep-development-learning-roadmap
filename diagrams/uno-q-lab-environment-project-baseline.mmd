@@ -1,0 +1,12 @@
+flowchart LR
+    SYN["合成数据<br/>SYNTHETIC"] --> ADAPT["采集适配<br/>实现位置待决"]
+    SENSOR["后续批准的传感器<br/>OBSERVED"] --> ADAPT
+    ADAPT --> CHECK{"来源 / 时间 / 单位 / 质量<br/>校验"}
+    CHECK -->|有效| LOCAL["本地状态与事件记录"]
+    CHECK -->|缺失 / 无效 / 过期 / 重复 / 乱序| UNKNOWN["标记异常或 UNKNOWN<br/>不得报告为正常"]
+    LOCAL --> RULE["规则判断<br/>仅使用已批准参数"]
+    RULE -->|触发| ALERT["解释性告警<br/>附来源与触发依据"]
+    RULE -->|未触发| VIEW["本地可视化<br/>状态和数据质量分开呈现"]
+    ALERT --> VIEW
+    LOCAL -.->|默认关闭；变更批准后| REMOTE["可选远程遥测"]
+    EXCLUDED["范围外：自动执行器控制"]

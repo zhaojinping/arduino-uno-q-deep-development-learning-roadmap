@@ -191,9 +191,9 @@ class ChapterContentContractTests(unittest.TestCase):
                     f"broken explicit anchor in {source.name}: {destination}",
                 )
 
-    def test_part_7_directory_registers_ten_chapters_and_58_total(self):
+    def test_part_7_directory_registers_ten_chapters_and_59_total(self):
         summary = (REPOSITORY_ROOT / "SUMMARY.md").read_text(encoding="utf-8")
-        self.assertEqual(len(re.findall(r"^- \[第\d+章", summary, re.MULTILINE)), 58)
+        self.assertEqual(len(re.findall(r"^- \[第\d+章", summary, re.MULTILINE)), 59)
         for chapter in range(1, 11):
             pattern = re.compile(rf"^- \[第{chapter}章[^\n]*\]\(book/第7篇_AI/[^)]+\)", re.MULTILINE)
             self.assertRegex(summary, pattern)
@@ -212,14 +212,14 @@ class ChapterContentContractTests(unittest.TestCase):
                     text = source.read_text(encoding="utf-8")
                     self.assertNotIn(old_path, text, f"stale active path in {source.relative_to(REPOSITORY_ROOT)}")
 
-    def test_image_registry_has_unique_contiguous_figure_ids_from_existing_baseline_through_59(self):
+    def test_image_registry_has_unique_contiguous_figure_ids_from_existing_baseline_through_60(self):
         chapter_numbers: list[int] = []
         for chapter in (REPOSITORY_ROOT / "book").rglob("*.md"):
             chapter_numbers.extend(
                 int(number)
                 for number in re.findall(r'<a id="fig-(\d+)-[^\"]+"></a>', chapter.read_text(encoding="utf-8"))
             )
-        self.assertEqual(sorted(chapter_numbers), list(range(4, 60)))
+        self.assertEqual(sorted(chapter_numbers), list(range(4, 61)))
 
         registry_numbers: list[int] = []
         for registry in (REPOSITORY_ROOT / "images").glob("*/README.md"):
@@ -227,7 +227,7 @@ class ChapterContentContractTests(unittest.TestCase):
                 int(number)
                 for number in re.findall(r'<a id="fig-(\d+)-[^\"]+"></a>', registry.read_text(encoding="utf-8"))
             )
-        self.assertEqual(sorted(registry_numbers), list(range(26, 60)))
+        self.assertEqual(sorted(registry_numbers), list(range(26, 61)))
 
     def test_part_8_active_figures_are_53_through_59(self):
         part_8 = REPOSITORY_ROOT / "book/第8篇_IoT"

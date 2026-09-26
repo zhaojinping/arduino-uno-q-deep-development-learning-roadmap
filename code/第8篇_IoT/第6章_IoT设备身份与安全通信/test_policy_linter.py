@@ -792,7 +792,7 @@ class ChapterContractTests(unittest.TestCase):
             self.assertLess(part_five, part_six)
         self.assertTrue((REPOSITORY_ROOT / target).is_file())
         self.assertIn("第八篇第1～7章已建立为初稿", root_readme)
-        self.assertIn("全书当前共 58 章", root_readme)
+        self.assertIn("全书当前共 59 章", root_readme)
 
     def test_chapter_six_sources_are_registered_with_versions_and_boundaries(self):
         references = (REPOSITORY_ROOT / "resources/references.md").read_text(

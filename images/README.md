@@ -15,3 +15,4 @@
 - [第六篇 OpenCV 图示登记](第6篇_OpenCV/README.md)：Fig-35 Mermaid 源文件已登记，SVG 和实机视觉管线验证尚未完成。
 - [第七篇 AI 图示登记](第7篇_AI/README.md)：Fig-43～Fig-52 Mermaid 源文件已登记；SVG 尚未渲染审阅，目标板模型兼容未验证。
 - [第八篇 IoT 图示登记](第8篇_IoT/README.md)：Fig-53～Fig-59 Mermaid 源文件已登记；SVG 尚未渲染审阅，传感器、Broker、网络、监控后端及目标板路径未验证。
+- [第九篇 Project 图示登记](第9篇_Project/README.md)：Fig-60 Mermaid 源文件已登记；SVG 尚未渲染审阅，传感器选型与 UNO Q 实机路径未验证。
