@@ -127,7 +127,7 @@
 - [x] **Step 2: 检查 diff 与文档结构。** 运行 `git diff --check`；重新核对 front matter、篇内编号、SUMMARY 链接唯一性、所有受影响的相对 Markdown 链接、Fig-61 全局唯一性及 Mermaid 正文/源一致性。若 `mmdc` 可用，则渲染并目视检查 Fig-61；不可用时保留 `.mmd` 源并将 SVG/视觉检查标为未完成，不制造空 SVG。
 - [x] **Step 3: 独立审阅内容。** 审阅覆盖双处理器责任、Bridge 语义、时间/重复/恢复、未批准的阈值/硬件及旧值误判。审阅发现一项 Important：分类器原先未检查来源/主机时钟可信度和持久化确认，可能在持久化失败时返回 `NORMAL`。已先添加失败测试，再修复纯函数健康门禁；修复后本章专项测试 9 项通过，全仓 pytest 为 402 项测试、355 个子测试通过。Mermaid 视觉渲染仍未完成，UNO Q/Bridge 未实测。
 - [x] **Step 4: 最后核对状态。** 已核对当前分支和变更范围；只纳入本计划范围内的 18 个文件，既有第1章计划继续保持未暂存；未访问板卡或外部 API。
-- [ ] **Step 5: 按用户要求提交并推送。** 在全仓测试、文档检查和独立审阅通过后，只暂存本计划范围内的第2章正文、测试、导航/图示/来源登记，以及本章设计规格和实施计划；使用提交说明 `docs(book): add Part 9 architecture chapter`，推送到当前分支 `codex/part9-project-chapter1`，再用远端分支 SHA 和 `git status --short --branch` 核对提交已同步。不得暂存 `docs/superpowers/plans/2026-09-26-part9-chapter1-implementation-plan.md`。
+- [x] **Step 5: 按用户要求提交并推送。** 全仓测试、文档检查和独立审阅通过后，仅提交本计划范围内的 18 个文件，提交说明为 `docs(book): add Part 9 architecture chapter`；提交 `0588e007f149ee8876ff3054e11c0ab57116166b` 已推送到 `origin/codex/part9-project-chapter1`，并通过 `git ls-remote` 核对远端 SHA 一致。第1章未跟踪计划未暂存；未创建 PR。
 
 ## Review Checklist
 
