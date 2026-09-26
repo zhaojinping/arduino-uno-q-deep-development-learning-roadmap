@@ -688,12 +688,12 @@ FIGURE_PATH = REPOSITORY_ROOT / "diagrams/uno-q-iot-device-identity-secure-commu
 class ChapterBootstrapTests(unittest.TestCase):
     def test_chapter_and_figure_assets_exist(self):
         self.assertTrue(CHAPTER_PATH.is_file(), "Task 6 chapter has not been created")
-        self.assertTrue(FIGURE_PATH.is_file(), "Fig-56 source has not been created")
+        self.assertTrue(FIGURE_PATH.is_file(), "Fig-58 source has not been created")
 
 
 @unittest.skipUnless(
     CHAPTER_PATH.is_file() and FIGURE_PATH.is_file(),
-    "chapter and Fig-56 assets are not implemented yet",
+    "chapter and Fig-58 assets are not implemented yet",
 )
 class ChapterContractTests(unittest.TestCase):
     def test_chapter_metadata_headings_and_cli_contract(self):
@@ -724,7 +724,7 @@ class ChapterContractTests(unittest.TestCase):
         self.assertIn(command_fragment, code_readme)
         self.assertIn("PASS", chapter)
         self.assertIn("DENY", chapter)
-        self.assertIn("Fig-56", chapter)
+        self.assertIn("Fig-58", chapter)
 
     def test_mermaid_block_is_identical_to_fig56_source_and_has_fail_closed_paths(self):
         chapter = CHAPTER_PATH.read_text(encoding="utf-8")
@@ -792,7 +792,7 @@ class ChapterContractTests(unittest.TestCase):
             self.assertLess(part_five, part_six)
         self.assertTrue((REPOSITORY_ROOT / target).is_file())
         self.assertIn("第八篇第1～7章已建立为初稿", root_readme)
-        self.assertIn("全书当前共 56 章", root_readme)
+        self.assertIn("全书当前共 58 章", root_readme)
 
     def test_chapter_six_sources_are_registered_with_versions_and_boundaries(self):
         references = (REPOSITORY_ROOT / "resources/references.md").read_text(
@@ -854,16 +854,16 @@ class ChapterContractTests(unittest.TestCase):
             / "book/第8篇_IoT/第6章_IoT设备身份与安全通信_从连接信任到最小权限.md"
         )
         chapter = chapter_path.read_text(encoding="utf-8")
-        anchor = "fig-56-uno-q-iot-device-identity-secure-communication"
+        anchor = "fig-58-uno-q-iot-device-identity-secure-communication"
         anchor_line = rf'^<a id="{re.escape(anchor)}"></a>$'
         self.assertEqual(len(re.findall(anchor_line, registry, re.MULTILINE)), 1)
         self.assertEqual(len(re.findall(anchor_line, chapter, re.MULTILINE)), 1)
-        self.assertIn("Fig-56", registry)
+        self.assertIn("Fig-58", registry)
         self.assertIn("SVG 待生成并完成预览审阅", registry)
 
         targets = re.findall(r"!?\[[^\]]*\]\(([^)]+)\)", registry)
         chapter_targets = [target for target in targets if anchor in target]
-        self.assertTrue(chapter_targets, "Fig-56 chapter backlink is missing")
+        self.assertTrue(chapter_targets, "Fig-58 chapter backlink is missing")
         for target in chapter_targets:
             path_part, fragment = target.split("#", 1)
             resolved = (registry_path.parent / path_part).resolve()
@@ -872,7 +872,7 @@ class ChapterContractTests(unittest.TestCase):
         self.assertTrue(
             any("uno-q-iot-device-identity-secure-communication.mmd" in target
                 for target in targets),
-            "Fig-56 Mermaid source link is missing",
+            "Fig-58 Mermaid source link is missing",
         )
         for source in chapter_targets + [
             target for target in targets

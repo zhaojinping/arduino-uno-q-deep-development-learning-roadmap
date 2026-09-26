@@ -1,12 +1,12 @@
 ---
 title: 生成式 AI 与工具调用安全边界：从模型建议到受控执行
 part: 7
-chapter: 7
+chapter: 9
 status: draft
 last_verified: 2026-09-24
 ---
 
-# 第7章 生成式 AI 与工具调用安全边界：从模型建议到受控执行
+# 第9章 生成式 AI 与工具调用安全边界：从模型建议到受控执行
 
 ## 学习目标
 
@@ -23,7 +23,7 @@ last_verified: 2026-09-24
 
 ### 工具调用是提案，不是执行
 
-大语言模型（Large Language Model，LLM）的自然语言回答通常供人阅读；工具调用则是模型响应中描述“可能要调用哪个工具、参数是什么”的结构化请求。以 OpenAI 应用程序编程接口（Application Programming Interface，API）文档描述的流程为例，应用先把可用工具发给模型，再接收工具调用，由**应用侧代码**执行所选逻辑，把工具结果关联到该调用并交回模型，最后取得模型回答。该流程是 OpenAI API 的说明，不是所有供应商的统一协议，也不意味着模型本身访问了本地引脚或外设。[来源登记](../../resources/references.md#第七篇第7章补充核验)
+大语言模型（Large Language Model，LLM）的自然语言回答通常供人阅读；工具调用则是模型响应中描述“可能要调用哪个工具、参数是什么”的结构化请求。以 OpenAI 应用程序编程接口（Application Programming Interface，API）文档描述的流程为例，应用先把可用工具发给模型，再接收工具调用，由**应用侧代码**执行所选逻辑，把工具结果关联到该调用并交回模型，最后取得模型回答。该流程是 OpenAI API 的说明，不是所有供应商的统一协议，也不意味着模型本身访问了本地引脚或外设。[来源登记](../../resources/references.md#part7-ch09-references)
 
 因此，本书把工具调用看作不可信输入：模型可以建议调用，但不能通过提示词授予自己权限。应用必须在每次副作用发生前独立检查调用名、字段、数据类型、取值范围、调用身份、目标状态和策略；检查失败时拒绝执行并保留最少必要的审计信息。提示词中的“请谨慎操作”不能代替代码中的授权门。
 
@@ -42,17 +42,17 @@ JSON（JavaScript Object Notation，JavaScript 对象表示法）Schema（结构
 | 工具返回内容 | 外部文本继续携带恶意指令或敏感信息 | 最小化返回；作为数据处理；限制后续模型可见范围 |
 | 模型/API 凭据 | 密钥泄漏、滥用或费用失控 | 放在受控应用侧；设置配额、超时、调用上限和密钥轮换 |
 
-开放全球应用安全项目（Open Worldwide Application Security Project，OWASP）的 2026 版 LLM 风险清单把“过度代理权”列为风险项之一，涉及工具功能、权限和自主性过量，并建议缩减工具能力、在应用/下游强制授权和按风险设置人工审批。该 PDF 标示为 Version 2026，但封面日期仍待填写；这里把它作为当前可查阅的社区安全指南，而非定稿法规或产品认证要求。美国国家标准与技术研究院（National Institute of Standards and Technology，NIST）的生成式 AI 风险管理档案也强调治理、测试、人类监督与记录；其建议属于自愿风险管理指南，不能替代具体系统的威胁建模和验收。[来源登记](../../resources/references.md#第七篇第7章补充核验)
+开放全球应用安全项目（Open Worldwide Application Security Project，OWASP）的 2026 版 LLM 风险清单把“过度代理权”列为风险项之一，涉及工具功能、权限和自主性过量，并建议缩减工具能力、在应用/下游强制授权和按风险设置人工审批。该 PDF 标示为 Version 2026，但封面日期仍待填写；这里把它作为当前可查阅的社区安全指南，而非定稿法规或产品认证要求。美国国家标准与技术研究院（National Institute of Standards and Technology，NIST）的生成式 AI 风险管理档案也强调治理、测试、人类监督与记录；其建议属于自愿风险管理指南，不能替代具体系统的威胁建模和验收。[来源登记](../../resources/references.md#part7-ch09-references)
 
-该清单还把同时接触不可信输入、敏感数据和状态变更/外部通信的配置列为高风险组合，并讨论逐次人工审批。这个筛查有助于识别复杂场景；审批策略仍须结合系统威胁模型确定，不能把单一风险清单机械地当作普遍法规。[来源登记](../../resources/references.md#第七篇第7章补充核验)
+该清单还把同时接触不可信输入、敏感数据和状态变更/外部通信的配置列为高风险组合，并讨论逐次人工审批。这个筛查有助于识别复杂场景；审批策略仍须结合系统威胁模型确定，不能把单一风险清单机械地当作普遍法规。[来源登记](../../resources/references.md#part7-ch09-references)
 
 ### 映射到 Arduino UNO Q 的责任边界
 
-Arduino 官方资料将 Arduino UNO Q 描述为结合 Linux 侧微处理器（Microprocessor Unit，MPU）、微控制器（Microcontroller Unit，MCU）与 Arduino App Lab 的平台；App Lab 可编排 Python 应用、Arduino sketch 和 AI 模型，内置 Bridge 提供 Linux 与 MCU 之间的远程过程调用（Remote Procedure Call，RPC）通信。这些产品资料说明了可组合的架构组成，**不证明**任意 LLM、工具调用服务、认证流程或安全执行策略已内置或兼容。具体镜像、Brick、API、网络和目标硬件组合必须依据相应版本资料验证。[Arduino UNO Q 官方文档](../../resources/references.md#第七篇第7章补充核验)
+Arduino 官方资料将 Arduino UNO Q 描述为结合 Linux 侧微处理器（Microprocessor Unit，MPU）、微控制器（Microcontroller Unit，MCU）与 Arduino App Lab 的平台；App Lab 可编排 Python 应用、Arduino sketch 和 AI 模型，内置 Bridge 提供 Linux 与 MCU 之间的远程过程调用（Remote Procedure Call，RPC）通信。这些产品资料说明了可组合的架构组成，**不证明**任意 LLM、工具调用服务、认证流程或安全执行策略已内置或兼容。具体镜像、Brick、API、网络和目标硬件组合必须依据相应版本资料验证。[Arduino UNO Q 官方文档](../../resources/references.md#part7-ch09-references)
 
 本章不调用真实模型 API，不连接网络、App Lab、Bridge、MCU、通用输入/输出（General-Purpose Input/Output，GPIO）或执行器。配套程序只接收手工编写的合成请求，并修改进程内的“虚拟指示灯”变量。后文把它映射为 UNO Q 上可进一步设计的参考分层；这只是本书的安全架构建议，不是 Arduino 官方工具调用规范。
 
-开放全球应用安全项目的 Agent Control Standard（ACS）可作为策略钩子设计的探索材料，但截至本章核验的公开仓库 v0.1.0 示例，Guardian 通信通道未认证，示例默认故障策略为继续（`proceed`）。因此它不是可直接部署的安全边界；采用任何类似组件前，都要核对具体版本、身份保护和故障时是否拒绝执行。[来源登记](../../resources/references.md#第七篇第7章补充核验)
+开放全球应用安全项目的 Agent Control Standard（ACS）可作为策略钩子设计的探索材料，但截至本章核验的公开仓库 v0.1.0 示例，Guardian 通信通道未认证，示例默认故障策略为继续（`proceed`）。因此它不是可直接部署的安全边界；采用任何类似组件前，都要核对具体版本、身份保护和故障时是否拒绝执行。[来源登记](../../resources/references.md#part7-ch09-references)
 
 ## 操作与实验
 
@@ -87,7 +87,7 @@ Arduino 官方资料将 Arduino UNO Q 描述为结合 Linux 侧微处理器（Mi
 代码说明
 - 用途：模拟只读状态查询与一个受限的虚拟状态写入；校验工具白名单和参数，要求单独批准，按调用 ID 阻断重放并记录最少审计字段。
 - 运行环境：Python 3.10 或更新版本；本次验证环境为 Python 3.14.6。
-- 文件位置：[模拟器](../../code/第7篇_AI/第7章_生成式AI与工具调用/tool_guard.py)、[行为测试](../../code/第7篇_AI/第7章_生成式AI与工具调用/test_tool_guard.py)、[代码说明](../../code/第7篇_AI/第7章_生成式AI与工具调用/README.md)。
+- 文件位置：[模拟器](../../code/第7篇_AI/第9章_生成式AI与工具调用安全边界/tool_guard.py)、[行为测试](../../code/第7篇_AI/第9章_生成式AI与工具调用安全边界/test_tool_guard.py)、[代码说明](../../code/第7篇_AI/第9章_生成式AI与工具调用安全边界/README.md)。
 - 依赖：仅 Python 标准库；不安装模型 SDK、推理运行时或 Arduino 库。
 - 操作步骤：在代码目录中运行模拟器和测试；程序将单行 JSON 报告写到标准输出，不写文件。命令行界面（Command-Line Interface，CLI）仅接受固定演示流程，不提供远程调用入口。
 - 预期输出：范围为 `SIMULATION_ONLY`；只读调用执行，虚拟写操作先得到 `APPROVAL_REQUIRED`，独立批准后才改变模拟变量；相同调用的再次提交为 `DUPLICATE_BLOCKED`。
@@ -154,13 +154,13 @@ Bridge / MCU：再次检查运行模式、硬限位、超时、看门狗与安�
 
 实际接入前还要验证目标镜像、App Lab/Brick 接口版本、运行时依赖、设备身份、凭据存储、网络隔离、速率/成本上限、数据保留策略、日志脱敏、掉线行为、恢复流程和执行器失效安全。Arduino 官方平台资料不替代这些应用自身的安全设计或目标板验证。
 
-### Fig-49：从模型提案到受控工具执行
+### Fig-51：从模型提案到受控工具执行
 
 图中“模型建议”和“应用执行”是两个独立阶段；只有窄范围白名单、输入校验、独立授权和重放/下游策略门全部满足后，才允许进入本章的虚拟动作。虚线目标设备仅表示将来需要另行验证的架构边界。
 
-<a id="fig-49-uno-q-ai-tool-call-guard"></a>
+<a id="fig-51-uno-q-ai-tool-call-guard"></a>
 
-> 图示占位：图号=Fig-49；位置=本段之后；内容=模型提案经结构校验、工具白名单、人工批准和重放门后进入虚拟动作；真实 Bridge/MCU/执行器仅以待验证边界表示；来源=第七篇图示资源登记中的 Fig-49 Mermaid（本书原创）。
+> 图示占位：图号=Fig-51；位置=本段之后；内容=模型提案经结构校验、工具白名单、人工批准和重放门后进入虚拟动作；真实 Bridge/MCU/执行器仅以待验证边界表示；来源=第七篇图示资源登记中的 Fig-51 Mermaid（本书原创）。
 
 ```mermaid
 flowchart LR
@@ -186,7 +186,7 @@ flowchart LR
     J -. 未来需独立验证 .-> M[Bridge / MCU / 执行器]
 ```
 
-图源：[Fig-49 Mermaid 源文件](../../diagrams/uno-q-ai-tool-call-guard.mmd)。虚线不表示本章实现或验证了真实控制链；本图是本书参考安全流程，不是 Arduino、OpenAI、NIST 或 OWASP 的官方发布规范。SVG 尚未渲染和目视审阅。
+图源：[Fig-51 Mermaid 源文件](../../diagrams/uno-q-ai-tool-call-guard.mmd)。虚线不表示本章实现或验证了真实控制链；本图是本书参考安全流程，不是 Arduino、OpenAI、NIST 或 OWASP 的官方发布规范。SVG 尚未渲染和目视审阅。
 
 ## 验证结果与范围
 
@@ -214,10 +214,10 @@ flowchart LR
 
 ## 延伸阅读
 
-- [OpenAI Function Calling 文档](../../resources/references.md#第七篇第7章补充核验)：查看模型如何提交函数工具请求、应用侧如何执行并回传结果；API 行为只适用于其文档范围。
-- [OWASP GenAI LLM Top 10 2026](../../resources/references.md#第七篇第7章补充核验)：阅读 LLM03“Excessive Agency”及相邻风险；本章注明所查 PDF 封面仍未填写发布日期。
-- [OWASP Agent Control Standard](../../resources/references.md#第七篇第7章补充核验)：了解运行时策略钩子的探索方向；其参考仓库披露了未认证 wire 和默认 fail-open 等限制，不可视为即插即用的生产防护。
-- [NIST AI RMF Generative AI Profile](../../resources/references.md#第七篇第7章补充核验)：了解生成式 AI 风险治理、测试、监督和记录方面的自愿指南。
-- [Arduino UNO Q 与 App Lab 官方资料](../../resources/references.md#第七篇第7章补充核验)：核对 Linux/MCU、App Lab 与 Bridge 平台组成；这些资料不证明本章安全工具调用模拟器可直接部署。
+- [OpenAI Function Calling 文档](../../resources/references.md#part7-ch09-references)：查看模型如何提交函数工具请求、应用侧如何执行并回传结果；API 行为只适用于其文档范围。
+- [OWASP GenAI LLM Top 10 2026](../../resources/references.md#part7-ch09-references)：阅读 LLM03“Excessive Agency”及相邻风险；本章注明所查 PDF 封面仍未填写发布日期。
+- [OWASP Agent Control Standard](../../resources/references.md#part7-ch09-references)：了解运行时策略钩子的探索方向；其参考仓库披露了未认证 wire 和默认 fail-open 等限制，不可视为即插即用的生产防护。
+- [NIST AI RMF Generative AI Profile](../../resources/references.md#part7-ch09-references)：了解生成式 AI 风险治理、测试、监督和记录方面的自愿指南。
+- [Arduino UNO Q 与 App Lab 官方资料](../../resources/references.md#part7-ch09-references)：核对 Linux/MCU、App Lab 与 Bridge 平台组成；这些资料不证明本章安全工具调用模拟器可直接部署。
 - [第七篇第3章](./第3章_模型工件与部署契约_从清单到目标预检.md)：回看模型与运行环境身份、目标预检和部署证据。
 - [第七篇第5章](./第5章_端侧推理性能评估_从测量方案到资源预算.md)：回看测量工作负载和证据边界。

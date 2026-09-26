@@ -20,7 +20,7 @@ EXPECTED_CHAPTERS = ["第1章", "第2章", "第3章", "第4章", "第5章", "第
 CHAPTER_PATH = (
     "book/第8篇_IoT/第7章_IoT综合验证_从分章测试到系统级证据.md"
 )
-FIG57_ANCHOR = "fig-57-uno-q-iot-integration-validation"
+FIG57_ANCHOR = "fig-59-uno-q-iot-integration-validation"
 
 
 def passing_results():
@@ -211,7 +211,7 @@ class ChapterContractTests(unittest.TestCase):
         self.assertIn(CHAPTER_PATH, summary)
         self.assertIn("第7章 IoT 综合验证", part_readme)
         self.assertIn("第八篇第1～7章", root_readme)
-        self.assertIn("全书当前共 56 章", root_readme)
+        self.assertIn("全书当前共 58 章", root_readme)
 
     def test_fig57_anchor_is_unique_and_mermaid_source_matches(self):
         chapter_path = REPOSITORY_ROOT / CHAPTER_PATH
@@ -227,7 +227,7 @@ class ChapterContractTests(unittest.TestCase):
         match = re.search(r"```mermaid\r?\n(.*?)\r?\n```", figure_section, re.DOTALL)
         self.assertIsNotNone(match)
         self.assertEqual(match.group(1).strip(), source_path.read_text(encoding="utf-8").strip())
-        self.assertIn("Fig-57", registry)
+        self.assertIn("Fig-59", registry)
 
     def test_chapter_registered_local_links_resolve(self):
         chapter_path = REPOSITORY_ROOT / CHAPTER_PATH

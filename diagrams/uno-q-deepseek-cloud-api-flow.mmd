@@ -1,0 +1,11 @@
+flowchart LR
+    S[固定合成读数] --> V[字段 allowlist 与数值范围校验]
+    V --> C[Python 客户端<br/>限时、限长、单次请求]
+    E[本机进程环境<br/>DEEPSEEK_API_KEY] --> H[Authorization Bearer header<br/>不进入 prompt/body]
+    C --> R[HTTPS POST<br/>api.deepseek.com/chat/completions]
+    H --> R
+    R --> D[DeepSeek 公共云服务<br/>云端推理 / 可能计费]
+    D --> P[有界 JSON 解析<br/>状态、finish_reason、content]
+    P --> O[REPORT_ONLY<br/>人工复核]
+    C -.超时/连接中断.-> U[结果 UNKNOWN<br/>不自动重试]
+    O -.不连接.-> X[Bridge / GPIO / 执行器]

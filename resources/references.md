@@ -326,7 +326,35 @@
 
 本章 `quantization_demo.py`、固定标量向量、9 项标准库行为测试及 Fig-48 Mermaid 为本书原创。程序只模拟对称 int8 的数值量化/反量化，不生成模型工件、不评估任务精度、不测量实际文件/RAM/时延，也不访问 ONNX Runtime 或 UNO Q；Fig-48 SVG 尚未渲染和目视审阅。
 
-## 第七篇第7章补充核验
+## 第七篇第7章 UNO Q 板载 AI 实战补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方硬件数据表 | Arduino UNO Q | https://docs.arduino.cc/resources/datasheets/ABX00162-ABX00173-datasheet.pdf | 核对 ABX00162/ABX00173 的 RAM/eMMC、QRB2210/Linux 与 STM32U585/Zephyr 分工、Bridge、App Lab、可选 Brick 与 4 GB SKU 的资源建议；不证明具体模型兼容或 AI 后端映射。 | ABX00162-ABX00173，PDF 标示 Modified 2026-09-22 | 仅链接并原创解释，不复制表格、图表或产品图片。 | 2026-09-26 |
+| 官方示例 | Arduino App Bricks Examples：Object Detection | https://github.com/arduino/app-bricks-examples/tree/main/inspirational/common/object-detection · https://github.com/arduino/app-bricks-examples/blob/main/inspirational/common/object-detection/README.md | 核对当前示例目录、JPG/PNG 上传、标注图/标签、objectdetection 与 web_ui Brick，以及该示例声明 CPU-only/no C++ Sketch；不代表本项目已在板上运行。 | main 分支页面/README（核验时） | 仅链接和原创归纳；代码短片段按接口形态改写，不复制完整示例。 | 2026-09-26 |
+| 官方示例代码 | Arduino App Bricks Examples：object detection `main.py` | https://github.com/arduino/app-bricks-examples/blob/main/inspirational/common/object-detection/python/main.py | 核对 `ObjectDetection` Python import、`detect`、`draw_bounding_boxes` 和 `WebUI` 回调接口形态；具体回调/manifest 须与目标版本示例复核。 | main 分支页面（核验时） | 仅链接及原创教学摘述，不复制完整源文件。 | 2026-09-26 |
+| 官方应用规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 `app.yaml`、`python/main.py`、可选 `sketch/`、Brick ID 与 Brick variables/secret 的规则；不推断通用变量必然传入 Python 进程环境。 | main 分支页面（核验时） | 仅链接并原创说明，不复制规范正文或完整示例。 | 2026-09-26 |
+| 官方 Brick 实现 | Arduino App Bricks Python：`LargeLanguageModel` | https://github.com/arduino/app-bricks-py/blob/main/src/arduino/app_bricks/llm/local_llm.py | 核对 `genie:` / `llamacpp:` model 前缀、本地 runner 端点和当前模型列表查询实现；不保证 UNO Q 具体镜像已有 runner、模型或相同接口版本。 | main 分支源文件（核验时） | 仅链接及原创归纳，不复制源文件。 | 2026-09-26 |
+| 官方芯片资料 | Qualcomm Dragonwing QRB2210 | https://www.qualcomm.com/internet-of-things/products/q2-series/qrb2210 | 核对 SoC 级 CPU/GPU/DSP 与 AI 能力说明；UNO Q 数据表/Arduino 示例没有说明特定 Brick 的算子后端，不能据 SoC 能力推断 DSP/NPU 被实际调用。 | QRB2210 产品页与产品 brief（核验时） | 仅链接并原创解释，不复制规格表或芯片图。 | 2026-09-26 |
+
+本章原创图号为 Fig-49。短代码片段仅显示官方示例可核对的接口形态；没有复制样例图片、页面、CSS 或完整源码。对象检测实机、模型输出质量、SKU/资源、摄像头、Brick/runner 与加速后端均为 `NOT_RUN`；Fig-49 SVG 尚未渲染审阅。
+
+## 第七篇第8章 UNO Q 接入 DeepSeek API 补充核验
+
+| 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 官方 API 参考 | DeepSeek Chat Completions | https://api-docs.deepseek.com/api/create-chat-completion/ | 核对 endpoint、messages、当前 model IDs、thinking、`max_tokens`、response choices/finish_reason 与错误语义；请求/响应示例由本章标准库客户端做受限实现。 | 页面内容（核验时） | 仅链接和原创实现，不复制完整文档或 SDK 样例。 | 2026-09-26 |
+| 官方 API 指南 | DeepSeek Thinking Mode | https://api-docs.deepseek.com/guides/thinking_mode/ | 核对默认开启的思考模式及 `thinking.type=disabled`；本例明确关闭以限制简单摘要任务。 | 页面内容（核验时） | 仅链接并原创摘要，不复制正文或代码。 | 2026-09-26 |
+| 官方 API 指南 | DeepSeek Multi-round Conversation | https://api-docs.deepseek.com/guides/multi_round_chat/ | 核对 Chat Completions 无状态及调用方需显式提交历史消息；本章故意不实现多轮上下文。 | 页面内容（核验时） | 仅链接和原创说明，不复制正文或代码。 | 2026-09-26 |
+| 官方 API 参考 | DeepSeek Models / Models & Pricing / Change Log | https://api-docs.deepseek.com/api/list-models/ · https://api-docs.deepseek.com/quick_start/pricing/ · https://api-docs.deepseek.com/updates/ | 核验 `deepseek-flash` 当前标识以及 2026-09-10 公告对 V4.1 Flash 与兼容旧模型名的说明；模型路由、可用性、费率和限额易变，正文不固定价格。 | 页面内容（核验时）；公告日期 2026-09-10 | 仅链接与原创说明，不复制价格表。 | 2026-09-26 |
+| 官方应用规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 App/Python/Brick 结构及 Brick variables/secret 导出脱敏规则；不推断普通 Brick variables 自动注入 Python `os.environ`。 | main 分支页面（核验时） | 仅链接并原创说明，不复制规范正文。 | 2026-09-26 |
+| 官方 Brick 实现 | Arduino App Bricks Python：`CloudLLM` | https://github.com/arduino/app-bricks-py/blob/main/src/arduino/app_bricks/cloud_llm/cloud_llm.py | 检查当前候选入口存在云 LLM、api_key/model 和扩展参数接口；不据此宣称 UNO Q/App Lab/DeepSeek 组合已验证。 | main 分支源文件（核验时） | 仅链接及原创归纳，不复制源文件。 | 2026-09-26 |
+
+本章原创代码为 `deepseek_client.py` 与显式双开关 CLI `summarize_readings.py`；测试使用本地 mock transport 与固定合成读数，不读取真实密钥、不产生网络请求。真实 DeepSeek 调用、费用、UNO Q TLS、App Lab Python secret 注入均为 `NOT_RUN`；Fig-50 SVG 尚未渲染审阅。
+
+<a id="part7-ch09-references"></a>
+
+## 第七篇第9章工具调用安全边界补充核验
 
 | 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -337,9 +365,11 @@
 | 官方风险管理指南 | NIST AI RMF Generative AI Profile | https://doi.org/10.6028/NIST.AI.600-1 | 核对生成式 AI 风险治理、测试、人类监督与记录建议；为自愿风险管理资料，不替代应用威胁建模或合规评估。 | NIST AI 600-1（2024） | 仅链接并原创摘要，不复制正文或图表。 | 2026-09-24 |
 | 官方产品资料 | Arduino UNO Q 与 App Lab | https://docs.arduino.cc/hardware/uno-q · https://docs.arduino.cc/software/app-lab/ | 核对产品资料所述 Linux MPU、MCU、App Lab、Python/sketch/AI 组合与 Bridge/RPC 定位；资料不证明通用 LLM 工具安全门已内置、兼容或实机验证。 | 页面内容（核验时） | 仅链接并原创摘要，不复制图表或产品正文。 | 2026-09-24 |
 
-本章文字、`tool_guard.py`、12 项标准库测试和 Fig-49 Mermaid 为本书原创教学材料。模拟器不调用模型/API、网络、App Lab、Bridge、MCU、GPIO 或执行器；测试只验证本机进程内策略契约，不证明真实身份认证、持久重放控制、生产部署或 UNO Q 实机兼容。Fig-49 SVG 尚未渲染和目视审阅。
+本章文字、`tool_guard.py`、12 项标准库测试和 Fig-51 Mermaid 为本书原创教学材料。模拟器不调用模型/API、网络、App Lab、Bridge、MCU、GPIO 或执行器；测试只验证本机进程内策略契约，不证明真实身份认证、持久重放控制、生产部署或 UNO Q 实机兼容。Fig-51 SVG 尚未渲染和目视审阅。
 
-## 第七篇第8章补充核验
+<a id="part7-ch10-references"></a>
+
+## 第七篇第10章 AI 应用综合验证补充核验
 
 | 类型 | 来源 | 地址 | 用途与边界 | 版本基线 | 版权处理 | 核验日期 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -347,7 +377,7 @@
 | 官方产品页 | Arduino UNO Q | https://docs.arduino.cc/hardware/uno-q | 核对 Debian Linux 侧 QRB2210 MPU、Zephyr 侧 STM32U585 MCU、App Lab 与 Bridge/RPC 的产品架构说明；不据此声称本章验收器在板上运行或已兼容。 | 页面内容（核验时） | 仅链接并原创解释，不复制产品图表、截图或正文。 | 2026-09-24 |
 | 官方应用规范 | Arduino App specification | https://github.com/arduino/arduino-app-cli/blob/main/docs/app-specification.md | 核对 Arduino App 中 Sketch 的 MCU 侧、Python/Brick/容器的 Linux 侧及 RPC 协作边界；本章证据字段与部署门槛为教程级设计，不是官方规范。 | main 分支页面（核验时） | 仅链接并原创归纳，不复制规范正文或代码。 | 2026-09-24 |
 
-本章 `readiness_gate.py`、合成 `evidence_manifest.json`、14 项标准库测试及 Fig-50 Mermaid 为本书原创。检查器仅核对清单结构和提交者状态声明，不读取证据引用、不验证模型/数据/设备事实，也不授权部署。未调用生成模型、网络、App Lab、Bridge、MCU 或 UNO Q；Fig-50 SVG 尚未渲染和目视审阅。
+本章 `readiness_gate.py`、合成 `evidence_manifest.json`、14 项标准库测试及 Fig-52 Mermaid 为本书原创。检查器仅核对清单结构和提交者状态声明，不读取证据引用、不验证模型/数据/设备事实，也不授权部署。未调用生成模型、网络、App Lab、Bridge、MCU 或 UNO Q；Fig-52 SVG 尚未渲染和目视审阅。
 
 ## 第八篇第1章补充核验
 
@@ -361,7 +391,7 @@
 | 官方语言文档 | Python `json` 模块 | https://docs.python.org/3.14/library/json.html | 核对 `object_pairs_hook` 和 `parse_constant` 可用于自定义重复键及非标准常量处理；不把样例校验器当作通用安全解析器。 | Python 3.14 文档（核验时） | 仅链接并原创说明，不复制文档代码或正文。 | 2026-09-24 |
 | 官方语言文档 | Python `datetime` 模块 | https://docs.python.org/3.14/library/datetime.html | 核对 `datetime.fromisoformat()` 的日期时间解析接口；RFC 3339 子集限制由本章另行定义。 | Python 3.14 文档（核验时） | 仅链接并原创说明，不复制文档代码或正文。 | 2026-09-24 |
 
-本章 `validate_telemetry.py`、合成 `telemetry_sample.json`、16 项行为测试和 Fig-51 Mermaid 均为本书原创。校验器只检查 UTF-8/JSON 边界和教学字段契约；未访问传感器、网络、MQTT/HTTP 服务、Bridge/RPC、数据库或 UNO Q，未验证身份、真实性、时钟、校准、幂等和目标环境；Fig-51 SVG 尚未渲染和目视审阅。
+本章 `validate_telemetry.py`、合成 `telemetry_sample.json`、16 项行为测试和 Fig-53 Mermaid 均为本书原创。校验器只检查 UTF-8/JSON 边界和教学字段契约；未访问传感器、网络、MQTT/HTTP 服务、Bridge/RPC、数据库或 UNO Q，未验证身份、真实性、时钟、校准、幂等和目标环境；Fig-53 SVG 尚未渲染和目视审阅。
 
 ## 第八篇第2章补充核验
 
@@ -372,7 +402,7 @@
 | 官方数据库文档 | SQLite Transactions | https://www.sqlite.org/lang_transaction.html | 核对显式事务的 `BEGIN`、`COMMIT`、`ROLLBACK` 语义；不把单库事务扩展为跨 Broker、API 或硬件的原子操作。 | 页面内容（核验时） | 仅链接并原创说明，不复制文档正文或图表。 | 2026-09-24 |
 | 官方数据库文档 | SQLite Atomic Commit | https://www.sqlite.org/atomiccommit.html | 核对 SQLite 单个事务原子提交的设计说明及相关存储前提；不据此承诺所有文件系统/设备故障下的数据恢复。 | 页面内容（核验时） | 仅链接并原创归纳，不复制文档正文或图表。 | 2026-09-24 |
 
-本章 `idempotent_consumer.py`、两行合成 `qos1_redelivery.jsonl`、5 项标准库测试及 Fig-52 Mermaid 为本书原创。脚本调用第1章校验器，仅在本机 SQLite 中演示同库账本与模拟效果事务；没有 MQTT 库、QoS 包交换、PUBACK、Broker、网络、TLS/ACL、设备或外部副作用。两个进程测试只证明固定测试条件下本机数据库文件复用和重复抑制，不验证断电/存储故障恢复或生产保留策略；Fig-52 SVG 尚未渲染和目视审阅。
+本章 `idempotent_consumer.py`、两行合成 `qos1_redelivery.jsonl`、5 项标准库测试及 Fig-54 Mermaid 为本书原创。脚本调用第1章校验器，仅在本机 SQLite 中演示同库账本与模拟效果事务；没有 MQTT 库、QoS 包交换、PUBACK、Broker、网络、TLS/ACL、设备或外部副作用。两个进程测试只证明固定测试条件下本机数据库文件复用和重复抑制，不验证断电/存储故障恢复或生产保留策略；Fig-54 SVG 尚未渲染和目视审阅。
 
 ## 第八篇第3章补充核验
 
@@ -383,7 +413,7 @@
 | 官方数据库文档 | SQLite Transactions | https://www.sqlite.org/lang_transaction.html | 核对 SQLite 显式事务及单写事务边界；不将本地数据库事务扩展为跨 Broker 或消费者的分布式原子提交。 | 页面内容（核验时） | 仅链接并原创说明，不复制文档正文或图表。 | 2026-09-24 |
 | 官方数据库文档 | SQLite Atomic Commit | https://www.sqlite.org/atomiccommit.html | 核对 SQLite 单库事务原子提交的模型及其存储环境前提；不据此宣称本章已验证掉电、文件系统或存储介质故障恢复。 | 页面内容（核验时） | 仅链接并原创归纳，不复制文档正文或图表。 | 2026-09-24 |
 
-本章 `outbox.py`、3 条合成 `offline_telemetry.jsonl`、11 项标准库测试及 Fig-53 Mermaid 均为本书原创。SQLite 逻辑队列容量与单条载荷上限不代表数据库物理文件或闪存写入量具有同等硬上限；没有真实 MQTT 包、Broker、网络、UNO Q、传感器、断电注入或目标介质耐久性测试；Fig-53 SVG 尚未生成和目视审阅。
+本章 `outbox.py`、3 条合成 `offline_telemetry.jsonl`、11 项标准库测试及 Fig-55 Mermaid 均为本书原创。SQLite 逻辑队列容量与单条载荷上限不代表数据库物理文件或闪存写入量具有同等硬上限；没有真实 MQTT 包、Broker、网络、UNO Q、传感器、断电注入或目标介质耐久性测试；Fig-55 SVG 尚未生成和目视审阅。
 
 ## 第八篇第4章补充核验
 
@@ -395,7 +425,7 @@
 | 官方实践指南 | Prometheus Metric and label naming | https://prometheus.io/docs/practices/naming/ | 核对指标单位/名称与避免高基数标签的建议；本章没有定义 Prometheus 导出器或实际指标名。 | 官方在线文档（核验时） | 仅链接和原创归纳，不复制文档表格或正文。 | 2026-09-24 |
 | 官方实践指南 | Prometheus Alerting | https://prometheus.io/docs/practices/alerting/ | 核对关注症状、留出短暂抖动余量和控制告警噪声等通用实践；本章教学 finding 不是生产告警规则。 | 官方在线文档（核验时） | 仅链接和原创归纳，不复制文档正文或图表。 | 2026-09-24 |
 
-本章 `health_observer.py`、4 条合成 `health_snapshots.jsonl`、14 项标准库行为测试及 Fig-54 Mermaid 均为本书原创。判定器仅处理受限本地 JSONL，并按显式参考时刻输出建议；没有 OpenTelemetry SDK/Collector、Prometheus、指标后端、通知渠道、真实设备身份、Broker、网络或 UNO Q 实机验证。90 秒、300 秒、600 秒、0.80 与重试阈值是固定教学假设；单快照分类没有迟滞、告警去重/确认/恢复状态；Fig-54 SVG 尚未生成和目视审阅。
+本章 `health_observer.py`、4 条合成 `health_snapshots.jsonl`、14 项标准库行为测试及 Fig-56 Mermaid 均为本书原创。判定器仅处理受限本地 JSONL，并按显式参考时刻输出建议；没有 OpenTelemetry SDK/Collector、Prometheus、指标后端、通知渠道、真实设备身份、Broker、网络或 UNO Q 实机验证。90 秒、300 秒、600 秒、0.80 与重试阈值是固定教学假设；单快照分类没有迟滞、告警去重/确认/恢复状态；Fig-56 SVG 尚未生成和目视审阅。
 
 ## 第八篇第5章补充核验
 
@@ -405,7 +435,7 @@
 | 官方能力目录 | NIST IoT Device Cybersecurity Requirement Catalogs：Technical Capabilities | https://pages.nist.gov/IoT-Device-Cybersecurity-Requirement-Catalogs/technical/ | 核对设备识别、配置、数据保护、逻辑访问、软件更新与安全状态感知等能力主题；目录须结合设备与风险配置文件裁剪。 | 官方在线目录（核验时） | 仅链接并原创归纳；不复制目录内容或图表。 | 2026-09-24 |
 | 国际标准 | OASIS MQTT Version 5.0 | https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html | 核对请求/响应模式及 Response Topic、Correlation Data 等关联属性；这些协议属性不承担请求者身份认证、应用授权或物理效果证明。 | OASIS Standard，2019-03-07 | 仅链接并原创解释，不复制标准文本或图表。 | 2026-09-24 |
 
-本章 `remote_command_gate.py`、6 条合成 JSONL 命令、30 项标准库测试及 Fig-55 Mermaid 均为本书原创。脚本限制 JSON 输入、命令有效期和进程内账本容量，只演示本地状态逻辑；固定命令样例的未知结果表示本地账本无对应记录，不模拟网络超时或设备回执丢失。没有身份认证、签名/TLS/MQTT ACL、真实 Broker/网络、持久账本、并发/崩溃恢复、Bridge/RPC、MCU、传感器、UNO Q 或物理执行验证。300 秒、4096 字节、64 条与采样周期范围都是教学策略；Fig-55 SVG 尚未生成和目视审阅。
+本章 `remote_command_gate.py`、6 条合成 JSONL 命令、30 项标准库测试及 Fig-57 Mermaid 均为本书原创。脚本限制 JSON 输入、命令有效期和进程内账本容量，只演示本地状态逻辑；固定命令样例的未知结果表示本地账本无对应记录，不模拟网络超时或设备回执丢失。没有身份认证、签名/TLS/MQTT ACL、真实 Broker/网络、持久账本、并发/崩溃恢复、Bridge/RPC、MCU、传感器、UNO Q 或物理执行验证。300 秒、4096 字节、64 条与采样周期范围都是教学策略；Fig-57 SVG 尚未生成和目视审阅。
 
 ## 第八篇第6章补充核验
 
@@ -418,7 +448,7 @@
 | IETF 标准 | [RFC 9525：TLS 中的服务身份](https://datatracker.ietf.org/doc/html/rfc9525) | https://datatracker.ietf.org/doc/html/rfc9525 | 核对客户端参考身份与服务端呈现身份的匹配原则；该服务身份规则不替代证书链、信任锚或应用授权校验。 | RFC 9525，2023-11；取代 RFC 6125 | 仅链接并原创说明，不复制 RFC 正文。 | 2026-09-25 |
 | 国际标准 | [OASIS MQTT Version 5.0](https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html) | https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html | 核对 Client ID、连接认证/授权背景及主题发布订阅边界；本章精确到每设备、每方向的默认拒绝 ACL 是教程策略，不能由 Client ID 自动推导身份或授权。 | OASIS Standard，2019-03-07 | 仅链接并原创归纳，不复制标准文本或图表。 | 2026-09-25 |
 
-本章 `policy_linter.py`、合成 `profiles.json`、45 项本地标准库测试及 Fig-56 Mermaid 为本书原创。检查器只静态审阅固定 JSON 策略并报告 PASS/DENY；不验证密钥、证书链、TLS 握手、Broker 认证/授权、网络连接、Bridge/RPC、MCU 或 UNO Q 实机。Fig-56 SVG 尚未生成和目视审阅。
+本章 `policy_linter.py`、合成 `profiles.json`、45 项本地标准库测试及 Fig-58 Mermaid 为本书原创。检查器只静态审阅固定 JSON 策略并报告 PASS/DENY；不验证密钥、证书链、TLS 握手、Broker 认证/授权、网络连接、Bridge/RPC、MCU 或 UNO Q 实机。Fig-58 SVG 尚未生成和目视审阅。
 
 ## 第八篇第7章补充核验
 
@@ -426,4 +456,4 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | 官方语言文档 | Python `unittest`：命令行与测试发现 | https://docs.python.org/3.14/library/unittest.html | 核对 `python -m unittest discover`、`-s` 起始目录和 `-p` 文件匹配参数；本章将这些选项用于六个仓库内固定目录，不对目标设备或部署环境作判断。 | Python 3.14.7 官方文档（页面核验于 2026-09-25） | 仅链接并原创说明，不复制文档正文或示例代码。 | 2026-09-25 |
 
-本章 `aggregate_local_tests.py`、第1～6章 121 项测试结果汇总、15 项聚合器/文档契约测试及 Fig-57 Mermaid 均为本书原创。聚合器本身只在本机依次启动仓库内六个固定 `unittest` 目录，不接受任意路径/命令，也不自行建立网络/Broker/硬件连接。测试子进程继承调用环境并以当前用户权限执行，故本工具不是沙箱，只应运行可信仓库的测试代码；本次固定样例未连接网络、Broker、传感器、Bridge/RPC、MCU 或 UNO Q。报告固定为 `LOCAL_TESTS_ONLY`、`target_validation=NOT_RUN` 与 `deployment_authorized=false`；本机测试结果不是目标环境验收或部署批准。Fig-57 SVG 尚未渲染和目视审阅。
+本章 `aggregate_local_tests.py`、第1～6章 121 项测试结果汇总、15 项聚合器/文档契约测试及 Fig-59 Mermaid 均为本书原创。聚合器本身只在本机依次启动仓库内六个固定 `unittest` 目录，不接受任意路径/命令，也不自行建立网络/Broker/硬件连接。测试子进程继承调用环境并以当前用户权限执行，故本工具不是沙箱，只应运行可信仓库的测试代码；本次固定样例未连接网络、Broker、传感器、Bridge/RPC、MCU 或 UNO Q。报告固定为 `LOCAL_TESTS_ONLY`、`target_validation=NOT_RUN` 与 `deployment_authorized=false`；本机测试结果不是目标环境验收或部署批准。Fig-59 SVG 尚未渲染和目视审阅。

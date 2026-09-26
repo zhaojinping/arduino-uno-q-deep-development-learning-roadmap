@@ -103,13 +103,13 @@ python -B -m unittest -v test_idempotent_consumer.py
 
 SQLite 文件演示持久账本可在进程退出后供新进程复用，但不等于保证任意断电、文件系统损坏或存储设备故障下的数据恢复。真实部署需要评估磁盘空间、备份、保留期限、权限、数据库锁争用、同步/写入模式和迁移策略。账本还必须至少保留到系统不再接受相同事件重放为止；过早清理会重新开放重复副作用窗口。
 
-## Fig-52：MQTT 重复投递与消费端事务门
+## Fig-54：MQTT 重复投递与消费端事务门
 
 此图把发布/订阅传输、事件键查重、同库原子写入和冲突审查分开。协议确认由客户端库负责，应用必须验证它与持久提交的先后关系。
 
-<a id="fig-52-uno-q-mqtt-idempotent-consumer"></a>
+<a id="fig-54-uno-q-mqtt-idempotent-consumer"></a>
 
-> 图示占位：图号=Fig-52；位置=本段之后；内容=合成事件经 QoS 1 发布和 Broker 到达消费者后，经过第1章契约检查，以 event_key 和载荷摘要分流为首次原子落账、相同重复忽略或冲突人工审查；来源=本书原创，QoS、主题及保留消息边界见参考资料索引。
+> 图示占位：图号=Fig-54；位置=本段之后；内容=合成事件经 QoS 1 发布和 Broker 到达消费者后，经过第1章契约检查，以 event_key 和载荷摘要分流为首次原子落账、相同重复忽略或冲突人工审查；来源=本书原创，QoS、主题及保留消息边界见参考资料索引。
 
 ```mermaid
 flowchart LR
@@ -129,13 +129,13 @@ flowchart LR
     C -.-> ACK[客户端库负责 PUBACK<br/>确认时序须按实际库验证]
 ```
 
-图源：[Fig-52 Mermaid 源文件](../../diagrams/uno-q-mqtt-idempotent-consumer.mmd)。本图的重复消息由固定 JSONL 样例模拟，不代表协议抓包或 Broker 运行结果；数据库只模拟本地业务效果。未实现 MQTT 客户端确认、不保证外部副作用恰好一次。SVG 尚未生成和目视审阅。
+图源：[Fig-54 Mermaid 源文件](../../diagrams/uno-q-mqtt-idempotent-consumer.mmd)。本图的重复消息由固定 JSONL 样例模拟，不代表协议抓包或 Broker 运行结果；数据库只模拟本地业务效果。未实现 MQTT 客户端确认、不保证外部副作用恰好一次。SVG 尚未生成和目视审阅。
 
 ## 验证结果与范围
 
 本章 5 项标准库行为测试覆盖：同事件首次处理与重复忽略；`boot_id` 变化后同序号形成新事件；同键异载荷进入审查而不增加记录；模拟业务表写入失败时账本与业务表一并回滚且可安全重试；两个独立 Python 进程使用同一个临时数据库时，第二次投递被忽略。测试通过只证明本机离线实现满足这些断言。
 
-本章仍为 `draft`。未连接 MQTT Broker、网络或真实订阅客户端；未验证 TLS、认证、ACL、客户端重连、Broker 会话存储、服务端配额、QoS 包级顺序、真实 PUBACK 时序、消息保留、事件积压或现场数据库运行策略。未连接传感器、Bridge/RPC、Linux App 或 UNO Q 实机。SQLite 的原子性范围不包含数据库以外的 API、消息、文件或硬件动作；Fig-52 SVG 尚未渲染审阅。
+本章仍为 `draft`。未连接 MQTT Broker、网络或真实订阅客户端；未验证 TLS、认证、ACL、客户端重连、Broker 会话存储、服务端配额、QoS 包级顺序、真实 PUBACK 时序、消息保留、事件积压或现场数据库运行策略。未连接传感器、Bridge/RPC、Linux App 或 UNO Q 实机。SQLite 的原子性范围不包含数据库以外的 API、消息、文件或硬件动作；Fig-54 SVG 尚未渲染审阅。
 
 ## 常见问题
 

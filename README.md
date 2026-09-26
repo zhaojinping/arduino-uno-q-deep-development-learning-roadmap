@@ -29,7 +29,7 @@
 
 ## 当前进度
 
-当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～8 章已建立为初稿，第七篇第 1～8 章已建立为初稿，第八篇第1～7章已建立为初稿**，全书当前共 56 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
+当前状态：**第一篇第 1～5 章已完成，第二篇第 1～9 章已建立为初稿，第三篇第 1～8 章已建立为初稿，第四篇第 1～4 章已建立为初稿，第五篇第 1～7 章已建立为初稿，第六篇第 1～8 章已建立为初稿，第七篇第 1～10 章已建立为初稿，第八篇第1～7章已建立为初稿**，全书当前共 58 章。第五篇的正文范围已由第 7 章“综合验证：从部署预检到运行复盘”收束，仍保持 `draft`；第 7 章提供 G0～G7 证据门、交接模板和模拟阻断示例，不代表完成现场部署。本环境仍未完成 Arduino CLI 编译、上传、Linux 实机盘点、网络查询、服务观测、资源压力演练、队列压力演练、性能压测、故障注入、安装或启用 systemd unit、Bridge 重启、配置/凭据替换、ADB/SSH/App Lab 入口验证、Router/Bridge 重连、远程写操作、Bridge 联调和硬件实机验证。章节编号按篇重置，每一篇从第 1 章重新开始。
 
 第三篇第 1～8 章的正文范围已建立，但各章仍保持 draft；“正文范围完成”不等于 UNO Q 实机、systemd、Bridge、MCU 联调或现场部署验证完成。
 
@@ -82,22 +82,24 @@
 第七篇第 5 章[端侧推理性能评估：从测量方案到资源预算](book/第7篇_AI/第5章_端侧推理性能评估_从测量方案到资源预算.md)已建立为 `draft` 初稿；以 23 条合成记录演示预热隔离、最近秩 P50/P95、最大时延和观测 RSS，配套 21 项标准库行为测试及 Fig-47 Mermaid。报告固定为 `REPORT_ONLY`；未执行模型、ONNX Runtime、UNO Q 或真实性能/资源测量，图示尚未渲染 SVG。
 
 第七篇第 6 章[模型量化与校准验证：从校准数据到资源—精度权衡](book/第7篇_AI/第6章_模型量化与校准验证_从校准数据到资源精度权衡.md)已建立为 `draft` 初稿；以合成标量向量演示校准范围、对称 int8 截断/重建误差和理论裸载荷，配套 9 项标准库测试及 Fig-48 Mermaid。未生成或评估真实模型，未测量模型文件、RAM、性能或 UNO Q 兼容性，图示尚未渲染 SVG。
+第七篇第 7 章[UNO Q 板载 AI 实战：App Lab AI Brick 与本地推理](book/第7篇_AI/第7章_UNO_Q板载AI实战_App_Lab_AI_Brick与本地推理.md)已建立为 `draft` 初稿；以 Arduino 官方对象检测 AI Brick 示例为板载实践入口，将本地 LLM 作为需核对 SKU、runner 和模型版本的可选路径。主机仅做书稿/离线契约检查；对象检测、本地模型、相机及目标板性能均为 `NOT_RUN`，Fig-49 SVG 尚未渲染审阅。
+第七篇第 8 章[UNO Q 接入 DeepSeek API：从云端 LLM 到可验证应用](book/第7篇_AI/第8章_UNO_Q接入DeepSeek_API_从云端LLM到可验证应用.md)已建立为 `draft` 初稿；提供有界 Python REST 客户端、固定合成数据、mock 离线测试、dry-run 默认行为和双开关真实请求保护。真实 API、费用、UNO Q TLS 与 App Lab secret 注入均为 `NOT_RUN`；Fig-50 SVG 尚未渲染审阅。
+第七篇第 9 章[生成式 AI 与工具调用安全边界：从模型建议到受控执行](book/第7篇_AI/第9章_生成式AI与工具调用安全边界_从模型建议到受控执行.md)为原安全章节迁移改号，保留标准库离线策略模拟、12 项测试与 Fig-51；没有真实身份、模型、网络、Bridge/MCU 或执行器验证。
+第七篇第 10 章[AI 应用综合验证：从端侧基线到云端闭环](book/第7篇_AI/第10章_AI应用综合验证_从端侧基线到云端闭环.md)为综合收束，保留八道粗粒度证据门、14 项离线测试与 Fig-52，并新增板载 Brick、本地 LLM、DeepSeek、相机、Bridge/MCU 和安全动作的独立证据矩阵；该矩阵不由示例检查器自动验证。
 
-第七篇第 7 章[生成式 AI 与工具调用安全边界：从模型建议到受控执行](book/第7篇_AI/第7章_生成式AI与工具调用_从模型建议到受控执行.md)已建立为 `draft` 初稿；以标准库离线模拟器演示只读查询、写操作独立批准、重放阻断和最少审计，配套 12 项行为测试及 Fig-49 Mermaid。模拟器不调用真实模型/API、网络、App Lab、Bridge、MCU 或 UNO Q 硬件；示例批准不构成身份认证，进程内重放账本不持久，SVG 尚未渲染审阅。
 
-第七篇第 8 章[AI 应用综合验证：从模型基线到受控工具调用](book/第7篇_AI/第8章_AI应用综合验证_从模型基线到受控工具调用.md)已建立为 `draft` 初稿，作为本篇综合收束；以八道证据门核对提交者声明，配套标准库验收器、合成清单、14 项行为测试和 Fig-50 Mermaid。报告始终为 `REPORT_ONLY` 且不授权部署；未核验真实模型、数据、目标板、设备或组织批准，SVG 尚未渲染审阅。
 
-第八篇第 1 章[IoT 开发基础：从采样数据到可验证遥测](book/第8篇_IoT/第1章_IoT开发基础_从采样数据到可验证遥测.md)已建立为 `draft` 初稿；以合成 JSON 说明设备/启动身份、序号、带偏移时间戳、测量值/单位/质量字段及 MQTT 传输与业务幂等边界，配套标准库离线校验器、16 项测试和 Fig-51 Mermaid。未连接传感器、网络、MQTT/HTTP、Bridge/RPC 或 UNO Q 实机；SVG 尚未渲染审阅。
+第八篇第 1 章[IoT 开发基础：从采样数据到可验证遥测](book/第8篇_IoT/第1章_IoT开发基础_从采样数据到可验证遥测.md)已建立为 `draft` 初稿；以合成 JSON 说明设备/启动身份、序号、带偏移时间戳、测量值/单位/质量字段及 MQTT 传输与业务幂等边界，配套标准库离线校验器、16 项测试和 Fig-53 Mermaid。未连接传感器、网络、MQTT/HTTP、Bridge/RPC 或 UNO Q 实机；SVG 尚未渲染审阅。
 
-第八篇第 2 章[MQTT 消息上报与幂等消费：从主题设计到重复投递](book/第8篇_IoT/第2章_MQTT消息上报与幂等消费_从主题设计到重复投递.md)已建立为 `draft` 初稿；说明主题过滤器、QoS 0/1/2、保留状态、会话期限、消费者事件键和单 SQLite 事务，配套合成重复投递、5 项标准库行为测试及 Fig-52 Mermaid。没有运行 MQTT 客户端/Broker、网络、传感器或 UNO Q 实机；PUBACK 与应用提交的真实顺序未验证，SVG 尚未渲染审阅。
+第八篇第 2 章[MQTT 消息上报与幂等消费：从主题设计到重复投递](book/第8篇_IoT/第2章_MQTT消息上报与幂等消费_从主题设计到重复投递.md)已建立为 `draft` 初稿；说明主题过滤器、QoS 0/1/2、保留状态、会话期限、消费者事件键和单 SQLite 事务，配套合成重复投递、5 项标准库行为测试及 Fig-54 Mermaid。没有运行 MQTT 客户端/Broker、网络、传感器或 UNO Q 实机；PUBACK 与应用提交的真实顺序未验证，SVG 尚未渲染审阅。
 
-第八篇第 3 章[离线缓存与补传：从持久化队列到可验证恢复](book/第8篇_IoT/第3章_离线缓存与补传_从持久化队列到可验证恢复.md)已建立为 `draft` 初稿；提供 SQLite 持久化队列、逻辑容量/TTL/FIFO/退避与不确定结果处置、3 条合成遥测事件、11 项标准库行为测试和 Fig-53 Mermaid。章节测试、演示、全库测试、涉及文档的相对链接和 Mermaid 双源一致性检查均通过。全库 27 个 Python 测试模块共 258 项测试、164 个子测试通过。未连接 MQTT 客户端/Broker、网络、传感器或 UNO Q 实机，SVG 尚未渲染审阅。
+第八篇第 3 章[离线缓存与补传：从持久化队列到可验证恢复](book/第8篇_IoT/第3章_离线缓存与补传_从持久化队列到可验证恢复.md)已建立为 `draft` 初稿；提供 SQLite 持久化队列、逻辑容量/TTL/FIFO/退避与不确定结果处置、3 条合成遥测事件、11 项标准库行为测试和 Fig-55 Mermaid。章节测试、演示、全库测试、涉及文档的相对链接和 Mermaid 双源一致性检查均通过。全库 27 个 Python 测试模块共 258 项测试、164 个子测试通过。未连接 MQTT 客户端/Broker、网络、传感器或 UNO Q 实机，SVG 尚未渲染审阅。
 
-第八篇第4章[IoT 可观测性与告警：从设备状态到可操作信号](book/第8篇_IoT/第4章_IoT可观测性与告警_从设备状态到可操作信号.md)已建立为 `draft` 初稿；以四条合成 JSONL 健康快照练习身份/时效门、队列占比/最老事件年龄、发布时效、重试与拒收分类，配套 14 项标准库测试及 Fig-54 Mermaid。没有连接 OpenTelemetry、Prometheus、告警通知、Broker、网络或 UNO Q 实机；阈值是固定教学假设，图示 SVG 尚待生成和审阅。
+第八篇第4章[IoT 可观测性与告警：从设备状态到可操作信号](book/第8篇_IoT/第4章_IoT可观测性与告警_从设备状态到可操作信号.md)已建立为 `draft` 初稿；以四条合成 JSONL 健康快照练习身份/时效门、队列占比/最老事件年龄、发布时效、重试与拒收分类，配套 14 项标准库测试及 Fig-56 Mermaid。没有连接 OpenTelemetry、Prometheus、告警通知、Broker、网络或 UNO Q 实机；阈值是固定教学假设，图示 SVG 尚待生成和审阅。
 
-第八篇第5章[IoT 远程命令与受控维护：从授权请求到结果对账](book/第8篇_IoT/第5章_IoT远程命令与受控维护_从授权请求到结果对账.md)已建立为 `draft` 初稿；配套标准库命令门、6 条合成 JSONL 命令、30 项测试和 Fig-55 Mermaid。样例区分 `ACCEPTED`、`APPLIED`、`OBSERVED` 与 `UNKNOWN`，覆盖目标/权限/参数/时间检查、幂等回放和命令 ID 冲突；不实现身份认证、持久账本或真实网络设备操作。
+第八篇第5章[IoT 远程命令与受控维护：从授权请求到结果对账](book/第8篇_IoT/第5章_IoT远程命令与受控维护_从授权请求到结果对账.md)已建立为 `draft` 初稿；配套标准库命令门、6 条合成 JSONL 命令、30 项测试和 Fig-57 Mermaid。样例区分 `ACCEPTED`、`APPLIED`、`OBSERVED` 与 `UNKNOWN`，覆盖目标/权限/参数/时间检查、幂等回放和命令 ID 冲突；不实现身份认证、持久账本或真实网络设备操作。
 
-第八篇第7章[IoT 综合验证：从分章测试到系统级证据](book/第8篇_IoT/第7章_IoT综合验证_从分章测试到系统级证据.md)已建立为 `draft` 初稿，提供固定范围的本地测试聚合器、15 项标准库测试和 Fig-57 Mermaid；本地报告始终为 `LOCAL_TESTS_ONLY`、`target_validation=NOT_RUN` 且不授权部署。第1～6章固定目录共 121 项测试通过。全仓库 pytest 回归为 362 项测试、298 个子测试通过。全仓 Markdown 扫描（排除 fenced code）覆盖 140 份文件和 1067 个本地行内链接目标，缺失目标为 0；`SUMMARY.md` 登记 56 章。Fig-51～Fig-57 的 Mermaid 正文与源文件逐图核对；SVG 尚未生成或目视审阅。未运行真实 TLS、Broker、网络或 UNO Q 安全测试。
+第八篇第7章[IoT 综合验证：从分章测试到系统级证据](book/第8篇_IoT/第7章_IoT综合验证_从分章测试到系统级证据.md)已建立为 `draft` 初稿，提供固定范围的本地测试聚合器、15 项标准库测试和 Fig-59 Mermaid；本地报告始终为 `LOCAL_TESTS_ONLY`、`target_validation=NOT_RUN` 且不授权部署。第1～6章固定目录共 121 项测试通过。2026-09-26 全仓库 pytest 回归为 384 项测试、306 个子测试通过。`SUMMARY.md` 登记 58 章。Fig-53～Fig-59 的 Mermaid 正文与源文件逐图核对；SVG 尚未生成或目视审阅。未运行真实 TLS、Broker、网络或 UNO Q 安全测试。
 
 ## 目录结构
 
@@ -129,7 +131,7 @@ docs/       项目设计说明和写作规范
 
 ## 当前验证记录
 
-最后验证日期：`2026-09-25`。当前已创建并核验的文件/目录如下：
+最后验证日期：`2026-09-26`。当前已创建并核验的文件/目录如下：
 
 ```text
 docs/superpowers/plans/2026-09-25-iot-integration-validation-chapter7.md
@@ -310,8 +312,10 @@ book/第7篇_AI/第3章_模型工件与部署契约_从清单到目标预检.md
 book/第7篇_AI/第4章_推理回归与数值一致性_从黄金样例到目标验收.md
 book/第7篇_AI/第5章_端侧推理性能评估_从测量方案到资源预算.md
 book/第7篇_AI/第6章_模型量化与校准验证_从校准数据到资源精度权衡.md
-book/第7篇_AI/第7章_生成式AI与工具调用_从模型建议到受控执行.md
-book/第7篇_AI/第8章_AI应用综合验证_从模型基线到受控工具调用.md
+book/第7篇_AI/第7章_UNO_Q板载AI实战_App_Lab_AI_Brick与本地推理.md
+book/第7篇_AI/第8章_UNO_Q接入DeepSeek_API_从云端LLM到可验证应用.md
+book/第7篇_AI/第9章_生成式AI与工具调用安全边界_从模型建议到受控执行.md
+book/第7篇_AI/第10章_AI应用综合验证_从端侧基线到云端闭环.md
 code/第7篇_AI/第1章_AI开发基础/README.md
 code/第7篇_AI/第1章_AI开发基础/teaching_inference.py
 code/第7篇_AI/第1章_AI开发基础/test_teaching_inference.py
@@ -335,19 +339,27 @@ code/第7篇_AI/第5章_端侧推理性能评估/test_analyze_benchmark.py
 code/第7篇_AI/第6章_模型量化与校准验证/README.md
 code/第7篇_AI/第6章_模型量化与校准验证/quantization_demo.py
 code/第7篇_AI/第6章_模型量化与校准验证/test_quantization_demo.py
-code/第7篇_AI/第7章_生成式AI与工具调用/README.md
-code/第7篇_AI/第7章_生成式AI与工具调用/tool_guard.py
-code/第7篇_AI/第7章_生成式AI与工具调用/test_tool_guard.py
-code/第7篇_AI/第8章_AI应用综合验证/README.md
-code/第7篇_AI/第8章_AI应用综合验证/evidence_manifest.json
-code/第7篇_AI/第8章_AI应用综合验证/readiness_gate.py
-code/第7篇_AI/第8章_AI应用综合验证/test_readiness_gate.py
+code/第7篇_AI/第7章_UNO_Q板载AI实战/README.md
+code/第7篇_AI/第7章_UNO_Q板载AI实战/test_onboard_ai_contract.py
+code/第7篇_AI/第8章_DeepSeek_API实战/README.md
+code/第7篇_AI/第8章_DeepSeek_API实战/deepseek_client.py
+code/第7篇_AI/第8章_DeepSeek_API实战/summarize_readings.py
+code/第7篇_AI/第8章_DeepSeek_API实战/test_deepseek_client.py
+code/第7篇_AI/第9章_生成式AI与工具调用安全边界/README.md
+code/第7篇_AI/第9章_生成式AI与工具调用安全边界/tool_guard.py
+code/第7篇_AI/第9章_生成式AI与工具调用安全边界/test_tool_guard.py
+code/第7篇_AI/第10章_AI应用综合验证/README.md
+code/第7篇_AI/第10章_AI应用综合验证/evidence_manifest.json
+code/第7篇_AI/第10章_AI应用综合验证/readiness_gate.py
+code/第7篇_AI/第10章_AI应用综合验证/test_readiness_gate.py
 diagrams/uno-q-ai-inference-evidence-gate.mmd
 diagrams/uno-q-ai-dataset-evaluation-gate.mmd
 diagrams/uno-q-ai-model-deployment-contract.mmd
 diagrams/uno-q-ai-inference-regression.mmd
 diagrams/uno-q-ai-inference-performance.mmd
 diagrams/uno-q-ai-quantization-calibration.mmd
+diagrams/uno-q-onboard-ai-brick-flow.mmd
+diagrams/uno-q-deepseek-cloud-api-flow.mmd
 diagrams/uno-q-ai-tool-call-guard.mmd
 diagrams/uno-q-ai-readiness-evidence-gate.mmd
 diagrams/uno-q-iot-telemetry-contract.mmd
@@ -367,8 +379,8 @@ images/第8篇_IoT/README.md
 
 第六篇第1～7章的 Markdown 正文、配套代码、目录和来源登记已建立；第3章的 3 项测试、第4章和第5章各 4 项测试、第6章的 7 项、第7章的 10 项测试在本机环境通过。Fig-35～Fig-41 保留 Mermaid 源文件，尚未渲染 SVG。本次未验证相机驱动、真实摄像头采集、目标 UNO Q OpenCV/NumPy 版本、色彩/几何标定、对象身份、Bridge/MCU 联动或硬件性能。
 
-第七篇第1～8章的目录、交叉链接、来源登记和 Mermaid 双源已更新；第4章 17 项、第5章 21 项、第6章 9 项、第7章 12 项及第8章 14 项标准库行为测试均通过。全书回归复验 24 个 Python 测试模块，226 项测试及 144 个子测试全部通过。第7～8章的链接、Fig-49/Fig-50 双源一致性和资源登记检查通过。Fig-43～Fig-50 保留 Mermaid 源文件；本机未找到 `mmdc`，SVG 未生成或目视审阅；没有真实模型/API、UNO Q、App Lab、运行时兼容、性能/资源实测或硬件验收。
+第七篇第1～10章的目录、交叉链接、来源登记和图示编号已同步。第7章使用 Arduino 官方对象检测 AI Brick 示例作为板载路径，把本地 LLM 限定为需按设备版本核验的可选路径；第8章提供固定合成数据、mock 测试和默认 dry-run 的 DeepSeek REST 示例；第9、10章保留原工具安全与综合验证内容并改为新编号。四章相关代码/契约回归共 48 项测试和 13 个子测试通过；全仓库 pytest 为 384 项测试和 306 个子测试通过。全书本地 Markdown 链接目标、SUMMARY 章节数、图号连续性以及 Fig-49～Fig-52 Mermaid 源一致性通过契约检查；Part 8 图号已顺延至 Fig-53～Fig-59。SVG 未渲染或目视审阅；没有真实 UNO Q 板载运行、相机、本地模型、DeepSeek 请求/费用、TLS、App Lab secret 注入、Bridge/MCU 或硬件安全验收。
 
-第八篇第1～2章的正文、SUMMARY、篇入口、代码/图示/图片/参考资料索引和 Fig-51/Fig-52 Mermaid 源已登记；第1章 16 项、第2章 5 项行为测试通过。全库 26 个测试模块的最新回归为 247 项测试和 164 个子测试通过；本次涉及文件的相对链接、Fig-52 锚点与 Mermaid 双源一致性检查通过。当前环境未生成或审阅 Fig-51/Fig-52 SVG；未访问传感器、网络、MQTT/HTTP 服务、Bridge/RPC 或 UNO Q 实机。本次改动留在本地工作区，尚未提交或推送。
+第八篇第1～2章的正文、SUMMARY、篇入口、代码/图示/图片/参考资料索引和 Fig-53/Fig-54 Mermaid 源已登记；第1章 16 项、第2章 5 项行为测试通过。全库 26 个测试模块的最新回归为 247 项测试和 164 个子测试通过；本次涉及文件的相对链接、Fig-54 锚点与 Mermaid 双源一致性检查通过。当前环境未生成或审阅 Fig-53/Fig-54 SVG；未访问传感器、网络、MQTT/HTTP 服务、Bridge/RPC 或 UNO Q 实机。本次改动留在本地工作区，尚未提交或推送。
 
-第八篇第3章《离线缓存与补传：从持久化队列到可验证恢复》已加入 `SUMMARY.md`、本篇入口、代码/图示/图片/参考资料索引。11 项章节测试与离线脚本演示通过；全库 27 个 Python 测试模块共 258 项测试、164 个子测试通过。涉及的 10 份 Markdown 文件相对链接检查通过，Fig-53 正文的两处 Mermaid 与独立 `.mmd` 源完全一致，章节总数更新为 52。`mmdc` 不可用，Fig-53 SVG 未生成或审阅；没有真实 Broker、网络、传感器或 UNO Q 验证。
+第八篇第3章《离线缓存与补传：从持久化队列到可验证恢复》已加入 `SUMMARY.md`、本篇入口、代码/图示/图片/参考资料索引。11 项章节测试与离线脚本演示通过；全库 27 个 Python 测试模块共 258 项测试、164 个子测试通过。涉及的 10 份 Markdown 文件相对链接检查通过，Fig-55 正文的两处 Mermaid 与独立 `.mmd` 源完全一致，章节总数更新为 52。`mmdc` 不可用，Fig-55 SVG 未生成或审阅；没有真实 Broker、网络、传感器或 UNO Q 验证。

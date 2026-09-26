@@ -99,7 +99,7 @@ MQTT 5.0 定义了请求/响应相关属性，例如 Response Topic 与 Correlat
 
 下图是本书的本地教学流程，而不是 Arduino、MQTT 或 NIST 发布的标准架构。关键是 `ACCEPTED` 与应用结果之间保留了独立阶段；对账无法得到可信状态时，流程停在 `UNKNOWN`，不自动创建替代命令。
 
-<a id="fig-55-uno-q-iot-remote-command-lifecycle"></a>
+<a id="fig-57-uno-q-iot-remote-command-lifecycle"></a>
 
 #### 图 8-5：远程命令的接纳、执行与结果对账
 
@@ -121,7 +121,7 @@ flowchart LR
     U --> N[禁止因超时而盲目重发]
 ```
 
-> 图示占位：图号=Fig-55；位置=本节之后；内容=命令契约、授权/有效期检查、幂等账本、执行结果与 UNKNOWN 对账分支；来源=[第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md#fig-55-uno-q-iot-remote-command-lifecycle)。
+> 图示占位：图号=Fig-57；位置=本节之后；内容=命令契约、授权/有效期检查、幂等账本、执行结果与 UNKNOWN 对账分支；来源=[第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md#fig-57-uno-q-iot-remote-command-lifecycle)。
 
 独立源文件为 [`diagrams/uno-q-iot-remote-command-lifecycle.mmd`](../../diagrams/uno-q-iot-remote-command-lifecycle.mmd)。图中出现的“权限有效”只表示应用应在此处核验，不意味着本章提供真实身份凭证、认证协议或设备策略引擎。
 
@@ -158,7 +158,7 @@ python -B "code/第8篇_IoT/第5章_IoT远程命令与受控维护/remote_comman
 - 依赖：Python 标准库 `unittest`；无第三方测试框架要求。
 - 操作步骤：从仓库根目录运行下方命令；测试会启动本地 Python 子进程并读取仓库固定样例，不访问网络、硬件或用户数据。
 - 预期输出：30 项测试全部通过；任何失败都应先检查命令状态、输入边界和样例是否一致，不要把失败测试当作真实设备故障。
-- 故障排查：确认命令在仓库根目录执行、Python 可用且代码目录未被改名。若测试期望与输出不一致，应停止并同步检查实现、正文状态表和 Fig-55；不通过放宽断言来掩盖不一致。
+- 故障排查：确认命令在仓库根目录执行、Python 可用且代码目录未被改名。若测试期望与输出不一致，应停止并同步检查实现、正文状态表和 Fig-57；不通过放宽断言来掩盖不一致。
 - 验证方式：除测试结果外，独立运行固定演示并检查十行状态顺序；测试通过不是认证、网络、设备或物理安全验收。
 
 ```powershell
@@ -205,6 +205,6 @@ Broker/客户端的协议确认说明的是相应传输阶段，不是设备应�
 - [NIST IoT Device Cybersecurity Requirement Catalogs](../../resources/references.md#第八篇第5章补充核验)：核对设备识别、配置、数据保护、逻辑访问、更新和安全状态感知等能力主题。
 - [OASIS MQTT Version 5.0](../../resources/references.md#第八篇第5章补充核验)：核对请求/响应属性与协议层职责边界。
 - [第四篇第4章：结果账本与状态查询](../第4篇_PythonBridge/第4章_Python_Bridge结果账本与状态查询_从返回值到可验证证据.md)：延伸了解持久化记录、查询和未知结果收敛。
-- [第七篇第7章：生成式 AI 与工具调用安全边界](../第7篇_AI/第7章_生成式AI与工具调用_从模型建议到受控执行.md)：比较模型提案、独立批准、幂等和执行权限边界。
+- [第七篇第9章：生成式 AI 与工具调用安全边界](../第7篇_AI/第9章_生成式AI与工具调用安全边界_从模型建议到受控执行.md)：比较模型提案、独立批准、幂等和执行权限边界。
 - [本章代码入口、固定合成命令及测试](../../code/第8篇_IoT/第5章_IoT远程命令与受控维护/README.md)。
-- [第八篇 IoT 图示登记：Fig-55](../../images/第8篇_IoT/README.md#fig-55-uno-q-iot-remote-command-lifecycle)。
+- [第八篇 IoT 图示登记：Fig-57](../../images/第8篇_IoT/README.md#fig-57-uno-q-iot-remote-command-lifecycle)。

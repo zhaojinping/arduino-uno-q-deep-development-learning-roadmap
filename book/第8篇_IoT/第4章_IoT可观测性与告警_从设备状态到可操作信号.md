@@ -115,7 +115,7 @@ Prometheus 的告警实践建议尽量告警在用户可感知的症状上，留
 
 图中的状态名和顺序是本书的离线教学模型。图示强调：输入质量失败时，应停止得出设备健康结论；有效快照也只会生成本地报告，不会直接触发告警或设备动作。
 
-<a id="fig-54-uno-q-iot-observability-alerts"></a>
+<a id="fig-56-uno-q-iot-observability-alerts"></a>
 
 #### 图 8-4：从健康快照到可操作信号
 
@@ -138,7 +138,7 @@ flowchart LR
     U --> R
 ```
 
-> 图示占位：图号=Fig-54；位置=本节之后；内容=健康快照身份/时效门、阈值判定和不触发外部动作的输出边界；来源=[第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md#fig-54-uno-q-iot-observability-alerts)。
+> 图示占位：图号=Fig-56；位置=本节之后；内容=健康快照身份/时效门、阈值判定和不触发外部动作的输出边界；来源=[第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md#fig-56-uno-q-iot-observability-alerts)。
 
 独立 Mermaid 源保存在 [`diagrams/uno-q-iot-observability-alerts.mmd`](../../diagrams/uno-q-iot-observability-alerts.mmd)，图号、节点与正文保持一致。SVG 尚未生成或目视审阅。
 
@@ -214,5 +214,5 @@ python -B "code/第8篇_IoT/第4章_IoT可观测性与告警/health_observer.py"
 - [第八篇第2章：MQTT 消息上报与幂等消费](./第2章_MQTT消息上报与幂等消费_从主题设计到重复投递.md)
 - [第八篇第3章：离线缓存与补传](./第3章_离线缓存与补传_从持久化队列到可验证恢复.md)
 - [代码入口与固定 JSONL 样例](../../code/第8篇_IoT/第4章_IoT可观测性与告警/README.md)
-- [第八篇 IoT 图示登记：Fig-54](../../images/第8篇_IoT/README.md#fig-54-uno-q-iot-observability-alerts)
+- [第八篇 IoT 图示登记：Fig-56](../../images/第8篇_IoT/README.md#fig-56-uno-q-iot-observability-alerts)
 - [第八篇参考资料登记](../../resources/references.md#第八篇第4章补充核验)
