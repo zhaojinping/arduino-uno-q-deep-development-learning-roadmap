@@ -5,6 +5,7 @@ Thumbs.db
 # Temporary and editor files
 *.tmp
 *.bak
+.worktrees/
 .idea/
 .vscode/*.log
 
