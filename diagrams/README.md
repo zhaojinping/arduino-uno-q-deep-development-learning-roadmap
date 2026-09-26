@@ -26,10 +26,14 @@
 - [第七篇第4章 Fig-46：固定样例推理回归与目标验收边界](uno-q-ai-inference-regression.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
 - [第七篇第5章 Fig-47：端侧推理性能记录与离线报告边界](uno-q-ai-inference-performance.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
 - [第七篇第6章 Fig-48：量化校准、候选评估与目标证据门](uno-q-ai-quantization-calibration.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
-- [第七篇第7章 Fig-49：从模型提案到受控工具执行](uno-q-ai-tool-call-guard.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
-- [第七篇第8章 Fig-50：从章节证据到人工验收](uno-q-ai-readiness-evidence-gate.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
-- [第八篇第1章 Fig-51：从采样事件到服务端遥测入口](uno-q-iot-telemetry-contract.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
-- [第八篇第2章 Fig-52：MQTT 重复投递与消费端事务门](uno-q-mqtt-idempotent-consumer.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
-- [第八篇第3章 Fig-53：持久化队列的离线补传与不确定结果恢复](uno-q-iot-offline-outbox.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
-- [第八篇第4章 Fig-54：从健康快照到可操作信号](uno-q-iot-observability-alerts.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
-- [第八篇第5章 Fig-55：远程命令的接纳、执行与结果对账](uno-q-iot-remote-command-lifecycle.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
+- [第七篇第7章 Fig-49：从上传图片到板载 AI Brick 的结果复核](uno-q-onboard-ai-brick-flow.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
+- [第七篇第9章 Fig-51：从模型提案到受控工具执行](uno-q-ai-tool-call-guard.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
+- [第七篇第8章 Fig-50：UNO Q Linux 客户端到云端 LLM 的受限请求](uno-q-deepseek-cloud-api-flow.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
+- [第七篇第10章 Fig-52：从章节证据到人工验收](uno-q-ai-readiness-evidence-gate.mmd)：对应正文和图片资源登记见 [images/第7篇_AI/README.md](../images/第7篇_AI/README.md)。
+- [第八篇第1章 Fig-53：从采样事件到服务端遥测入口](uno-q-iot-telemetry-contract.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
+- [第八篇第2章 Fig-54：MQTT 重复投递与消费端事务门](uno-q-mqtt-idempotent-consumer.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
+- [第八篇第3章 Fig-55：持久化队列的离线补传与不确定结果恢复](uno-q-iot-offline-outbox.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
+- [第八篇第4章 Fig-56：从健康快照到可操作信号](uno-q-iot-observability-alerts.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
+- [第八篇第5章 Fig-57：远程命令的接纳、执行与结果对账](uno-q-iot-remote-command-lifecycle.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
+- [第八篇第6章 Fig-58：从连接信任到每设备最小权限](uno-q-iot-device-identity-secure-communication.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。
+- [第八篇第7章 Fig-59：从章节测试聚合到独立目标验收](uno-q-iot-integration-validation.mmd)：对应正文和图片资源登记见 [images/第8篇_IoT/README.md](../images/第8篇_IoT/README.md)。

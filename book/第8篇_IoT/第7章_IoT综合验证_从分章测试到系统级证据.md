@@ -115,7 +115,7 @@ Python `unittest` 官方命令行支持用 `discover`、`-s` 指定起始目录�
 
 `LOCAL_TESTS_PASS` 需要六个章节按固定顺序齐全、每个目录发现至少一项测试、退出码为零，且所有摘要字段有效。一个章节非零退出、超时或空测试目录会得到 `LOCAL_TESTS_FAIL`；结果清单缺失章节或顺序被改动则为 `LOCAL_TESTS_INCOMPLETE`。无论结论是哪一种，`target_validation` 都固定为 `NOT_RUN`，`deployment_authorized` 都固定为 `false`。
 
-本章配套 15 项标准库测试覆盖：固定六章顺序；聚合成功、失败、缺项和额外无效记录；子进程超时或启动错误；拒绝额外参数；实际启动六个现有目录并解析非零测试数；章节 front matter/标题、导航、本地链接、来源登记，以及 Fig-57 唯一锚点和正文/独立 Mermaid 同步。章节测试证明本地工具按约定工作，不构成系统或设备安全测试。
+本章配套 15 项标准库测试覆盖：固定六章顺序；聚合成功、失败、缺项和额外无效记录；子进程超时或启动错误；拒绝额外参数；实际启动六个现有目录并解析非零测试数；章节 front matter/标题、导航、本地链接、来源登记，以及 Fig-59 唯一锚点和正文/独立 Mermaid 同步。章节测试证明本地工具按约定工作，不构成系统或设备安全测试。
 
 ### 逐层验证而不是一次性“上线测试”
 
@@ -130,13 +130,13 @@ Python `unittest` 官方命令行支持用 `discover`、`-s` 指定起始目录�
 
 若目标环境未获批准，或者证据不能确认测试对象、身份、版本、时点或执行结果，应保留 `NOT_RUN`、`BLOCKED` 或 `UNKNOWN`。不得把缺失日志、客户端超时或无确认回执按成功处理；也不得让端侧自动重试造成未经审查的重复动作。
 
-### Fig-57：从章节测试聚合到独立目标验收
+### Fig-59：从章节测试聚合到独立目标验收
 
 图中的左侧是本机固定目录和测试汇总；其绿色结论仍停留在本机报告。虚线表示项目可能另有独立的目标验证和授权流程，不是脚本触发的后续动作。
 
-<a id="fig-57-uno-q-iot-integration-validation"></a>
+<a id="fig-59-uno-q-iot-integration-validation"></a>
 
-> 图示占位与登记：图号=Fig-57；位置=本段之后；内容=六章本机固定测试依次聚合，失败/超时/空测试与缺失记录分别停止，目标板验收和部署审批由独立责任人另行处理；来源边界=本书原创流程图；SVG 尚未生成或视觉审阅。参见[第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md)。
+> 图示占位与登记：图号=Fig-59；位置=本段之后；内容=六章本机固定测试依次聚合，失败/超时/空测试与缺失记录分别停止，目标板验收和部署审批由独立责任人另行处理；来源边界=本书原创流程图；SVG 尚未生成或视觉审阅。参见[第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md)。
 
 ```mermaid
 flowchart LR
@@ -161,7 +161,7 @@ flowchart LR
     O -. 组织内另行批准 .-> P[独立部署决策]
 ```
 
-图源：[Fig-57 Mermaid 独立源文件](../../diagrams/uno-q-iot-integration-validation.mmd)。本图是本书的教学流程建议，不是 Arduino、NIST、Python 或 MQTT 标准组织的官方验收图。SVG 只有在实际渲染、记录工具版本并完成视觉审阅后，才可把图示登记状态更新为已审阅。
+图源：[Fig-59 Mermaid 独立源文件](../../diagrams/uno-q-iot-integration-validation.mmd)。本图是本书的教学流程建议，不是 Arduino、NIST、Python 或 MQTT 标准组织的官方验收图。SVG 只有在实际渲染、记录工具版本并完成视觉审阅后，才可把图示登记状态更新为已审阅。
 
 ## 目标环境验证与证据交接
 
@@ -183,7 +183,7 @@ flowchart LR
 
 聚合器本身没有发起 DNS、Socket、HTTP、MQTT、TLS、SSH、ADB 或 Arduino CLI 调用；本次固定测试运行也没有连接 UNO Q、改变设备配置、操控执行器、访问监控后端或生成目标环境验收证据。测试子进程按前述约定继承环境并在当前用户权限下执行，因此聚合器不提供对任意仓库代码的安全隔离。没有验证 App Lab、Linux 镜像、MCU、Bridge/RPC、真实 Broker、TLS 握手、ACL 执行、传感器、掉电恢复、现场时延或组织审批。本地测试通过仅是有限的软件回归证据，章节仍为 `draft`。
 
-全书 pytest 回归、Markdown 本地链接、篇内导航和 Fig-57 双源检查的实际计数应以当前提交对应的验证记录为准；根目录 README 和[本篇地图](./README.md)随每次验证结果更新。图示源尚未渲染为 SVG，不能声称已完成视觉检查。
+全书 pytest 回归、Markdown 本地链接、篇内导航和 Fig-59 双源检查的实际计数应以当前提交对应的验证记录为准；根目录 README 和[本篇地图](./README.md)随每次验证结果更新。图示源尚未渲染为 SVG，不能声称已完成视觉检查。
 
 ## 常见问题
 
@@ -211,6 +211,6 @@ flowchart LR
 
 - [Python `unittest` 官方文档](https://docs.python.org/3.14/library/unittest.html)：测试发现与命令行选项；本章只使用固定目录的 `discover` 模式。
 - [本章来源登记](../../resources/references.md#第八篇第7章补充核验)：记录官方资料、版本基线和用途边界。
-- [第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md)：查看 Fig-51～Fig-57 的图号、来源和渲染状态。
+- [第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md)：查看 Fig-53～Fig-59 的图号、来源和渲染状态。
 - [第八篇第1～7章](./README.md)：回到本篇章节地图。
 - [本章代码说明和测试](../../code/第8篇_IoT/第7章_IoT综合验证/README.md)：查看运行命令、退出码和工具安全范围。

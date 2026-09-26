@@ -1,0 +1,10 @@
+flowchart LR
+    U[本地样例图 JPG/PNG] --> W[WebUI 上传<br/>图像与置信阈值]
+    W --> P[Linux Python 回调<br/>QRB2210 / Debian]
+    P --> B[ObjectDetection Brick<br/>预训练视觉模型]
+    B --> R[检测记录与标注图像]
+    R --> W
+    P -.可选：另一项实验.-> L[LargeLanguageModel Brick<br/>本地模型 runner]
+    L --> Q[文本回答<br/>仅供复核]
+    P -.本章不调用.-> X[Bridge / RPC]
+    X -.独立设计与验证后.-> M[STM32U585 Sketch<br/>实时 I/O 与硬约束]

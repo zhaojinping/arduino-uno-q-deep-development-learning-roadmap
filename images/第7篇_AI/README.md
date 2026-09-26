@@ -74,26 +74,50 @@
 - 来源边界：参考 ONNX Runtime 官方量化文档并采用本书原创的标量教学模拟；不是 ONNX Runtime、Arduino 或 UNO Q 官方量化、性能或发布规范。
 - 验证边界：仅有合成数值案例和本机标准库测试；没有模型转换、任务质量评估、真实模型文件/内存对比、目标运行时或 UNO Q 实机验证；SVG 尚未渲染和目视审阅。
 
-<a id="fig-49-uno-q-ai-tool-call-guard"></a>
+<a id="fig-49-uno-q-onboard-ai-brick-flow"></a>
 
-## 图 7-7：从模型提案到受控工具执行
+## 图 7-7：从上传图片到板载 AI Brick 的结果复核
 
 - 图号：Fig-49
 - 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[板载 AI Brick 流程 Mermaid](../../diagrams/uno-q-onboard-ai-brick-flow.mmd)
+- 正文位置：[第七篇第7章 Fig-49](../../book/第7篇_AI/第7章_UNO_Q板载AI实战_App_Lab_AI_Brick与本地推理.md#fig-49-uno-q-onboard-ai-brick-flow)
+- 内容要求：区分 WebUI 输入、QRB2210/Linux Python、对象检测 Brick、本地 LLM 可选路径与未参与的 Bridge/MCU 边界。
+- 来源边界：依据 Arduino UNO Q 数据表、App specification、官方 object-detection 示例及 Qualcomm QRB2210 资料原创绘制；不是官方模型架构或硬件加速拓扑。
+- 验证边界：本机仅核对书稿和图源契约；UNO Q、App Lab、Brick、模型和加速后端均未运行验证；SVG 尚未渲染审阅。
+
+<a id="fig-50-uno-q-deepseek-cloud-api-flow"></a>
+
+## 图 7-8：UNO Q Linux 客户端到云端 LLM 的受限请求
+
+- 图号：Fig-50
+- 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
+- 图源：[DeepSeek 云 API 流程 Mermaid](../../diagrams/uno-q-deepseek-cloud-api-flow.mmd)
+- 正文位置：[第七篇第8章 Fig-50](../../book/第7篇_AI/第8章_UNO_Q接入DeepSeek_API_从云端LLM到可验证应用.md#fig-50-uno-q-deepseek-cloud-api-flow)
+- 内容要求：展示本机凭据不进入 prompt、固定合成数据、限时限长的一次云端请求、报告复核和超时不重试；不连接执行器。
+- 来源边界：依据 DeepSeek 官方 Chat Completions 文档和本章原创 REST 客户端；不是 UNO Q 实机或云服务运行记录。
+- 验证边界：仅通过离线 mock/文档契约；真实 DeepSeek 请求、费用、UNO Q/TLS 与 App Lab secret 注入均未验证；SVG 尚未渲染审阅。
+
+<a id="fig-51-uno-q-ai-tool-call-guard"></a>
+
+## 图 7-9：从模型提案到受控工具执行
+
+- 图号：Fig-51
+- 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
 - 图源：[工具调用安全门 Mermaid](../../diagrams/uno-q-ai-tool-call-guard.mmd)
-- 正文位置：[第七篇第7章 Fig-49](../../book/第7篇_AI/第7章_生成式AI与工具调用_从模型建议到受控执行.md#fig-49-uno-q-ai-tool-call-guard)
+- 正文位置：[第七篇第9章 Fig-51](../../book/第7篇_AI/第9章_生成式AI与工具调用安全边界_从模型建议到受控执行.md#fig-51-uno-q-ai-tool-call-guard)
 - 内容要求：模型提案经过结构校验、工具白名单、只读/写入分流、独立批准、调用预算、重放检查和窄范围适配器；真实 Bridge/MCU/执行器仅表示为待验证边界。
 - 来源边界：本书原创教学流程；OpenAI、OWASP、NIST 与 Arduino 来源用于核对各自文档所述边界，不代表这些组织发布了本图或认可本模拟器。
 - 验证边界：配套代码只操作进程内虚拟状态；不调用真实模型、网络、App Lab、Bridge、MCU、GPIO 或执行器；身份认证、持久幂等、目标设备和实机安全均未验证；SVG 尚未渲染和目视审阅。
 
-<a id="fig-50-uno-q-ai-readiness-evidence-gate"></a>
+<a id="fig-52-uno-q-ai-readiness-evidence-gate"></a>
 
-## 图 7-8：从章节证据到人工验收
+## 图 7-10：从章节证据到人工验收
 
-- 图号：Fig-50
+- 图号：Fig-52
 - 状态：正文 Mermaid 与独立源文件已建立；SVG 待生成并完成预览审阅。
 - 图源：[AI 验收证据门 Mermaid](../../diagrams/uno-q-ai-readiness-evidence-gate.mmd)
-- 正文位置：[第七篇第8章 Fig-50](../../book/第7篇_AI/第8章_AI应用综合验证_从模型基线到受控工具调用.md#fig-50-uno-q-ai-readiness-evidence-gate)
+- 正文位置：[第七篇第10章 Fig-52](../../book/第7篇_AI/第10章_AI应用综合验证_从端侧基线到云端闭环.md#fig-52-uno-q-ai-readiness-evidence-gate)
 - 内容要求：八类证据状态经受限 JSON 解析与聚合，显示无效、阻断、不完整或待人工复核；所有输出均不授权部署。
 - 来源边界：本书原创综合验收图；NIST 档案与 Arduino 官方资料用于核验风险治理和平台职责，不表示其发布或认可本验收流程。
 - 验证边界：只读取固定合成清单，不调用模型、网络、App Lab、Bridge、MCU 或硬件；证据本身、目标验收和部署授权未验证；SVG 尚未渲染和目视审阅。

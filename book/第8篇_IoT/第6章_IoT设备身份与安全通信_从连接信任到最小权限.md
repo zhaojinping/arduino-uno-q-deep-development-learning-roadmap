@@ -92,11 +92,11 @@ NIST IR 8259 Rev. 1（2026 年 4 月最终版）描述 IoT 产品制造商在产
 
 ## 操作与实验
 
-### 5. 阅读 Fig-56：从登记到最小权限通信
+### 5. 阅读 Fig-58：从登记到最小权限通信
 
-Fig-56 是本书的教学参考流程：客户端校验 Broker 服务身份，服务端验证客户端凭据并绑定主体，再按 default-deny 策略检查动作与主题。任何一层失败都进入拒绝/审计，不回退明文。轮换或撤销事件会让旧凭据停止使用并回到身份登记流程。该图不是 Arduino、NIST、IETF 或 OASIS 发布或认可的架构。
+Fig-58 是本书的教学参考流程：客户端校验 Broker 服务身份，服务端验证客户端凭据并绑定主体，再按 default-deny 策略检查动作与主题。任何一层失败都进入拒绝/审计，不回退明文。轮换或撤销事件会让旧凭据停止使用并回到身份登记流程。该图不是 Arduino、NIST、IETF 或 OASIS 发布或认可的架构。
 
-<a id="fig-56-uno-q-iot-device-identity-secure-communication"></a>
+<a id="fig-58-uno-q-iot-device-identity-secure-communication"></a>
 
 #### 图 8-6：从连接信任到每设备最小权限
 
@@ -117,7 +117,7 @@ flowchart LR
     H -- 否 --> B
 ```
 
-> 图示占位与登记：图号=Fig-56；位置=本节；内容=服务身份校验、设备认证/绑定、默认拒绝 ACL、失败审计和凭据轮换闭环；来源边界=本书原创教学流程，标准仅作概念核对；SVG 尚未渲染和视觉审阅。参见[第八篇图示登记](../../images/第8篇_IoT/README.md)。
+> 图示占位与登记：图号=Fig-58；位置=本节；内容=服务身份校验、设备认证/绑定、默认拒绝 ACL、失败审计和凭据轮换闭环；来源边界=本书原创教学流程，标准仅作概念核对；SVG 尚未渲染和视觉审阅。参见[第八篇图示登记](../../images/第8篇_IoT/README.md)。
 
 唯一 Mermaid 源文件为 [`diagrams/uno-q-iot-device-identity-secure-communication.mmd`](../../diagrams/uno-q-iot-device-identity-secure-communication.mmd)。正文代码围栏与独立 `.mmd` 文件应保持一致；若后续生成 SVG，应记录渲染器/版本并做视觉审阅，不能把未渲染状态写成已完成。
 
@@ -155,7 +155,7 @@ python -B "code/第8篇_IoT/第6章_IoT设备身份与安全通信/policy_linter
 
 ### 7. 运行行为测试
 
-测试覆盖严格 UTC、凭据边界、秘密标记筛查与脱敏、身份/TLS/profile 校验、default-deny ACL、固定输入 CLI、文件/参数错误、JSONL 顺序和 Fig-56/章节交叉引用。测试只使用合成数据和临时目录。
+测试覆盖严格 UTC、凭据边界、秘密标记筛查与脱敏、身份/TLS/profile 校验、default-deny ACL、固定输入 CLI、文件/参数错误、JSONL 顺序和 Fig-58/章节交叉引用。测试只使用合成数据和临时目录。
 
 代码说明
 - 用途：验证离线解析器、策略评估、CLI 输出和本章资源契约的回归测试。
@@ -214,4 +214,4 @@ python -B -m unittest discover -s "code/第8篇_IoT/第6章_IoT设备身份与�
 - [OASIS MQTT Version 5.0](https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html)：ClientID、Topic Filter、认证后授权和安全考虑。
 - [第八篇第1章：IoT 开发基础](./第1章_IoT开发基础_从采样数据到可验证遥测.md)、[第2章：MQTT 消息上报](./第2章_MQTT消息上报与幂等消费_从主题设计到重复投递.md)、[第3章：离线缓存与补传](./第3章_离线缓存与补传_从持久化队列到可验证恢复.md)、[第4章：IoT 可观测性与告警](./第4章_IoT可观测性与告警_从设备状态到可操作信号.md)和[第5章：远程命令与受控维护](./第5章_IoT远程命令与受控维护_从授权请求到结果对账.md)：承接遥测、消息、离线、观测和应用级操作的章节背景。
 - [本章代码说明、固定合成配置与测试](../../code/第8篇_IoT/第6章_IoT设备身份与安全通信/README.md)；[policy_linter.py](../../code/第8篇_IoT/第6章_IoT设备身份与安全通信/policy_linter.py)；[profiles.json](../../code/第8篇_IoT/第6章_IoT设备身份与安全通信/profiles.json)；[测试文件](../../code/第8篇_IoT/第6章_IoT设备身份与安全通信/test_policy_linter.py)。
-- [Fig-56 独立图源](../../diagrams/uno-q-iot-device-identity-secure-communication.mmd)；[第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md)。
+- [Fig-58 独立图源](../../diagrams/uno-q-iot-device-identity-secure-communication.mmd)；[第八篇 IoT 图示登记](../../images/第8篇_IoT/README.md)。
